@@ -42,7 +42,7 @@ VLM, robot control and exploration scenarios are outside scope.
 6. Report changes, successes, failures and unverified requirements.
 Ask questions only to avoid materially incorrect or destructive changes.
 
-## Codex chat workflow (Phase 1)
+## Codex chat workflow
 1. Inspect `scene.json`, `scene-factory.toml`, and `uv run --locked scene-factory status PROJECT`.
 2. Translate natural language into a Scene Specification change using existing
    generators. For an unsupported generator, assess and implement/test it before
@@ -53,8 +53,41 @@ Ask questions only to avoid materially incorrect or destructive changes.
 5. Run `preview PROJECT` when relevant, open its actual PNG, then `validate PROJECT`.
 6. Report implementation, generated outputs, errors and unverified requirements.
    Use Codex chat itself; do not add a separate chat UI or Codex API integration.
-7. Preserve previous successful builds. Phase 1 always rebuilds the full scene;
+7. Preserve previous successful builds. Phase 2A always rebuilds the full scene;
    incremental regeneration and complex continuing edits belong to later phases.
+
+## Phase 2A contracts and skill registration
+- Read docs/phase2a.md before changing the compiler, registry, worker protocol or
+  artifact/quality contracts. Preserve v1 originals and legacy validated builds.
+- Use explicit `migrate SOURCE DESTINATION`; never migrate by overwriting input.
+  New v2 projects use `init PROJECT --schema-version 2`; `compile PROJECT` must
+  remain bpy-free and must not generate geometry.
+- Logical node IDs and generated artifact IDs are different. Recipe child IDs
+  derive from parent ID + local key; seeds derive from scene seed + node ID.
+- Keep common validation shape-independent. Put topology/dimension/material checks
+  in the skill validator and use independent measurements, not the generator's
+  geometry construction function. The first declared artifact is the node frame.
+- To add a skill: write a candidate manifest in src/scene_factory/skills, add its
+  implementation and independent validator in blender/skills, and add reviewed
+  bindings/support files in skills/entrypoints.json. Do not import bpy in the app.
+- Validate schema, typed ports, exact dependency versions, recipe DAG and examples;
+  add unit tests and real Blender integration tests. No central shape-specific
+  validator branch should be needed for a new skill.
+- Run passing unit tests with `--junitxml=PATH`, then run
+  `uv run --locked scene-factory skills validate ID --activate --test-report PATH`.
+  This tests each example with real Blender and reopening before activation.
+  Candidate/disabled or stale-evidence skills must not run in normal builds.
+  `--contract-only` is not sufficient for activation. Record changes in Git.
+- When changing implementation/helpers/parameter contracts, return the skill to
+  candidate or add a new exact version, rerun tests and refresh evidence. Pin all
+  relevant helper source files in the reviewed binding; update dependencies too.
+- Treat the local binding catalog as trusted reviewed code, not as a sandbox for
+  arbitrary manifest Python. Never auto-enable external code or unverified assets.
+- The canonical preview is the immutable operations PNG selected by preview.json.
+  Publish only that single reference atomically. Do not overwrite legacy PNG copies.
+- Structural `validated` is not `accepted`. QualityReport's visual/domain/export/
+  target stages remain not_run unless their actual validation is implemented/run.
+  SceneIntent, accepted Revision, automatic repair and caching are Phase 2B+ work.
 
 ## Implementation and quality
 - After code changes, run relevant checks and commit the completed changes.
@@ -83,3 +116,7 @@ integration test is not proof of Blender compatibility. The current Metal
 integration probe is macOS-specific and skips on other platforms.
 Phase 1: set `SCENE_FACTORY_TEST_BLENDER` to run the common CPU integration tests
 on macOS or Ubuntu. See docs/phase1.md for commands and acceptance evidence.
+Phase 2A uses that same variable. New tests keep generated projects under
+artifacts/test-runs/phase2a-*; registration checks use artifacts/skill-validation/.
+Set both test variables to include all legacy Phase 0/1 tests. Ubuntu runtime and
+CUDA/OptiX remain unverified until tested on the actual target hardware.

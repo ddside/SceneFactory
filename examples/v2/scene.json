@@ -1,0 +1,62 @@
+{
+  "nodes": [
+    {
+      "node_id": "ground.main",
+      "parameters": {},
+      "skill": {
+        "skill_id": "ground",
+        "version": "1.0.0"
+      },
+      "transform": {
+        "location": [
+          0,
+          0,
+          -0.2
+        ]
+      }
+    },
+    {
+      "depends_on": [
+        "ground.main"
+      ],
+      "node_id": "building.main",
+      "parameters": {},
+      "skill": {
+        "skill_id": "building_recipe",
+        "version": "1.0.0"
+      },
+      "transform": {
+        "location": [
+          -2,
+          0,
+          0
+        ],
+        "rotation_degrees": [
+          0,
+          0,
+          15
+        ]
+      }
+    },
+    {
+      "node_id": "column.side",
+      "parameters": {},
+      "parent_id": "building.main",
+      "skill": {
+        "skill_id": "cylinder",
+        "version": "1.0.0"
+      },
+      "transform": {
+        "location": [
+          4,
+          -2,
+          0
+        ]
+      }
+    }
+  ],
+  "scene_id": "v2-example",
+  "schema_version": 2,
+  "seed": 42,
+  "units": "m"
+}

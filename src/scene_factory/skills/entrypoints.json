@@ -1,0 +1,42 @@
+{
+  "cuboid.generate": {
+    "module": "scene_factory.blender.skills.cuboid",
+    "function": "generate",
+    "support_files": [
+      "blender/generators.py",
+      "blender/skills/common.py",
+      "spec.py"
+    ]
+  },
+  "cuboid.validate": {
+    "module": "scene_factory.blender.skills.cuboid",
+    "function": "validate",
+    "support_files": [
+      "blender/generators.py",
+      "blender/skills/common.py",
+      "spec.py"
+    ]
+  },
+  "cylinder.generate": {
+    "module": "scene_factory.blender.skills.cylinder",
+    "function": "generate",
+    "support_files": [
+      "blender/skills/common.py"
+    ]
+  },
+  "cylinder.validate": {
+    "module": "scene_factory.blender.skills.cylinder",
+    "function": "validate",
+    "support_files": [
+      "blender/skills/common.py"
+    ]
+  },
+  "recipe.generate": {
+    "module": "scene_factory.blender.skills.recipe",
+    "function": "generate"
+  },
+  "recipe.validate": {
+    "module": "scene_factory.blender.skills.recipe",
+    "function": "validate"
+  }
+}

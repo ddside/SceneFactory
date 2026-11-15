@@ -1,0 +1,157 @@
+{
+  "migration": {
+    "migration_version": "1.0.0",
+    "source_schema_version": 1,
+    "source_sha256": "666e5a41ff010cf85d647177fe0dfe00e7e978a6ee740939a589450fa88d8e1d"
+  },
+  "nodes": [
+    {
+      "depends_on": [],
+      "inputs": {},
+      "legacy": {
+        "generator": "box_building",
+        "stable_id": "building.main"
+      },
+      "node_id": "building.main",
+      "parameters": {
+        "depth": 4.0,
+        "height": 3.0,
+        "width": 6.0
+      },
+      "parent_id": null,
+      "skill": {
+        "skill_id": "box_building",
+        "version": "1.0.0"
+      },
+      "transform": {
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation_degrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "depends_on": [],
+      "inputs": {},
+      "legacy": {
+        "generator": "ground",
+        "stable_id": "ground.main"
+      },
+      "node_id": "ground.main",
+      "parameters": {
+        "depth": 20.0,
+        "thickness": 0.2,
+        "width": 20.0
+      },
+      "parent_id": null,
+      "skill": {
+        "skill_id": "ground",
+        "version": "1.0.0"
+      },
+      "transform": {
+        "location": [
+          0.0,
+          0.0,
+          -0.2
+        ],
+        "rotation_degrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "depends_on": [],
+      "inputs": {},
+      "legacy": {
+        "generator": "pillar",
+        "stable_id": "pillar.entry"
+      },
+      "node_id": "pillar.entry",
+      "parameters": {
+        "depth": 0.4,
+        "height": 3.0,
+        "width": 0.4
+      },
+      "parent_id": null,
+      "skill": {
+        "skill_id": "pillar",
+        "version": "1.0.0"
+      },
+      "transform": {
+        "location": [
+          4.0,
+          -2.0,
+          0.0
+        ],
+        "rotation_degrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "depends_on": [],
+      "inputs": {},
+      "legacy": {
+        "generator": "roof",
+        "stable_id": "roof.main"
+      },
+      "node_id": "roof.main",
+      "parameters": {
+        "depth": 5.0,
+        "thickness": 0.25,
+        "width": 7.0
+      },
+      "parent_id": null,
+      "skill": {
+        "skill_id": "roof",
+        "version": "1.0.0"
+      },
+      "transform": {
+        "location": [
+          0.0,
+          0.0,
+          3.0
+        ],
+        "rotation_degrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    }
+  ],
+  "scene_id": "minimal",
+  "schema_version": 2,
+  "seed": 42,
+  "units": "m"
+}

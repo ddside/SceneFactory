@@ -1,83 +1,118 @@
-"""Validate actual reloaded geometry against normalized spec, no mocks."""
+"""Shape-independent common checks and skill/domain validator dispatch."""
 import hashlib
 import json
 import math
+import struct
 
 import bpy
-from mathutils import Euler, Matrix, Vector
+from mathutils import Vector
 
-from scene_factory.spec import dimensions
-from scene_factory.blender.generators import cuboid_vertices, FACES
-
-
-def close(actual, expected, label):
-    if len(actual) != len(expected) or any(
-        not math.isfinite(a) or not math.isclose(a, b, rel_tol=1e-6, abs_tol=2e-5)
-        for a, b in zip(actual, expected)
-    ):
-        raise ValueError(f"{label}: expected {list(expected)}, got {list(actual)}")
+from scene_factory.artifacts import check_manifest, structure_digest
+from scene_factory.contract_utils import canonical_digest
+from scene_factory.blender.engine import callback
+from scene_factory.blender.skills.common import close
 
 
-def validate_scene(spec):
+def rounded_matrix(matrix):
+    return [[round(float(v), 6) for v in row] for row in matrix]
+
+
+def geometry_digest(mesh):
+    """Streaming digest: no full vertex arrays in JSON inventories."""
+    sha = hashlib.sha256()
+    sha.update(struct.pack("<QQ", len(mesh.vertices), len(mesh.polygons)))
+    for vertex in mesh.vertices:
+        values = [round(float(v), 6) for v in vertex.co]
+        if not all(math.isfinite(v) for v in values):
+            raise ValueError("mesh has non-finite vertex coordinates")
+        sha.update(struct.pack("<ddd", *values))
+    for face in mesh.polygons:
+        sha.update(struct.pack("<Q", len(face.vertices)))
+        for index in face.vertices:
+            sha.update(struct.pack("<Q", index))
+    return sha.hexdigest()
+
+
+def validate_scene(plan, registry, domain_validators=()):
     scene = bpy.context.scene
-    if scene.get("scene_id") != spec["scene_id"] or scene.get("seed") != spec["seed"]:
-        raise ValueError("scene metadata: scene_id/seed mismatch")
-    if scene.get("schema_version") != 1:
-        raise ValueError("scene metadata: schema_version mismatch")
+    for key, expected in (("scene_id", plan["scene_id"]), ("seed", plan["seed"]),
+                          ("schema_version", 2), ("source_schema_version", plan["source_schema_version"]),
+                          ("plan_digest", plan["plan_digest"])):
+        if scene.get(key) != expected:
+            raise ValueError(f"scene.{key}: metadata mismatch")
     if scene.unit_settings.system != "METRIC" or scene.unit_settings.scale_length != 1.0:
-        raise ValueError("scene units: expected meters")
-    meshes = [o for o in scene.objects if o.type == "MESH"]
-    expected_ids = {o["stable_id"] for o in spec["objects"]}
-    actual_ids = [o.get("stable_id") for o in meshes]
-    if len(actual_ids) != len(expected_ids) or set(actual_ids) != expected_ids:
-        raise ValueError(f"stable_id mismatch: expected {sorted(expected_ids)}, got {actual_ids}")
-    actual = {o["stable_id"]: o for o in meshes}
-    records = []
-    for obj in spec["objects"]:
-        sid = obj["stable_id"]
-        mesh_obj = actual[sid]
-        if mesh_obj.get("generator") != obj["generator"]:
-            raise ValueError(f"{sid}: generator mismatch")
-        if mesh_obj.parent or mesh_obj.modifiers or mesh_obj.constraints or mesh_obj.animation_data:
-            raise ValueError(f"{sid}: unexpected parent/modifier/constraint/animation")
-        expected_vertices = cuboid_vertices(dimensions(obj))
-        vertices = [tuple(v.co) for v in mesh_obj.data.vertices]
-        faces = [tuple(p.vertices) for p in mesh_obj.data.polygons]
-        if len(vertices) != 8 or faces != FACES:
-            raise ValueError(f"{sid}: expected cuboid mesh with 8 vertices and 6 quads")
-        for i, (v, expected) in enumerate(zip(vertices, expected_vertices)):
-            close(v, expected, f"{sid}.vertices[{i}]")
-        transform = obj["transform"]
-        rotation = [math.radians(a) for a in transform["rotation_degrees"]]
-        close(mesh_obj.location, transform["location"], sid + ".location")
-        close(mesh_obj.scale, transform["scale"], sid + ".scale")
-        expected_matrix = Matrix.LocRotScale(Vector(transform["location"]),
-                                            Euler(rotation, "XYZ").to_quaternion(),
-                                            Vector(transform["scale"]))
-        for row, expected in zip(mesh_obj.matrix_world, expected_matrix):
-            close(row, expected, sid + ".matrix_world")
-        world = [mesh_obj.matrix_world @ Vector(v) for v in vertices]
-        expected_world = [expected_matrix @ Vector(v) for v in expected_vertices]
-        bounds = [[min(v[i] for v in world) for i in range(3)],
-                  [max(v[i] for v in world) for i in range(3)]]
-        expected_bounds = [[min(v[i] for v in expected_world) for i in range(3)],
-                           [max(v[i] for v in expected_world) for i in range(3)]]
-        for row, expected in zip(bounds, expected_bounds):
-            close(row, expected, sid + ".world_bounds")
-        if len(mesh_obj.data.materials) != 1 or mesh_obj.data.materials[0] is None:
-            raise ValueError(f"{sid}: missing material")
-        material = mesh_obj.data.materials[0]
-        if not all(math.isfinite(v) for v in material.diffuse_color):
-            raise ValueError(f"{sid}: non-finite material")
-        close(mesh_obj.dimensions, [dimensions(obj)[i] * transform["scale"][i]
-                                   for i in range(3)], sid + ".dimensions")
-        records.append({"stable_id": sid, "generator": obj["generator"],
-                        "vertices": [[round(v, 6) for v in row] for row in vertices],
-                        "faces": faces, "matrix_world": [[round(v, 6) for v in row]
-                                                           for row in mesh_obj.matrix_world],
-                        "world_bounds": bounds, "dimensions": list(mesh_obj.dimensions)})
-    fingerprint_data = [{k: r[k] for k in ("stable_id", "generator", "vertices", "faces", "matrix_world")}
-                        for r in records]
-    fingerprint = hashlib.sha256(json.dumps(fingerprint_data, sort_keys=True).encode()).hexdigest()
-    return {"ok": True, "object_count": len(records), "objects": records,
-            "structure_sha256": fingerprint}
+        raise ValueError("scene units: expected meters / Z-up")
+    actual = {}
+    for obj in scene.objects:
+        aid = obj.get("artifact_id")
+        if not aid or aid in actual:
+            raise ValueError("scene contains duplicate or unexpected untracked artifacts")
+        actual[aid] = obj
+    expected = {a["artifact_id"]: a for a in plan["expected_artifacts"]}
+    if set(expected) != set(actual):
+        raise ValueError("scene contains missing/unexpected artifacts")
+    nodes = {n["node_id"]: n for n in plan["nodes"]}
+    primary = {nid: actual[n["expected_artifacts"][0]["artifact_id"]] for nid, n in nodes.items()}
+    inventory, legacy_objects = [], []
+    for aid, declaration in sorted(expected.items()):
+        obj = actual[aid]
+        node = nodes[declaration["producer_node_id"]]
+        for key, value in (("stable_id", node["node_id"]), ("source_node_id", declaration["source_node_id"]),
+                           ("producer_node_id", node["node_id"]), ("role", declaration["role"]),
+                           ("local_role", declaration["local_role"]), ("generator", node["skill"]["skill_id"]),
+                           ("node_seed", node["node_seed"]), ("logical_parent", node["parent_id"] or "")):
+            if obj.get(key) != value:
+                raise ValueError(f"{aid}.{key}: metadata mismatch")
+        if obj.get("typed_inputs") != json.dumps(node["resolved_inputs"], sort_keys=True):
+            raise ValueError(f"{aid}: typed input binding mismatch")
+        if obj.parent != (primary[node["parent_id"]] if node["parent_id"] else None):
+            raise ValueError(f"{aid}: spatial parent mismatch")
+        if obj.modifiers or obj.constraints or obj.animation_data:
+            raise ValueError(f"{aid}: undeclared modifiers/constraints/animation unsupported in Phase 2A")
+        for row, exp in zip(obj.matrix_basis, node["local_matrix"]):
+            close(row, exp, aid + ".local_matrix")
+        for row, exp in zip(obj.matrix_world, node["world_matrix"]):
+            close(row, exp, aid + ".world_matrix")
+        for i, row in enumerate(obj.matrix_parent_inverse):
+            close(row, [float(i == j) for j in range(4)], aid + ".matrix_parent_inverse")
+        if declaration["type"] == "Mesh":
+            if obj.type != "MESH" or not obj.data.vertices or not obj.data.polygons:
+                raise ValueError(f"{aid}: required mesh missing")
+            digest = geometry_digest(obj.data)
+            low, high = [math.inf]*3, [-math.inf]*3
+            for vertex in obj.data.vertices:
+                point = obj.matrix_world @ vertex.co
+                if not all(math.isfinite(v) for v in point):
+                    raise ValueError(f"{aid}: non-finite world coordinates")
+                for i in range(3):
+                    low[i], high[i] = min(low[i], point[i]), max(high[i], point[i])
+            vertex_count, face_count = len(obj.data.vertices), len(obj.data.polygons)
+            legacy_objects.append({"artifact_id":aid, "stable_id": node["node_id"], "generator": node["skill"]["skill_id"],
+                                   "dimensions": list(obj.dimensions), "world_bounds": [low, high]})
+        else:
+            if obj.type != "EMPTY":
+                raise ValueError(f"{aid}: only Empty Object artifacts supported")
+            digest = None
+            vertex_count = face_count = 0
+            point = obj.matrix_world @ Vector((0,0,0))
+            low = high = list(point)
+        inventory.append({**declaration, "reference": {"object": obj.name,
+                          "mesh": obj.data.name if obj.type == "MESH" else None},
+                          "geometry_digest": digest, "vertex_count": vertex_count, "face_count": face_count,
+                          "bounds": [[round(v,6) for v in low], [round(v,6) for v in high]],
+                          "local_matrix": rounded_matrix(obj.matrix_basis), "world_matrix": rounded_matrix(obj.matrix_world)})
+    context = {"plan": plan, "primary_objects": primary}
+    for node in plan["nodes"]:
+        manifest = registry.get(node["skill"]["skill_id"], node["skill"]["version"], plan["validation_candidates"])
+        objects = {a["local_role"]: actual[a["artifact_id"]] for a in node["expected_artifacts"]}
+        callback(registry, manifest["validator"])(node, objects, context)
+    domain_results = [validator(plan, context) for validator in domain_validators]
+    mapping = {}
+    for a in inventory:
+        mapping.setdefault(a["source_node_id"], []).append(a["artifact_id"])
+    manifest = check_manifest({"schema_version": 1, "plan_digest": plan["plan_digest"], "artifact_count": len(inventory),
+                               "artifacts": inventory, "node_artifacts": {k: sorted(v) for k,v in mapping.items()}},
+                              plan["expected_artifacts"])
+    return {"ok": True, "object_count": len(legacy_objects), "objects": sorted(legacy_objects, key=lambda o: o["stable_id"]),
+            "artifact_count": len(inventory), "artifact_manifest": manifest, "domain_results": domain_results,
+            "structure_sha256": structure_digest(manifest)}

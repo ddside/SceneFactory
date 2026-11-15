@@ -2,15 +2,19 @@
 from datetime import datetime, timezone
 from pathlib import Path
 import shutil
-import struct
 import platform
-import hashlib
 import uuid
 
 from .runner import run_blender
 from .spec import example_spec, load_spec, read_json
 from .storage import check_artifacts, digest, project_lock, write_json
 from . import __version__
+from .compiler import compile_scene, verify_plan
+from .scene_v2 import example_v2
+from .artifacts import check_manifest
+from .quality import report as quality_report, validate_report
+from .png import verify_png
+from .contract_utils import canonical_digest
 
 
 def new_id():
@@ -20,12 +24,14 @@ def new_id():
 def implementation_hash():
     root = Path(__file__).parent
     files = {str(p.relative_to(root)): digest(p) for p in sorted(root.rglob("*.py"))}
-    return hashlib.sha256(str(sorted(files.items())).encode()).hexdigest()
+    return canonical_digest(files)
 
 
-def init_project(path):
+def init_project(path, schema_version=1):
     path = Path(path).resolve()
-    spec = example_spec(path.name)
+    if schema_version not in (1,2):
+        raise ValueError("schema_version must be 1 or 2")
+    spec = example_spec(path.name) if schema_version == 1 else example_v2(path.name)
     path.mkdir(parents=True, exist_ok=False)
     write_json(path / "scene.json", spec)
     (path / "scene-factory.toml").write_text(
@@ -58,9 +64,19 @@ def latest_build(project):
     if metadata.get("status") != "validated":
         raise ValueError(f"Build {build_id} is not validated")
     required = {"scene.json", "scene.blend", "result.json", "validation.json"}
+    if metadata.get("manifest_version") == 2:
+        required.update(("scene-v2.json", "plan.json", "resolved-scene.json", "skills.lock.json", "artifact-manifest.json", "quality.json"))
     if set(metadata.get("sha256", {})) != required:
         raise ValueError("Build manifest has missing or unexpected artifact entries")
     check_artifacts(directory, metadata["sha256"])
+    if metadata.get("manifest_version") == 2:
+        plan = verify_plan(read_json(directory / "plan.json"))
+        if metadata["plan_digest"] != plan["plan_digest"]:
+            raise ValueError("Build metadata / plan digest mismatch")
+        manifest = check_manifest(read_json(directory / "artifact-manifest.json"), plan["expected_artifacts"])
+        if manifest["plan_digest"] != plan["plan_digest"]:
+            raise ValueError("ArtifactManifest / BuildPlan digest mismatch")
+        validate_report(read_json(directory / "quality.json"))
     return directory, metadata
 
 
@@ -73,51 +89,93 @@ def run_build(project, executable, options):
         metadata = {"build_id": build_id, "status": "staging", "error": None}
         write_json(directory / "build.json", metadata)
         record_operation(project, "build", directory, "staging")
+        completed, stage = [], "specification"
         try:
-            spec = load_spec(project / "scene.json")
-            write_json(directory / "scene.json", spec)
-            built = run_blender(executable, {"action": "build", "spec_path": str(directory / "scene.json")},
+            shutil.copyfile(project / "scene.json", directory / "scene.json")
+            compiled = prepare_plan(directory / "scene.json", directory)
+            plan = compiled["build_plan"]
+            metadata.update(manifest_version=2, source_schema_version=plan["source_schema_version"], plan_digest=plan["plan_digest"])
+            completed.append("specification")
+            write_json(directory / "quality.json", quality_report(completed))
+            stage = "execution"
+            request = {"action":"build", "spec_path":str(directory / "scene.json"),
+                       "plan_path":str(directory / "plan.json"),"plan_digest":plan["plan_digest"]}
+            built = run_blender(executable, request,
                                 directory, options["timeout"])
             if not (directory / "scene.blend").is_file() or (directory / "scene.blend").stat().st_size == 0:
                 raise ValueError("Missing/empty artifact: scene.blend")
-            checked = run_blender(executable, {
-                "action": "validate", "spec_path": str(directory / "scene.json"),
+            completed.append("execution")
+            stage = "structure"
+            checked = run_blender(executable, {**request,
+                "action": "validate",
                 "blend_path": str(directory / "scene.blend")}, directory / "reopen", options["timeout"])
             if not checked.get("reopened") or built.get("structure_sha256") != checked.get("structure_sha256"):
                 raise ValueError("Reopened scene does not match generated structure")
             write_json(directory / "validation.json", checked)
+            check_manifest(checked["artifact_manifest"], plan["expected_artifacts"])
+            write_json(directory / "artifact-manifest.json", checked["artifact_manifest"])
+            completed.append("structure")
+            write_json(directory / "quality.json", quality_report(completed))
             metadata.update(status="validated", structure_sha256=checked["structure_sha256"],
                             blender=built["blender"], blender_hash=built["blender_hash"],
                             application_version=__version__, implementation_sha256=implementation_hash(),
                             application_python=platform.python_version(),
                             blender_python=built["blender_python"],
                             sha256={name: digest(directory / name) for name in
-                                    ("scene.json", "scene.blend", "result.json", "validation.json")})
+                                    ("scene.json", "scene.blend", "result.json", "validation.json", "scene-v2.json",
+                                     "plan.json", "resolved-scene.json", "skills.lock.json", "artifact-manifest.json", "quality.json")})
             write_json(directory / "build.json", metadata)
             # Only this atomic state update publishes the validated build.
             record_operation(project, "build", directory, "validated", promote=build_id)
             return {"build_id": build_id, "directory": str(directory), **metadata}
         except Exception as exc:
+            write_json(directory / "quality.json", quality_report(completed, (stage, str(exc))))
             metadata.update(status="failed", error=str(exc))
             write_json(directory / "build.json", metadata)
             record_operation(project, "build", directory, "failed", str(exc))
             raise
 
 
-def verify_png(path, resolution):
-    path = Path(path)
-    with path.open("rb") as stream:
-        header = stream.read(24)
-    if len(header) != 24 or header[:8] != b"\x89PNG\r\n\x1a\n" or header[12:16] != b"IHDR":
-        raise ValueError(f"Invalid/missing PNG artifact: {path}")
-    if struct.unpack(">II", header[16:24]) != (resolution, resolution):
-        raise ValueError("Preview resolution mismatch")
+def prepare_plan(source_path, directory):
+    source = read_json(source_path)
+    compiled = compile_scene(source, source_sha256=digest(source_path), runtime_profile={
+        "application_python": platform.python_version(), "os": platform.system(), "architecture": platform.machine()})
+    for filename, data in (("scene-v2.json", compiled["resolved_scene"]["authoring_spec"]),
+                           ("resolved-scene.json", compiled["resolved_scene"]),
+                           ("plan.json", compiled["build_plan"]), ("skills.lock.json", compiled["skills_lock"])):
+        write_json(directory / filename, data)
+    return compiled
+
+
+def compile_project(project):
+    project = Path(project).resolve()
+    with project_lock(project):
+        directory = project / "operations" / new_id()
+        directory.mkdir(parents=True)
+        record_operation(project,"compile",directory,"staging")
+        try:
+            shutil.copyfile(project / "scene.json", directory / "scene.json")
+            compiled = prepare_plan(directory / "scene.json", directory)
+            record_operation(project, "compile", directory, "succeeded")
+            return {"directory":str(directory),"plan_digest":compiled["build_plan"]["plan_digest"],
+                    "node_count":len(compiled["build_plan"]["nodes"])}
+        except Exception as exc:
+            write_json(directory/"error.json",{"error":str(exc)})
+            record_operation(project,"compile",directory,"failed",str(exc))
+            raise
 
 
 def verify_preview(project, build_dir):
     preview = read_json(build_dir / "preview.json")
+    original = (project / preview["path"]).resolve()
+    if not original.is_relative_to(project.resolve()):
+        raise ValueError("Preview reference escapes project directory")
     check_artifacts(project, {preview["path"]: preview["sha256"]})
-    check_artifacts(build_dir, {"preview.png": preview["sha256"]})
+    if preview.get("schema_version") == 2:
+        verify_png(original, preview["resolution"])
+    else:
+        # Existing Phase 1 preview records keep their original integrity contract.
+        check_artifacts(build_dir, {"preview.png": preview["sha256"]})
     return preview
 
 
@@ -135,20 +193,26 @@ def operate(project, action, executable, options):
                 raise ValueError("Scene Specification changed since the successful build; build again first")
             request = {"action": action, "spec_path": str(build_dir / "scene.json"),
                        "blend_path": str(build_dir / "scene.blend"), **options}
+            if metadata.get("manifest_version") == 2:
+                request.update(plan_path=str(build_dir / "plan.json"), plan_digest=metadata["plan_digest"])
             result = run_blender(executable, request, directory, options["timeout"])
             if result.get("structure_sha256") != metadata["structure_sha256"]:
                 raise ValueError("Structure fingerprint differs from validated build")
             if action == "preview":
                 verify_png(directory / "preview.png", options["resolution"])
                 # Publish preview only after successful rendering and file checks.
-                preview = {"path": str((directory / "preview.png").relative_to(project)),
-                           "sha256": digest(directory / "preview.png"), "render": result["render"]}
-                # Root convenience artifact, copied atomically, original operation is immutable.
-                temporary = build_dir / ".preview.png"
-                shutil.copyfile(directory / "preview.png", temporary)
-                temporary.replace(build_dir / "preview.png")
+                preview = {"schema_version":2,"path": str((directory / "preview.png").relative_to(project)),
+                           "sha256": digest(directory / "preview.png"), "resolution":options["resolution"],
+                           "render": result["render"],"attempt_id":directory.name}
+                # A first-preview snapshot for Phase 1 consumers only. Never updated,
+                # never authoritative, never checked against a later canonical preview.
+                if metadata.get("source_schema_version",1) == 1 and not (build_dir / "preview.png").exists():
+                    shutil.copyfile(directory / "preview.png", build_dir / "preview.png")
+                record_operation(project, action, directory, "succeeded")
+                # Final publication is ONE atomic reference update, after all other writes.
                 write_json(build_dir / "preview.json", preview)
-            record_operation(project, action, directory, "succeeded")
+            else:
+                record_operation(project, action, directory, "succeeded")
             return {"build_id": metadata["build_id"], "directory": str(directory), **result}
         except Exception as exc:
             write_json(directory / "error.json", {"error": str(exc)})
@@ -166,6 +230,8 @@ def status(project):
         data["spec_matches_build"] = load_spec(project / "scene.json") == load_spec(directory / "scene.json")
         if (directory / "preview.json").exists():
             data["preview"] = verify_preview(project, directory)
+        if metadata.get("manifest_version") == 2:
+            data["quality"] = read_json(directory / "quality.json")
     except ValueError as exc:
         data["artifact_integrity"] = False
         data["integrity_error"] = str(exc)

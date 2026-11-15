@@ -1,0 +1,219 @@
+{
+  "artifacts": [
+    {
+      "role": "geometry",
+      "type": "Mesh"
+    }
+  ],
+  "blender_compatibility": {
+    "python_series": "3.11",
+    "series": "4.5"
+  },
+  "category": "primitive",
+  "dependencies": [],
+  "description": "Deterministic Phase 2A pillar contract fixture",
+  "examples": [
+    {},
+    {
+      "depth": 0.8,
+      "height": 2.5,
+      "width": 1.2
+    }
+  ],
+  "implementation": "cuboid.generate",
+  "inputs": {},
+  "kind": "leaf",
+  "name": "pillar",
+  "outputs": {
+    "dimensions": {
+      "type": "Dimensions",
+      "value": [
+        {
+          "parameter": "width"
+        },
+        {
+          "parameter": "depth"
+        },
+        {
+          "parameter": "height"
+        }
+      ]
+    },
+    "height": {
+      "type": "Length",
+      "value": {
+        "parameter": "height"
+      }
+    }
+  },
+  "parameter_schema": {
+    "depth": {
+      "default": 0.4,
+      "maximum": 1000,
+      "minimum": 0.01,
+      "type": "number"
+    },
+    "height": {
+      "default": 3.0,
+      "maximum": 1000,
+      "minimum": 0.01,
+      "type": "number"
+    },
+    "width": {
+      "default": 0.4,
+      "maximum": 1000,
+      "minimum": 0.01,
+      "type": "number"
+    }
+  },
+  "schema_version": 1,
+  "skill_id": "pillar",
+  "tags": [
+    "procedural",
+    "pillar"
+  ],
+  "validation_evidence": {
+    "pin": {
+      "dependencies": [],
+      "dependency_pins": [],
+      "implementation": {
+        "function": "generate",
+        "module": "scene_factory.blender.skills.cuboid",
+        "sha256": "f749c877798fe5d407bcd8e08f7e0247bad6c58d267af996c2e4fe3ea3ca51f2",
+        "support_sha256": {
+          "blender/generators.py": "06db28e679a89cab1ff9f906d79dd4142261706505e8bbb4145d8ca3d21ca187",
+          "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+          "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+        }
+      },
+      "manifest_sha256": "8a51c11360aeab21c1bb3b1bb92953cfaae36ae979eebef5fa846418ef82f5fc",
+      "skill_id": "pillar",
+      "validator": {
+        "function": "validate",
+        "module": "scene_factory.blender.skills.cuboid",
+        "sha256": "f749c877798fe5d407bcd8e08f7e0247bad6c58d267af996c2e4fe3ea3ca51f2",
+        "support_sha256": {
+          "blender/generators.py": "06db28e679a89cab1ff9f906d79dd4142261706505e8bbb4145d8ca3d21ca187",
+          "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+          "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+        }
+      },
+      "version": "1.0.0"
+    },
+    "runtime": {
+      "application_python": "3.12.13",
+      "architecture": "arm64",
+      "blender": "4.5.15 LTS",
+      "blender_python": "3.11.15 (main, Apr 25 2025, 12:39:20) [Clang 15.0.0 (clang-1500.0.40.1)]",
+      "implementation_sha256": "1c6421922688f19bdeec7bada05eda2a457fd0ddfaae5a4313bd722ed7eddfc4",
+      "os": "Darwin"
+    },
+    "status": "passed",
+    "tests": [
+      {
+        "checks": [
+          "compile",
+          "generate",
+          "skill-validator",
+          "reopen",
+          "artifact-contract"
+        ],
+        "example": 0,
+        "plan_digest": "3a65eae543824cf09c70a40a241afc84e7bbe13bc049917e4f869b6d8d9aced8",
+        "structure_sha256": "e8994ffef8375d569b6fb115804e9a476c6256c2354efb89bf65e2f9b6acf2f0"
+      },
+      {
+        "checks": [
+          "compile",
+          "generate",
+          "skill-validator",
+          "reopen",
+          "artifact-contract"
+        ],
+        "example": 1,
+        "plan_digest": "06ea4cb5e1b88d9524ead684370543f8ef8b934d56528491bf7f5c301b8b6e0a",
+        "structure_sha256": "cd4c51dc34e87a54461d8b3f2c10c9add7525170d5623672b1d374801af9f06a"
+      }
+    ],
+    "unit_tests": {
+      "case_count": 71,
+      "cases": [
+        "tests.test_scene_v2.test_typed_roof_follows_height_and_topological_order",
+        "tests.test_scene_v2.test_invalid_v2[unknown_root]",
+        "tests.test_scene_v2.test_invalid_v2[unknown_node]",
+        "tests.test_scene_v2.test_invalid_v2[duplicate]",
+        "tests.test_scene_v2.test_invalid_v2[missing_input_node]",
+        "tests.test_scene_v2.test_invalid_v2[missing_output]",
+        "tests.test_scene_v2.test_invalid_v2[type_mismatch]",
+        "tests.test_scene_v2.test_invalid_v2[bad_parent]",
+        "tests.test_scene_v2.test_invalid_v2[parent_cycle]",
+        "tests.test_scene_v2.test_invalid_v2[dependency_cycle]",
+        "tests.test_scene_v2.test_invalid_v2[combined_cycle]",
+        "tests.test_scene_v2.test_invalid_v2[bad_version]",
+        "tests.test_scene_v2.test_invalid_v2[negative_dimension]",
+        "tests.test_scene_v2.test_invalid_v2[nan]",
+        "tests.test_scene_v2.test_invalid_v2[unknown_parameter]",
+        "tests.test_scene_v2.test_invalid_v2[unknown_skill]",
+        "tests.test_scene_v2.test_invalid_v2[duplicate_dependency]",
+        "tests.test_scene_v2.test_invalid_v2[unsupported_state]",
+        "tests.test_scene_v2.test_invalid_v2[unregistered_input]",
+        "tests.test_scene_v2.test_parent_world_and_dependency_are_distinct",
+        "tests.test_scene_v2.test_recipe_expansion_stable_ids_and_seeds",
+        "tests.test_scene_v2.test_plan_digest_detects_tampering",
+        "tests.test_scene_v2.test_v1_explicit_migration_preserves_semantics",
+        "tests.test_scene_v2.test_new_leaf_and_recipe_are_data_registered",
+        "tests.test_skill_registry.test_catalog_and_discovery",
+        "tests.test_skill_registry.test_manifest_rejections[unknown_field]",
+        "tests.test_skill_registry.test_manifest_rejections[unknown_entry]",
+        "tests.test_skill_registry.test_manifest_rejections[unknown_module]",
+        "tests.test_skill_registry.test_manifest_rejections[bad_version]",
+        "tests.test_skill_registry.test_manifest_rejections[bad_status]",
+        "tests.test_skill_registry.test_manifest_rejections[unknown_type]",
+        "tests.test_skill_registry.test_manifest_rejections[bad_default]",
+        "tests.test_skill_registry.test_manifest_rejections[bad_example]",
+        "tests.test_skill_registry.test_manifest_rejections[bad_artifact]",
+        "tests.test_skill_registry.test_manifest_rejections[bad_compatibility]",
+        "tests.test_skill_registry.test_manifest_rejections[duplicate_role]",
+        "tests.test_skill_registry.test_manifest_rejections[unsupported_expression]",
+        "tests.test_skill_registry.test_inactive_skills_cannot_execute[candidate]",
+        "tests.test_skill_registry.test_inactive_skills_cannot_execute[disabled]",
+        "tests.test_skill_registry.test_stale_validation_evidence_rejected",
+        "tests.test_skill_registry.test_registry_graph_rejections[cycle]",
+        "tests.test_skill_registry.test_registry_graph_rejections[missing_version]",
+        "tests.test_skill_registry.test_registry_graph_rejections[recipe_cycle]",
+        "tests.test_skill_registry.test_registry_graph_rejections[undeclared_recipe_dependency]",
+        "tests.test_skill_registry.test_activation_requires_passing_unit_report",
+        "tests.test_preview_publication.test_normal_reference_update_keeps_old_original",
+        "tests.test_preview_publication.test_atomic_publish_io_failure_preserves_reference",
+        "tests.test_preview_publication.test_preview_failures_preserve_reference[render_failure]",
+        "tests.test_preview_publication.test_preview_failures_preserve_reference[corrupt_png]",
+        "tests.test_preview_publication.test_png_corruption_is_rejected[header_only]",
+        "tests.test_preview_publication.test_png_corruption_is_rejected[truncated]",
+        "tests.test_preview_publication.test_png_corruption_is_rejected[crc]",
+        "tests.test_preview_publication.test_png_corruption_is_rejected[pixels]",
+        "tests.test_artifact_protocol.test_artifact_contract_rejections[count]",
+        "tests.test_artifact_protocol.test_artifact_contract_rejections[duplicate]",
+        "tests.test_artifact_protocol.test_artifact_contract_rejections[mapping]",
+        "tests.test_artifact_protocol.test_artifact_contract_rejections[type]",
+        "tests.test_artifact_protocol.test_artifact_contract_rejections[geometry]",
+        "tests.test_artifact_protocol.test_artifact_contract_rejections[nonfinite]",
+        "tests.test_artifact_protocol.test_artifact_contract_rejections[missing_dep]",
+        "tests.test_artifact_protocol.test_artifact_contract_rejections[missing_role]",
+        "tests.test_artifact_protocol.test_artifact_contract_rejections[missing_artifact]",
+        "tests.test_artifact_protocol.test_artifact_contract_rejections[unexpected_artifact]",
+        "tests.test_artifact_protocol.test_ids_do_not_depend_on_blender_names_and_inventory_is_lightweight",
+        "tests.test_artifact_protocol.test_worker_result_rejections[count]",
+        "tests.test_artifact_protocol.test_worker_result_rejections[protocol]",
+        "tests.test_artifact_protocol.test_worker_result_rejections[attempt]",
+        "tests.test_artifact_protocol.test_worker_result_rejections[digest]",
+        "tests.test_artifact_protocol.test_worker_result_rejections[artifact_count]",
+        "tests.test_artifact_protocol.test_worker_result_rejections[artifact_plan]",
+        "tests.test_artifact_protocol.test_quality_does_not_promote_structure_to_accepted"
+      ],
+      "sha256": "8eb5663b60d4afec476cddf2a22abdf5ef86998eaa847433d818bdc034523445"
+    }
+  },
+  "validation_status": "validated",
+  "validator": "cuboid.validate",
+  "version": "1.0.0"
+}

@@ -57,6 +57,11 @@ def identifier(value, path):
 
 def validate_spec(data):
     """Return a normalized copy; reject unknown fields and all unsupported values."""
+    if isinstance(data, dict) and type(data.get("schema_version")) is int and data["schema_version"] == 2:
+        if "objects" in data:
+            fail("$.schema_version", "v2 uses nodes; explicitly migrate v1 objects first")
+        from .scene_v2 import validate_v2
+        return validate_v2(data)
     fields(data, "$", ("schema_version", "scene_id", "seed", "units", "objects"))
     if type(data["schema_version"]) is not int or data["schema_version"] != 1:
         fail("$.schema_version", "only integer version 1 is supported")

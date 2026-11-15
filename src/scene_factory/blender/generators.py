@@ -19,7 +19,7 @@ PALETTE = {"ground": (0.22, 0.27, 0.21), "box_building": (0.62, 0.56, 0.44),
            "pillar": (0.5, 0.53, 0.56), "roof": (0.25, 0.31, 0.37)}
 
 
-def make_cuboid(obj, seed):
+def make_cuboid(obj, seed, node_seed=None):
     mesh = bpy.data.meshes.new(obj["stable_id"] + ".mesh")
     mesh.from_pydata(cuboid_vertices(dimensions(obj)), [], FACES)
     mesh.update()
@@ -32,7 +32,7 @@ def make_cuboid(obj, seed):
     result.rotation_euler = [radians(v) for v in obj["transform"]["rotation_degrees"]]
     result.scale = obj["transform"]["scale"]
     # Independent deterministic stream per ID; object insertion doesn't recolor others.
-    seed_bytes = hashlib.sha256(f"{seed}:{obj['stable_id']}".encode()).digest()
+    seed_bytes = bytes.fromhex(node_seed) if node_seed is not None else hashlib.sha256(f"{seed}:{obj['stable_id']}".encode()).digest()
     rng = random.Random(int.from_bytes(seed_bytes, "big"))
     factor = rng.uniform(0.9, 1.1)
     color = tuple(v * factor for v in PALETTE[obj["generator"]]) + (1.0,)

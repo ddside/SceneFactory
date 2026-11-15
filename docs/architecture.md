@@ -1,6 +1,20 @@
 # Scene Factory — アーキテクチャと実環境
 
-## 現行のPhase 1
+## 現行のPhase 2A
+
+共通契約とスキル基盤を実装した。現行の契約・操作方法・検証結果は
+[Phase 2A実装記録](phase2a.md)を正とする。Phase 1.5の方針に沿い、既存CLI/Runner、
+Python分離、保存後の再読込み、成功版保護を維持した。
+
+v1原本 → 明示的/内部adapter → logical SceneSpec v2 → Registry + 純粋compile →
+ResolvedScene / BuildPlan / skills lock → Blender worker → ArtifactManifest →
+共通/skill検証 → 保存/再読込み → QualityReport（構造validated）。
+SceneIntent、自然言語自動化、accepted Revision、修復ループはPhase 2B以降。
+新規ビルドのinventoryは軽量化し、全頂点JSONを正本にしない。
+プレビューはoperationsの不変PNGを単一の原子的な参照で公開する。
+v1と旧形式のvalidated buildは読込み互換を保持し、元ファイルを上書きしない。
+
+## Phase 1の履歴
 
 Phase 1のCLI・仕様検証・4生成器・完成版保護を実装した。
 設計契約、操作方法、テスト結果、未検証事項は[Phase 1実装記録](phase1.md)を参照。
@@ -9,7 +23,7 @@ wheelにもワーカーを同梱する。OS固有の検出候補は`platforms.py
 依存は実行時なし、テスト用pytest、ビルド用uv_build。
 `uv run --locked scene-factory`を標準操作とし、Blender内蔵Pythonは変更しない。
 以下のPhase 0調査と将来構想は履歴として保持する。下記の「未実装」は
-Phase 0当時の記録であり、現行の実装範囲はPhase 1記録を正とする。
+Phase 0当時の記録であり、現行の実装範囲はPhase 2A記録を正とする。
 
 調査日: 2026-11-15 (America/New_York)。空の作業ディレクトリから開始。
 Phase 0は環境調査と最小統合検証のみを実施した。
