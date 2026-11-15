@@ -88,7 +88,8 @@ def execute(request, out):
         validation = validate_scene(plan, registry) if plan is not None else validate_legacy_scene(spec)
         if action == "validate":
             return {**metadata, **validation, "reopened": True}
-        selected = render(out / "preview.png", request["device"], request["resolution"], request["samples"])
+        selected = render(out / "preview.png", request["device"], request["resolution"], request["samples"],
+                          view_direction=request.get('view_direction'))
         return {**metadata, **validation, "render": selected, "preview": "preview.png",
                 "resolution": request["resolution"], "samples": request["samples"]}
     raise ValueError(f"Unknown worker action: {action}")

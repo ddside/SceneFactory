@@ -24,6 +24,9 @@ def report(passed=(), failed=None):
 
 
 def validate_report(value):
+    if isinstance(value,dict) and value.get('schema_version')==2:
+        from .quality_profiles import validate_quality_report
+        return validate_quality_report(value)
     fields(value, "QualityReport", ("schema_version", "acceptance", "stages"))
     if (type(value["schema_version"]) is not int or value["schema_version"] != 1
         or value["acceptance"] != "not_evaluated" or not isinstance(value["stages"],dict) or set(value["stages"]) != set(STAGES)):

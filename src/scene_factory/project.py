@@ -1,11 +1,13 @@
 """Project operations and transactional validated-build promotion."""
 from datetime import datetime, timezone
+from contextlib import nullcontext
 from pathlib import Path
 import shutil
 import platform
 import uuid
+import time
 
-from .runner import run_blender
+from .runner import run_blender, RunnerError
 from .spec import example_spec, load_spec, read_json
 from .storage import check_artifacts, digest, project_lock, write_json
 from . import __version__
@@ -54,10 +56,29 @@ def record_operation(project, action, directory, status, error=None, promote=Non
     write_json(project / "state.json", data)
 
 
+def current_spec_path(project):
+    data=state(project)
+    if data.get('working_revision'):
+        from .workflow_store import load_record, revision_spec
+        revision_spec(project,data['working_revision'])
+        record=load_record(project,'revision',data['working_revision'])
+        return Path(project)/record['scene_spec_snapshot']
+    return Path(project)/'scene.json'
+
+
+def remaining_timeout(options):
+    remaining=options.get('_deadline_epoch',float('inf'))-time.time()
+    if remaining<=0: raise RunnerError('Workflow total time budget exhausted')
+    return min(options['timeout'],remaining)
+
+
 def latest_build(project):
+    return build_at(project,state(project)['last_successful_build'])
+
+
+def build_at(project,build_id):
     project = Path(project).resolve()
-    build_id = state(project)["last_successful_build"]
-    if not build_id or not isinstance(build_id, str) or Path(build_id).name != build_id:
+    if not build_id or not isinstance(build_id, str) or Path(build_id).name != build_id or build_id in ('.','..'):
         raise ValueError("No successful build. Run scene-factory build first.")
     directory = project / "builds" / build_id
     metadata = read_json(directory / "build.json")
@@ -80,9 +101,9 @@ def latest_build(project):
     return directory, metadata
 
 
-def run_build(project, executable, options):
+def run_build(project, executable, options, source_path=None, _locked=False):
     project = Path(project).resolve()
-    with project_lock(project):
+    with (nullcontext() if _locked else project_lock(project)):
         build_id = new_id()
         directory = project / "builds" / build_id
         directory.mkdir(parents=True)
@@ -91,7 +112,7 @@ def run_build(project, executable, options):
         record_operation(project, "build", directory, "staging")
         completed, stage = [], "specification"
         try:
-            shutil.copyfile(project / "scene.json", directory / "scene.json")
+            shutil.copyfile(source_path or current_spec_path(project), directory / "scene.json")
             compiled = prepare_plan(directory / "scene.json", directory)
             plan = compiled["build_plan"]
             metadata.update(manifest_version=2, source_schema_version=plan["source_schema_version"], plan_digest=plan["plan_digest"])
@@ -101,14 +122,14 @@ def run_build(project, executable, options):
             request = {"action":"build", "spec_path":str(directory / "scene.json"),
                        "plan_path":str(directory / "plan.json"),"plan_digest":plan["plan_digest"]}
             built = run_blender(executable, request,
-                                directory, options["timeout"])
+                                directory, remaining_timeout(options))
             if not (directory / "scene.blend").is_file() or (directory / "scene.blend").stat().st_size == 0:
                 raise ValueError("Missing/empty artifact: scene.blend")
             completed.append("execution")
             stage = "structure"
             checked = run_blender(executable, {**request,
                 "action": "validate",
-                "blend_path": str(directory / "scene.blend")}, directory / "reopen", options["timeout"])
+                "blend_path": str(directory / "scene.blend")}, directory / "reopen", remaining_timeout(options))
             if not checked.get("reopened") or built.get("structure_sha256") != checked.get("structure_sha256"):
                 raise ValueError("Reopened scene does not match generated structure")
             write_json(directory / "validation.json", checked)
@@ -154,7 +175,7 @@ def compile_project(project):
         directory.mkdir(parents=True)
         record_operation(project,"compile",directory,"staging")
         try:
-            shutil.copyfile(project / "scene.json", directory / "scene.json")
+            shutil.copyfile(current_spec_path(project), directory / "scene.json")
             compiled = prepare_plan(directory / "scene.json", directory)
             record_operation(project, "compile", directory, "succeeded")
             return {"directory":str(directory),"plan_digest":compiled["build_plan"]["plan_digest"],
@@ -179,23 +200,23 @@ def verify_preview(project, build_dir):
     return preview
 
 
-def operate(project, action, executable, options):
+def operate(project, action, executable, options, build_id=None, check_working_spec=True, _locked=False):
     project = Path(project).resolve()
-    with project_lock(project):
+    with (nullcontext() if _locked else project_lock(project)):
         directory = project / "operations" / new_id()
         directory.mkdir(parents=True)
         record_operation(project, action, directory, "staging")
         try:
-            build_dir, metadata = latest_build(project)
+            build_dir, metadata = build_at(project,build_id) if build_id else latest_build(project)
             if action == "validate" and (build_dir / "preview.json").exists():
                 verify_preview(project, build_dir)
-            if load_spec(project / "scene.json") != load_spec(build_dir / "scene.json"):
+            if check_working_spec and load_spec(current_spec_path(project)) != load_spec(build_dir / "scene.json"):
                 raise ValueError("Scene Specification changed since the successful build; build again first")
             request = {"action": action, "spec_path": str(build_dir / "scene.json"),
-                       "blend_path": str(build_dir / "scene.blend"), **options}
+                       "blend_path": str(build_dir / "scene.blend"), **{k:v for k,v in options.items() if not k.startswith('_')}}
             if metadata.get("manifest_version") == 2:
                 request.update(plan_path=str(build_dir / "plan.json"), plan_digest=metadata["plan_digest"])
-            result = run_blender(executable, request, directory, options["timeout"])
+            result = run_blender(executable, request, directory, remaining_timeout(options))
             if result.get("structure_sha256") != metadata["structure_sha256"]:
                 raise ValueError("Structure fingerprint differs from validated build")
             if action == "preview":
@@ -227,7 +248,7 @@ def status(project):
         directory, metadata = latest_build(project)
         data["artifacts"] = {name: str(directory / name) for name in metadata["sha256"]}
         data["artifact_integrity"] = True
-        data["spec_matches_build"] = load_spec(project / "scene.json") == load_spec(directory / "scene.json")
+        data["spec_matches_build"] = load_spec(current_spec_path(project)) == load_spec(directory / "scene.json")
         if (directory / "preview.json").exists():
             data["preview"] = verify_preview(project, directory)
         if metadata.get("manifest_version") == 2:
@@ -235,4 +256,7 @@ def status(project):
     except ValueError as exc:
         data["artifact_integrity"] = False
         data["integrity_error"] = str(exc)
+    if data.get('working_revision'):
+        from .workflow import resume_context
+        data['workflow']=resume_context(project)
     return data

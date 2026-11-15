@@ -38,7 +38,8 @@ def verify_png(path, resolution):
     if not ended or header is None or not image:
         raise ValueError("PNG missing header, image data or IEND")
     width, height, bits, color, compression, filtering, interlace = header
-    if (width, height) != (resolution, resolution):
+    expected_size=(resolution,resolution) if type(resolution) is int else tuple(resolution)
+    if (width, height) != expected_size:
         raise ValueError("Preview resolution mismatch")
     channels = {0:1, 2:3, 3:1, 4:2, 6:4}.get(color)
     if not channels or bits not in (1,2,4,8,16) or compression or filtering or interlace:

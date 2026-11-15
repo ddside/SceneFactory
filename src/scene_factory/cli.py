@@ -50,6 +50,17 @@ def parser():
             action.add_argument("--activate", action="store_true")
             action.add_argument("--test-report")
             action.add_argument("--contract-only", action="store_true")
+    for name in ('generate','edit','rebuild','repair','review','history','diff','rollback','resume','present'):
+        command=commands.add_parser(name)
+        command.add_argument('project'); common_options(command)
+        if name in ('generate','edit','repair'): command.add_argument('--proposal',required=True)
+        if name=='review': command.add_argument('--file',required=True)
+        if name=='rebuild': command.add_argument('--revision')
+        if name=='rollback':
+            command.add_argument('--revision',required=True); command.add_argument('--reason',default='Return to a previously accepted revision')
+        if name=='diff':
+            command.add_argument('--from',dest='from_revision',required=True); command.add_argument('--to',dest='to_revision',required=True)
+        if name=='resume': command.add_argument('--execute',action='store_true')
     return root
 
 
@@ -57,7 +68,33 @@ def main(argv=None):
     args = parser().parse_args(argv)
     project = Path(args.project).expanduser().resolve()
     try:
-        if args.command == "init":
+        if args.command in ('generate','edit','rebuild','repair','review','history','diff','rollback','resume','present'):
+            from . import workflow
+            from .workflow_store import history,diff_revisions,read_state,load_record
+            from .publication import rollback
+            from .spec import read_json
+            if args.command=='history': result=history(project)
+            elif args.command=='diff': result=diff_revisions(project,args.from_revision,args.to_revision)
+            elif args.command=='rollback': result=rollback(project,args.revision,args.reason)
+            elif args.command=='review': result=workflow.submit_review(project,read_json(args.file))
+            elif args.command=='present':
+                s=read_state(project)
+                if not s['latest_presentation']: raise ValueError('No presentation available')
+                result=load_record(project,'presentation',s['latest_presentation'],s)
+            elif args.command=='resume' and not args.execute: result=workflow.resume_context(project)
+            else:
+                options=load_config(project)
+                for key in ('timeout','device','resolution','samples'):
+                    if hasattr(args,key): options[key]=getattr(args,key)
+                validate_options(options)
+                executable=resolve_blender(getattr(args,'blender_path',None),options,project)
+                if args.command in ('generate','edit'):
+                    result=workflow.start(project,read_json(args.proposal),executable,options,args.command=='edit')
+                elif args.command=='rebuild': result=workflow.rebuild(project,executable,options,args.revision)
+                elif args.command=='repair': result=workflow.repair(project,read_json(args.proposal),executable,options)
+                else: result=workflow.resume(project,executable,options,True)
+                result=workflow.summary(result)
+        elif args.command == "init":
             result = init_project(project, args.schema_version)
         elif args.command == "status":
             result = status(project)

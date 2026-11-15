@@ -3,6 +3,24 @@
 Python 3.12 / uvとBlender 4.5 LTS CLIで、JSON仕様から最小の3D環境を生成します。
 Blender内蔵Python 3.11はアプリ環境から分離しています。BlenderのGUIやMCPは不要です。
 
+Codexチャットでは自然言語と任意の参考画像を入力します。Codexが既存スキルを選び、
+仕様作成・生成・検証・実画像レビューを操作します。継続編集、Revision履歴、
+Rollback、制限付き修復、ファイルからの再開に対応します。
+[操作手順](docs/codex-workflow.md)と[Phase 2Bの範囲・検証](docs/phase2b.md)を参照してください。
+高度な画像→3D復元や写実的形状生成は未実装です。
+
+```sh
+# Codexが解釈済みproposalを作成して実行する例
+uv run --locked scene-factory generate artifacts/example --proposal examples/workflows/natural-request.json
+uv run --locked scene-factory resume artifacts/example
+uv run --locked scene-factory history artifacts/example
+uv run --locked scene-factory present artifacts/example
+```
+
+通常の生成はbasic_sceneを選び、実際のPNG閲覧とreview記録まで行います。
+preview生成成功だけでは視覚検査をpassedにしません。acceptedは選択したprofileの
+範囲だけを意味し、写実性や物理妥当性の保証ではありません。
+
 ```sh
 uv python install 3.12
 uv sync --locked
@@ -19,7 +37,10 @@ Blenderの指定は`--blender-path`、`SCENE_FACTORY_BLENDER`、プロジェク�
 macOSの制限付きサンドボックスでは起動に失敗する場合があります。
 runnerは権限を変更せず、エラーとログを残します。
 
-仕様は`example/scene.json`を編集します。上記の既定initは従来のv1です。
+従来のinit/buildでは仕様は`example/scene.json`を編集します。
+generate/edit管理のプロジェクトでは不変Revisionが正本で、resumeした仕様から
+新proposalを作ります。snapshotや派生Planを直接編集しません。
+上記の既定initは従来のv1です。
 v2では論理ノード・空間的な親子関係・typed inputと依存DAGを記述できます。
 4直方体スキルに加え、円柱と複数部材のRecipeを利用できます。
 いずれも契約実証用の小さな生成器で、写実的建築物の生成器ではありません。

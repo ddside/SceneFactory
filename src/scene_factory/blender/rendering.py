@@ -44,7 +44,7 @@ def select_device(requested):
             "policy": "auto selects first enumerated backend; render failure never falls back"}
 
 
-def setup_camera_lights():
+def setup_camera_lights(direction=None):
     scene = bpy.context.scene
     corners = [o.matrix_world @ Vector(v) for o in scene.objects if o.type == "MESH"
                for v in o.bound_box]
@@ -55,7 +55,10 @@ def setup_camera_lights():
     data = bpy.data.cameras.new("preview.camera")
     camera = bpy.data.objects.new("preview.camera", data)
     scene.collection.objects.link(camera)
-    camera.location = center + Vector((1, -1.4, 1.1)).normalized() * radius * 2
+    direction=direction or (1,-1.4,1.1)
+    if len(direction)!=3 or not all(type(v) in (int,float) and math.isfinite(v) for v in direction) or Vector(direction).length<.001:
+        raise ValueError('preview view_direction must be a finite nonzero vector')
+    camera.location = center + Vector(direction).normalized() * radius * 2
     camera.rotation_euler = (center - camera.location).to_track_quat("-Z", "Y").to_euler()
     data.type = "ORTHO"
     rotation = camera.rotation_euler.to_matrix().transposed()
@@ -77,7 +80,7 @@ def setup_camera_lights():
     scene.world.node_tree.nodes["Background"].inputs["Strength"].default_value = 0.5
 
 
-def render(path, device="cpu", resolution=256, samples=8, engine="CYCLES"):
+def render(path, device="cpu", resolution=256, samples=8, engine="CYCLES",view_direction=None):
     selected = select_device(device)
     scene = bpy.context.scene
     scene.render.engine = engine
@@ -89,7 +92,7 @@ def render(path, device="cpu", resolution=256, samples=8, engine="CYCLES"):
     scene.render.resolution_percentage = 100
     scene.render.image_settings.file_format = "PNG"
     scene.render.filepath = str(path)
-    setup_camera_lights()
+    setup_camera_lights(view_direction)
     if bpy.ops.render.render(write_still=True) != {"FINISHED"}:
         raise RuntimeError("Render did not finish")
     return selected

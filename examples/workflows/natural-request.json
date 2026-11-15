@@ -1,0 +1,313 @@
+{
+  "assumptions": [
+    {
+      "confidence": 1,
+      "reference_ids": [],
+      "text": "\u5efa\u7269\u306f\u4e2d\u5b9fbox\u3002\u67f1\u306f\u5730\u9762\u4e0a\u306b\u7acb\u3064\u9ad8\u30554m\u306e\u89d2\u67f1\u3002\u5468\u56f2\u306e\u67f1\u306f\u5efa\u7269\u306e\u5b50\u3068\u3057\u3066\u79fb\u52d5\u306b\u8ffd\u5f93\u3057\u3001ID/seed\u306f\u4fdd\u3064\u3002\u53f3\u306fworld +X\u3002\u5730\u9762\u306f22m\u00d720m\u3002"
+    }
+  ],
+  "change_summary": "Generate requested building, eight perimeter pillars and ground",
+  "constraints": [
+    {
+      "confidence": 1.0,
+      "constraint_id": "building.width",
+      "expected_value": 10,
+      "property": "width",
+      "source": {
+        "detail": "Explicit request; grounding is a recorded construction convention",
+        "kind": "user"
+      },
+      "strength": "hard",
+      "target_node_id": "building.main",
+      "tolerance": 0.0001,
+      "type": "parameter_equals"
+    },
+    {
+      "confidence": 1.0,
+      "constraint_id": "building.depth",
+      "expected_value": 8,
+      "property": "depth",
+      "source": {
+        "detail": "Explicit request; grounding is a recorded construction convention",
+        "kind": "user"
+      },
+      "strength": "hard",
+      "target_node_id": "building.main",
+      "tolerance": 0.0001,
+      "type": "parameter_equals"
+    },
+    {
+      "confidence": 1.0,
+      "constraint_id": "building.height",
+      "expected_value": 4,
+      "property": "height",
+      "source": {
+        "detail": "Explicit request; grounding is a recorded construction convention",
+        "kind": "user"
+      },
+      "strength": "hard",
+      "target_node_id": "building.main",
+      "tolerance": 0.0001,
+      "type": "parameter_equals"
+    },
+    {
+      "confidence": 1.0,
+      "constraint_id": "pillar.count",
+      "expected_value": 8,
+      "source": {
+        "detail": "Explicit request; grounding is a recorded construction convention",
+        "kind": "user"
+      },
+      "strength": "hard",
+      "target_role": "skill:pillar",
+      "tolerance": 0.0001,
+      "type": "node_count"
+    },
+    {
+      "confidence": 1.0,
+      "constraint_id": "ground.exists",
+      "expected_value": true,
+      "source": {
+        "detail": "Explicit request; grounding is a recorded construction convention",
+        "kind": "user"
+      },
+      "strength": "hard",
+      "target_node_id": "ground.main",
+      "tolerance": 0.0001,
+      "type": "exists"
+    },
+    {
+      "confidence": 0.9,
+      "constraint_id": "pillars.grounded",
+      "expected_value": 0,
+      "source": {
+        "detail": "Default: pillars stand on the ground unless user requests otherwise",
+        "kind": "assumption"
+      },
+      "strength": "hard",
+      "target_role": "skill:pillar",
+      "tolerance": 0.0001,
+      "type": "grounded"
+    }
+  ],
+  "generation_budget": {
+    "max_attempts": 3,
+    "max_nodes": 100,
+    "max_resolution": 512,
+    "max_samples": 16,
+    "max_seconds": 900,
+    "no_improvement_limit": 1
+  },
+  "observations": [],
+  "raw_request": "\u5e4510m\u3001\u5965\u884c\u304d8m\u3001\u9ad8\u30554m\u306e\u5efa\u7269\u3068\u3001\u305d\u306e\u5468\u56f2\u306b8\u672c\u306e\u67f1\u3092\u4f5c\u3063\u3066\u304f\u3060\u3055\u3044\u3002\u5730\u9762\u3082\u8ffd\u52a0\u3057\u3066\u304f\u3060\u3055\u3044",
+  "reference_files": [],
+  "requested_quality_profile": "basic_scene",
+  "scene_spec": {
+    "nodes": [
+      {
+        "node_id": "ground.main",
+        "parameters": {
+          "depth": 20,
+          "thickness": 0.2,
+          "width": 22
+        },
+        "skill": {
+          "skill_id": "ground",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            0,
+            0,
+            -0.2
+          ]
+        }
+      },
+      {
+        "node_id": "building.main",
+        "parameters": {
+          "depth": 8,
+          "height": 4,
+          "width": 10
+        },
+        "skill": {
+          "skill_id": "box_building",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "node_id": "pillar.01",
+        "parameters": {
+          "depth": 0.4,
+          "height": 4,
+          "width": 0.4
+        },
+        "parent_id": "building.main",
+        "skill": {
+          "skill_id": "pillar",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            -6,
+            -5,
+            0
+          ]
+        }
+      },
+      {
+        "node_id": "pillar.02",
+        "parameters": {
+          "depth": 0.4,
+          "height": 4,
+          "width": 0.4
+        },
+        "parent_id": "building.main",
+        "skill": {
+          "skill_id": "pillar",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            0,
+            -5,
+            0
+          ]
+        }
+      },
+      {
+        "node_id": "pillar.03",
+        "parameters": {
+          "depth": 0.4,
+          "height": 4,
+          "width": 0.4
+        },
+        "parent_id": "building.main",
+        "skill": {
+          "skill_id": "pillar",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            6,
+            -5,
+            0
+          ]
+        }
+      },
+      {
+        "node_id": "pillar.04",
+        "parameters": {
+          "depth": 0.4,
+          "height": 4,
+          "width": 0.4
+        },
+        "parent_id": "building.main",
+        "skill": {
+          "skill_id": "pillar",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            6,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "node_id": "pillar.05",
+        "parameters": {
+          "depth": 0.4,
+          "height": 4,
+          "width": 0.4
+        },
+        "parent_id": "building.main",
+        "skill": {
+          "skill_id": "pillar",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            6,
+            5,
+            0
+          ]
+        }
+      },
+      {
+        "node_id": "pillar.06",
+        "parameters": {
+          "depth": 0.4,
+          "height": 4,
+          "width": 0.4
+        },
+        "parent_id": "building.main",
+        "skill": {
+          "skill_id": "pillar",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            0,
+            5,
+            0
+          ]
+        }
+      },
+      {
+        "node_id": "pillar.07",
+        "parameters": {
+          "depth": 0.4,
+          "height": 4,
+          "width": 0.4
+        },
+        "parent_id": "building.main",
+        "skill": {
+          "skill_id": "pillar",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            -6,
+            5,
+            0
+          ]
+        }
+      },
+      {
+        "node_id": "pillar.08",
+        "parameters": {
+          "depth": 0.4,
+          "height": 4,
+          "width": 0.4
+        },
+        "parent_id": "building.main",
+        "skill": {
+          "skill_id": "pillar",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            -6,
+            0,
+            0
+          ]
+        }
+      }
+    ],
+    "scene_id": "natural-language-example",
+    "schema_version": 2,
+    "seed": 42,
+    "units": "m"
+  },
+  "unresolved_questions": [],
+  "unsupported_requests": []
+}

@@ -42,19 +42,38 @@ VLM, robot control and exploration scenarios are outside scope.
 6. Report changes, successes, failures and unverified requirements.
 Ask questions only to avoid materially incorrect or destructive changes.
 
-## Codex chat workflow
-1. Inspect `scene.json`, `scene-factory.toml`, and `uv run --locked scene-factory status PROJECT`.
-2. Translate natural language into a Scene Specification change using existing
-   generators. For an unsupported generator, assess and implement/test it before
-   running it; never execute an invented generator name.
-3. Validate the specification with `scene_factory.spec.load_spec` through
-   `uv run --locked python`, or let `build` perform validation before Blender starts.
-4. Run `uv run --locked scene-factory build PROJECT` and inspect result/log files.
-5. Run `preview PROJECT` when relevant, open its actual PNG, then `validate PROJECT`.
-6. Report implementation, generated outputs, errors and unverified requirements.
-   Use Codex chat itself; do not add a separate chat UI or Codex API integration.
-7. Preserve previous successful builds. Phase 2A always rebuilds the full scene;
-   incremental regeneration and complex continuing edits belong to later phases.
+## Codex chat workflow (Phase 2B)
+- Follow docs/codex-workflow.md and docs/phase2b.md. The user supplies natural
+  language and optional images; Codex writes proposals and runs the commands.
+  Do not introduce a keyword parser, chat UI, LLM API or Blender MCP.
+- Start existing projects with `uv run --locked scene-factory resume PROJECT`.
+  Inspect working Spec/Intent, accepted, skills/versions, attempts, quality,
+  previews, remaining workflow budget and latest failure. Chat history is optional.
+- Inspect `skills list/show`, reuse validated skills. Interpret the original
+  request into SceneIntent plus SceneSpec v2. Record observations separately from
+  assumptions; actually view supplied images before marking them viewed. Record
+  inferred dimensions, uncertainty and unsupported features honestly.
+- Use `generate PROJECT --proposal FILE` or `edit PROJECT --proposal FILE`.
+  Normally choose basic_scene. Preserve unrelated IDs/seeds. Managed projects use
+  the working Revision snapshot; never edit snapshots, BuildPlan or the legacy
+  root scene.json to change a managed scene.
+- Read quality/presentation. Actually open every attempt preview before writing
+  an image-bound VisualReview and invoking `review PROJECT --file FILE`.
+  If images cannot be viewed, leave visual not_run and report the limitation.
+- For needs_repair, read actual findings, identify the node/cause, propose the
+  smallest parameter/placement correction via `repair PROJECT --proposal FILE`.
+  Preserve Intent, hard constraints, profile, seeds and workflow budget. Stop on
+  bounds/no improvement/unsupported work; never relax criteria to pass.
+- Rollback switches to a previously accepted bundle without regeneration;
+  rebuild creates a separate attempt using current skills. Inspect history/diff.
+  `resume --execute` retains the original time/attempt budget and only recovers
+  a lock when the saved PID is provably dead; do not remove a live process lock.
+- Report Presentation status/profile, actual previews/blend, accepted ID,
+  unsupported requests and unperformed checks. Do not call structural-scoped
+  acceptance visual/physical quality. No intermediate user approval is required
+  except execution permissions or materially blocking ambiguity.
+- Phase 2B still rebuilds the full scene. High-quality generators, assets/PBR,
+  incremental caching and USD/Isaac Sim pipeline integration are later work.
 
 ## Phase 2A contracts and skill registration
 - Read docs/phase2a.md before changing the compiler, registry, worker protocol or
@@ -87,7 +106,8 @@ Ask questions only to avoid materially incorrect or destructive changes.
   Publish only that single reference atomically. Do not overwrite legacy PNG copies.
 - Structural `validated` is not `accepted`. QualityReport's visual/domain/export/
   target stages remain not_run unless their actual validation is implemented/run.
-  SceneIntent, accepted Revision, automatic repair and caching are Phase 2B+ work.
+  Phase 2B adds profile-scoped QualityReport v2 and explicit acceptance; preserve
+  old schema 1 not_evaluated reports. Incremental caching remains later work.
 
 ## Implementation and quality
 - After code changes, run relevant checks and commit the completed changes.
@@ -120,3 +140,9 @@ Phase 2A uses that same variable. New tests keep generated projects under
 artifacts/test-runs/phase2a-*; registration checks use artifacts/skill-validation/.
 Set both test variables to include all legacy Phase 0/1 tests. Ubuntu runtime and
 CUDA/OptiX remain unverified until tested on the actual target hardware.
+
+Phase 2B uses the same real-Blender test variables. Run the full regression suite
+including the existing 150 cases and new workflow tests. Synthetic unit fixtures
+are labeled test-only; they are never evidence of real Blender or image review.
+Keep runtime outputs under ignored artifacts/; only intentional, documented
+example input fixtures belong in Git.

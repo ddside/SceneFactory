@@ -1,6 +1,19 @@
 # Scene Factory — アーキテクチャと実環境
 
-## 現行のPhase 2A
+## 現行のPhase 2B
+
+[Phase 2B実装記録](phase2b.md)と[Codex操作手順](codex-workflow.md)を現行仕様とする。
+Codexが自然言語/任意画像を解釈し、SceneIntentとSceneSpec Revisionを作成する。
+不変Revision → 純粋compile → Build Attempt → Quality Run → 実画像レビュー →
+Presentation/Acceptanceを既存CLI/Runnerの上位層で実行する。
+状態の公開点は既存state.jsonだけとし、workingとacceptedを分離する。
+旧buildの構造validatedを自動でacceptedへ格上げしない。
+Rollbackは過去accepted bundleへの参照切替、rebuildは別Attemptの再生成。
+修復は同じIntent/profile/予算内に限定し、中断再開で予算をリセットしない。
+managedプロジェクトの仕様正本はworking Revisionの不変snapshotであり、
+ルートscene.jsonとBuildPlanを並行した編集対象にしない。
+
+## Phase 2Aの基盤（維持）
 
 共通契約とスキル基盤を実装した。現行の契約・操作方法・検証結果は
 [Phase 2A実装記録](phase2a.md)を正とする。Phase 1.5の方針に沿い、既存CLI/Runner、
@@ -9,7 +22,7 @@ Python分離、保存後の再読込み、成功版保護を維持した。
 v1原本 → 明示的/内部adapter → logical SceneSpec v2 → Registry + 純粋compile →
 ResolvedScene / BuildPlan / skills lock → Blender worker → ArtifactManifest →
 共通/skill検証 → 保存/再読込み → QualityReport（構造validated）。
-SceneIntent、自然言語自動化、accepted Revision、修復ループはPhase 2B以降。
+この上にPhase 2BのSceneIntent、accepted Revision、修復ループを追加した。
 新規ビルドのinventoryは軽量化し、全頂点JSONを正本にしない。
 プレビューはoperationsの不変PNGを単一の原子的な参照で公開する。
 v1と旧形式のvalidated buildは読込み互換を保持し、元ファイルを上書きしない。
@@ -23,7 +36,7 @@ wheelにもワーカーを同梱する。OS固有の検出候補は`platforms.py
 依存は実行時なし、テスト用pytest、ビルド用uv_build。
 `uv run --locked scene-factory`を標準操作とし、Blender内蔵Pythonは変更しない。
 以下のPhase 0調査と将来構想は履歴として保持する。下記の「未実装」は
-Phase 0当時の記録であり、現行の実装範囲はPhase 2A記録を正とする。
+Phase 0当時の記録であり、現行の実装範囲はPhase 2B記録を正とする。
 
 調査日: 2026-11-15 (America/New_York)。空の作業ディレクトリから開始。
 Phase 0は環境調査と最小統合検証のみを実施した。

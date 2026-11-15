@@ -1,0 +1,140 @@
+{
+  "assumptions": [
+    {
+      "confidence": 0.4,
+      "reference_ids": [
+        "reference.main"
+      ],
+      "text": "\u5bf8\u6cd5\u306f\u753b\u50cf\u3060\u3051\u304b\u3089\u78ba\u5b9a\u3067\u304d\u306a\u3044\u305f\u3081\u65e2\u5b9a\u306e\u7d046m\u00d74m\u00d73m\u3092\u63a1\u7528\u3002\u72ec\u7acb\u90e8\u6750\u306f\u5186\u67f1\u30b9\u30ad\u30eb\u3067\u8fd1\u4f3c\u3057\u3001\u65ad\u9762\u3092\u89b3\u6e2c\u4e8b\u5b9f\u3068\u306f\u3057\u306a\u3044\u3002"
+    }
+  ],
+  "change_summary": "Approximate the observed roof/support layout using registered recipe and cylinder",
+  "constraints": [
+    {
+      "confidence": 0.9,
+      "constraint_id": "reference.building",
+      "expected_value": true,
+      "source": {
+        "detail": "Observed main structure",
+        "kind": "reference",
+        "reference_id": "reference.main"
+      },
+      "strength": "hard",
+      "target_node_id": "building.main",
+      "tolerance": 0,
+      "type": "exists"
+    },
+    {
+      "confidence": 0.95,
+      "constraint_id": "reference.ground",
+      "expected_value": true,
+      "source": {
+        "detail": "Observed supporting plane",
+        "kind": "reference",
+        "reference_id": "reference.main"
+      },
+      "strength": "hard",
+      "target_node_id": "ground.main",
+      "tolerance": 0,
+      "type": "exists"
+    }
+  ],
+  "generation_budget": {
+    "max_seconds": 900
+  },
+  "observations": [
+    {
+      "reference_ids": [
+        "reference.main"
+      ],
+      "text": "\u7dd1\u7070\u8272\u306e\u5e73\u9762\u4e0a\u306b\u5e73\u5c4b\u6839\u306e\u5c0f\u3055\u306a\u69cb\u9020\u3068\u624b\u524d\u5074\u306e\u652f\u67f1\u304c\u898b\u3048\u308b\u3002\u53f3\u5074\u306b\u72ec\u7acb\u3057\u305f\u652f\u67f1\u72b6\u306e\u5f62\u304c\u3042\u308a\u3001\u65ad\u9762\u3084\u4e0d\u53ef\u8996\u90e8\u306f\u5224\u5225\u56f0\u96e3\u3002"
+    }
+  ],
+  "raw_request": "\u3053\u306e\u53c2\u8003\u753b\u50cf\u3092\u3001\u65e2\u5b58\u30b9\u30ad\u30eb\u3067\u7c21\u6613\u7684\u306b\u518d\u73fe\u3057\u3066\u304f\u3060\u3055\u3044\u3002",
+  "reference_files": [
+    {
+      "inspection": {
+        "method": "Codex view_image",
+        "notes": "\u5b9f\u969b\u306ePNG\u3092\u3053\u306eCodex\u30bb\u30c3\u30b7\u30e7\u30f3\u3067\u78ba\u8a8d\u3002\u5185\u90e8\u751f\u6210\u306e\u53c2\u8003\u753b\u50cf\u3067\u3001\u5916\u90e8\u5199\u771f\u3067\u306f\u306a\u3044\u3002",
+        "state": "viewed"
+      },
+      "reference_id": "reference.main",
+      "source_path": "examples/references/phase2a-preview.png"
+    }
+  ],
+  "requested_quality_profile": "preview_reviewed",
+  "scene_spec": {
+    "nodes": [
+      {
+        "node_id": "ground.main",
+        "parameters": {},
+        "skill": {
+          "skill_id": "ground",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            0,
+            0,
+            -0.2
+          ]
+        }
+      },
+      {
+        "depends_on": [
+          "ground.main"
+        ],
+        "node_id": "building.main",
+        "parameters": {},
+        "skill": {
+          "skill_id": "building_recipe",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            -2,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            15
+          ]
+        }
+      },
+      {
+        "node_id": "column.side",
+        "parameters": {},
+        "parent_id": "building.main",
+        "skill": {
+          "skill_id": "cylinder",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            4,
+            -2,
+            0
+          ]
+        }
+      }
+    ],
+    "scene_id": "reference-fixture",
+    "schema_version": 2,
+    "seed": 42,
+    "units": "m"
+  },
+  "unresolved_questions": [
+    {
+      "blocking": false,
+      "text": "\u4e0d\u53ef\u8996\u306e\u5185\u90e8\u69cb\u9020\u3068\u6b63\u78ba\u306a\u5bf8\u6cd5\u306f\u4e0d\u660e\u3002\u65e2\u5b9a\u5024\u306b\u3088\u308b\u7c21\u6613\u518d\u73fe\u3067\u9032\u3081\u308b\u3002"
+    }
+  ],
+  "unsupported_requests": [
+    {
+      "blocking": false,
+      "text": "\u5fae\u7d30\u6750\u8cea\u3001\u6b63\u78ba\u306a\u753b\u50cf\u4e00\u81f4\u3001\u4e0d\u53ef\u8996\u90e8\u306e3D\u5fa9\u5143\u3001\u7cbe\u5bc6\u306a\u7269\u7406\u59a5\u5f53\u6027\u306f\u4eca\u56de\u672a\u5bfe\u5fdc\u3002"
+    }
+  ]
+}

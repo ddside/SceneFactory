@@ -52,3 +52,25 @@ def project_lock(project):
         yield
     finally:
         path.unlink()
+
+
+def recover_stale_lock(project):
+    """Only remove a demonstrably dead coordinator's unchanged lock (POSIX targets)."""
+    path=Path(project)/'.scene-factory.lock'
+    if not path.exists(): return False
+    original=path.stat(); content=path.read_text()
+    try:
+        pid=int(content)
+        if pid<=0: raise ValueError()
+    except ValueError as exc:
+        raise ValueError('Cannot establish owner of malformed lock; inspect it manually') from exc
+    try:
+        os.kill(pid,0)
+    except ProcessLookupError:
+        current=path.stat()
+        if (current.st_ino,current.st_mtime_ns)!=(original.st_ino,original.st_mtime_ns) or path.read_text()!=content:
+            raise ValueError('Lock changed during recovery')
+        path.unlink(); return True
+    except PermissionError as exc:
+        raise ValueError('Cannot prove lock owner is dead') from exc
+    raise ValueError(f'Coordinator PID {pid} still exists; resume is read-only until it ends')
