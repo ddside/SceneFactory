@@ -24,10 +24,14 @@ uv lock --check
 依存追加は`uv add <package>`、テスト用は`uv add --dev <package>`を使う。
 `pyproject.toml`、`.python-version`、`uv.lock`を合わせてGit管理する。
 本作業ではGit未初期化だったため初期化してファイルをステージした。
-コミットは未作成。仮想環境、uvキャッシュ、旧環境はGit対象外。
+Phase 0の設定・コードはコミット済み。仮想環境、uvキャッシュ、旧環境はGit対象外。
 当面は実行時依存なし、devはpytestとその推移的依存。
 パッケージ本体は未実装のため`tool.uv.package=false`とし、配布用ビルド
 バックエンドはまだ導入しない。
+
+整理作業では`.DS_Store`、`.pytest_cache`、ローカル`.uv-cache`、
+`tests/__pycache__`を削除した。いずれも再生成可能な一時ファイル。
+現行`.venv`、移行復元用の`.venv-backups`、検証ログ・USD・画像は保持する。
 
 uvの[lock/sync公式仕様](https://docs.astral.sh/uv/concepts/projects/sync/)と
 [依存管理](https://docs.astral.sh/uv/concepts/projects/dependencies/)に従う。
