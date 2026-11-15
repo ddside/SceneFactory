@@ -2,6 +2,7 @@
 import copy
 from pathlib import Path
 import platform
+import time
 import xml.etree.ElementTree as ET
 
 from .compiler import compile_scene
@@ -35,17 +36,22 @@ def validate_skill(skill_id, version, executable, directory, timeout=120, activa
     directory = Path(directory).resolve()
     directory.mkdir(parents=True, exist_ok=False)
     tests = []
-    for i, parameters in enumerate(manifest["examples"]):
+    scenes = manifest.get("test_scenes") or [
+        {"schema_version":2,"scene_id":"skill-validation","seed":42,"units":"m","nodes":[
+            {"node_id":"probe","skill":{"skill_id":skill_id,"version":version},"transform":{},"parameters":p}]}
+        for p in manifest["examples"]]
+    for i, spec in enumerate(scenes):
         output = directory / f"example-{i}"
         output.mkdir()
-        spec = {"schema_version":2,"scene_id":"skill-validation","seed":42,"units":"m","nodes":[
-            {"node_id":"probe","skill":{"skill_id":skill_id,"version":version},"transform":{},"parameters":parameters}]}
         write_json(output / "scene.json", spec)
         compiled = compile_scene(spec, registry, file_hash(output / "scene.json"), allow_candidates=(skill_id,))
         plan = compiled["build_plan"]
+        if not any(n['skill']=={'skill_id':skill_id,'version':version} for n in plan['nodes']):
+            raise ValueError('skill validation fixture must exercise the target skill/version')
         write_json(output / "plan.json", plan)
         request = {"action":"build","spec_path":str(output / "scene.json"),"plan_path":str(output / "plan.json"),
                    "plan_digest":plan["plan_digest"],"skill_validation":True}
+        started = time.monotonic()
         built = run_blender(executable, request, output, timeout)
         if not (output / "scene.blend").is_file() or (output / "scene.blend").stat().st_size == 0:
             raise ValueError("skill validation: missing .blend artifact")
@@ -55,7 +61,11 @@ def validate_skill(skill_id, version, executable, directory, timeout=120, activa
         if built["structure_sha256"] != checked["structure_sha256"]:
             raise ValueError("skill validation: reopened structure mismatch")
         tests.append({"example":i,"checks":["compile","generate","skill-validator","reopen","artifact-contract"],
-                      "structure_sha256":checked["structure_sha256"],"plan_digest":plan["plan_digest"]})
+                      "structure_sha256":checked["structure_sha256"],"plan_digest":plan["plan_digest"],
+                      "metrics":{"build_reopen_seconds":round(time.monotonic()-started,3),
+                                 "mesh_count":sum(a['type']=='Mesh' for a in checked['artifact_manifest']['artifacts']),
+                                 "vertex_count":sum(a['vertex_count'] for a in checked['artifact_manifest']['artifacts']),
+                                 "face_count":sum(a['face_count'] for a in checked['artifact_manifest']['artifacts'])}})
     evidence = {"status":"passed","pin":registry.pin(manifest),"tests":tests,"unit_tests":units,
                 "runtime":{"blender":built["blender"],"blender_python":built["blender_python"],
                            "implementation_sha256":built["runtime_implementation_sha256"],

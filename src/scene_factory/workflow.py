@@ -165,8 +165,12 @@ def execute(project,executable,options):
                 built=run_build(project,executable,opts,source_path=project/revision['scene_spec_snapshot'],_locked=True)
                 attempt['build_id']=built['build_id']; _save_attempt(project,attempt)
                 operate(project,'validate',executable,opts,build_id=built['build_id'],check_working_spec=False,_locked=True)
-                for name,direction in VIEWS.items():
-                    result=operate(project,'preview',executable,{**opts,'view_direction':direction},
+                views=[(name,direction,[]) for name,direction in VIEWS.items()]
+                if workflow['profile']['profile_id']=='architectural':
+                    views=[('overview',VIEWS['overview'],[]),('top',VIEWS['top'],['cover']),
+                           ('interior',[1,-1.4,1.6],['cover','south_wall'])]
+                for name,direction,hidden in views:
+                    result=operate(project,'preview',executable,{**opts,'view_direction':direction,'hide_groups':hidden},
                                    build_id=built['build_id'],check_working_spec=False,_locked=True)
                     path=Path(result['directory'])/'preview.png'
                     attempt['previews'].append({'view':name,'path':str(path.relative_to(project)),
@@ -174,7 +178,7 @@ def execute(project,executable,options):
                     _save_attempt(project,attempt)
                 build,_=build_at(project,built['build_id'])
                 quality=evaluate(intent,spec,read_json(build/'plan.json'),read_json(build/'artifact-manifest.json'),
-                    read_json(build/'quality.json'),rid,aid,uid('quality'),now(),workflow['profile'])
+                    read_json(build/'quality.json'),rid,aid,uid('quality'),now(),workflow['profile'],domain_results=read_json(build/'validation.json').get('domain_results',[]))
             except Exception as exc:
                 attempt['error']=str(exc); attempt['status']='failed'
                 latest=read_state(project).get('latest',{})
@@ -265,7 +269,7 @@ def submit_review(project,review):
         build,_=build_at(project,attempt['build_id'])
         quality=evaluate(intent,revision_spec(project,attempt['revision_id'],state),read_json(build/'plan.json'),
             read_json(build/'artifact-manifest.json'),read_json(build/'quality.json'),attempt['revision_id'],attempt['attempt_id'],
-            uid('quality'),now(),workflow['profile'],validated,vid)
+            uid('quality'),now(),workflow['profile'],validated,vid,read_json(build/'validation.json').get('domain_results',[]))
         _save_quality_locked(project,state,attempt,quality)
         if quality['acceptance']=='eligible':
             attempt['status']='quality_passed'; _save_attempt(project,attempt); commit_state(project,state)

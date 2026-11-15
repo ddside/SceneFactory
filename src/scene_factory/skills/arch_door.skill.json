@@ -1,0 +1,388 @@
+{
+  "artifacts": [
+    {
+      "role": "frame",
+      "type": "Mesh"
+    },
+    {
+      "role": "leaf",
+      "type": "Mesh"
+    }
+  ],
+  "blender_compatibility": {
+    "python_series": "3.11",
+    "series": "4.5"
+  },
+  "category": "architecture",
+  "contract": "architecture.check_fitting",
+  "dependencies": [
+    {
+      "skill_id": "arch_opening",
+      "version": "1.0.0"
+    }
+  ],
+  "description": "Orthogonal modular architecture: arch_door",
+  "examples": [
+    {}
+  ],
+  "implementation": "architecture.generate",
+  "inputs": {
+    "opening": {
+      "required": true,
+      "target": "reference",
+      "type": "OpeningRef"
+    }
+  },
+  "kind": "leaf",
+  "name": "arch door",
+  "outputs": {},
+  "parameter_schema": {
+    "depth": {
+      "default": 0.2,
+      "maximum": 1,
+      "minimum": 0.05,
+      "type": "number"
+    },
+    "frame_thickness": {
+      "default": 0.06,
+      "maximum": 0.2,
+      "minimum": 0.01,
+      "type": "number"
+    },
+    "height": {
+      "default": 2.2,
+      "maximum": 20,
+      "minimum": 0.1,
+      "type": "number"
+    },
+    "leaf_thickness": {
+      "default": 0.035,
+      "maximum": 0.1,
+      "minimum": 0.01,
+      "type": "number"
+    },
+    "open_angle": {
+      "default": 90,
+      "maximum": 110,
+      "minimum": 0,
+      "type": "number"
+    },
+    "width": {
+      "default": 1,
+      "maximum": 20,
+      "minimum": 0.1,
+      "type": "number"
+    }
+  },
+  "schema_version": 1,
+  "skill_id": "arch_door",
+  "tags": [
+    "building",
+    "interior",
+    "modular",
+    "arch_door"
+  ],
+  "test_scenes": [
+    {
+      "nodes": [
+        {
+          "depends_on": [],
+          "inputs": {},
+          "node_id": "wall",
+          "parameters": {
+            "height": 3,
+            "length": 8,
+            "o1_height": 2.2,
+            "o1_kind": 1,
+            "o1_sill": 0,
+            "o1_width": 1,
+            "opening_count": 1,
+            "thickness": 0.2
+          },
+          "parent_id": null,
+          "skill": {
+            "skill_id": "arch_wall",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "wall": {
+              "node_id": "wall",
+              "output": "wall"
+            }
+          },
+          "node_id": "opening",
+          "parameters": {
+            "height": 2.2,
+            "kind": 1,
+            "sill": 0,
+            "width": 1
+          },
+          "parent_id": "wall",
+          "skill": {
+            "skill_id": "arch_opening",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "opening": {
+              "node_id": "opening",
+              "output": "opening"
+            }
+          },
+          "node_id": "fitting",
+          "parameters": {
+            "height": 2.2,
+            "width": 1
+          },
+          "parent_id": "opening",
+          "skill": {
+            "skill_id": "arch_door",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "scene_id": "architecture-registration",
+      "schema_version": 2,
+      "seed": 42,
+      "units": "m"
+    }
+  ],
+  "validation_evidence": {
+    "pin": {
+      "contract": {
+        "function": "check_fitting",
+        "module": "scene_factory.architecture_contracts",
+        "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+        "support_sha256": {
+          "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+        }
+      },
+      "dependencies": [
+        {
+          "skill_id": "arch_opening",
+          "version": "1.0.0"
+        }
+      ],
+      "dependency_pins": [
+        {
+          "contract": {
+            "function": "check_opening",
+            "module": "scene_factory.architecture_contracts",
+            "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+            "support_sha256": {
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "dependencies": [
+            {
+              "skill_id": "arch_wall",
+              "version": "1.0.0"
+            }
+          ],
+          "dependency_pins": [
+            {
+              "contract": {
+                "function": "check_wall",
+                "module": "scene_factory.architecture_contracts",
+                "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                "support_sha256": {
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "dependencies": [],
+              "dependency_pins": [],
+              "implementation": {
+                "function": "generate",
+                "module": "scene_factory.blender.skills.architecture",
+                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "support_sha256": {
+                  "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "manifest_sha256": "d6ebebef1e7e399ba5f118cc22850ca9e293f6a4aa8e0728bac2b12d6ca2f34e",
+              "skill_id": "arch_wall",
+              "validator": {
+                "function": "validate",
+                "module": "scene_factory.blender.skills.architecture",
+                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "support_sha256": {
+                  "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "version": "1.0.0"
+            }
+          ],
+          "implementation": {
+            "function": "generate",
+            "module": "scene_factory.blender.skills.architecture",
+            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "support_sha256": {
+              "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "manifest_sha256": "1d96a54e429daf11db825c799738332c60977eeeff129ffda70bd3442f4a8924",
+          "skill_id": "arch_opening",
+          "validator": {
+            "function": "validate",
+            "module": "scene_factory.blender.skills.architecture",
+            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "support_sha256": {
+              "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "version": "1.0.0"
+        }
+      ],
+      "implementation": {
+        "function": "generate",
+        "module": "scene_factory.blender.skills.architecture",
+        "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+        "support_sha256": {
+          "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+          "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+          "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+        }
+      },
+      "manifest_sha256": "5b5100342fc8899672e323487860a31b1936f8467cb52a4ef99110609a3cd90a",
+      "skill_id": "arch_door",
+      "validator": {
+        "function": "validate",
+        "module": "scene_factory.blender.skills.architecture",
+        "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+        "support_sha256": {
+          "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+          "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+          "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+        }
+      },
+      "version": "1.0.0"
+    },
+    "runtime": {
+      "application_python": "3.12.13",
+      "architecture": "arm64",
+      "blender": "4.5.15 LTS",
+      "blender_python": "3.11.15 (main, Apr 25 2025, 12:39:20) [Clang 15.0.0 (clang-1500.0.40.1)]",
+      "implementation_sha256": "5c596a1f9c0a092eb04d8dd366bec558567e61fada61a7c87cf45c380e3ebda3",
+      "os": "Darwin"
+    },
+    "status": "passed",
+    "tests": [
+      {
+        "checks": [
+          "compile",
+          "generate",
+          "skill-validator",
+          "reopen",
+          "artifact-contract"
+        ],
+        "example": 0,
+        "metrics": {
+          "build_reopen_seconds": 2.473,
+          "face_count": 50,
+          "mesh_count": 3,
+          "vertex_count": 56
+        },
+        "plan_digest": "44460913822a3fcaa70e061542a3a0a9a79640bba3aaf90977a9f6c749620fce",
+        "structure_sha256": "3d7882b55b57b22e2f55263e3e7e2ad46289ecd4f93d690ffabf9465272ab3a0"
+      }
+    ],
+    "unit_tests": {
+      "case_count": 40,
+      "cases": [
+        "tests.test_architecture.test_layout_recipe_dimensions_references_and_determinism[1]",
+        "tests.test_architecture.test_layout_recipe_dimensions_references_and_determinism[2]",
+        "tests.test_architecture.test_layout_recipe_dimensions_references_and_determinism[3]",
+        "tests.test_architecture.test_window_edit_only_three_nodes_preserves_all_seeds_and_artifact_ids",
+        "tests.test_architecture.test_invalid_scene_d[big_window]",
+        "tests.test_architecture.test_invalid_scene_d[outside_door]",
+        "tests.test_architecture.test_invalid_scene_d[overlap]",
+        "tests.test_architecture.test_invalid_scene_d[negative_wall]",
+        "tests.test_architecture.test_invalid_scene_d[negative_floor]",
+        "tests.test_architecture.test_invalid_scene_d[bad_parent]",
+        "tests.test_architecture.test_invalid_scene_d[missing_wallref]",
+        "tests.test_architecture.test_invalid_scene_d[fitting_mismatch]",
+        "tests.test_architecture.test_invalid_scene_d[unconnected_room]",
+        "tests.test_architecture.test_invalid_scene_d[duplicate_id]",
+        "tests.test_architecture.test_invalid_scene_d[duplicate_slot]",
+        "tests.test_architecture.test_invalid_scene_d[thickness]",
+        "tests.test_architecture.test_invalid_scene_d[perimeter]",
+        "tests.test_architecture.test_invalid_scene_d[wall_intersection]",
+        "tests.test_architecture.test_invalid_scene_d[hidden_space]",
+        "tests.test_architecture.test_invalid_scene_d[floating_slab]",
+        "tests.test_architecture.test_invalid_scene_d[wrong_type]",
+        "tests.test_architecture.test_invalid_scene_d[roof_missing]",
+        "tests.test_architecture.test_invalid_scene_d[inward_space]",
+        "tests.test_architecture.test_wall_contract_invalid[no_end_pier]",
+        "tests.test_architecture.test_wall_contract_invalid[no_header]",
+        "tests.test_architecture.test_wall_contract_invalid[door_sill]",
+        "tests.test_architecture.test_wall_contract_invalid[touching_openings]",
+        "tests.test_architecture.test_wall_contract_invalid[fractional_count]",
+        "tests.test_architecture.test_wall_contract_invalid[negative_thickness]",
+        "tests.test_architecture.test_architectural_profile_preserves_legacy_profiles",
+        "tests.test_architecture.test_manifest_pins_include_pure_contract_and_support",
+        "tests.test_architecture.test_layout_rejects_unsupported_room_counts[0]",
+        "tests.test_architecture.test_layout_rejects_unsupported_room_counts[4]",
+        "tests.test_architecture.test_layout_rejects_unsupported_room_counts[1.5]",
+        "tests.test_architecture.test_wall_material_slots_are_explicit[0]",
+        "tests.test_architecture.test_wall_material_slots_are_explicit[1]",
+        "tests.test_architecture.test_wall_material_slots_are_explicit[2]",
+        "tests.test_architecture.test_wall_material_slots_are_explicit[3]",
+        "tests.test_architecture.test_architectural_domain_evidence_is_required_and_not_visual_evidence",
+        "tests.test_architecture.test_binding_syntax_cache_uses_exact_source_bytes"
+      ],
+      "sha256": "f58915087ac48a1c8b768784cde8403ed8e1e0a4fdb93d3463676c55299b209a"
+    }
+  },
+  "validation_status": "validated",
+  "validator": "architecture.validate",
+  "version": "1.0.0"
+}

@@ -1,0 +1,2502 @@
+{
+  "artifacts": [
+    {
+      "role": "frame",
+      "type": "Object"
+    }
+  ],
+  "blender_compatibility": {
+    "python_series": "3.11",
+    "series": "4.5"
+  },
+  "category": "architecture",
+  "contract": "architecture.check_building",
+  "dependencies": [
+    {
+      "skill_id": "arch_slab",
+      "version": "1.0.0"
+    },
+    {
+      "skill_id": "arch_wall",
+      "version": "1.0.0"
+    },
+    {
+      "skill_id": "arch_opening",
+      "version": "1.0.0"
+    },
+    {
+      "skill_id": "arch_door",
+      "version": "1.0.0"
+    },
+    {
+      "skill_id": "arch_window",
+      "version": "1.0.0"
+    },
+    {
+      "skill_id": "arch_room",
+      "version": "1.0.0"
+    },
+    {
+      "skill_id": "arch_corridor",
+      "version": "1.0.0"
+    }
+  ],
+  "description": "Orthogonal modular architecture: arch_building",
+  "examples": [
+    {}
+  ],
+  "implementation": "recipe.generate",
+  "inputs": {},
+  "kind": "recipe",
+  "name": "arch building",
+  "outputs": {},
+  "parameter_schema": {
+    "ceiling_thickness": {
+      "default": 0.15,
+      "maximum": 1,
+      "minimum": 0.05,
+      "type": "number"
+    },
+    "corridor_width": {
+      "default": 1.6,
+      "maximum": 5,
+      "minimum": 0,
+      "type": "number"
+    },
+    "depth": {
+      "default": 8,
+      "maximum": 100,
+      "minimum": 5,
+      "type": "number"
+    },
+    "floor_thickness": {
+      "default": 0.2,
+      "maximum": 1,
+      "minimum": 0.05,
+      "type": "number"
+    },
+    "height": {
+      "default": 3,
+      "maximum": 10,
+      "minimum": 2.7,
+      "type": "number"
+    },
+    "roof_thickness": {
+      "default": 0.15,
+      "maximum": 1,
+      "minimum": 0.05,
+      "type": "number"
+    },
+    "room_count": {
+      "default": 3,
+      "maximum": 3,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "wall_thickness": {
+      "default": 0.2,
+      "maximum": 0.4,
+      "minimum": 0.1,
+      "type": "number"
+    },
+    "width": {
+      "default": 12,
+      "maximum": 100,
+      "minimum": 6,
+      "type": "number"
+    }
+  },
+  "recipe": {
+    "nodes": [
+      {
+        "depends_on": [],
+        "inputs": {},
+        "local_key": "floor",
+        "parameters": {
+          "depth": {
+            "parameter": "depth"
+          },
+          "purpose": 1,
+          "thickness": {
+            "parameter": "floor_thickness"
+          },
+          "width": {
+            "parameter": "width"
+          }
+        },
+        "skill": {
+          "skill_id": "arch_slab",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            0,
+            0,
+            {
+              "args": [
+                -1,
+                {
+                  "parameter": "floor_thickness"
+                }
+              ],
+              "op": "multiply"
+            }
+          ]
+        }
+      },
+      {
+        "depends_on": [],
+        "inputs": {},
+        "local_key": "ceiling",
+        "parameters": {
+          "depth": {
+            "parameter": "depth"
+          },
+          "purpose": 2,
+          "thickness": {
+            "parameter": "ceiling_thickness"
+          },
+          "width": {
+            "parameter": "width"
+          }
+        },
+        "skill": {
+          "skill_id": "arch_slab",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            0,
+            0,
+            {
+              "parameter": "height"
+            }
+          ]
+        }
+      },
+      {
+        "depends_on": [],
+        "inputs": {},
+        "local_key": "roof",
+        "parameters": {
+          "depth": {
+            "parameter": "depth"
+          },
+          "purpose": 3,
+          "thickness": {
+            "parameter": "roof_thickness"
+          },
+          "width": {
+            "parameter": "width"
+          }
+        },
+        "skill": {
+          "skill_id": "arch_slab",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            0,
+            0,
+            {
+              "args": [
+                {
+                  "parameter": "height"
+                },
+                {
+                  "parameter": "ceiling_thickness"
+                }
+              ],
+              "op": "add"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "schema_version": 1,
+  "skill_id": "arch_building",
+  "tags": [
+    "building",
+    "interior",
+    "modular",
+    "arch_building"
+  ],
+  "test_scenes": [
+    {
+      "nodes": [
+        {
+          "depends_on": [],
+          "inputs": {},
+          "node_id": "building.main",
+          "parameters": {
+            "corridor_width": 0,
+            "depth": 6,
+            "height": 3,
+            "room_count": 1,
+            "wall_thickness": 0.2,
+            "width": 8
+          },
+          "parent_id": null,
+          "skill": {
+            "skill_id": "arch_building",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {},
+          "node_id": "building.main.wall.south",
+          "parameters": {
+            "height": 3,
+            "length": 8,
+            "o1_height": 2.2,
+            "o1_kind": 1,
+            "o1_offset": 0,
+            "o1_sill": 0,
+            "o1_width": 1,
+            "opening_count": 1,
+            "side": 1,
+            "thickness": 0.2,
+            "wall_kind": 1
+          },
+          "parent_id": "building.main",
+          "skill": {
+            "skill_id": "arch_wall",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              -2.9,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "wall": {
+              "node_id": "building.main.wall.south",
+              "output": "wall"
+            }
+          },
+          "node_id": "building.main.opening.entrance",
+          "parameters": {
+            "depth": 0.2,
+            "height": 2.2,
+            "kind": 1,
+            "offset": 0,
+            "sill": 0,
+            "slot": 1,
+            "width": 1
+          },
+          "parent_id": "building.main.wall.south",
+          "skill": {
+            "skill_id": "arch_opening",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "opening": {
+              "node_id": "building.main.opening.entrance",
+              "output": "opening"
+            }
+          },
+          "node_id": "building.main.door.entrance",
+          "parameters": {
+            "depth": 0.2,
+            "height": 2.2,
+            "width": 1
+          },
+          "parent_id": "building.main.opening.entrance",
+          "skill": {
+            "skill_id": "arch_door",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {},
+          "node_id": "building.main.wall.north",
+          "parameters": {
+            "height": 3,
+            "length": 8,
+            "o1_height": 1.2,
+            "o1_kind": 2,
+            "o1_offset": -2.0,
+            "o1_sill": 1,
+            "o1_width": 1.2,
+            "o2_height": 1.2,
+            "o2_kind": 2,
+            "o2_offset": 2.0,
+            "o2_sill": 1,
+            "o2_width": 1.2,
+            "opening_count": 2,
+            "side": 2,
+            "thickness": 0.2,
+            "wall_kind": 1
+          },
+          "parent_id": "building.main",
+          "skill": {
+            "skill_id": "arch_wall",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              2.9,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "wall": {
+              "node_id": "building.main.wall.north",
+              "output": "wall"
+            }
+          },
+          "node_id": "building.main.opening.window.room01a",
+          "parameters": {
+            "depth": 0.2,
+            "height": 1.2,
+            "kind": 2,
+            "offset": -2.0,
+            "sill": 1,
+            "slot": 1,
+            "width": 1.2
+          },
+          "parent_id": "building.main.wall.north",
+          "skill": {
+            "skill_id": "arch_opening",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              -2.0,
+              0,
+              1
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "opening": {
+              "node_id": "building.main.opening.window.room01a",
+              "output": "opening"
+            }
+          },
+          "node_id": "building.main.window.room01a",
+          "parameters": {
+            "depth": 0.2,
+            "height": 1.2,
+            "width": 1.2
+          },
+          "parent_id": "building.main.opening.window.room01a",
+          "skill": {
+            "skill_id": "arch_window",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "wall": {
+              "node_id": "building.main.wall.north",
+              "output": "wall"
+            }
+          },
+          "node_id": "building.main.opening.window.room01b",
+          "parameters": {
+            "depth": 0.2,
+            "height": 1.2,
+            "kind": 2,
+            "offset": 2.0,
+            "sill": 1,
+            "slot": 2,
+            "width": 1.2
+          },
+          "parent_id": "building.main.wall.north",
+          "skill": {
+            "skill_id": "arch_opening",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              2.0,
+              0,
+              1
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "opening": {
+              "node_id": "building.main.opening.window.room01b",
+              "output": "opening"
+            }
+          },
+          "node_id": "building.main.window.room01b",
+          "parameters": {
+            "depth": 0.2,
+            "height": 1.2,
+            "width": 1.2
+          },
+          "parent_id": "building.main.opening.window.room01b",
+          "skill": {
+            "skill_id": "arch_window",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {},
+          "node_id": "building.main.wall.west",
+          "parameters": {
+            "height": 3,
+            "length": 5.6,
+            "opening_count": 0,
+            "side": 3,
+            "thickness": 0.2,
+            "wall_kind": 1
+          },
+          "parent_id": "building.main",
+          "skill": {
+            "skill_id": "arch_wall",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              -3.9,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              90
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {},
+          "node_id": "building.main.wall.east",
+          "parameters": {
+            "height": 3,
+            "length": 5.6,
+            "opening_count": 0,
+            "side": 4,
+            "thickness": 0.2,
+            "wall_kind": 1
+          },
+          "parent_id": "building.main",
+          "skill": {
+            "skill_id": "arch_wall",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              3.9,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              90
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "access": {
+              "node_id": "building.main.opening.entrance",
+              "output": "opening"
+            }
+          },
+          "node_id": "building.main.room.01",
+          "parameters": {
+            "depth": 5.6,
+            "height": 3,
+            "width": 7.6
+          },
+          "parent_id": "building.main",
+          "skill": {
+            "skill_id": "arch_room",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "scene_id": "modular-building",
+      "schema_version": 2,
+      "seed": 42,
+      "units": "m"
+    },
+    {
+      "nodes": [
+        {
+          "depends_on": [],
+          "inputs": {},
+          "node_id": "building.main",
+          "parameters": {
+            "corridor_width": 1.6,
+            "depth": 8,
+            "height": 3,
+            "room_count": 3,
+            "wall_thickness": 0.2,
+            "width": 12
+          },
+          "parent_id": null,
+          "skill": {
+            "skill_id": "arch_building",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {},
+          "node_id": "building.main.wall.south",
+          "parameters": {
+            "height": 3,
+            "length": 12,
+            "o1_height": 2.2,
+            "o1_kind": 1,
+            "o1_offset": 0,
+            "o1_sill": 0,
+            "o1_width": 1,
+            "opening_count": 1,
+            "side": 1,
+            "thickness": 0.2,
+            "wall_kind": 1
+          },
+          "parent_id": "building.main",
+          "skill": {
+            "skill_id": "arch_wall",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              -3.9,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "wall": {
+              "node_id": "building.main.wall.south",
+              "output": "wall"
+            }
+          },
+          "node_id": "building.main.opening.entrance",
+          "parameters": {
+            "depth": 0.2,
+            "height": 2.2,
+            "kind": 1,
+            "offset": 0,
+            "sill": 0,
+            "slot": 1,
+            "width": 1
+          },
+          "parent_id": "building.main.wall.south",
+          "skill": {
+            "skill_id": "arch_opening",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "opening": {
+              "node_id": "building.main.opening.entrance",
+              "output": "opening"
+            }
+          },
+          "node_id": "building.main.door.entrance",
+          "parameters": {
+            "depth": 0.2,
+            "height": 2.2,
+            "width": 1
+          },
+          "parent_id": "building.main.opening.entrance",
+          "skill": {
+            "skill_id": "arch_door",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {},
+          "node_id": "building.main.wall.north",
+          "parameters": {
+            "height": 3,
+            "length": 12,
+            "o1_height": 1.2,
+            "o1_kind": 2,
+            "o1_offset": -3.9333333333333336,
+            "o1_sill": 1,
+            "o1_width": 1.2,
+            "o2_height": 1.2,
+            "o2_kind": 2,
+            "o2_offset": -4.440892098500626e-16,
+            "o2_sill": 1,
+            "o2_width": 1.2,
+            "o3_height": 1.2,
+            "o3_kind": 2,
+            "o3_offset": 3.9333333333333327,
+            "o3_sill": 1,
+            "o3_width": 1.2,
+            "opening_count": 3,
+            "side": 2,
+            "thickness": 0.2,
+            "wall_kind": 1
+          },
+          "parent_id": "building.main",
+          "skill": {
+            "skill_id": "arch_wall",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              3.9,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "wall": {
+              "node_id": "building.main.wall.north",
+              "output": "wall"
+            }
+          },
+          "node_id": "building.main.opening.window.room01",
+          "parameters": {
+            "depth": 0.2,
+            "height": 1.2,
+            "kind": 2,
+            "offset": -3.9333333333333336,
+            "sill": 1,
+            "slot": 1,
+            "width": 1.2
+          },
+          "parent_id": "building.main.wall.north",
+          "skill": {
+            "skill_id": "arch_opening",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              -3.9333333333333336,
+              0,
+              1
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "opening": {
+              "node_id": "building.main.opening.window.room01",
+              "output": "opening"
+            }
+          },
+          "node_id": "building.main.window.room01",
+          "parameters": {
+            "depth": 0.2,
+            "height": 1.2,
+            "width": 1.2
+          },
+          "parent_id": "building.main.opening.window.room01",
+          "skill": {
+            "skill_id": "arch_window",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "wall": {
+              "node_id": "building.main.wall.north",
+              "output": "wall"
+            }
+          },
+          "node_id": "building.main.opening.window.room02",
+          "parameters": {
+            "depth": 0.2,
+            "height": 1.2,
+            "kind": 2,
+            "offset": -4.440892098500626e-16,
+            "sill": 1,
+            "slot": 2,
+            "width": 1.2
+          },
+          "parent_id": "building.main.wall.north",
+          "skill": {
+            "skill_id": "arch_opening",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              -4.440892098500626e-16,
+              0,
+              1
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "opening": {
+              "node_id": "building.main.opening.window.room02",
+              "output": "opening"
+            }
+          },
+          "node_id": "building.main.window.room02",
+          "parameters": {
+            "depth": 0.2,
+            "height": 1.2,
+            "width": 1.2
+          },
+          "parent_id": "building.main.opening.window.room02",
+          "skill": {
+            "skill_id": "arch_window",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "wall": {
+              "node_id": "building.main.wall.north",
+              "output": "wall"
+            }
+          },
+          "node_id": "building.main.opening.window.room03",
+          "parameters": {
+            "depth": 0.2,
+            "height": 1.2,
+            "kind": 2,
+            "offset": 3.9333333333333327,
+            "sill": 1,
+            "slot": 3,
+            "width": 1.2
+          },
+          "parent_id": "building.main.wall.north",
+          "skill": {
+            "skill_id": "arch_opening",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              3.9333333333333327,
+              0,
+              1
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "opening": {
+              "node_id": "building.main.opening.window.room03",
+              "output": "opening"
+            }
+          },
+          "node_id": "building.main.window.room03",
+          "parameters": {
+            "depth": 0.2,
+            "height": 1.2,
+            "width": 1.2
+          },
+          "parent_id": "building.main.opening.window.room03",
+          "skill": {
+            "skill_id": "arch_window",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {},
+          "node_id": "building.main.wall.west",
+          "parameters": {
+            "height": 3,
+            "length": 7.6,
+            "opening_count": 0,
+            "side": 3,
+            "thickness": 0.2,
+            "wall_kind": 1
+          },
+          "parent_id": "building.main",
+          "skill": {
+            "skill_id": "arch_wall",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              -5.9,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              90
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {},
+          "node_id": "building.main.wall.east",
+          "parameters": {
+            "height": 3,
+            "length": 7.6,
+            "opening_count": 0,
+            "side": 4,
+            "thickness": 0.2,
+            "wall_kind": 1
+          },
+          "parent_id": "building.main",
+          "skill": {
+            "skill_id": "arch_wall",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              5.9,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              90
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {},
+          "node_id": "building.main.wall.corridor",
+          "parameters": {
+            "height": 3,
+            "length": 11.6,
+            "o1_height": 2.2,
+            "o1_kind": 1,
+            "o1_offset": -3.9333333333333336,
+            "o1_sill": 0,
+            "o1_width": 0.95,
+            "o2_height": 2.2,
+            "o2_kind": 1,
+            "o2_offset": -4.440892098500626e-16,
+            "o2_sill": 0,
+            "o2_width": 0.95,
+            "o3_height": 2.2,
+            "o3_kind": 1,
+            "o3_offset": 3.9333333333333327,
+            "o3_sill": 0,
+            "o3_width": 0.95,
+            "opening_count": 3,
+            "side": 0,
+            "thickness": 0.2,
+            "wall_kind": 3
+          },
+          "parent_id": "building.main",
+          "skill": {
+            "skill_id": "arch_wall",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              -2.0999999999999996,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "wall": {
+              "node_id": "building.main.wall.corridor",
+              "output": "wall"
+            }
+          },
+          "node_id": "building.main.opening.room01",
+          "parameters": {
+            "depth": 0.2,
+            "height": 2.2,
+            "kind": 1,
+            "offset": -3.9333333333333336,
+            "sill": 0,
+            "slot": 1,
+            "width": 0.95
+          },
+          "parent_id": "building.main.wall.corridor",
+          "skill": {
+            "skill_id": "arch_opening",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              -3.9333333333333336,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "opening": {
+              "node_id": "building.main.opening.room01",
+              "output": "opening"
+            }
+          },
+          "node_id": "building.main.door.room01",
+          "parameters": {
+            "depth": 0.2,
+            "height": 2.2,
+            "width": 0.95
+          },
+          "parent_id": "building.main.opening.room01",
+          "skill": {
+            "skill_id": "arch_door",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "wall": {
+              "node_id": "building.main.wall.corridor",
+              "output": "wall"
+            }
+          },
+          "node_id": "building.main.opening.room02",
+          "parameters": {
+            "depth": 0.2,
+            "height": 2.2,
+            "kind": 1,
+            "offset": -4.440892098500626e-16,
+            "sill": 0,
+            "slot": 2,
+            "width": 0.95
+          },
+          "parent_id": "building.main.wall.corridor",
+          "skill": {
+            "skill_id": "arch_opening",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              -4.440892098500626e-16,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "opening": {
+              "node_id": "building.main.opening.room02",
+              "output": "opening"
+            }
+          },
+          "node_id": "building.main.door.room02",
+          "parameters": {
+            "depth": 0.2,
+            "height": 2.2,
+            "width": 0.95
+          },
+          "parent_id": "building.main.opening.room02",
+          "skill": {
+            "skill_id": "arch_door",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "wall": {
+              "node_id": "building.main.wall.corridor",
+              "output": "wall"
+            }
+          },
+          "node_id": "building.main.opening.room03",
+          "parameters": {
+            "depth": 0.2,
+            "height": 2.2,
+            "kind": 1,
+            "offset": 3.9333333333333327,
+            "sill": 0,
+            "slot": 3,
+            "width": 0.95
+          },
+          "parent_id": "building.main.wall.corridor",
+          "skill": {
+            "skill_id": "arch_opening",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              3.9333333333333327,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "opening": {
+              "node_id": "building.main.opening.room03",
+              "output": "opening"
+            }
+          },
+          "node_id": "building.main.door.room03",
+          "parameters": {
+            "depth": 0.2,
+            "height": 2.2,
+            "width": 0.95
+          },
+          "parent_id": "building.main.opening.room03",
+          "skill": {
+            "skill_id": "arch_door",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {},
+          "node_id": "building.main.wall.partition01",
+          "parameters": {
+            "height": 3,
+            "length": 5.8,
+            "opening_count": 0,
+            "side": 0,
+            "thickness": 0.2,
+            "wall_kind": 2
+          },
+          "parent_id": "building.main",
+          "skill": {
+            "skill_id": "arch_wall",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              -1.9666666666666668,
+              0.9000000000000004,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              90
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {},
+          "node_id": "building.main.wall.partition02",
+          "parameters": {
+            "height": 3,
+            "length": 5.8,
+            "opening_count": 0,
+            "side": 0,
+            "thickness": 0.2,
+            "wall_kind": 2
+          },
+          "parent_id": "building.main",
+          "skill": {
+            "skill_id": "arch_wall",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              1.9666666666666661,
+              0.9000000000000004,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              90
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "entrance": {
+              "node_id": "building.main.opening.entrance",
+              "output": "opening"
+            }
+          },
+          "node_id": "building.main.corridor.main",
+          "parameters": {
+            "depth": 1.6,
+            "height": 3,
+            "width": 11.6
+          },
+          "parent_id": "building.main",
+          "skill": {
+            "skill_id": "arch_corridor",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              0,
+              -3.0,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "access": {
+              "node_id": "building.main.opening.room01",
+              "output": "opening"
+            },
+            "corridor": {
+              "node_id": "building.main.corridor.main",
+              "output": "space"
+            }
+          },
+          "node_id": "building.main.room.01",
+          "parameters": {
+            "depth": 5.8,
+            "height": 3,
+            "width": 3.733333333333333
+          },
+          "parent_id": "building.main",
+          "skill": {
+            "skill_id": "arch_room",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              -3.9333333333333336,
+              0.9000000000000004,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "access": {
+              "node_id": "building.main.opening.room02",
+              "output": "opening"
+            },
+            "corridor": {
+              "node_id": "building.main.corridor.main",
+              "output": "space"
+            }
+          },
+          "node_id": "building.main.room.02",
+          "parameters": {
+            "depth": 5.8,
+            "height": 3,
+            "width": 3.733333333333333
+          },
+          "parent_id": "building.main",
+          "skill": {
+            "skill_id": "arch_room",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              -4.440892098500626e-16,
+              0.9000000000000004,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "depends_on": [],
+          "inputs": {
+            "access": {
+              "node_id": "building.main.opening.room03",
+              "output": "opening"
+            },
+            "corridor": {
+              "node_id": "building.main.corridor.main",
+              "output": "space"
+            }
+          },
+          "node_id": "building.main.room.03",
+          "parameters": {
+            "depth": 5.8,
+            "height": 3,
+            "width": 3.733333333333333
+          },
+          "parent_id": "building.main",
+          "skill": {
+            "skill_id": "arch_room",
+            "version": "1.0.0"
+          },
+          "transform": {
+            "location": [
+              3.9333333333333327,
+              0.9000000000000004,
+              0
+            ],
+            "rotation_degrees": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "scene_id": "modular-building",
+      "schema_version": 2,
+      "seed": 42,
+      "units": "m"
+    }
+  ],
+  "validation_evidence": {
+    "pin": {
+      "contract": {
+        "function": "check_building",
+        "module": "scene_factory.architecture_contracts",
+        "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+        "support_sha256": {
+          "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+        }
+      },
+      "dependencies": [
+        {
+          "skill_id": "arch_slab",
+          "version": "1.0.0"
+        },
+        {
+          "skill_id": "arch_wall",
+          "version": "1.0.0"
+        },
+        {
+          "skill_id": "arch_opening",
+          "version": "1.0.0"
+        },
+        {
+          "skill_id": "arch_door",
+          "version": "1.0.0"
+        },
+        {
+          "skill_id": "arch_window",
+          "version": "1.0.0"
+        },
+        {
+          "skill_id": "arch_room",
+          "version": "1.0.0"
+        },
+        {
+          "skill_id": "arch_corridor",
+          "version": "1.0.0"
+        }
+      ],
+      "dependency_pins": [
+        {
+          "dependencies": [],
+          "dependency_pins": [],
+          "implementation": {
+            "function": "generate",
+            "module": "scene_factory.blender.skills.architecture",
+            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "support_sha256": {
+              "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "manifest_sha256": "da8085b746e27685a04fe7c6a249eb0860924ef086c08c96a217ff9b8c9054b9",
+          "skill_id": "arch_slab",
+          "validator": {
+            "function": "validate",
+            "module": "scene_factory.blender.skills.architecture",
+            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "support_sha256": {
+              "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "version": "1.0.0"
+        },
+        {
+          "contract": {
+            "function": "check_wall",
+            "module": "scene_factory.architecture_contracts",
+            "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+            "support_sha256": {
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "dependencies": [],
+          "dependency_pins": [],
+          "implementation": {
+            "function": "generate",
+            "module": "scene_factory.blender.skills.architecture",
+            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "support_sha256": {
+              "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "manifest_sha256": "d6ebebef1e7e399ba5f118cc22850ca9e293f6a4aa8e0728bac2b12d6ca2f34e",
+          "skill_id": "arch_wall",
+          "validator": {
+            "function": "validate",
+            "module": "scene_factory.blender.skills.architecture",
+            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "support_sha256": {
+              "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "version": "1.0.0"
+        },
+        {
+          "contract": {
+            "function": "check_opening",
+            "module": "scene_factory.architecture_contracts",
+            "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+            "support_sha256": {
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "dependencies": [
+            {
+              "skill_id": "arch_wall",
+              "version": "1.0.0"
+            }
+          ],
+          "dependency_pins": [
+            {
+              "contract": {
+                "function": "check_wall",
+                "module": "scene_factory.architecture_contracts",
+                "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                "support_sha256": {
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "dependencies": [],
+              "dependency_pins": [],
+              "implementation": {
+                "function": "generate",
+                "module": "scene_factory.blender.skills.architecture",
+                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "support_sha256": {
+                  "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "manifest_sha256": "d6ebebef1e7e399ba5f118cc22850ca9e293f6a4aa8e0728bac2b12d6ca2f34e",
+              "skill_id": "arch_wall",
+              "validator": {
+                "function": "validate",
+                "module": "scene_factory.blender.skills.architecture",
+                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "support_sha256": {
+                  "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "version": "1.0.0"
+            }
+          ],
+          "implementation": {
+            "function": "generate",
+            "module": "scene_factory.blender.skills.architecture",
+            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "support_sha256": {
+              "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "manifest_sha256": "1d96a54e429daf11db825c799738332c60977eeeff129ffda70bd3442f4a8924",
+          "skill_id": "arch_opening",
+          "validator": {
+            "function": "validate",
+            "module": "scene_factory.blender.skills.architecture",
+            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "support_sha256": {
+              "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "version": "1.0.0"
+        },
+        {
+          "contract": {
+            "function": "check_fitting",
+            "module": "scene_factory.architecture_contracts",
+            "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+            "support_sha256": {
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "dependencies": [
+            {
+              "skill_id": "arch_opening",
+              "version": "1.0.0"
+            }
+          ],
+          "dependency_pins": [
+            {
+              "contract": {
+                "function": "check_opening",
+                "module": "scene_factory.architecture_contracts",
+                "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                "support_sha256": {
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "dependencies": [
+                {
+                  "skill_id": "arch_wall",
+                  "version": "1.0.0"
+                }
+              ],
+              "dependency_pins": [
+                {
+                  "contract": {
+                    "function": "check_wall",
+                    "module": "scene_factory.architecture_contracts",
+                    "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                    "support_sha256": {
+                      "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                    }
+                  },
+                  "dependencies": [],
+                  "dependency_pins": [],
+                  "implementation": {
+                    "function": "generate",
+                    "module": "scene_factory.blender.skills.architecture",
+                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "support_sha256": {
+                      "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                    }
+                  },
+                  "manifest_sha256": "d6ebebef1e7e399ba5f118cc22850ca9e293f6a4aa8e0728bac2b12d6ca2f34e",
+                  "skill_id": "arch_wall",
+                  "validator": {
+                    "function": "validate",
+                    "module": "scene_factory.blender.skills.architecture",
+                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "support_sha256": {
+                      "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                    }
+                  },
+                  "version": "1.0.0"
+                }
+              ],
+              "implementation": {
+                "function": "generate",
+                "module": "scene_factory.blender.skills.architecture",
+                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "support_sha256": {
+                  "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "manifest_sha256": "1d96a54e429daf11db825c799738332c60977eeeff129ffda70bd3442f4a8924",
+              "skill_id": "arch_opening",
+              "validator": {
+                "function": "validate",
+                "module": "scene_factory.blender.skills.architecture",
+                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "support_sha256": {
+                  "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "version": "1.0.0"
+            }
+          ],
+          "implementation": {
+            "function": "generate",
+            "module": "scene_factory.blender.skills.architecture",
+            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "support_sha256": {
+              "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "manifest_sha256": "5b5100342fc8899672e323487860a31b1936f8467cb52a4ef99110609a3cd90a",
+          "skill_id": "arch_door",
+          "validator": {
+            "function": "validate",
+            "module": "scene_factory.blender.skills.architecture",
+            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "support_sha256": {
+              "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "version": "1.0.0"
+        },
+        {
+          "contract": {
+            "function": "check_fitting",
+            "module": "scene_factory.architecture_contracts",
+            "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+            "support_sha256": {
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "dependencies": [
+            {
+              "skill_id": "arch_opening",
+              "version": "1.0.0"
+            }
+          ],
+          "dependency_pins": [
+            {
+              "contract": {
+                "function": "check_opening",
+                "module": "scene_factory.architecture_contracts",
+                "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                "support_sha256": {
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "dependencies": [
+                {
+                  "skill_id": "arch_wall",
+                  "version": "1.0.0"
+                }
+              ],
+              "dependency_pins": [
+                {
+                  "contract": {
+                    "function": "check_wall",
+                    "module": "scene_factory.architecture_contracts",
+                    "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                    "support_sha256": {
+                      "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                    }
+                  },
+                  "dependencies": [],
+                  "dependency_pins": [],
+                  "implementation": {
+                    "function": "generate",
+                    "module": "scene_factory.blender.skills.architecture",
+                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "support_sha256": {
+                      "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                    }
+                  },
+                  "manifest_sha256": "d6ebebef1e7e399ba5f118cc22850ca9e293f6a4aa8e0728bac2b12d6ca2f34e",
+                  "skill_id": "arch_wall",
+                  "validator": {
+                    "function": "validate",
+                    "module": "scene_factory.blender.skills.architecture",
+                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "support_sha256": {
+                      "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                    }
+                  },
+                  "version": "1.0.0"
+                }
+              ],
+              "implementation": {
+                "function": "generate",
+                "module": "scene_factory.blender.skills.architecture",
+                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "support_sha256": {
+                  "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "manifest_sha256": "1d96a54e429daf11db825c799738332c60977eeeff129ffda70bd3442f4a8924",
+              "skill_id": "arch_opening",
+              "validator": {
+                "function": "validate",
+                "module": "scene_factory.blender.skills.architecture",
+                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "support_sha256": {
+                  "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "version": "1.0.0"
+            }
+          ],
+          "implementation": {
+            "function": "generate",
+            "module": "scene_factory.blender.skills.architecture",
+            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "support_sha256": {
+              "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "manifest_sha256": "8ed74a2153a0d9eec792bf7f07f7da5830f3a52d15e060d4fc970db044e211d6",
+          "skill_id": "arch_window",
+          "validator": {
+            "function": "validate",
+            "module": "scene_factory.blender.skills.architecture",
+            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "support_sha256": {
+              "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "version": "1.0.0"
+        },
+        {
+          "contract": {
+            "function": "check_space",
+            "module": "scene_factory.architecture_contracts",
+            "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+            "support_sha256": {
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "dependencies": [
+            {
+              "skill_id": "arch_space",
+              "version": "1.0.0"
+            },
+            {
+              "skill_id": "arch_opening",
+              "version": "1.0.0"
+            },
+            {
+              "skill_id": "arch_corridor",
+              "version": "1.0.0"
+            }
+          ],
+          "dependency_pins": [
+            {
+              "dependencies": [],
+              "dependency_pins": [],
+              "implementation": {
+                "function": "generate",
+                "module": "scene_factory.blender.skills.architecture",
+                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "support_sha256": {
+                  "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "manifest_sha256": "a27ecd51809a8acc995518deb457aa5f4217a9b71b87b55d422d6af65b55d69c",
+              "skill_id": "arch_space",
+              "validator": {
+                "function": "validate",
+                "module": "scene_factory.blender.skills.architecture",
+                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "support_sha256": {
+                  "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "version": "1.0.0"
+            },
+            {
+              "contract": {
+                "function": "check_opening",
+                "module": "scene_factory.architecture_contracts",
+                "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                "support_sha256": {
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "dependencies": [
+                {
+                  "skill_id": "arch_wall",
+                  "version": "1.0.0"
+                }
+              ],
+              "dependency_pins": [
+                {
+                  "contract": {
+                    "function": "check_wall",
+                    "module": "scene_factory.architecture_contracts",
+                    "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                    "support_sha256": {
+                      "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                    }
+                  },
+                  "dependencies": [],
+                  "dependency_pins": [],
+                  "implementation": {
+                    "function": "generate",
+                    "module": "scene_factory.blender.skills.architecture",
+                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "support_sha256": {
+                      "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                    }
+                  },
+                  "manifest_sha256": "d6ebebef1e7e399ba5f118cc22850ca9e293f6a4aa8e0728bac2b12d6ca2f34e",
+                  "skill_id": "arch_wall",
+                  "validator": {
+                    "function": "validate",
+                    "module": "scene_factory.blender.skills.architecture",
+                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "support_sha256": {
+                      "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                    }
+                  },
+                  "version": "1.0.0"
+                }
+              ],
+              "implementation": {
+                "function": "generate",
+                "module": "scene_factory.blender.skills.architecture",
+                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "support_sha256": {
+                  "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "manifest_sha256": "1d96a54e429daf11db825c799738332c60977eeeff129ffda70bd3442f4a8924",
+              "skill_id": "arch_opening",
+              "validator": {
+                "function": "validate",
+                "module": "scene_factory.blender.skills.architecture",
+                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "support_sha256": {
+                  "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "version": "1.0.0"
+            },
+            {
+              "contract": {
+                "function": "check_space",
+                "module": "scene_factory.architecture_contracts",
+                "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                "support_sha256": {
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "dependencies": [
+                {
+                  "skill_id": "arch_space",
+                  "version": "1.0.0"
+                },
+                {
+                  "skill_id": "arch_opening",
+                  "version": "1.0.0"
+                }
+              ],
+              "dependency_pins": [
+                {
+                  "dependencies": [],
+                  "dependency_pins": [],
+                  "implementation": {
+                    "function": "generate",
+                    "module": "scene_factory.blender.skills.architecture",
+                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "support_sha256": {
+                      "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                    }
+                  },
+                  "manifest_sha256": "a27ecd51809a8acc995518deb457aa5f4217a9b71b87b55d422d6af65b55d69c",
+                  "skill_id": "arch_space",
+                  "validator": {
+                    "function": "validate",
+                    "module": "scene_factory.blender.skills.architecture",
+                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "support_sha256": {
+                      "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                    }
+                  },
+                  "version": "1.0.0"
+                },
+                {
+                  "contract": {
+                    "function": "check_opening",
+                    "module": "scene_factory.architecture_contracts",
+                    "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                    "support_sha256": {
+                      "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                    }
+                  },
+                  "dependencies": [
+                    {
+                      "skill_id": "arch_wall",
+                      "version": "1.0.0"
+                    }
+                  ],
+                  "dependency_pins": [
+                    {
+                      "contract": {
+                        "function": "check_wall",
+                        "module": "scene_factory.architecture_contracts",
+                        "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                        "support_sha256": {
+                          "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                        }
+                      },
+                      "dependencies": [],
+                      "dependency_pins": [],
+                      "implementation": {
+                        "function": "generate",
+                        "module": "scene_factory.blender.skills.architecture",
+                        "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                        "support_sha256": {
+                          "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                          "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                          "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                        }
+                      },
+                      "manifest_sha256": "d6ebebef1e7e399ba5f118cc22850ca9e293f6a4aa8e0728bac2b12d6ca2f34e",
+                      "skill_id": "arch_wall",
+                      "validator": {
+                        "function": "validate",
+                        "module": "scene_factory.blender.skills.architecture",
+                        "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                        "support_sha256": {
+                          "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                          "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                          "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                        }
+                      },
+                      "version": "1.0.0"
+                    }
+                  ],
+                  "implementation": {
+                    "function": "generate",
+                    "module": "scene_factory.blender.skills.architecture",
+                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "support_sha256": {
+                      "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                    }
+                  },
+                  "manifest_sha256": "1d96a54e429daf11db825c799738332c60977eeeff129ffda70bd3442f4a8924",
+                  "skill_id": "arch_opening",
+                  "validator": {
+                    "function": "validate",
+                    "module": "scene_factory.blender.skills.architecture",
+                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "support_sha256": {
+                      "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                    }
+                  },
+                  "version": "1.0.0"
+                }
+              ],
+              "implementation": {
+                "function": "generate",
+                "module": "scene_factory.blender.skills.recipe",
+                "sha256": "b76410f398addda3b082ff01a37909cdfd9b5bcf1102082424f8d54829ecaf87",
+                "support_sha256": {}
+              },
+              "manifest_sha256": "aa5531c94b67e96bf50e8b5b9bb6be26e0008b1109386f77a8f161b5f707b15f",
+              "skill_id": "arch_corridor",
+              "validator": {
+                "function": "validate",
+                "module": "scene_factory.blender.skills.architecture",
+                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "support_sha256": {
+                  "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "version": "1.0.0"
+            }
+          ],
+          "implementation": {
+            "function": "generate",
+            "module": "scene_factory.blender.skills.recipe",
+            "sha256": "b76410f398addda3b082ff01a37909cdfd9b5bcf1102082424f8d54829ecaf87",
+            "support_sha256": {}
+          },
+          "manifest_sha256": "b9617112a18131bde970aebdbf12396d05ff5d58cb36a4b774cd577a997d2b3c",
+          "skill_id": "arch_room",
+          "validator": {
+            "function": "validate",
+            "module": "scene_factory.blender.skills.architecture",
+            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "support_sha256": {
+              "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "version": "1.0.0"
+        },
+        {
+          "contract": {
+            "function": "check_space",
+            "module": "scene_factory.architecture_contracts",
+            "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+            "support_sha256": {
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "dependencies": [
+            {
+              "skill_id": "arch_space",
+              "version": "1.0.0"
+            },
+            {
+              "skill_id": "arch_opening",
+              "version": "1.0.0"
+            }
+          ],
+          "dependency_pins": [
+            {
+              "dependencies": [],
+              "dependency_pins": [],
+              "implementation": {
+                "function": "generate",
+                "module": "scene_factory.blender.skills.architecture",
+                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "support_sha256": {
+                  "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "manifest_sha256": "a27ecd51809a8acc995518deb457aa5f4217a9b71b87b55d422d6af65b55d69c",
+              "skill_id": "arch_space",
+              "validator": {
+                "function": "validate",
+                "module": "scene_factory.blender.skills.architecture",
+                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "support_sha256": {
+                  "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "version": "1.0.0"
+            },
+            {
+              "contract": {
+                "function": "check_opening",
+                "module": "scene_factory.architecture_contracts",
+                "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                "support_sha256": {
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "dependencies": [
+                {
+                  "skill_id": "arch_wall",
+                  "version": "1.0.0"
+                }
+              ],
+              "dependency_pins": [
+                {
+                  "contract": {
+                    "function": "check_wall",
+                    "module": "scene_factory.architecture_contracts",
+                    "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                    "support_sha256": {
+                      "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                    }
+                  },
+                  "dependencies": [],
+                  "dependency_pins": [],
+                  "implementation": {
+                    "function": "generate",
+                    "module": "scene_factory.blender.skills.architecture",
+                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "support_sha256": {
+                      "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                    }
+                  },
+                  "manifest_sha256": "d6ebebef1e7e399ba5f118cc22850ca9e293f6a4aa8e0728bac2b12d6ca2f34e",
+                  "skill_id": "arch_wall",
+                  "validator": {
+                    "function": "validate",
+                    "module": "scene_factory.blender.skills.architecture",
+                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "support_sha256": {
+                      "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                    }
+                  },
+                  "version": "1.0.0"
+                }
+              ],
+              "implementation": {
+                "function": "generate",
+                "module": "scene_factory.blender.skills.architecture",
+                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "support_sha256": {
+                  "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "manifest_sha256": "1d96a54e429daf11db825c799738332c60977eeeff129ffda70bd3442f4a8924",
+              "skill_id": "arch_opening",
+              "validator": {
+                "function": "validate",
+                "module": "scene_factory.blender.skills.architecture",
+                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "support_sha256": {
+                  "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+                }
+              },
+              "version": "1.0.0"
+            }
+          ],
+          "implementation": {
+            "function": "generate",
+            "module": "scene_factory.blender.skills.recipe",
+            "sha256": "b76410f398addda3b082ff01a37909cdfd9b5bcf1102082424f8d54829ecaf87",
+            "support_sha256": {}
+          },
+          "manifest_sha256": "aa5531c94b67e96bf50e8b5b9bb6be26e0008b1109386f77a8f161b5f707b15f",
+          "skill_id": "arch_corridor",
+          "validator": {
+            "function": "validate",
+            "module": "scene_factory.blender.skills.architecture",
+            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "support_sha256": {
+              "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "version": "1.0.0"
+        }
+      ],
+      "implementation": {
+        "function": "generate",
+        "module": "scene_factory.blender.skills.recipe",
+        "sha256": "b76410f398addda3b082ff01a37909cdfd9b5bcf1102082424f8d54829ecaf87",
+        "support_sha256": {}
+      },
+      "manifest_sha256": "a54c91295718ec5adbfad6de59dc9893b6fbd35b0fe304943da0cfb5f98076e2",
+      "skill_id": "arch_building",
+      "validator": {
+        "function": "validate",
+        "module": "scene_factory.blender.skills.architecture",
+        "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+        "support_sha256": {
+          "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+          "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+          "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+        }
+      },
+      "version": "1.0.0"
+    },
+    "runtime": {
+      "application_python": "3.12.13",
+      "architecture": "arm64",
+      "blender": "4.5.15 LTS",
+      "blender_python": "3.11.15 (main, Apr 25 2025, 12:39:20) [Clang 15.0.0 (clang-1500.0.40.1)]",
+      "implementation_sha256": "5c596a1f9c0a092eb04d8dd366bec558567e61fada61a7c87cf45c380e3ebda3",
+      "os": "Darwin"
+    },
+    "status": "passed",
+    "tests": [
+      {
+        "checks": [
+          "compile",
+          "generate",
+          "skill-validator",
+          "reopen",
+          "artifact-contract"
+        ],
+        "example": 0,
+        "metrics": {
+          "build_reopen_seconds": 2.547,
+          "face_count": 206,
+          "mesh_count": 13,
+          "vertex_count": 224
+        },
+        "plan_digest": "3b293791d581fbb032e39e511fb5bc08c95e265403ed46fec91ce896f4eb17ec",
+        "structure_sha256": "e86e84dfe228cf02bd5440a091cf2704ce1e5b06ad10aef175b88056898fb598"
+      },
+      {
+        "checks": [
+          "compile",
+          "generate",
+          "skill-validator",
+          "reopen",
+          "artifact-contract"
+        ],
+        "example": 1,
+        "metrics": {
+          "build_reopen_seconds": 5.956,
+          "face_count": 404,
+          "mesh_count": 24,
+          "vertex_count": 440
+        },
+        "plan_digest": "ef4547c70e47a8d9bc276b91abc2c6bcc091d32c5dca18e5a7824e07e26bb445",
+        "structure_sha256": "c3ed6ffa52a245d8a551c794ba8d54843d562db75f4a07fc022133d0cf26f385"
+      }
+    ],
+    "unit_tests": {
+      "case_count": 40,
+      "cases": [
+        "tests.test_architecture.test_layout_recipe_dimensions_references_and_determinism[1]",
+        "tests.test_architecture.test_layout_recipe_dimensions_references_and_determinism[2]",
+        "tests.test_architecture.test_layout_recipe_dimensions_references_and_determinism[3]",
+        "tests.test_architecture.test_window_edit_only_three_nodes_preserves_all_seeds_and_artifact_ids",
+        "tests.test_architecture.test_invalid_scene_d[big_window]",
+        "tests.test_architecture.test_invalid_scene_d[outside_door]",
+        "tests.test_architecture.test_invalid_scene_d[overlap]",
+        "tests.test_architecture.test_invalid_scene_d[negative_wall]",
+        "tests.test_architecture.test_invalid_scene_d[negative_floor]",
+        "tests.test_architecture.test_invalid_scene_d[bad_parent]",
+        "tests.test_architecture.test_invalid_scene_d[missing_wallref]",
+        "tests.test_architecture.test_invalid_scene_d[fitting_mismatch]",
+        "tests.test_architecture.test_invalid_scene_d[unconnected_room]",
+        "tests.test_architecture.test_invalid_scene_d[duplicate_id]",
+        "tests.test_architecture.test_invalid_scene_d[duplicate_slot]",
+        "tests.test_architecture.test_invalid_scene_d[thickness]",
+        "tests.test_architecture.test_invalid_scene_d[perimeter]",
+        "tests.test_architecture.test_invalid_scene_d[wall_intersection]",
+        "tests.test_architecture.test_invalid_scene_d[hidden_space]",
+        "tests.test_architecture.test_invalid_scene_d[floating_slab]",
+        "tests.test_architecture.test_invalid_scene_d[wrong_type]",
+        "tests.test_architecture.test_invalid_scene_d[roof_missing]",
+        "tests.test_architecture.test_invalid_scene_d[inward_space]",
+        "tests.test_architecture.test_wall_contract_invalid[no_end_pier]",
+        "tests.test_architecture.test_wall_contract_invalid[no_header]",
+        "tests.test_architecture.test_wall_contract_invalid[door_sill]",
+        "tests.test_architecture.test_wall_contract_invalid[touching_openings]",
+        "tests.test_architecture.test_wall_contract_invalid[fractional_count]",
+        "tests.test_architecture.test_wall_contract_invalid[negative_thickness]",
+        "tests.test_architecture.test_architectural_profile_preserves_legacy_profiles",
+        "tests.test_architecture.test_manifest_pins_include_pure_contract_and_support",
+        "tests.test_architecture.test_layout_rejects_unsupported_room_counts[0]",
+        "tests.test_architecture.test_layout_rejects_unsupported_room_counts[4]",
+        "tests.test_architecture.test_layout_rejects_unsupported_room_counts[1.5]",
+        "tests.test_architecture.test_wall_material_slots_are_explicit[0]",
+        "tests.test_architecture.test_wall_material_slots_are_explicit[1]",
+        "tests.test_architecture.test_wall_material_slots_are_explicit[2]",
+        "tests.test_architecture.test_wall_material_slots_are_explicit[3]",
+        "tests.test_architecture.test_architectural_domain_evidence_is_required_and_not_visual_evidence",
+        "tests.test_architecture.test_binding_syntax_cache_uses_exact_source_bytes"
+      ],
+      "sha256": "f58915087ac48a1c8b768784cde8403ed8e1e0a4fdb93d3463676c55299b209a"
+    }
+  },
+  "validation_status": "validated",
+  "validator": "architecture.validate",
+  "version": "1.0.0"
+}

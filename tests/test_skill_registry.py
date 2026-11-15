@@ -12,7 +12,8 @@ from scene_factory.skill_testing import unit_test_evidence
 
 def test_catalog_and_discovery():
     r=Registry()
-    assert {m["skill_id"] for m in r.search()} == {"ground","box_building","pillar","roof","cylinder","building_recipe"}
+    assert {m["skill_id"] for m in r.search()} == {"ground","box_building","pillar","roof","cylinder","building_recipe",
+        "arch_wall","arch_opening","arch_door","arch_window","arch_slab","arch_space","arch_room","arch_corridor","arch_building"}
     assert r.search("components")[0]["skill_id"] == "building_recipe"
     assert r.search("cylinder")[0]["category"] == "primitive"
 

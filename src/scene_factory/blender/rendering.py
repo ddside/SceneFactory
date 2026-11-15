@@ -80,7 +80,7 @@ def setup_camera_lights(direction=None):
     scene.world.node_tree.nodes["Background"].inputs["Strength"].default_value = 0.5
 
 
-def render(path, device="cpu", resolution=256, samples=8, engine="CYCLES",view_direction=None):
+def render(path, device="cpu", resolution=256, samples=8, engine="CYCLES",view_direction=None,hide_groups=()):
     selected = select_device(device)
     scene = bpy.context.scene
     scene.render.engine = engine
@@ -93,6 +93,13 @@ def render(path, device="cpu", resolution=256, samples=8, engine="CYCLES",view_d
     scene.render.image_settings.file_format = "PNG"
     scene.render.filepath = str(path)
     setup_camera_lights(view_direction)
-    if bpy.ops.render.render(write_still=True) != {"FINISHED"}:
-        raise RuntimeError("Render did not finish")
+    if not isinstance(hide_groups,(list,tuple)) or any(x not in ('cover','south_wall') for x in hide_groups):
+        raise ValueError('unsupported preview hide group')
+    hidden=[(obj,obj.hide_render) for obj in scene.objects if obj.get('preview_group') in hide_groups]
+    try:
+        for obj,_ in hidden: obj.hide_render=True
+        if bpy.ops.render.render(write_still=True) != {"FINISHED"}:
+            raise RuntimeError("Render did not finish")
+    finally:
+        for obj,old in hidden: obj.hide_render=old
     return selected

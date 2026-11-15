@@ -38,5 +38,58 @@
   "recipe.validate": {
     "module": "scene_factory.blender.skills.recipe",
     "function": "validate"
+  },
+  "architecture.generate": {
+    "module": "scene_factory.blender.skills.architecture",
+    "function": "generate",
+    "support_files": [
+      "architecture_contracts.py",
+      "blender/skills/common.py",
+      "spec.py"
+    ]
+  },
+  "architecture.validate": {
+    "module": "scene_factory.blender.skills.architecture",
+    "function": "validate",
+    "support_files": [
+      "architecture_contracts.py",
+      "blender/skills/common.py",
+      "spec.py"
+    ]
+  },
+  "architecture.check_wall": {
+    "module": "scene_factory.architecture_contracts",
+    "function": "check_wall",
+    "support_files": [
+      "spec.py"
+    ]
+  },
+  "architecture.check_opening": {
+    "module": "scene_factory.architecture_contracts",
+    "function": "check_opening",
+    "support_files": [
+      "spec.py"
+    ]
+  },
+  "architecture.check_fitting": {
+    "module": "scene_factory.architecture_contracts",
+    "function": "check_fitting",
+    "support_files": [
+      "spec.py"
+    ]
+  },
+  "architecture.check_space": {
+    "module": "scene_factory.architecture_contracts",
+    "function": "check_space",
+    "support_files": [
+      "spec.py"
+    ]
+  },
+  "architecture.check_building": {
+    "module": "scene_factory.architecture_contracts",
+    "function": "check_building",
+    "support_files": [
+      "spec.py"
+    ]
   }
 }

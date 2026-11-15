@@ -10,7 +10,8 @@ from .storage import digest
 
 REQUIRED={'structural':['specification','execution','structure'],
           'preview_reviewed':['specification','execution','structure','visual'],
-          'basic_scene':['specification','execution','structure','visual','domain']}
+          'basic_scene':['specification','execution','structure','visual','domain'],
+          'architectural':['specification','execution','structure','visual','domain']}
 VISUAL_CHECKS=('requested_objects_visible','layout_reasonable','main_structure_visible',
                'no_obvious_intersection_or_floating','reference_consistent','request_conformance')
 
@@ -21,7 +22,8 @@ def profile(name):
             'request_conformance_required':True,
             'scope':{'structural':'Structure and declared hard constraints only; images unreviewed',
                      'preview_reviewed':'Structure, declared hard constraints and recorded visual review',
-                     'basic_scene':'Preview-reviewed scene and basic declared spatial constraints; no physics/photorealism guarantee'}[name]}
+                     'basic_scene':'Preview-reviewed scene and basic declared spatial constraints; no physics/photorealism guarantee',
+                     'architectural':'Modular architectural geometry/access validation plus actual exterior/interior review; no code/physics guarantee'}[name]}
 
 
 def validate_visual_review(value,project,attempt,intent):
@@ -93,7 +95,7 @@ def constraint_checks(intent,spec,plan,artifacts):
 
 
 def evaluate(intent,spec,plan,artifacts,base_report,revision_id,attempt_id,quality_id,created_at,
-             profile_snapshot,visual=None,visual_id=None):
+             profile_snapshot,visual=None,visual_id=None,domain_results=()):
     validate_intent(intent)
     if profile_snapshot!=profile(profile_snapshot.get('profile_id')): raise SpecError('Quality profile snapshot/version mismatch')
     stages=copy.deepcopy(base_report['stages'])
@@ -118,6 +120,15 @@ def evaluate(intent,spec,plan,artifacts,base_report,revision_id,attempt_id,quali
         stages['domain']={'state':'failed' if hard or blockers else 'passed',
                           'reason':'Basic declared dimensions/count/placement constraints evaluated; no physical validation',
                           'evidence':['constraint_checks']}
+    if profile_snapshot['profile_id']=='architectural':
+        buildings={n['node_id'] for n in plan['nodes'] if n['skill']['skill_id']=='arch_building'}
+        verified={r['node_id'] for r in domain_results if r.get('kind')=='architecture' and r.get('state')=='passed'}
+        has_evidence=bool(buildings) and buildings==verified
+        passed=has_evidence and not hard and not blockers
+        stages['domain']={'state':'passed' if passed else ('failed' if has_evidence else 'not_run'),
+                          'reason':'Actual reopened architectural skill checks' if passed else 'Architectural domain evidence missing or request constraints failed',
+                          'evidence':['validation.json:domain_results'] if passed else []}
+        if not passed: findings.append({'kind':'blocker','node_id':None,'reason':'Architectural domain checks required'})
     if visual is not None:
         passed=all(c['state'] in ('passed','not_applicable') for c in visual['checks'].values())
         stages['visual']={'state':'passed' if passed else 'failed','reason':visual['notes'],'evidence':[visual_id]}

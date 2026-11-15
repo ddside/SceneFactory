@@ -1,0 +1,158 @@
+{
+  "artifacts": [
+    {
+      "role": "frame",
+      "type": "Object"
+    }
+  ],
+  "blender_compatibility": {
+    "python_series": "3.11",
+    "series": "4.5"
+  },
+  "category": "architecture",
+  "dependencies": [],
+  "description": "Orthogonal modular architecture: arch_space",
+  "examples": [
+    {}
+  ],
+  "implementation": "architecture.generate",
+  "inputs": {},
+  "kind": "leaf",
+  "name": "arch space",
+  "outputs": {},
+  "parameter_schema": {
+    "depth": {
+      "default": 3,
+      "maximum": 100,
+      "minimum": 0.5,
+      "type": "number"
+    },
+    "height": {
+      "default": 3,
+      "maximum": 100,
+      "minimum": 0.5,
+      "type": "number"
+    },
+    "width": {
+      "default": 4,
+      "maximum": 100,
+      "minimum": 0.5,
+      "type": "number"
+    }
+  },
+  "schema_version": 1,
+  "skill_id": "arch_space",
+  "tags": [
+    "building",
+    "interior",
+    "modular",
+    "arch_space"
+  ],
+  "validation_evidence": {
+    "pin": {
+      "dependencies": [],
+      "dependency_pins": [],
+      "implementation": {
+        "function": "generate",
+        "module": "scene_factory.blender.skills.architecture",
+        "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+        "support_sha256": {
+          "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+          "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+          "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+        }
+      },
+      "manifest_sha256": "a27ecd51809a8acc995518deb457aa5f4217a9b71b87b55d422d6af65b55d69c",
+      "skill_id": "arch_space",
+      "validator": {
+        "function": "validate",
+        "module": "scene_factory.blender.skills.architecture",
+        "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+        "support_sha256": {
+          "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+          "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+          "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+        }
+      },
+      "version": "1.0.0"
+    },
+    "runtime": {
+      "application_python": "3.12.13",
+      "architecture": "arm64",
+      "blender": "4.5.15 LTS",
+      "blender_python": "3.11.15 (main, Apr 25 2025, 12:39:20) [Clang 15.0.0 (clang-1500.0.40.1)]",
+      "implementation_sha256": "5c596a1f9c0a092eb04d8dd366bec558567e61fada61a7c87cf45c380e3ebda3",
+      "os": "Darwin"
+    },
+    "status": "passed",
+    "tests": [
+      {
+        "checks": [
+          "compile",
+          "generate",
+          "skill-validator",
+          "reopen",
+          "artifact-contract"
+        ],
+        "example": 0,
+        "metrics": {
+          "build_reopen_seconds": 2.24,
+          "face_count": 0,
+          "mesh_count": 0,
+          "vertex_count": 0
+        },
+        "plan_digest": "e462ce70b580fbe11f9cb108859f1ceb8864c3f02afbb1406d069eccc1745176",
+        "structure_sha256": "c4911a8536c216cbc7ee90ea9834c914576061ac44ef60db9d39ff0c52ecc2d2"
+      }
+    ],
+    "unit_tests": {
+      "case_count": 40,
+      "cases": [
+        "tests.test_architecture.test_layout_recipe_dimensions_references_and_determinism[1]",
+        "tests.test_architecture.test_layout_recipe_dimensions_references_and_determinism[2]",
+        "tests.test_architecture.test_layout_recipe_dimensions_references_and_determinism[3]",
+        "tests.test_architecture.test_window_edit_only_three_nodes_preserves_all_seeds_and_artifact_ids",
+        "tests.test_architecture.test_invalid_scene_d[big_window]",
+        "tests.test_architecture.test_invalid_scene_d[outside_door]",
+        "tests.test_architecture.test_invalid_scene_d[overlap]",
+        "tests.test_architecture.test_invalid_scene_d[negative_wall]",
+        "tests.test_architecture.test_invalid_scene_d[negative_floor]",
+        "tests.test_architecture.test_invalid_scene_d[bad_parent]",
+        "tests.test_architecture.test_invalid_scene_d[missing_wallref]",
+        "tests.test_architecture.test_invalid_scene_d[fitting_mismatch]",
+        "tests.test_architecture.test_invalid_scene_d[unconnected_room]",
+        "tests.test_architecture.test_invalid_scene_d[duplicate_id]",
+        "tests.test_architecture.test_invalid_scene_d[duplicate_slot]",
+        "tests.test_architecture.test_invalid_scene_d[thickness]",
+        "tests.test_architecture.test_invalid_scene_d[perimeter]",
+        "tests.test_architecture.test_invalid_scene_d[wall_intersection]",
+        "tests.test_architecture.test_invalid_scene_d[hidden_space]",
+        "tests.test_architecture.test_invalid_scene_d[floating_slab]",
+        "tests.test_architecture.test_invalid_scene_d[wrong_type]",
+        "tests.test_architecture.test_invalid_scene_d[roof_missing]",
+        "tests.test_architecture.test_invalid_scene_d[inward_space]",
+        "tests.test_architecture.test_wall_contract_invalid[no_end_pier]",
+        "tests.test_architecture.test_wall_contract_invalid[no_header]",
+        "tests.test_architecture.test_wall_contract_invalid[door_sill]",
+        "tests.test_architecture.test_wall_contract_invalid[touching_openings]",
+        "tests.test_architecture.test_wall_contract_invalid[fractional_count]",
+        "tests.test_architecture.test_wall_contract_invalid[negative_thickness]",
+        "tests.test_architecture.test_architectural_profile_preserves_legacy_profiles",
+        "tests.test_architecture.test_manifest_pins_include_pure_contract_and_support",
+        "tests.test_architecture.test_layout_rejects_unsupported_room_counts[0]",
+        "tests.test_architecture.test_layout_rejects_unsupported_room_counts[4]",
+        "tests.test_architecture.test_layout_rejects_unsupported_room_counts[1.5]",
+        "tests.test_architecture.test_wall_material_slots_are_explicit[0]",
+        "tests.test_architecture.test_wall_material_slots_are_explicit[1]",
+        "tests.test_architecture.test_wall_material_slots_are_explicit[2]",
+        "tests.test_architecture.test_wall_material_slots_are_explicit[3]",
+        "tests.test_architecture.test_architectural_domain_evidence_is_required_and_not_visual_evidence",
+        "tests.test_architecture.test_binding_syntax_cache_uses_exact_source_bytes"
+      ],
+      "sha256": "f58915087ac48a1c8b768784cde8403ed8e1e0a4fdb93d3463676c55299b209a"
+    }
+  },
+  "validation_status": "validated",
+  "validator": "architecture.validate",
+  "version": "1.0.0"
+}

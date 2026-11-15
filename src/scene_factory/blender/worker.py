@@ -89,7 +89,7 @@ def execute(request, out):
         if action == "validate":
             return {**metadata, **validation, "reopened": True}
         selected = render(out / "preview.png", request["device"], request["resolution"], request["samples"],
-                          view_direction=request.get('view_direction'))
+                          view_direction=request.get('view_direction'),hide_groups=request.get('hide_groups',[]))
         return {**metadata, **validation, "render": selected, "preview": "preview.png",
                 "resolution": request["resolution"], "samples": request["samples"]}
     raise ValueError(f"Unknown worker action: {action}")

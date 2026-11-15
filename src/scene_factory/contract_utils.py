@@ -8,7 +8,7 @@ from .spec import SpecError, fields, number
 
 VERSION = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+$")
 DIGEST = re.compile(r"^[0-9a-f]{64}$")
-TYPES = ("Length", "Dimensions")
+TYPES = ("Length", "Dimensions", "WallRef", "OpeningRef", "SpaceRef")
 
 
 def canonical_digest(value):
@@ -106,7 +106,7 @@ def evaluate(expr, parameters):
 def typed_value(value, kind, path):
     if kind == "Length":
         return number(value, path, 0, 1e6)
-    if kind == "Dimensions" and isinstance(value, list) and len(value) == 3:
+    if kind in ("Dimensions", "WallRef", "OpeningRef", "SpaceRef") and isinstance(value, list) and len(value) == 3:
         return [number(v, path, .000001, 1e6) for v in value]
     raise SpecError(f"{path}: unsupported/mismatched typed value {kind}")
 

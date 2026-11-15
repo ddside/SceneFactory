@@ -104,7 +104,8 @@ def compile_scene(source, registry=None, source_sha256=None, runtime_profile=Non
             if output is None or output["type"] != declared["type"]:
                 raise SpecError(f"{nid}.inputs.{port_name}: missing output/type mismatch")
             value = typed_value(output["value"], output["type"], f"{nid}.{port_name}")
-            effective["location"][2] += value
+            if declared["target"] == "elevation":
+                effective["location"][2] += value
             bindings[port_name] = {**binding, **output, "target": declared["target"]}
         effective = normalize_transform(effective, nid + ".resolved_transform")
         local = trs(effective)
@@ -124,6 +125,15 @@ def compile_scene(source, registry=None, source_sha256=None, runtime_profile=Non
             node["expected_artifacts"].append(artifact)
             expected.append(artifact)
         resolved[nid] = node
+    # Reviewed pure skill contracts own cross-node architectural semantics.
+    # Generic compiler/validator never branch on a particular shape.
+    import importlib
+    for nid in order:
+        node = resolved[nid]
+        manifest = registry.get(node['skill']['skill_id'], node['skill']['version'], allow_candidates)
+        if 'contract' in manifest:
+            binding = registry.binding(manifest['contract'])
+            getattr(importlib.import_module(binding['module']), binding['function'])(node, resolved)
     runtime = {"blender_series": "4.5", "worker_python_series": "3.11", **(runtime_profile or {})}
     if (set(runtime) - {"blender_series","worker_python_series","implementation_sha256","application_python","os","architecture"}
         or any(not isinstance(v,str) or not v for v in runtime.values())):

@@ -54,7 +54,8 @@ Ask questions only to avoid materially incorrect or destructive changes.
   assumptions; actually view supplied images before marking them viewed. Record
   inferred dimensions, uncertainty and unsupported features honestly.
 - Use `generate PROJECT --proposal FILE` or `edit PROJECT --proposal FILE`.
-  Normally choose basic_scene. Preserve unrelated IDs/seeds. Managed projects use
+  Normally choose basic_scene; use architectural for modular interior buildings.
+  Preserve unrelated IDs/seeds. Managed projects use
   the working Revision snapshot; never edit snapshots, BuildPlan or the legacy
   root scene.json to change a managed scene.
 - Read quality/presentation. Actually open every attempt preview before writing
@@ -146,3 +147,26 @@ including the existing 150 cases and new workflow tests. Synthetic unit fixtures
 are labeled test-only; they are never evidence of real Blender or image review.
 Keep runtime outputs under ignored artifacts/; only intentional, documented
 example input fixtures belong in Git.
+
+## Phase 3A modular architecture
+- Read docs/phase3a.md for geometry/coordinate/quality contracts. Reuse the nine
+  arch_*@1.0.0 skills; preserve the six legacy skill meanings and version pins.
+- Use architecture_layout.building_scene for a supported 1..3-room orthogonal
+  layout or author explicit SceneSpec nodes. Height means clear height; document
+  wall thickness, interior dimensions, corridor width and roof/slab assumptions.
+- Keep wall/opening/fitting/room/corridor identities separate. Openings use stable
+  wall slots (at most four per wall). A fitting edit must synchronize its opening
+  and the wall slot; enlarge_window provides this focused three-node edit.
+- WallRef/OpeningRef/SpaceRef are identity-bearing typed bindings with local
+  dimension vectors; reference targets do not implicitly change transforms.
+- Keep pure cross-node checks in the reviewed architectural contract binding and
+  actual mesh checks in the skill validator. Include contract/support hashes in
+  evidence. test_scenes supplies real registration fixtures for required ports.
+- Choose architectural profile for architectural acceptance. Actual reopened
+  domain evidence and actual review of overview/top/interior are required. A
+  basic_scene pass is not architectural assurance. Do not claim physics/code
+  compliance, photorealism or transparent glazing from these simplified models.
+- Preview cover/south-wall hiding is temporary and must not alter saved geometry.
+  Never delete roofs/walls from the authoritative Spec to expose an interior.
+- Run existing 197 regressions plus new architecture tests with both Blender test
+  variables. Explicitly retain Ubuntu/CUDA/OptiX as unverified in this phase.

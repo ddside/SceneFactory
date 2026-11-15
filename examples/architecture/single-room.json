@@ -1,0 +1,409 @@
+{
+  "schema_version": 2,
+  "scene_id": "modular-building",
+  "seed": 42,
+  "units": "m",
+  "nodes": [
+    {
+      "node_id": "building.main",
+      "skill": {
+        "skill_id": "arch_building",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "width": 8,
+        "depth": 6,
+        "height": 3,
+        "wall_thickness": 0.2,
+        "room_count": 1,
+        "corridor_width": 0
+      },
+      "parent_id": null,
+      "transform": {
+        "location": [
+          0,
+          0,
+          0
+        ],
+        "rotation_degrees": [
+          0,
+          0,
+          0
+        ]
+      },
+      "inputs": {},
+      "depends_on": []
+    },
+    {
+      "node_id": "building.main.wall.south",
+      "skill": {
+        "skill_id": "arch_wall",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "length": 8,
+        "height": 3,
+        "thickness": 0.2,
+        "wall_kind": 1,
+        "side": 1,
+        "opening_count": 1,
+        "o1_width": 1,
+        "o1_height": 2.2,
+        "o1_sill": 0,
+        "o1_offset": 0,
+        "o1_kind": 1
+      },
+      "parent_id": "building.main",
+      "transform": {
+        "location": [
+          0,
+          -2.9,
+          0
+        ],
+        "rotation_degrees": [
+          0,
+          0,
+          0
+        ]
+      },
+      "inputs": {},
+      "depends_on": []
+    },
+    {
+      "node_id": "building.main.opening.entrance",
+      "skill": {
+        "skill_id": "arch_opening",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "slot": 1,
+        "width": 1,
+        "height": 2.2,
+        "sill": 0,
+        "offset": 0,
+        "kind": 1,
+        "depth": 0.2
+      },
+      "parent_id": "building.main.wall.south",
+      "transform": {
+        "location": [
+          0,
+          0,
+          0
+        ],
+        "rotation_degrees": [
+          0,
+          0,
+          0
+        ]
+      },
+      "inputs": {
+        "wall": {
+          "node_id": "building.main.wall.south",
+          "output": "wall"
+        }
+      },
+      "depends_on": []
+    },
+    {
+      "node_id": "building.main.door.entrance",
+      "skill": {
+        "skill_id": "arch_door",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "width": 1,
+        "height": 2.2,
+        "depth": 0.2
+      },
+      "parent_id": "building.main.opening.entrance",
+      "transform": {
+        "location": [
+          0,
+          0,
+          0
+        ],
+        "rotation_degrees": [
+          0,
+          0,
+          0
+        ]
+      },
+      "inputs": {
+        "opening": {
+          "node_id": "building.main.opening.entrance",
+          "output": "opening"
+        }
+      },
+      "depends_on": []
+    },
+    {
+      "node_id": "building.main.wall.north",
+      "skill": {
+        "skill_id": "arch_wall",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "length": 8,
+        "height": 3,
+        "thickness": 0.2,
+        "wall_kind": 1,
+        "side": 2,
+        "opening_count": 2,
+        "o1_width": 1.2,
+        "o1_height": 1.2,
+        "o1_sill": 1,
+        "o1_offset": -2.0,
+        "o1_kind": 2,
+        "o2_width": 1.2,
+        "o2_height": 1.2,
+        "o2_sill": 1,
+        "o2_offset": 2.0,
+        "o2_kind": 2
+      },
+      "parent_id": "building.main",
+      "transform": {
+        "location": [
+          0,
+          2.9,
+          0
+        ],
+        "rotation_degrees": [
+          0,
+          0,
+          0
+        ]
+      },
+      "inputs": {},
+      "depends_on": []
+    },
+    {
+      "node_id": "building.main.opening.window.room01a",
+      "skill": {
+        "skill_id": "arch_opening",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "slot": 1,
+        "width": 1.2,
+        "height": 1.2,
+        "sill": 1,
+        "offset": -2.0,
+        "kind": 2,
+        "depth": 0.2
+      },
+      "parent_id": "building.main.wall.north",
+      "transform": {
+        "location": [
+          -2.0,
+          0,
+          1
+        ],
+        "rotation_degrees": [
+          0,
+          0,
+          0
+        ]
+      },
+      "inputs": {
+        "wall": {
+          "node_id": "building.main.wall.north",
+          "output": "wall"
+        }
+      },
+      "depends_on": []
+    },
+    {
+      "node_id": "building.main.window.room01a",
+      "skill": {
+        "skill_id": "arch_window",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "width": 1.2,
+        "height": 1.2,
+        "depth": 0.2
+      },
+      "parent_id": "building.main.opening.window.room01a",
+      "transform": {
+        "location": [
+          0,
+          0,
+          0
+        ],
+        "rotation_degrees": [
+          0,
+          0,
+          0
+        ]
+      },
+      "inputs": {
+        "opening": {
+          "node_id": "building.main.opening.window.room01a",
+          "output": "opening"
+        }
+      },
+      "depends_on": []
+    },
+    {
+      "node_id": "building.main.opening.window.room01b",
+      "skill": {
+        "skill_id": "arch_opening",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "slot": 2,
+        "width": 1.2,
+        "height": 1.2,
+        "sill": 1,
+        "offset": 2.0,
+        "kind": 2,
+        "depth": 0.2
+      },
+      "parent_id": "building.main.wall.north",
+      "transform": {
+        "location": [
+          2.0,
+          0,
+          1
+        ],
+        "rotation_degrees": [
+          0,
+          0,
+          0
+        ]
+      },
+      "inputs": {
+        "wall": {
+          "node_id": "building.main.wall.north",
+          "output": "wall"
+        }
+      },
+      "depends_on": []
+    },
+    {
+      "node_id": "building.main.window.room01b",
+      "skill": {
+        "skill_id": "arch_window",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "width": 1.2,
+        "height": 1.2,
+        "depth": 0.2
+      },
+      "parent_id": "building.main.opening.window.room01b",
+      "transform": {
+        "location": [
+          0,
+          0,
+          0
+        ],
+        "rotation_degrees": [
+          0,
+          0,
+          0
+        ]
+      },
+      "inputs": {
+        "opening": {
+          "node_id": "building.main.opening.window.room01b",
+          "output": "opening"
+        }
+      },
+      "depends_on": []
+    },
+    {
+      "node_id": "building.main.wall.west",
+      "skill": {
+        "skill_id": "arch_wall",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "length": 5.6,
+        "height": 3,
+        "thickness": 0.2,
+        "wall_kind": 1,
+        "side": 3,
+        "opening_count": 0
+      },
+      "parent_id": "building.main",
+      "transform": {
+        "location": [
+          -3.9,
+          0,
+          0
+        ],
+        "rotation_degrees": [
+          0,
+          0,
+          90
+        ]
+      },
+      "inputs": {},
+      "depends_on": []
+    },
+    {
+      "node_id": "building.main.wall.east",
+      "skill": {
+        "skill_id": "arch_wall",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "length": 5.6,
+        "height": 3,
+        "thickness": 0.2,
+        "wall_kind": 1,
+        "side": 4,
+        "opening_count": 0
+      },
+      "parent_id": "building.main",
+      "transform": {
+        "location": [
+          3.9,
+          0,
+          0
+        ],
+        "rotation_degrees": [
+          0,
+          0,
+          90
+        ]
+      },
+      "inputs": {},
+      "depends_on": []
+    },
+    {
+      "node_id": "building.main.room.01",
+      "skill": {
+        "skill_id": "arch_room",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "width": 7.6,
+        "depth": 5.6,
+        "height": 3
+      },
+      "parent_id": "building.main",
+      "transform": {
+        "location": [
+          0,
+          0,
+          0
+        ],
+        "rotation_degrees": [
+          0,
+          0,
+          0
+        ]
+      },
+      "inputs": {
+        "access": {
+          "node_id": "building.main.opening.entrance",
+          "output": "opening"
+        }
+      },
+      "depends_on": []
+    }
+  ]
+}

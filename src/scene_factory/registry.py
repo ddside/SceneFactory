@@ -1,6 +1,7 @@
 """Data-only skill catalog. Entry points are bound by a reviewed allowlist."""
 import ast
 import copy
+from functools import lru_cache
 from pathlib import Path
 
 from .spec import SpecError, fields, identifier, read_json
@@ -9,6 +10,14 @@ from .contract_utils import (TYPES, canonical_digest, check_digest, check_expres
 
 CATALOG = Path(__file__).parent / "skills"
 PACKAGE = Path(__file__).parent
+
+
+@lru_cache(maxsize=32)
+def defined_functions(source):
+    # Cache syntax analysis by exact source bytes, never by path/mtime. Every
+    # binding still reads/hashes current source and all reviewed support files.
+    tree = ast.parse(source, feature_version=(3, 11))
+    return frozenset(node.name for node in tree.body if isinstance(node, ast.FunctionDef))
 
 
 def file_hash(path):
@@ -54,15 +63,14 @@ class Registry:
         fields(entry, "entry point", ("module", "function"), ("support_files",))
         module, function = entry["module"], entry["function"]
         prefix = "scene_factory.blender.skills."
-        if (not isinstance(module, str) or not module.startswith(prefix)
+        if (not isinstance(module, str) or not (module.startswith(prefix) or module == "scene_factory.architecture_contracts")
             or not all(x.isidentifier() for x in module.split("."))
             or not isinstance(function, str) or not function.isidentifier()):
-            raise SpecError("entry point: only explicit Blender skill package bindings are allowed")
+            raise SpecError("entry point: only reviewed Blender skills and pure architectural contract bindings are allowed")
         path = PACKAGE.parent.joinpath(*module.split(".")).with_suffix(".py")
         if not path.is_file():
             raise SpecError(f"entry point: implementation file missing {module}")
-        tree = ast.parse(path.read_text(encoding="utf-8"), feature_version=(3, 11))
-        if not any(isinstance(node, ast.FunctionDef) and node.name == function for node in tree.body):
+        if function not in defined_functions(path.read_bytes()):
             raise SpecError(f"entry point: function not defined {module}:{function}")
         support = {}
         supporting = entry.get("support_files", [])
@@ -79,7 +87,7 @@ class Registry:
         required = ("schema_version", "skill_id", "version", "name", "description", "category", "tags",
                     "kind", "parameter_schema", "inputs", "outputs", "artifacts", "implementation",
                     "validator", "dependencies", "blender_compatibility", "examples", "validation_status")
-        fields(value, "SkillManifest", required, ("recipe", "validation_evidence"))
+        fields(value, "SkillManifest", required, ("recipe", "validation_evidence", "contract", "test_scenes"))
         if type(value["schema_version"]) is not int or value["schema_version"] != 1:
             raise SpecError("SkillManifest.schema_version: only 1 supported")
         identifier(value["skill_id"], "skill_id")
@@ -105,8 +113,8 @@ class Registry:
                 if port["type"] not in TYPES:
                     raise SpecError(f"{category}.{name}: unsupported type")
                 if category == "inputs":
-                    if type(port["required"]) is not bool or port["target"] != "elevation" or port["type"] != "Length":
-                        raise SpecError(f"inputs.{name}: only Length -> local Z elevation binding supported")
+                    if type(port["required"]) is not bool or not ((port["target"] == "elevation" and port["type"] == "Length") or (port["target"] == "reference" and port["type"] in ("WallRef", "OpeningRef", "SpaceRef"))):
+                        raise SpecError(f"inputs.{name}: expected Length/elevation or architectural typed reference binding")
                 else:
                     check_expression(port["value"], value["parameter_schema"], f"outputs.{name}")
         if not isinstance(value["artifacts"], list) or not value["artifacts"]:
@@ -118,6 +126,12 @@ class Registry:
             if artifact["role"] in roles or artifact["type"] not in ("Mesh", "Object"):
                 raise SpecError("artifacts: duplicate role or unsupported type")
             roles.add(artifact["role"])
+        if "contract" in value:
+            binding = self.binding(value["contract"])
+            if binding["module"] != "scene_factory.architecture_contracts":
+                raise SpecError("contract: only reviewed pure contract bindings allowed")
+        if "test_scenes" in value and (not isinstance(value["test_scenes"], list) or not value["test_scenes"]):
+            raise SpecError("test_scenes: nonempty full SceneSpec fixtures required")
         self.binding(value["implementation"])
         self.binding(value["validator"])
         if value["kind"] == "recipe":
@@ -204,6 +218,7 @@ class Registry:
                 "manifest_sha256": manifest_digest(manifest),
                 "implementation": self.binding(manifest["implementation"]),
                 "validator": self.binding(manifest["validator"]),
+                **({"contract": self.binding(manifest["contract"])} if "contract" in manifest else {}),
                 "dependencies": manifest["dependencies"],
                 "dependency_pins": [self.pin(self.manifests[(d["skill_id"],d["version"])]) for d in manifest["dependencies"]]}
 

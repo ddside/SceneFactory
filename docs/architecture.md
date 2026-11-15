@@ -1,6 +1,17 @@
 # Scene Factory — アーキテクチャと実環境
 
-## 現行のPhase 2B
+## 現行のPhase 3A
+
+[Phase 3A実装記録](phase3a.md)を現行の建築仕様とする。
+Phase 2BのIntent/Revision/Attempt/Quality/accepted境界を維持し、9つのarch_*スキルで
+厚い壁、実開口、建具、床/天井/屋根、1〜3部屋と廊下を生成する。
+壁・開口・建具・自由空間を通常のSceneSpecノードとして明示し、固定slab等だけを
+Recipe展開する。既存building_recipeとそのversion pinは変更しない。
+型付きreferenceとreviewed pure contractを最小追加し、形状固有の検証はスキル側に置く。
+architectural profileは保存・再読込後の建築検査と外観/内部3画像の実閲覧を必須にする。
+高品質PBR・外部アセット・破壊・USD/Isaac Simの実装は後続段階。
+
+## Phase 2Bのワークフロー（維持）
 
 [Phase 2B実装記録](phase2b.md)と[Codex操作手順](codex-workflow.md)を現行仕様とする。
 Codexが自然言語/任意画像を解釈し、SceneIntentとSceneSpec Revisionを作成する。

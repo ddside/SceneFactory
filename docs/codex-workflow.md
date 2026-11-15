@@ -68,3 +68,26 @@ VisualReviewの形式（ID/path/hashはresumeが返す当該Attemptの値を使�
 
 imagesには全preview（現在は2枚）を列挙する。上記は形式のみであり、
 未閲覧のままコピーしてpassedを提出してはならない。不合格はfailedと所見を記録する。
+
+## 内部構造を持つ建物（Phase 3A）
+
+1. `skills list --query architecture`でarch_*スキルを確認する。
+   通常のsolid building_recipeを室内モデルとして流用しない。
+2. 「幅12m、奥行き8m、高さ3m、3室と廊下」ならCodexが
+   `architecture_layout.building_scene(12,8,3,3)`で通常のSceneSpecを作れる。
+   任意の平面図最適化ではなく、1〜3室の直交レイアウトである。
+   高さは有効高さで、屋根上面は天井/屋根厚を足す。窓寸法/廊下幅/配置を
+   assumptionsへ記録し、ユーザー明示条件を制約として保存する。
+3. `examples/architecture/three-rooms-request.json`を形式例にproposalを作り、
+   requested_quality_profile=architecturalでgenerateする。
+4. domainの実Blender結果を読み、overview/top/interiorの全3画像を開く。
+   topは天井/屋根、interiorはさらに南外壁をpreviewだけで非表示にしている。
+   部屋の区別、廊下、ドア先の接続、窓、床、外観の天井/屋根を確認する。
+   写実性やガラス透過を検証したとは呼ばない。
+5. 「2番目の部屋の窓を大きく」ではresumeから部屋と窓を特定し、例えば
+   `architecture_layout.enlarge_window(spec,'building.main.window.room02',1.8,1.4)`
+   を使う。対象のwindow/opening/wall slotの3箇所だけを更新し、新Revisionへedit。
+   stable IDとseedを保ち、再び実構造検査と全3画像の閲覧を行う。
+
+壁は最大4矩形開口、レイアウトは矩形/直交、窓glassは簡易不透明部材。
+未対応の曲面建築・任意間取り・破壊を代替形状で成功扱いしない。

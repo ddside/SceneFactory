@@ -1,0 +1,355 @@
+{
+  "artifacts": [
+    {
+      "role": "geometry",
+      "type": "Mesh"
+    }
+  ],
+  "blender_compatibility": {
+    "python_series": "3.11",
+    "series": "4.5"
+  },
+  "category": "architecture",
+  "contract": "architecture.check_wall",
+  "dependencies": [],
+  "description": "Orthogonal modular architecture: arch_wall",
+  "examples": [
+    {},
+    {
+      "o1_height": 2.2,
+      "o1_offset": -2,
+      "o1_width": 1,
+      "o2_height": 1.2,
+      "o2_kind": 2,
+      "o2_offset": 1,
+      "o2_sill": 1,
+      "o2_width": 1.5,
+      "opening_count": 2
+    }
+  ],
+  "implementation": "architecture.generate",
+  "inputs": {},
+  "kind": "leaf",
+  "name": "arch wall",
+  "outputs": {
+    "wall": {
+      "type": "WallRef",
+      "value": [
+        {
+          "parameter": "length"
+        },
+        {
+          "parameter": "thickness"
+        },
+        {
+          "parameter": "height"
+        }
+      ]
+    }
+  },
+  "parameter_schema": {
+    "height": {
+      "default": 3,
+      "maximum": 100,
+      "minimum": 0.5,
+      "type": "number"
+    },
+    "length": {
+      "default": 8,
+      "maximum": 100,
+      "minimum": 0.5,
+      "type": "number"
+    },
+    "material_slot": {
+      "default": 0,
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "o1_height": {
+      "default": 2,
+      "maximum": 20,
+      "minimum": 0.1,
+      "type": "number"
+    },
+    "o1_kind": {
+      "default": 1,
+      "maximum": 2,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "o1_offset": {
+      "default": 0,
+      "maximum": 100,
+      "minimum": -100,
+      "type": "number"
+    },
+    "o1_sill": {
+      "default": 0,
+      "maximum": 20,
+      "minimum": 0,
+      "type": "number"
+    },
+    "o1_width": {
+      "default": 1,
+      "maximum": 20,
+      "minimum": 0.1,
+      "type": "number"
+    },
+    "o2_height": {
+      "default": 2,
+      "maximum": 20,
+      "minimum": 0.1,
+      "type": "number"
+    },
+    "o2_kind": {
+      "default": 1,
+      "maximum": 2,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "o2_offset": {
+      "default": 0,
+      "maximum": 100,
+      "minimum": -100,
+      "type": "number"
+    },
+    "o2_sill": {
+      "default": 0,
+      "maximum": 20,
+      "minimum": 0,
+      "type": "number"
+    },
+    "o2_width": {
+      "default": 1,
+      "maximum": 20,
+      "minimum": 0.1,
+      "type": "number"
+    },
+    "o3_height": {
+      "default": 2,
+      "maximum": 20,
+      "minimum": 0.1,
+      "type": "number"
+    },
+    "o3_kind": {
+      "default": 1,
+      "maximum": 2,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "o3_offset": {
+      "default": 0,
+      "maximum": 100,
+      "minimum": -100,
+      "type": "number"
+    },
+    "o3_sill": {
+      "default": 0,
+      "maximum": 20,
+      "minimum": 0,
+      "type": "number"
+    },
+    "o3_width": {
+      "default": 1,
+      "maximum": 20,
+      "minimum": 0.1,
+      "type": "number"
+    },
+    "o4_height": {
+      "default": 2,
+      "maximum": 20,
+      "minimum": 0.1,
+      "type": "number"
+    },
+    "o4_kind": {
+      "default": 1,
+      "maximum": 2,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "o4_offset": {
+      "default": 0,
+      "maximum": 100,
+      "minimum": -100,
+      "type": "number"
+    },
+    "o4_sill": {
+      "default": 0,
+      "maximum": 20,
+      "minimum": 0,
+      "type": "number"
+    },
+    "o4_width": {
+      "default": 1,
+      "maximum": 20,
+      "minimum": 0.1,
+      "type": "number"
+    },
+    "opening_count": {
+      "default": 0,
+      "maximum": 4,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "side": {
+      "default": 0,
+      "maximum": 4,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "thickness": {
+      "default": 0.2,
+      "maximum": 1,
+      "minimum": 0.05,
+      "type": "number"
+    },
+    "wall_kind": {
+      "default": 1,
+      "maximum": 3,
+      "minimum": 1,
+      "type": "integer"
+    }
+  },
+  "schema_version": 1,
+  "skill_id": "arch_wall",
+  "tags": [
+    "building",
+    "interior",
+    "modular",
+    "arch_wall"
+  ],
+  "validation_evidence": {
+    "pin": {
+      "contract": {
+        "function": "check_wall",
+        "module": "scene_factory.architecture_contracts",
+        "sha256": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+        "support_sha256": {
+          "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+        }
+      },
+      "dependencies": [],
+      "dependency_pins": [],
+      "implementation": {
+        "function": "generate",
+        "module": "scene_factory.blender.skills.architecture",
+        "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+        "support_sha256": {
+          "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+          "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+          "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+        }
+      },
+      "manifest_sha256": "d6ebebef1e7e399ba5f118cc22850ca9e293f6a4aa8e0728bac2b12d6ca2f34e",
+      "skill_id": "arch_wall",
+      "validator": {
+        "function": "validate",
+        "module": "scene_factory.blender.skills.architecture",
+        "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+        "support_sha256": {
+          "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
+          "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+          "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+        }
+      },
+      "version": "1.0.0"
+    },
+    "runtime": {
+      "application_python": "3.12.13",
+      "architecture": "arm64",
+      "blender": "4.5.15 LTS",
+      "blender_python": "3.11.15 (main, Apr 25 2025, 12:39:20) [Clang 15.0.0 (clang-1500.0.40.1)]",
+      "implementation_sha256": "5c596a1f9c0a092eb04d8dd366bec558567e61fada61a7c87cf45c380e3ebda3",
+      "os": "Darwin"
+    },
+    "status": "passed",
+    "tests": [
+      {
+        "checks": [
+          "compile",
+          "generate",
+          "skill-validator",
+          "reopen",
+          "artifact-contract"
+        ],
+        "example": 0,
+        "metrics": {
+          "build_reopen_seconds": 2.95,
+          "face_count": 6,
+          "mesh_count": 1,
+          "vertex_count": 8
+        },
+        "plan_digest": "40bbc5ab63e944757cc67e6ee94ac9a71963a3ff6135b78fb969e49169cb29fc",
+        "structure_sha256": "d2724226a28c1d8b08974edc8e11a4f6d01092efcd9ba0729422f1d2f09ccd52"
+      },
+      {
+        "checks": [
+          "compile",
+          "generate",
+          "skill-validator",
+          "reopen",
+          "artifact-contract"
+        ],
+        "example": 1,
+        "metrics": {
+          "build_reopen_seconds": 2.249,
+          "face_count": 48,
+          "mesh_count": 1,
+          "vertex_count": 48
+        },
+        "plan_digest": "e03394531d2cede000055d0822a06cb78282c4cb30f938132b8a68a3d3eb1b1d",
+        "structure_sha256": "ccde25158dbf86081601e281dbdbda4868fcc27a122de474cd6c3757295c8ecc"
+      }
+    ],
+    "unit_tests": {
+      "case_count": 40,
+      "cases": [
+        "tests.test_architecture.test_layout_recipe_dimensions_references_and_determinism[1]",
+        "tests.test_architecture.test_layout_recipe_dimensions_references_and_determinism[2]",
+        "tests.test_architecture.test_layout_recipe_dimensions_references_and_determinism[3]",
+        "tests.test_architecture.test_window_edit_only_three_nodes_preserves_all_seeds_and_artifact_ids",
+        "tests.test_architecture.test_invalid_scene_d[big_window]",
+        "tests.test_architecture.test_invalid_scene_d[outside_door]",
+        "tests.test_architecture.test_invalid_scene_d[overlap]",
+        "tests.test_architecture.test_invalid_scene_d[negative_wall]",
+        "tests.test_architecture.test_invalid_scene_d[negative_floor]",
+        "tests.test_architecture.test_invalid_scene_d[bad_parent]",
+        "tests.test_architecture.test_invalid_scene_d[missing_wallref]",
+        "tests.test_architecture.test_invalid_scene_d[fitting_mismatch]",
+        "tests.test_architecture.test_invalid_scene_d[unconnected_room]",
+        "tests.test_architecture.test_invalid_scene_d[duplicate_id]",
+        "tests.test_architecture.test_invalid_scene_d[duplicate_slot]",
+        "tests.test_architecture.test_invalid_scene_d[thickness]",
+        "tests.test_architecture.test_invalid_scene_d[perimeter]",
+        "tests.test_architecture.test_invalid_scene_d[wall_intersection]",
+        "tests.test_architecture.test_invalid_scene_d[hidden_space]",
+        "tests.test_architecture.test_invalid_scene_d[floating_slab]",
+        "tests.test_architecture.test_invalid_scene_d[wrong_type]",
+        "tests.test_architecture.test_invalid_scene_d[roof_missing]",
+        "tests.test_architecture.test_invalid_scene_d[inward_space]",
+        "tests.test_architecture.test_wall_contract_invalid[no_end_pier]",
+        "tests.test_architecture.test_wall_contract_invalid[no_header]",
+        "tests.test_architecture.test_wall_contract_invalid[door_sill]",
+        "tests.test_architecture.test_wall_contract_invalid[touching_openings]",
+        "tests.test_architecture.test_wall_contract_invalid[fractional_count]",
+        "tests.test_architecture.test_wall_contract_invalid[negative_thickness]",
+        "tests.test_architecture.test_architectural_profile_preserves_legacy_profiles",
+        "tests.test_architecture.test_manifest_pins_include_pure_contract_and_support",
+        "tests.test_architecture.test_layout_rejects_unsupported_room_counts[0]",
+        "tests.test_architecture.test_layout_rejects_unsupported_room_counts[4]",
+        "tests.test_architecture.test_layout_rejects_unsupported_room_counts[1.5]",
+        "tests.test_architecture.test_wall_material_slots_are_explicit[0]",
+        "tests.test_architecture.test_wall_material_slots_are_explicit[1]",
+        "tests.test_architecture.test_wall_material_slots_are_explicit[2]",
+        "tests.test_architecture.test_wall_material_slots_are_explicit[3]",
+        "tests.test_architecture.test_architectural_domain_evidence_is_required_and_not_visual_evidence",
+        "tests.test_architecture.test_binding_syntax_cache_uses_exact_source_bytes"
+      ],
+      "sha256": "f58915087ac48a1c8b768784cde8403ed8e1e0a4fdb93d3463676c55299b209a"
+    }
+  },
+  "validation_status": "validated",
+  "validator": "architecture.validate",
+  "version": "1.0.0"
+}

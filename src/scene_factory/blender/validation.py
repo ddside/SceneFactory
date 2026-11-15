@@ -102,11 +102,13 @@ def validate_scene(plan, registry, domain_validators=()):
                           "bounds": [[round(v,6) for v in low], [round(v,6) for v in high]],
                           "local_matrix": rounded_matrix(obj.matrix_basis), "world_matrix": rounded_matrix(obj.matrix_world)})
     context = {"plan": plan, "primary_objects": primary}
+    skill_results = []
     for node in plan["nodes"]:
         manifest = registry.get(node["skill"]["skill_id"], node["skill"]["version"], plan["validation_candidates"])
         objects = {a["local_role"]: actual[a["artifact_id"]] for a in node["expected_artifacts"]}
-        callback(registry, manifest["validator"])(node, objects, context)
-    domain_results = [validator(plan, context) for validator in domain_validators]
+        result = callback(registry, manifest["validator"])(node, objects, context)
+        if result is not None: skill_results.append(result)
+    domain_results = skill_results + [validator(plan, context) for validator in domain_validators]
     mapping = {}
     for a in inventory:
         mapping.setdefault(a["source_node_id"], []).append(a["artifact_id"])

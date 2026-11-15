@@ -9,6 +9,11 @@ Rollback、制限付き修復、ファイルからの再開に対応します。
 [操作手順](docs/codex-workflow.md)と[Phase 2Bの範囲・検証](docs/phase2b.md)を参照してください。
 高度な画像→3D復元や写実的形状生成は未実装です。
 
+モジュラー建築は厚い壁・実際の開口・ドア/窓・床/天井・1〜3部屋と廊下に対応します。
+例えば「幅12m、奥行き8m、高さ3m、3部屋と廊下、各室のドアと外壁の窓」と
+Codexへ指示できます。建築ではarchitectural profileを使い、外観・上面・室内斜視を
+実閲覧して受理します。詳細と制限は[Phase 3A](docs/phase3a.md)を参照してください。
+
 ```sh
 # Codexが解釈済みproposalを作成して実行する例
 uv run --locked scene-factory generate artifacts/example --proposal examples/workflows/natural-request.json
@@ -42,7 +47,7 @@ generate/edit管理のプロジェクトでは不変Revisionが正本で、resum
 新proposalを作ります。snapshotや派生Planを直接編集しません。
 上記の既定initは従来のv1です。
 v2では論理ノード・空間的な親子関係・typed inputと依存DAGを記述できます。
-4直方体スキルに加え、円柱と複数部材のRecipeを利用できます。
+4直方体スキルに加え、円柱と複数部材のRecipe、9つの建築スキルを利用できます。
 いずれも契約実証用の小さな生成器で、写実的建築物の生成器ではありません。
 
 ```sh
