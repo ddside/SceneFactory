@@ -19,7 +19,8 @@ VLM, robot control and exploration scenarios are outside scope.
   directly or recreate the obsolete Python 3.14 environment.
 - Blender installation/execution is outside uv management. Keep Blender 4.5 LTS
   built-in Python 3.11 unchanged; select its executable via configuration or
-  `BLENDER_EXECUTABLE`. Ubuntu compatibility needs real-machine validation.
+  `SCENE_FACTORY_BLENDER` / `--blender-path`. `BLENDER_EXECUTABLE` is only used by
+  the legacy Phase 0 test. Ubuntu compatibility needs real-machine validation.
 - The validated, versioned Scene Specification is the source of truth.
 - Reuse deterministic generators; extend the library when needed, rather than
   generating unrelated one-off scripts. Record seeds and configuration.
@@ -40,6 +41,20 @@ VLM, robot control and exploration scenarios are outside scope.
 5. Render previews when relevant and inspect accessible actual outputs.
 6. Report changes, successes, failures and unverified requirements.
 Ask questions only to avoid materially incorrect or destructive changes.
+
+## Codex chat workflow (Phase 1)
+1. Inspect `scene.json`, `scene-factory.toml`, and `uv run --locked scene-factory status PROJECT`.
+2. Translate natural language into a Scene Specification change using existing
+   generators. For an unsupported generator, assess and implement/test it before
+   running it; never execute an invented generator name.
+3. Validate the specification with `scene_factory.spec.load_spec` through
+   `uv run --locked python`, or let `build` perform validation before Blender starts.
+4. Run `uv run --locked scene-factory build PROJECT` and inspect result/log files.
+5. Run `preview PROJECT` when relevant, open its actual PNG, then `validate PROJECT`.
+6. Report implementation, generated outputs, errors and unverified requirements.
+   Use Codex chat itself; do not add a separate chat UI or Codex API integration.
+7. Preserve previous successful builds. Phase 1 always rebuilds the full scene;
+   incremental regeneration and complex continuing edits belong to later phases.
 
 ## Implementation and quality
 - After code changes, run relevant checks and commit the completed changes.
@@ -66,3 +81,5 @@ artifacts/environment (original run) and artifacts/environment-python312-*
 `uv run --locked pytest` skips Blender without BLENDER_EXECUTABLE; a skipped
 integration test is not proof of Blender compatibility. The current Metal
 integration probe is macOS-specific and skips on other platforms.
+Phase 1: set `SCENE_FACTORY_TEST_BLENDER` to run the common CPU integration tests
+on macOS or Ubuntu. See docs/phase1.md for commands and acceptance evidence.

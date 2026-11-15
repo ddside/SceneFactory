@@ -1,6 +1,6 @@
 [project]
 name = "scene-factory"
-version = "0.0.0"
+version = "0.1.0"
 description = "Procedural 3D environments with Python and Blender CLI"
 requires-python = ">=3.12,<3.13"
 dependencies = []
@@ -8,8 +8,12 @@ dependencies = []
 [dependency-groups]
 dev = ["pytest>=8,<10"]
 
-[tool.uv]
-package = false
+[project.scripts]
+scene-factory = "scene_factory.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.11.26,<0.12"]
+build-backend = "uv_build"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
