@@ -16,7 +16,7 @@ VLM, robot control and exploration scenarios are outside scope.
   Manage runtime dependencies with `uv add` and test dependencies with
   `uv add --dev`. Track `pyproject.toml`, `.python-version` and `uv.lock` in Git.
 - Never embed OS-specific application Python paths in code. Do not use pip
-  directly or reuse the archived Python 3.14 environment.
+  directly or recreate the obsolete Python 3.14 environment.
 - Blender installation/execution is outside uv management. Keep Blender 4.5 LTS
   built-in Python 3.11 unchanged; select its executable via configuration or
   `BLENDER_EXECUTABLE`. Ubuntu compatibility needs real-machine validation.

@@ -24,14 +24,14 @@ uv lock --check
 依存追加は`uv add <package>`、テスト用は`uv add --dev <package>`を使う。
 `pyproject.toml`、`.python-version`、`uv.lock`を合わせてGit管理する。
 本作業ではGit未初期化だったため初期化してファイルをステージした。
-Phase 0の設定・コードはコミット済み。仮想環境、uvキャッシュ、旧環境はGit対象外。
+Phase 0の設定・コードはコミット済み。仮想環境とuvキャッシュはGit対象外。
 当面は実行時依存なし、devはpytestとその推移的依存。
 パッケージ本体は未実装のため`tool.uv.package=false`とし、配布用ビルド
 バックエンドはまだ導入しない。
 
 整理作業では`.DS_Store`、`.pytest_cache`、ローカル`.uv-cache`、
 `tests/__pycache__`を削除した。いずれも再生成可能な一時ファイル。
-現行`.venv`、移行復元用の`.venv-backups`、検証ログ・USD・画像は保持する。
+現行`.venv`、検証ログ・USD・画像は保持する。
 
 uvの[lock/sync公式仕様](https://docs.astral.sh/uv/concepts/projects/sync/)と
 [依存管理](https://docs.astral.sh/uv/concepts/projects/dependencies/)に従う。
@@ -41,10 +41,10 @@ uvの既定キャッシュはこのセッションのサンドボックスで書
 
 ### 移行・影響確認
 
-旧`.venv`（3.14.7）を`.venv-backups/python314-phase0`へ移動して保存し、
-新しい`.venv`をuvで作成した。既存の成果物は保持し、システム/Homebrewの
-Pythonは変更していない。退避venvは絶対パスを含むため移動先でのactivateや
-実行は保証しない。復元する場合は新環境を別途退避して元の`.venv`位置に戻す。
+移行時は旧`.venv`（3.14.7）を`.venv-backups/python314-phase0`へ退避し、
+新しい`.venv`をuvで作成した。Python 3.12と実Blenderの検証成功後、
+ユーザーの指示により不要になった`.venv-backups`を削除した（約13MB）。
+既存の成果物は保持し、システム/HomebrewのPythonは変更していない。
 
 リポジトリのコードと設定を検索し、旧Pythonパスや3.14固有APIを使用する
 処理は見つからなかった。3.14の記載・絶対パスは初回調査の履歴としてのみ
