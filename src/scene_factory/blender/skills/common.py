@@ -18,5 +18,8 @@ def validate_material(obj):
     output = mat.node_tree.nodes.get("Material Output")
     if shader is None or output is None or not output.inputs["Surface"].is_linked:
         raise ValueError(f"{obj.name}: missing connected Principled material")
+    if obj.get('appearance_bound'):
+        # Exact planned PBR/UV/texture validation is a separate appearance stage.
+        return
     close(shader.inputs["Base Color"].default_value, mat.diffuse_color, "base color")
     close([shader.inputs["Roughness"].default_value], [.8], "roughness")

@@ -14,6 +14,21 @@ Rollback、制限付き修復、ファイルからの再開に対応します。
 Codexへ指示できます。建築ではarchitectural profileを使い、外観・上面・室内斜視を
 実閲覧して受理します。詳細と制限は[Phase 3A](docs/phase3a.md)を参照してください。
 
+PBRと外部アセットはProvider非依存Catalogで管理します。Poly Havenの実Concrete/Wood/
+Tile/AsphaltとglTFモデルを取得・hash固定し、オフライン生成、透明Glass、材質だけの
+編集に対応します。API利用時はPoly Havenを出典表示します。
+[Phase 3Bの範囲・実測・制限](docs/phase3b.md)を参照してください。
+
+```sh
+uv run --locked scene-factory assets search --provider polyhaven --type textures --query concrete
+uv run --locked scene-factory assets fetch --provider polyhaven --id concrete_wall_006 --variant 1k
+uv run --locked scene-factory materials list
+uv run --locked scene-factory final-preview artifacts/example
+```
+
+cacheは既定artifacts/asset-library、変更はSCENE_FACTORY_LIBRARYまたは--library。
+生成時に外部素材を自動で別版へ差し替えません。ライブ試験は通常回帰と分離します。
+
 ```sh
 # Codexが解釈済みproposalを作成して実行する例
 uv run --locked scene-factory generate artifacts/example --proposal examples/workflows/natural-request.json
@@ -81,3 +96,12 @@ SCENE_FACTORY_TEST_BLENDER=/path/to/blender BLENDER_EXECUTABLE=/path/to/blender 
 macOSで実Blenderによる動作を確認済み。Ubuntu 24.04実機とCUDA/OptiX、
 VS Code GUI経由の操作は未検証です。USD生成の本体パイプラインへの組込みと
 Isaac Sim互換性検証は後続Phaseで扱います。
+
+```sh
+# 通常回帰（live API試験を除く）
+SCENE_FACTORY_TEST_BLENDER=/path/to/blender BLENDER_EXECUTABLE=/path/to/blender \
+uv run --locked pytest -q --ignore=tests/test_polyhaven_live.py
+# 明示的な実Poly Haven試験
+SCENE_FACTORY_TEST_POLYHAVEN=1 SCENE_FACTORY_TEST_BLENDER=/path/to/blender \
+uv run --locked pytest -q tests/test_polyhaven_live.py
+```

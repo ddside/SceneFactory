@@ -1,6 +1,16 @@
 # Scene Factory — アーキテクチャと実環境
 
-## 現行のPhase 3A
+## 現行のPhase 3B
+
+[Phase 3B実装記録](phase3b.md)を現行の材質・Asset仕様とする。
+GeometryとAppearance/Texture/Asset/Provider/Previewを分離し、不変Catalogのrefを
+SceneSpec/Planへ固定する。取得だけが明示的なProvider操作で、通常のcompile/buildは
+cacheとbuild内の凍結依存ファイルを使う。acceptedのatomic公開/旧bundle保護を維持。
+Poly Haven、Local、Fakeを共通契約で扱い、glTF importは階層/複数Meshを保持する。
+appearance profileは既存architecturalの意味を変えず、実PBR/UV/resource検査と
+実画像reviewを追加する。USD/Omniverse実行と認証は将来の別Adapter・受入段階。
+
+## Phase 3Aの建築基盤（維持）
 
 [Phase 3A実装記録](phase3a.md)を現行の建築仕様とする。
 Phase 2BのIntent/Revision/Attempt/Quality/accepted境界を維持し、9つのarch_*スキルで

@@ -1,0 +1,101 @@
+{
+  "category": "tile",
+  "display_name": "Dark ceramic tile",
+  "license": {
+    "access_restrictions": [],
+    "attribution_required": false,
+    "authentication_requirements": "none",
+    "commercial_use": "allowed",
+    "license_id": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "provider_terms": "https://github.com/Poly-Haven/Public-API/blob/master/ToS.md; unique User-Agent and live-API source credit required",
+    "redistribution": "allowed",
+    "verification_status": "verified"
+  },
+  "material_id": "ph.tile.dark",
+  "parameters": {
+    "base_color": [
+      0.14,
+      0.16,
+      0.19,
+      1
+    ],
+    "bump_distance": 0.02,
+    "ior": 1.5,
+    "metallic": 0.0,
+    "normal_strength": 1.0,
+    "roughness": 0.6,
+    "transmission": 0.0
+  },
+  "provenance": {
+    "author": "See source asset",
+    "source_asset": {
+      "asset_id": "polyhaven.03fb5833a8c3f02629f52d98",
+      "content_hash": "5420b3470cb6f3fcb1ce1ee86e2ad1c12e4918ed9e6cc8d570d69effa327aebc",
+      "provider_id": "polyhaven",
+      "variant": "1k",
+      "version": "c1fab86f1dc643296d1dede562f64393ab996c0d"
+    },
+    "derived_from": {
+      "content_hash": "50a8ae5121e5b66ac5dfe05f6813fc9ecd9c0ba70e1ab88cf6e1c6df69a84f2d",
+      "material_id": "ph.tile",
+      "version": "1.0.0"
+    }
+  },
+  "provider_id": "polyhaven",
+  "schema_version": 1,
+  "source_asset_id": "polyhaven.03fb5833a8c3f02629f52d98",
+  "surface_state": {},
+  "texture_references": {
+    "base_color": {
+      "asset": {
+        "asset_id": "polyhaven.03fb5833a8c3f02629f52d98",
+        "content_hash": "5420b3470cb6f3fcb1ce1ee86e2ad1c12e4918ed9e6cc8d570d69effa327aebc",
+        "provider_id": "polyhaven",
+        "variant": "1k",
+        "version": "c1fab86f1dc643296d1dede562f64393ab996c0d"
+      },
+      "color_space": "sRGB",
+      "file": "base_color.jpg"
+    },
+    "height": {
+      "asset": {
+        "asset_id": "polyhaven.03fb5833a8c3f02629f52d98",
+        "content_hash": "5420b3470cb6f3fcb1ce1ee86e2ad1c12e4918ed9e6cc8d570d69effa327aebc",
+        "provider_id": "polyhaven",
+        "variant": "1k",
+        "version": "c1fab86f1dc643296d1dede562f64393ab996c0d"
+      },
+      "color_space": "Non-Color",
+      "file": "height.jpg"
+    },
+    "normal": {
+      "asset": {
+        "asset_id": "polyhaven.03fb5833a8c3f02629f52d98",
+        "content_hash": "5420b3470cb6f3fcb1ce1ee86e2ad1c12e4918ed9e6cc8d570d69effa327aebc",
+        "provider_id": "polyhaven",
+        "variant": "1k",
+        "version": "c1fab86f1dc643296d1dede562f64393ab996c0d"
+      },
+      "color_space": "Non-Color",
+      "file": "normal.png"
+    },
+    "roughness": {
+      "asset": {
+        "asset_id": "polyhaven.03fb5833a8c3f02629f52d98",
+        "content_hash": "5420b3470cb6f3fcb1ce1ee86e2ad1c12e4918ed9e6cc8d570d69effa327aebc",
+        "provider_id": "polyhaven",
+        "variant": "1k",
+        "version": "c1fab86f1dc643296d1dede562f64393ab996c0d"
+      },
+      "color_space": "Non-Color",
+      "file": "roughness.jpg"
+    }
+  },
+  "texture_scale": [
+    2,
+    2
+  ],
+  "validation_status": "validated",
+  "version": "1.0.0"
+}

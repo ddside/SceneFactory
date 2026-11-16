@@ -87,6 +87,7 @@ def build_at(project,build_id):
     required = {"scene.json", "scene.blend", "result.json", "validation.json"}
     if metadata.get("manifest_version") == 2:
         required.update(("scene-v2.json", "plan.json", "resolved-scene.json", "skills.lock.json", "artifact-manifest.json", "quality.json"))
+    required.update(metadata.get("resource_files",[]))
     if set(metadata.get("sha256", {})) != required:
         raise ValueError("Build manifest has missing or unexpected artifact entries")
     check_artifacts(directory, metadata["sha256"])
@@ -98,6 +99,10 @@ def build_at(project,build_id):
         if manifest["plan_digest"] != plan["plan_digest"]:
             raise ValueError("ArtifactManifest / BuildPlan digest mismatch")
         validate_report(read_json(directory / "quality.json"))
+        if 'resources' in plan:
+            from .resources import resource_files,verify_resources
+            if sorted(metadata.get('resource_files',[]))!=sorted(resource_files(plan['resources'])):raise ValueError('resource file inventory mismatch')
+            verify_resources(directory,plan['resources'])
     return directory, metadata
 
 
@@ -145,6 +150,10 @@ def run_build(project, executable, options, source_path=None, _locked=False):
                             sha256={name: digest(directory / name) for name in
                                     ("scene.json", "scene.blend", "result.json", "validation.json", "scene-v2.json",
                                      "plan.json", "resolved-scene.json", "skills.lock.json", "artifact-manifest.json", "quality.json")})
+            if 'resources' in plan:
+                from .resources import resource_files
+                metadata['resource_files']=resource_files(plan['resources'])
+                metadata['sha256'].update({name:digest(directory/name) for name in metadata['resource_files']})
             write_json(directory / "build.json", metadata)
             # Only this atomic state update publishes the validated build.
             record_operation(project, "build", directory, "validated", promote=build_id)
@@ -159,7 +168,10 @@ def run_build(project, executable, options, source_path=None, _locked=False):
 
 def prepare_plan(source_path, directory):
     source = read_json(source_path)
-    compiled = compile_scene(source, source_sha256=digest(source_path), runtime_profile={
+    from .resources import resolve_resources,stage_resources
+    resources=resolve_resources(source)
+    stage_resources(directory,resources)
+    compiled = compile_scene(source, resources=resources, source_sha256=digest(source_path), runtime_profile={
         "application_python": platform.python_version(), "os": platform.system(), "architecture": platform.machine()})
     for filename, data in (("scene-v2.json", compiled["resolved_scene"]["authoring_spec"]),
                            ("resolved-scene.json", compiled["resolved_scene"]),

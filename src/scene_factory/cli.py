@@ -25,13 +25,15 @@ def parser():
     root = argparse.ArgumentParser(prog="scene-factory")
     common_options(root)
     commands = root.add_subparsers(dest="command", required=True)
-    for name in ("doctor", "init", "build", "preview", "validate", "status", "compile"):
+    for name in ("doctor", "init", "build", "preview", "validate", "status", "compile", "final-preview"):
         command = commands.add_parser(name)
         command.add_argument("project", nargs="?" if name == "doctor" else None,
                              **({"default": "."} if name == "doctor" else {}))
         common_options(command)
         if name == "init":
             command.add_argument("--schema-version", choices=(1,2), type=int, default=1)
+    from .library_cli import add_parsers
+    add_parsers(commands)
     migration = commands.add_parser("migrate")
     migration.add_argument("source")
     migration.add_argument("destination")
@@ -68,7 +70,10 @@ def main(argv=None):
     args = parser().parse_args(argv)
     project = Path(args.project).expanduser().resolve()
     try:
-        if args.command in ('generate','edit','rebuild','repair','review','history','diff','rollback','resume','present'):
+        if args.command in ('assets','materials'):
+            from .library_cli import execute
+            result=execute(args)
+        elif args.command in ('generate','edit','rebuild','repair','review','history','diff','rollback','resume','present'):
             from . import workflow
             from .workflow_store import history,diff_revisions,read_state,load_record
             from .publication import rollback
@@ -146,7 +151,10 @@ def main(argv=None):
             elif args.command == "build":
                 result = run_build(project, executable, options)
             else:
-                result = operate(project, args.command, executable, options)
+                if args.command=='final-preview':
+                    options.update(resolution=getattr(args,'resolution',768),samples=getattr(args,'samples',48),denoise=True)
+                    result=operate(project,'preview',executable,options)
+                else:result = operate(project, args.command, executable, options)
         # Full vertex inventories remain in result.json / validation.json.
         summary = {k: v for k, v in result.items() if k != "objects"}
         print(json.dumps(summary, indent=2, allow_nan=False))

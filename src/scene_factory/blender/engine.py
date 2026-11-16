@@ -12,7 +12,7 @@ def callback(registry, key):
     return getattr(module, binding["function"])
 
 
-def generate_plan(plan, registry):
+def generate_plan(plan, registry,resource_root=None):
     bpy.ops.object.select_all(action="SELECT")
     bpy.ops.object.delete(use_global=False)
     scene = bpy.context.scene
@@ -25,10 +25,11 @@ def generate_plan(plan, registry):
     scene["plan_digest"] = plan["plan_digest"]
     nodes = {n["node_id"]: n for n in plan["nodes"]}
     primary_objects = {}
+    asset_prototypes = {}
     for nid in plan["execution_order"]:
         node = nodes[nid]
         manifest = registry.get(node["skill"]["skill_id"], node["skill"]["version"], plan["validation_candidates"])
-        context = {"scene_seed": plan["seed"], "plan": plan, "primary_objects": primary_objects}
+        context = {"scene_seed": plan["seed"], "plan": plan, "primary_objects": primary_objects,"resource_root":resource_root,"asset_prototypes":asset_prototypes}
         objects = callback(registry, manifest["implementation"])(node, context)
         declarations = {a["local_role"]: a for a in node["expected_artifacts"]}
         if not isinstance(objects, dict) or set(objects) != set(declarations):
@@ -46,6 +47,11 @@ def generate_plan(plan, registry):
             obj["node_seed"] = node["node_seed"]
             obj["logical_parent"] = node["parent_id"] or ""
             obj["typed_inputs"] = json.dumps(node["resolved_inputs"], sort_keys=True)
+            if 'component' in a:
+                obj.parent=objects[a['component']['parent_role']]
+                obj.matrix_parent_inverse=Matrix.Identity(4)
+                obj.matrix_basis=Matrix(a['component']['local_matrix'])
+                continue
             if node["parent_id"]:
                 obj.parent = primary_objects[node["parent_id"]]
                 obj.matrix_parent_inverse = Matrix.Identity(4)

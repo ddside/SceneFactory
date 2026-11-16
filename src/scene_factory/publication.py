@@ -16,7 +16,7 @@ def presentation_data(project,state,revision_id,attempt,quality,status):
     spec=revision_spec(project,revision_id,state)
     accepted_revision=None
     if state['accepted']: accepted_revision=load_record(project,'acceptance',state['accepted'],state)['revision_id']
-    return {'schema_version':1,'requested_summary':intent['raw_request'],'revision_id':revision_id,
+    result={'schema_version':1,'requested_summary':intent['raw_request'],'revision_id':revision_id,
         'generated_environment':{'scene_id':spec['scene_id'],'logical_node_count':len(spec['nodes']),
             'skills':sorted({n['skill']['skill_id']+'@'+n['skill']['version'] for n in spec['nodes']})},
         'status':status,'profile':quality['profile'],'quality_run_id':quality['quality_run_id'],
@@ -27,6 +27,16 @@ def presentation_data(project,state,revision_id,attempt,quality,status):
         'unperformed_checks':[name for name,item in quality['stages'].items() if item['state'] in ('not_run','not_applicable')],
         'findings':quality['findings'],'edit_instructions':'Provide another natural-language request to Codex; keep unrelated IDs and seeds',
         'created_at':now()}
+    if attempt.get('build_id'):
+        plan_path=Path(project)/'builds'/attempt['build_id']/'plan.json'
+        if plan_path.is_file():
+            from .spec import read_json
+            resources=read_json(plan_path).get('resources')
+            if resources:
+                result['resources']={'materials':(read_json(plan_path).get('appearance') or {}).get('materials',{}),
+                    'assets':[{'asset_id':r['asset_id'],'provider_id':r['provider_id'],'version':r['version'],'content_hash':r['content_hash'],
+                               'source_uri':r['source_uri'],'attribution':r['attribution'],'license':r['license']} for r in resources['assets'].values()]}
+    return result
 
 
 def save_presentation_locked(project,state,revision_id,attempt,quality,status):

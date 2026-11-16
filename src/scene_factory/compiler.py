@@ -27,7 +27,7 @@ def artifact_id(node_id, role):
     return "a." + canonical_digest([node_id, role])[:40]
 
 
-def compile_scene(source, registry=None, source_sha256=None, runtime_profile=None, allow_candidates=()):
+def compile_scene(source, registry=None, source_sha256=None, runtime_profile=None, allow_candidates=(), resources=None):
     registry = registry or Registry()
     version = source.get("schema_version") if isinstance(source, dict) else None
     if version == 1:
@@ -37,6 +37,8 @@ def compile_scene(source, registry=None, source_sha256=None, runtime_profile=Non
     else:
         raise SpecError("$.schema_version: expected 1 or 2")
     authored = validate_v2(authored, registry, allow_candidates)
+    from .resources import validate_bundle
+    validate_bundle(authored,resources)
     source_sha256 = source_sha256 or canonical_digest(source)
     expanded, used = {}, {}
 
@@ -115,13 +117,27 @@ def compile_scene(source, registry=None, source_sha256=None, runtime_profile=Non
         node.update(resolved_transform=effective, local_matrix=local, world_matrix=world,
                     resolved_inputs=bindings, typed_outputs=outputs, dependencies=sorted(edges[nid]))
         node["expected_artifacts"] = []
-        for declaration in manifest["artifacts"]:
+        declarations=copy.deepcopy(manifest['artifacts'])
+        if 'asset_ref' in node:
+            key=canonical_digest(node['asset_ref']);record=resources['assets'][key]
+            from .format_adapters import FORMATS
+            adapter=FORMATS.get(record['format'])
+            if adapter is None or record['units']!=adapter['units'] or record['up_axis']!=adapter['up_axis']:
+                raise SpecError('No supported import adapter for asset format/units/axis')
+            node['asset_key']=key
+            for part in record['source_metadata'][adapter['metadata_key']]['parts']:
+                declarations.append({'role':part['role'],'type':part['type'],'component':{
+                    'parent_role':part['parent_role'],'local_matrix':part['local_matrix']},
+                    'asset':{**node['asset_ref'],'source_part':part['source_index']}})
+        for declaration in declarations:
             local_role = declaration["role"]
             artifact = {"artifact_id": artifact_id(nid, local_role), "source_node_id": node["source_node_id"],
                         "producer_node_id": nid, "role": ".".join(node["role_prefix"] + [local_role]),
                         "local_role": local_role, "type": declaration["type"], "lineage": node["lineage"],
                         "dependencies": [artifact_id(dep, resolved[dep]["expected_artifacts"][0]["local_role"])
                                          for dep in sorted(edges[nid])]}
+            for key in ('component','asset'):
+                if key in declaration:artifact[key]=declaration[key]
             node["expected_artifacts"].append(artifact)
             expected.append(artifact)
         resolved[nid] = node
@@ -134,6 +150,23 @@ def compile_scene(source, registry=None, source_sha256=None, runtime_profile=Non
         if 'contract' in manifest:
             binding = registry.binding(manifest['contract'])
             getattr(importlib.import_module(binding['module']), binding['function'])(node, resolved)
+    if 'appearance' in authored:
+        occupied=set();binding_groups={}
+        for binding in authored['appearance']['bindings']:
+            target=expanded.get(binding['node_id'])
+            if target is None or not any(a['local_role']==binding['role'] and a['type']=='Mesh' for a in target['expected_artifacts']):
+                raise SpecError('appearance binding references missing node/Mesh role')
+            key=(binding['node_id'],binding['role'],canonical_digest(binding.get('region')))
+            if key in occupied:raise SpecError('duplicate material binding target/region')
+            occupied.add(key)
+            binding_groups.setdefault((binding['node_id'],binding['role']),[]).append(binding)
+        for bindings in binding_groups.values():
+            if len(bindings)>7:raise SpecError('material layer/UV budget exceeded')
+            if sum('region' not in b for b in bindings)!=1:raise SpecError('exactly one base material binding required')
+            regions=[b['region'] for b in bindings if 'region' in b]
+            for i,a in enumerate(regions):
+                for b in regions[:i]:
+                    if min(a['xmax'],b['xmax'])>max(a['xmin'],b['xmin']) and min(a['ymax'],b['ymax'])>max(a['ymin'],b['ymin']):raise SpecError('overlapping material regions')
     runtime = {"blender_series": "4.5", "worker_python_series": "3.11", **(runtime_profile or {})}
     if (set(runtime) - {"blender_series","worker_python_series","implementation_sha256","application_python","os","architecture"}
         or any(not isinstance(v,str) or not v for v in runtime.values())):
@@ -157,6 +190,9 @@ def compile_scene(source, registry=None, source_sha256=None, runtime_profile=Non
             "execution_order": order, "dependency_dag": {k: sorted(edges[k]) for k in sorted(edges)},
             "nodes": [resolved[k] for k in sorted(resolved)], "expected_artifacts": sorted(expected, key=lambda a: a["artifact_id"]),
             "validation_candidates": sorted(set(allow_candidates))}
+    if resources is not None:
+        plan['resources']=copy.deepcopy(resources)
+        plan['appearance']=copy.deepcopy(authored.get('appearance'))
     plan["plan_digest"] = canonical_digest(plan)
     return {"resolved_scene": resolved_scene, "build_plan": plan, "skills_lock": lock}
 

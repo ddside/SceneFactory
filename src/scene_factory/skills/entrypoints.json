@@ -91,5 +91,27 @@
     "support_files": [
       "spec.py"
     ]
+  },
+  "asset.generate": {
+    "module": "scene_factory.blender.skills.asset",
+    "function": "generate",
+    "support_files": [
+      "blender/appearance.py",
+      "library_contracts.py",
+      "blender/skills/common.py",
+      "gltf_contract.py",
+      "resources.py"
+    ]
+  },
+  "asset.validate": {
+    "module": "scene_factory.blender.skills.asset",
+    "function": "validate",
+    "support_files": [
+      "blender/appearance.py",
+      "library_contracts.py",
+      "blender/skills/common.py",
+      "gltf_contract.py",
+      "resources.py"
+    ]
   }
 }

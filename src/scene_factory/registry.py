@@ -87,7 +87,7 @@ class Registry:
         required = ("schema_version", "skill_id", "version", "name", "description", "category", "tags",
                     "kind", "parameter_schema", "inputs", "outputs", "artifacts", "implementation",
                     "validator", "dependencies", "blender_compatibility", "examples", "validation_status")
-        fields(value, "SkillManifest", required, ("recipe", "validation_evidence", "contract", "test_scenes"))
+        fields(value, "SkillManifest", required, ("recipe", "validation_evidence", "contract", "test_scenes", "asset_consumer", "test_catalog"))
         if type(value["schema_version"]) is not int or value["schema_version"] != 1:
             raise SpecError("SkillManifest.schema_version: only 1 supported")
         identifier(value["skill_id"], "skill_id")
@@ -132,6 +132,12 @@ class Registry:
                 raise SpecError("contract: only reviewed pure contract bindings allowed")
         if "test_scenes" in value and (not isinstance(value["test_scenes"], list) or not value["test_scenes"]):
             raise SpecError("test_scenes: nonempty full SceneSpec fixtures required")
+        if 'asset_consumer' in value and type(value['asset_consumer']) is not bool:
+            raise SpecError('asset_consumer must be boolean')
+        if 'test_catalog' in value:
+            catalog=(PACKAGE/value['test_catalog']).resolve()
+            if not catalog.is_relative_to(PACKAGE.resolve()) or not catalog.is_dir():
+                raise SpecError('test_catalog must be a reviewed packaged fixture directory')
         self.binding(value["implementation"])
         self.binding(value["validator"])
         if value["kind"] == "recipe":

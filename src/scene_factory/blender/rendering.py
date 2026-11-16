@@ -44,7 +44,7 @@ def select_device(requested):
             "policy": "auto selects first enumerated backend; render failure never falls back"}
 
 
-def setup_camera_lights(direction=None):
+def setup_camera_lights(direction=None,lighting=None):
     scene = bpy.context.scene
     corners = [o.matrix_world @ Vector(v) for o in scene.objects if o.type == "MESH"
                for v in o.bound_box]
@@ -68,7 +68,10 @@ def setup_camera_lights(direction=None):
     data.clip_end = radius * 10 + 100
     scene.camera = camera
     sun_data = bpy.data.lights.new("preview.sun", "SUN")
-    sun_data.energy = 3.0
+    lighting=lighting or {"preset":"daytime","world_strength":.5,"sun_energy":3.0}
+    from scene_factory.preview_settings import validate_lighting
+    validate_lighting(lighting)
+    sun_data.energy = lighting["sun_energy"]
     sun_data.angle = math.radians(10)
     sun = bpy.data.objects.new("preview.sun", sun_data)
     scene.collection.objects.link(sun)
@@ -77,22 +80,23 @@ def setup_camera_lights(direction=None):
         scene.world = bpy.data.worlds.new("preview.world")
     scene.world.use_nodes = True
     scene.world.node_tree.nodes["Background"].inputs["Color"].default_value = (0.25, 0.3, 0.4, 1)
-    scene.world.node_tree.nodes["Background"].inputs["Strength"].default_value = 0.5
+    scene.world.node_tree.nodes["Background"].inputs["Strength"].default_value = lighting["world_strength"]
 
 
-def render(path, device="cpu", resolution=256, samples=8, engine="CYCLES",view_direction=None,hide_groups=()):
+def render(path, device="cpu", resolution=256, samples=8, engine="CYCLES",view_direction=None,hide_groups=(),denoise=False,preview_lighting=None):
+    if type(denoise) is not bool:raise ValueError('denoise must be boolean')
     selected = select_device(device)
     scene = bpy.context.scene
     scene.render.engine = engine
     scene.cycles.samples = samples
-    scene.cycles.use_denoising = False
+    scene.cycles.use_denoising = denoise
     scene.cycles.seed = int(scene.get("seed", 0)) % 2147483647
     scene.render.resolution_x = resolution
     scene.render.resolution_y = resolution
     scene.render.resolution_percentage = 100
     scene.render.image_settings.file_format = "PNG"
     scene.render.filepath = str(path)
-    setup_camera_lights(view_direction)
+    setup_camera_lights(view_direction,preview_lighting)
     if not isinstance(hide_groups,(list,tuple)) or any(x not in ('cover','south_wall') for x in hide_groups):
         raise ValueError('unsupported preview hide group')
     hidden=[(obj,obj.hide_render) for obj in scene.objects if obj.get('preview_group') in hide_groups]
@@ -102,4 +106,5 @@ def render(path, device="cpu", resolution=256, samples=8, engine="CYCLES",view_d
             raise RuntimeError("Render did not finish")
     finally:
         for obj,old in hidden: obj.hide_render=old
+    selected['settings']={'resolution':resolution,'samples':samples,'denoise':denoise,'lighting':preview_lighting or {'preset':'daytime','world_strength':.5,'sun_energy':3.0},'hide_groups':list(hide_groups),'view_direction':view_direction}
     return selected

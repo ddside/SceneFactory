@@ -54,7 +54,8 @@ Ask questions only to avoid materially incorrect or destructive changes.
   assumptions; actually view supplied images before marking them viewed. Record
   inferred dimensions, uncertainty and unsupported features honestly.
 - Use `generate PROJECT --proposal FILE` or `edit PROJECT --proposal FILE`.
-  Normally choose basic_scene; use architectural for modular interior buildings.
+  Normally choose basic_scene; use architectural for modular interiors and
+  appearance for PBR architectural scenes.
   Preserve unrelated IDs/seeds. Managed projects use
   the working Revision snapshot; never edit snapshots, BuildPlan or the legacy
   root scene.json to change a managed scene.
@@ -73,7 +74,7 @@ Ask questions only to avoid materially incorrect or destructive changes.
   unsupported requests and unperformed checks. Do not call structural-scoped
   acceptance visual/physical quality. No intermediate user approval is required
   except execution permissions or materially blocking ambiguity.
-- Phase 2B still rebuilds the full scene. High-quality generators, assets/PBR,
+- Phase 2B still rebuilds the full scene. High-quality generators,
   incremental caching and USD/Isaac Sim pipeline integration are later work.
 
 ## Phase 2A contracts and skill registration
@@ -170,3 +171,35 @@ example input fixtures belong in Git.
   Never delete roofs/walls from the authoritative Spec to expose an interior.
 - Run existing 197 regressions plus new architecture tests with both Blender test
   variables. Explicitly retain Ubuntu/CUDA/OptiX as unverified in this phase.
+
+## Phase 3B appearance and external assets
+- Read docs/phase3b.md. Keep geometry, semantic Material records, texture bytes,
+  Asset records, Providers and preview lighting separate. Build/compile must not
+  query the network or silently substitute a different resource/version.
+- Prefer cached exact refs via assets/materials list/show. Explicit acquisition
+  uses a registered Provider; use the Poly Haven API with SceneFactory User-Agent
+  and visible Poly Haven credit. Preserve asset CC0 separately from API terms.
+- Local/Fake resources require explicit license metadata. Unknown license or lost
+  source terms are not CC0. Never persist credentials in Catalog records.
+- Keep catalogs immutable and content-addressed, stage complete dependencies,
+  validate hash/size/checksum, and publish atomically. Preserve older versions.
+  Each build freezes its resource snapshot/files; accepted includes their hashes.
+- Use appearance profile for PBR architectural scenes. Verify actual shader
+  values/links/color spaces, texture hashes, metric/tangent UV, material regions,
+  import hierarchy/units/bounds and reopen results before actual image review.
+- Normal maps mean OpenGL tangent space. Height is Bump, not geometric
+  displacement. Glass/Principled and region shaders do not guarantee USD or
+  Isaac Sim appearance. Preview uses only render-specific World+Sun settings.
+- Avoid coincident floor/ground top faces. Place ground at the foundation bottom
+  and use its actual elevation for external asset grounding; inspect the images.
+- Do not change geometry nodes/seeds for a material-only edit. Use a new immutable
+  MaterialRef and Revision, retain old accepted, and compare geometry fingerprints.
+- External model execution currently supports a restricted static glTF subset.
+  Preserve separate Mesh/Material/hierarchy; do not execute external scripts or
+  import unsupported formats through a silent fallback. Use registered import
+  Skill evidence and test_catalog fixtures, then real-provider E2E.
+- Run the existing 245 tests plus new PBR/provider/resource/import tests with both
+  Blender variables. Exclude opt-in live tests from ordinary regression and run
+  them separately with SCENE_FACTORY_TEST_POLYHAVEN=1. A network skip is unverified.
+- Track code/docs/own fixtures and example refs in Git; downloaded third-party
+  bytes and generated artifacts remain under ignored artifacts/. Commit changes.

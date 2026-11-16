@@ -44,7 +44,13 @@ def validate_skill(skill_id, version, executable, directory, timeout=120, activa
         output = directory / f"example-{i}"
         output.mkdir()
         write_json(output / "scene.json", spec)
-        compiled = compile_scene(spec, registry, file_hash(output / "scene.json"), allow_candidates=(skill_id,))
+        from .resources import resolve_resources,stage_resources
+        from .library import Catalog
+        from .registry import PACKAGE
+        catalog=Catalog(PACKAGE/manifest['test_catalog']) if 'test_catalog' in manifest else None
+        resources=resolve_resources(spec,catalog)
+        stage_resources(output,resources,catalog)
+        compiled = compile_scene(spec, registry, file_hash(output / "scene.json"), allow_candidates=(skill_id,),resources=resources)
         plan = compiled["build_plan"]
         if not any(n['skill']=={'skill_id':skill_id,'version':version} for n in plan['nodes']):
             raise ValueError('skill validation fixture must exercise the target skill/version')

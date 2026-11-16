@@ -143,7 +143,9 @@ def execute(project,executable,options):
                 _stop_locked(project,state,wid,limit); return resume_context(project)
             rid=state['working_revision']; revision=load_record(project,'revision',rid,state)
             spec=revision_spec(project,rid,state)
-            try: compiled=compile_scene(spec)
+            try:
+                from .resources import resolve_resources
+                compiled=compile_scene(spec,resources=resolve_resources(spec))
             except ValueError as exc:
                 _stop_locked(project,state,wid,f'Compile blocked: {exc}','needs_input'); return resume_context(project)
             budget=workflow['generation_budget']
@@ -152,6 +154,7 @@ def execute(project,executable,options):
             opts=dict(options)
             opts['resolution']=min(opts['resolution'],budget['max_resolution'])
             opts['samples']=min(opts['samples'],budget['max_samples'])
+            if workflow['profile']['profile_id']=='appearance':opts['denoise']=True
             opts['_deadline_epoch']=deadline
             aid=uid('attempt')
             attempt={'schema_version':1,'attempt_id':aid,'workflow_id':wid,'revision_id':rid,'intent_id':intent['intent_id'],
@@ -166,7 +169,7 @@ def execute(project,executable,options):
                 attempt['build_id']=built['build_id']; _save_attempt(project,attempt)
                 operate(project,'validate',executable,opts,build_id=built['build_id'],check_working_spec=False,_locked=True)
                 views=[(name,direction,[]) for name,direction in VIEWS.items()]
-                if workflow['profile']['profile_id']=='architectural':
+                if workflow['profile']['profile_id'] in ('architectural','appearance'):
                     views=[('overview',VIEWS['overview'],[]),('top',VIEWS['top'],['cover']),
                            ('interior',[1,-1.4,1.6],['cover','south_wall'])]
                 for name,direction,hidden in views:

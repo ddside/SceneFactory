@@ -1,0 +1,73 @@
+{
+  "asphalt": {
+    "asset_ref": {
+      "asset_id": "polyhaven.9a4dd255fd21e8af4337a841",
+      "content_hash": "835df579aae19ae2599b622f6991115a6797d4e1bc24bd5ca0f8ebab30227372",
+      "provider_id": "polyhaven",
+      "variant": "1k",
+      "version": "2839a331f389f6ad1e30a78f24db58369d92f742"
+    },
+    "material_ref": {
+      "content_hash": "528b262cca9690ed807b8628510d7d41dcc6b96f7493052670807c39511b4839",
+      "material_id": "ph.asphalt",
+      "version": "1.0.0"
+    },
+    "provider_asset_id": "asphalt_02"
+  },
+  "concrete": {
+    "asset_ref": {
+      "asset_id": "polyhaven.0933ada716754c4ad41750cb",
+      "content_hash": "a5882902d3b02e65631afd3391fff93f07ee1e63927a928c44d7c2e49613b314",
+      "provider_id": "polyhaven",
+      "variant": "1k",
+      "version": "a385d018de460aaa340cf2dff49b1651c69273b8"
+    },
+    "material_ref": {
+      "content_hash": "990871df8c70759243144cc4fc9136dd5f97ed7bedcafc6422588bfe1f89134e",
+      "material_id": "ph.concrete",
+      "version": "1.0.0"
+    },
+    "provider_asset_id": "concrete_wall_006"
+  },
+  "rock": {
+    "asset_ref": {
+      "asset_id": "polyhaven.c187497e6f5066b5c7e6c3ec",
+      "content_hash": "2619784b18e9ff272f3deee01a1fca8e077ec90a95d8a0c5293aae88cff80bbd",
+      "provider_id": "polyhaven",
+      "variant": "1k",
+      "version": "83e2b16d6a089f8077d3eebe0462615c2ba0e7f6"
+    },
+    "material_ref": null,
+    "provider_asset_id": "boulder_01"
+  },
+  "tile": {
+    "asset_ref": {
+      "asset_id": "polyhaven.03fb5833a8c3f02629f52d98",
+      "content_hash": "5420b3470cb6f3fcb1ce1ee86e2ad1c12e4918ed9e6cc8d570d69effa327aebc",
+      "provider_id": "polyhaven",
+      "variant": "1k",
+      "version": "c1fab86f1dc643296d1dede562f64393ab996c0d"
+    },
+    "material_ref": {
+      "content_hash": "50a8ae5121e5b66ac5dfe05f6813fc9ecd9c0ba70e1ab88cf6e1c6df69a84f2d",
+      "material_id": "ph.tile",
+      "version": "1.0.0"
+    },
+    "provider_asset_id": "anti_skid_tiles"
+  },
+  "wood": {
+    "asset_ref": {
+      "asset_id": "polyhaven.5233adc9ce049384c64751a9",
+      "content_hash": "b7e5329bbf59c18d7508a8ada36bc9870a5be4e34742a5b572721a660e914ac5",
+      "provider_id": "polyhaven",
+      "variant": "1k",
+      "version": "dc9ddbd1646f29747e9571f5bf7abd7a28975a80"
+    },
+    "material_ref": {
+      "content_hash": "9f157acd6fee0e65c631bc96a116dd9586622e9cfac7ad88f72d7a93543b4c8d",
+      "material_id": "ph.wood",
+      "version": "1.0.0"
+    },
+    "provider_asset_id": "brown_planks_03"
+  }
+}

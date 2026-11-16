@@ -3,6 +3,8 @@ import json
 from pathlib import Path
 import sys
 import traceback
+import time
+import resource
 
 # Blender doesn't inherit application site-packages. Only import this package's
 # source from its own location (also works in an installed wheel).
@@ -62,19 +64,26 @@ def execute(request, out):
             raise ValueError("candidate execution only allowed in explicit skill validation runs")
         registry = Registry()
         compiled = compile_scene(read_json(request["spec_path"]), registry, file_hash(request["spec_path"]),
-                                 plan["runtime_profile"], plan["validation_candidates"])
+                                 plan["runtime_profile"], plan["validation_candidates"],resources=plan.get("resources"))
         if compiled["build_plan"] != plan:
             raise ValueError("BuildPlan differs from current specification/skill pins/runtime contracts")
         metadata["plan_digest"] = plan["plan_digest"]
         metadata["runtime_implementation_sha256"] = registry.runtime_digest()
         metadata["runtime_code_matches"] = metadata["runtime_implementation_sha256"] == plan["runtime_profile"]["implementation_sha256"]
+    resource_root=Path(request['plan_path']).parent if plan is not None else None
+    if plan is not None and 'resources' in plan:
+        from scene_factory.resources import verify_resources
+        verify_resources(resource_root,plan['resources'])
     spec = load_spec(request["spec_path"]) if plan is None else None
     if spec is not None and spec["schema_version"] != 1:
         raise ValueError("SceneSpec v2 requires a compiled BuildPlan")
     if action == "build":
         if plan is not None:
-            generate_plan(plan, registry)
-            validation = validate_scene(plan, registry)
+            generate_plan(plan, registry,resource_root)
+            if plan.get('appearance'):
+                from scene_factory.blender.appearance import apply
+                apply(plan,resource_root)
+            validation = validate_scene(plan, registry,resource_root=resource_root)
         else:
             generate(spec)
             validation = validate_legacy_scene(spec)
@@ -85,11 +94,11 @@ def execute(request, out):
         return {**metadata, **validation, "scene_file": str(path)}
     if action in ("validate", "preview"):
         bpy.ops.wm.open_mainfile(filepath=request["blend_path"], load_ui=False, use_scripts=False)
-        validation = validate_scene(plan, registry) if plan is not None else validate_legacy_scene(spec)
+        validation = validate_scene(plan, registry,resource_root=resource_root) if plan is not None else validate_legacy_scene(spec)
         if action == "validate":
             return {**metadata, **validation, "reopened": True}
         selected = render(out / "preview.png", request["device"], request["resolution"], request["samples"],
-                          view_direction=request.get('view_direction'),hide_groups=request.get('hide_groups',[]))
+                          view_direction=request.get('view_direction'),hide_groups=request.get('hide_groups',[]),denoise=request.get('denoise',False),preview_lighting=request.get('preview_lighting'))
         return {**metadata, **validation, "render": selected, "preview": "preview.png",
                 "resolution": request["resolution"], "samples": request["samples"]}
     raise ValueError(f"Unknown worker action: {action}")
@@ -108,7 +117,19 @@ if __name__ == "__main__":
             raise ValueError("Unsupported worker protocol_version")
         if request.get("protocol_version") == 2 and not isinstance(request.get("attempt_id"), str):
             raise ValueError("protocol 2 requires attempt_id")
+        started=time.monotonic()
         result = execute(request, result_path.parent)
+        rss=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        result['performance']={'worker_seconds':round(time.monotonic()-started,4),
+            'peak_rss_bytes':int(rss if sys.platform=='darwin' else rss*1024)}
+        if action_plan:=request.get('plan_path'):
+            metrics=read_json(action_plan)
+            if metrics.get('resources'):
+                result['performance'].update(material_build_seconds=bpy.context.scene.get('material_build_seconds',0),
+                    asset_import_seconds=sum(float(o.get('asset_import_seconds',0)) for o in bpy.context.scene.objects),
+                    mesh_count=sum(o.type=='MESH' for o in bpy.context.scene.objects),
+                    material_count=len({m.name for o in bpy.context.scene.objects if o.type=='MESH' for m in o.data.materials if m}),
+                    texture_count=len({n.image.name for o in bpy.context.scene.objects if o.type=='MESH' for m in o.data.materials if m and m.use_nodes for n in m.node_tree.nodes if n.type=='TEX_IMAGE' and n.image}))
         result.update(protocol_version=request.get("protocol_version", 1), attempt_id=request.get("attempt_id"))
         write(result_path, result)
     except Exception as exc:

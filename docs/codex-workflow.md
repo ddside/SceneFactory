@@ -91,3 +91,29 @@ imagesには全preview（現在は2枚）を列挙する。上記は形式のみ
 
 壁は最大4矩形開口、レイアウトは矩形/直交、窓glassは簡易不透明部材。
 未対応の曲面建築・任意間取り・破壊を代替形状で成功扱いしない。
+
+## PBR・外部モデル（Phase 3B）
+
+1. docs/phase3b.mdを読み、assets/materials list/showでcacheを優先する。
+   新規取得はassets search/fetchでProviderを明示し、実在ID、variant、ライセンス、
+   元asset/source URLを確認する。Poly Havenの出典表示とUser-Agentを維持する。
+2. Concrete/Wood/Tile/Asphalt等はmaterials from-assetで正規化MaterialRecordを作る。
+   get/refのhash・source licenseを確認し、appearance_layout.apply_building_materialsで
+   通常のSceneSpecへbindingを記述する。TextureはsRGB/Non-Color、meters_per_repeat、
+   木目回転を明示し、Heightを実幾何変位と呼ばない。
+3. 外部モデルはasset_instance SkillのAssetRefで配置する。glTFは入力m/Y-upを検査し、
+   source hierarchyを保持する。ground_zは実際の地面上面から指定する。建物床と地面の
+   上面を同一にしない（床下面へ接触させる）。Source bboxから接地Zを計算できる。
+4. requested_quality_profile=appearanceでgenerate/edit。buildはProviderを呼ばず、
+   固定ref/byte/hashを解決する。cache欠落/破損は明示エラーとして報告し、fallbackしない。
+5. 外観/上面/室内PNGを全て実閲覧する。材質、木目/タイル寸法、ガラス、rockの浮遊/
+   貫通、黒い共面artifact、反射/白飛び/ノイズを確認する。必要なら追加視点と
+   final-preview（高解像度/denoise）を独立operationとして生成し、実画像を確認する。
+6. 「廊下だけ暗いタイル」では新しいMaterialRecord（例:元TileをTint派生）を作り、
+   appearance.materials.tileのMaterialRefだけを更新する。ノード/seed/外壁binding/
+   AssetRefを保ち、新Revisionで構造fingerprintと旧acceptedの保護を確認する。
+7. 履歴/PresentationへSource/License/未実施検査も記録する。未閲覧はvisual not_run。
+   Blenderの材質・照明をIsaac Simへそのまま移植可能と主張しない。
+
+Live APIテストは通常回帰から分離し、失敗/未実施をFakeProviderで置き換えて成功扱いに
+しない。Omniverse/Nucleus/Sketchfab/認証/USD import/exportはまだ対応していない。

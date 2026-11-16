@@ -44,7 +44,7 @@ def validate_v2(data, registry=None, allow_candidates=()):
     if registry is None:
         from .registry import Registry
         registry = Registry()
-    fields(data, "$", ("schema_version", "scene_id", "seed", "units", "nodes"), ("migration",))
+    fields(data, "$", ("schema_version", "scene_id", "seed", "units", "nodes"), ("migration", "appearance"))
     if type(data["schema_version"]) is not int or data["schema_version"] != 2:
         raise SpecError("$.schema_version: only integer version 2 supported")
     identifier(data["scene_id"], "$.scene_id")
@@ -61,11 +61,14 @@ def validate_v2(data, registry=None, allow_candidates=()):
         if type(m["source_schema_version"]) is not int or m["source_schema_version"] != 1 or m["migration_version"] != MIGRATION_VERSION:
             raise SpecError("migration: unsupported source/migration version")
         check_digest(m["source_sha256"], "migration.source_sha256")
+    if 'appearance' in result:
+        from .library_contracts import appearance
+        appearance(result['appearance'])
     seen, skills = {}, {}
     for index, node in enumerate(result["nodes"]):
         path = f"$.nodes[{index}]"
         fields(node, path, ("node_id", "skill", "transform", "parameters"),
-               ("parent_id", "depends_on", "inputs", "legacy"))
+               ("parent_id", "depends_on", "inputs", "legacy", "asset_ref"))
         identifier(node["node_id"], path + ".node_id")
         if node["node_id"] in seen:
             raise SpecError(f"{path}.node_id: duplicate ID")
@@ -99,6 +102,11 @@ def validate_v2(data, registry=None, allow_candidates=()):
                 or node["skill"]["skill_id"] not in ("ground", "box_building", "pillar", "roof")
                 or node["skill"]["version"] != "1.0.0"):
                 raise SpecError(f"{path}.legacy: invalid v1 identity mapping")
+        if 'asset_ref' in node:
+            from .library_contracts import asset_ref
+            asset_ref(node['asset_ref'])
+        if manifest.get('asset_consumer',False) != ('asset_ref' in node):
+            raise SpecError('asset_ref required only for an asset-consuming skill')
         seen[node["node_id"]] = node
         skills[node["node_id"]] = manifest
     parents, dependencies = {}, {}

@@ -146,7 +146,8 @@ def validate(node,objects,context):
             raise ValueError('architectural component metadata mismatch')
     if skill=='arch_wall':
         validate_wall_geometry(objects['geometry'],p)
-        close(objects['geometry'].data.materials[0].diffuse_color,(*WALL_COLORS[p['material_slot']],1),'wall material slot')
+        if not objects['geometry'].get('appearance_bound'):
+            close(objects['geometry'].data.materials[0].diffuse_color,(*WALL_COLORS[p['material_slot']],1),'wall material slot')
     elif skill=='arch_slab':
         obj=objects['geometry']; w,d,t=p['width'],p['depth'],p['thickness']
         mesh_checks(obj,w*d*t); bounds(obj,[-w/2,-d/2,0],[w/2,d/2,t])

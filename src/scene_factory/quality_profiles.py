@@ -11,7 +11,8 @@ from .storage import digest
 REQUIRED={'structural':['specification','execution','structure'],
           'preview_reviewed':['specification','execution','structure','visual'],
           'basic_scene':['specification','execution','structure','visual','domain'],
-          'architectural':['specification','execution','structure','visual','domain']}
+          'architectural':['specification','execution','structure','visual','domain'],
+          'appearance':['specification','execution','structure','visual','domain']}
 VISUAL_CHECKS=('requested_objects_visible','layout_reasonable','main_structure_visible',
                'no_obvious_intersection_or_floating','reference_consistent','request_conformance')
 
@@ -23,7 +24,8 @@ def profile(name):
             'scope':{'structural':'Structure and declared hard constraints only; images unreviewed',
                      'preview_reviewed':'Structure, declared hard constraints and recorded visual review',
                      'basic_scene':'Preview-reviewed scene and basic declared spatial constraints; no physics/photorealism guarantee',
-                     'architectural':'Modular architectural geometry/access validation plus actual exterior/interior review; no code/physics guarantee'}[name]}
+                     'architectural':'Modular architectural geometry/access validation plus actual exterior/interior review; no code/physics guarantee',
+                     'appearance':'Architectural geometry plus validated PBR/UV/resources and actual material review; no simulation renderer guarantee'}[name]}
 
 
 def validate_visual_review(value,project,attempt,intent):
@@ -120,7 +122,7 @@ def evaluate(intent,spec,plan,artifacts,base_report,revision_id,attempt_id,quali
         stages['domain']={'state':'failed' if hard or blockers else 'passed',
                           'reason':'Basic declared dimensions/count/placement constraints evaluated; no physical validation',
                           'evidence':['constraint_checks']}
-    if profile_snapshot['profile_id']=='architectural':
+    if profile_snapshot['profile_id'] in ('architectural','appearance'):
         buildings={n['node_id'] for n in plan['nodes'] if n['skill']['skill_id']=='arch_building'}
         verified={r['node_id'] for r in domain_results if r.get('kind')=='architecture' and r.get('state')=='passed'}
         has_evidence=bool(buildings) and buildings==verified
@@ -129,6 +131,12 @@ def evaluate(intent,spec,plan,artifacts,base_report,revision_id,attempt_id,quali
                           'reason':'Actual reopened architectural skill checks' if passed else 'Architectural domain evidence missing or request constraints failed',
                           'evidence':['validation.json:domain_results'] if passed else []}
         if not passed: findings.append({'kind':'blocker','node_id':None,'reason':'Architectural domain checks required'})
+    if profile_snapshot['profile_id']=='appearance':
+        appearance_evidence=any(r.get('kind')=='appearance' and r.get('state')=='passed' and r.get('material_count',0)>0 for r in domain_results)
+        if not appearance_evidence:
+            stages['domain']={'state':'not_run','reason':'Actual PBR/UV/resource validation required','evidence':[]}
+            findings.append({'kind':'blocker','node_id':None,'reason':'Appearance checks not run'})
+        else:stages['domain']['evidence'].append('validation.json:appearance_checks')
     if visual is not None:
         passed=all(c['state'] in ('passed','not_applicable') for c in visual['checks'].values())
         stages['visual']={'state':'passed' if passed else 'failed','reason':visual['notes'],'evidence':[visual_id]}

@@ -1,0 +1,197 @@
+{
+  "asset_id": "local.13c8ce19bfa12544096b3563",
+  "asset_type": "model",
+  "attribution": "Scene Factory own CC0 fixture",
+  "bounding_box": [
+    [
+      0.0,
+      -1.0,
+      0.0
+    ],
+    [
+      3.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "content_hash": "b84ea66e5e3b95312476a66bd71f0b81d3f2daf3876e8ffe851229ef386d9501",
+  "dependencies": [],
+  "entrypoint": "hierarchy.gltf",
+  "files": [
+    {
+      "path": "hierarchy.gltf",
+      "provider_checksum": null,
+      "role": "model",
+      "sha256": "5d03e9a09267241a0453061b8e63c15489f71df31dd4848eb4ebffdd722766df",
+      "size": 1845,
+      "uri": "urn:scene-factory:own-fixture:hierarchy.gltf"
+    }
+  ],
+  "format": "gltf",
+  "license": {
+    "access_restrictions": [],
+    "attribution_required": false,
+    "authentication_requirements": "none",
+    "commercial_use": "allowed",
+    "license_id": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "provider_terms": "",
+    "redistribution": "allowed",
+    "verification_status": "verified"
+  },
+  "local_cache_path": "objects/b84ea66e5e3b95312476a66bd71f0b81d3f2daf3876e8ffe851229ef386d9501",
+  "provider_asset_id": "hierarchy-fixture",
+  "provider_id": "local",
+  "retrieved_at": "2026-11-15T23:56:53.556676+00:00",
+  "schema_version": 1,
+  "source_metadata": {
+    "author": "Scene Factory",
+    "gltf": {
+      "bounding_box": [
+        [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        [
+          3.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "dependencies": [],
+      "parts": [
+        {
+          "bounds": null,
+          "local_matrix": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "material_count": 0,
+          "parent_role": "frame",
+          "role": "part0000",
+          "source_index": 0,
+          "type": "Object"
+        },
+        {
+          "bounds": [
+            [
+              0.0,
+              -1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "local_matrix": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "material_count": 1,
+          "parent_role": "part0000",
+          "role": "part0001",
+          "source_index": 1,
+          "type": "Mesh"
+        },
+        {
+          "bounds": [
+            [
+              0.0,
+              -1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "local_matrix": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              2.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "material_count": 1,
+          "parent_role": "part0000",
+          "role": "part0002",
+          "source_index": 2,
+          "type": "Mesh"
+        }
+      ]
+    }
+  },
+  "source_uri": "urn:scene-factory:own-fixture",
+  "units": "m",
+  "up_axis": "Y",
+  "validation_status": "validated",
+  "variant": "original",
+  "version": "1"
+}

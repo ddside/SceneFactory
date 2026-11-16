@@ -1579,10 +1579,10 @@
           "implementation": {
             "function": "generate",
             "module": "scene_factory.blender.skills.architecture",
-            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
             "support_sha256": {
               "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
               "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
             }
           },
@@ -1591,10 +1591,10 @@
           "validator": {
             "function": "validate",
             "module": "scene_factory.blender.skills.architecture",
-            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
             "support_sha256": {
               "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
               "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
             }
           },
@@ -1614,10 +1614,10 @@
           "implementation": {
             "function": "generate",
             "module": "scene_factory.blender.skills.architecture",
-            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
             "support_sha256": {
               "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
               "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
             }
           },
@@ -1626,10 +1626,10 @@
           "validator": {
             "function": "validate",
             "module": "scene_factory.blender.skills.architecture",
-            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
             "support_sha256": {
               "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
               "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
             }
           },
@@ -1665,10 +1665,10 @@
               "implementation": {
                 "function": "generate",
                 "module": "scene_factory.blender.skills.architecture",
-                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                 "support_sha256": {
                   "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                   "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                 }
               },
@@ -1677,10 +1677,10 @@
               "validator": {
                 "function": "validate",
                 "module": "scene_factory.blender.skills.architecture",
-                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                 "support_sha256": {
                   "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                   "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                 }
               },
@@ -1690,10 +1690,10 @@
           "implementation": {
             "function": "generate",
             "module": "scene_factory.blender.skills.architecture",
-            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
             "support_sha256": {
               "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
               "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
             }
           },
@@ -1702,10 +1702,10 @@
           "validator": {
             "function": "validate",
             "module": "scene_factory.blender.skills.architecture",
-            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
             "support_sha256": {
               "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
               "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
             }
           },
@@ -1757,10 +1757,10 @@
                   "implementation": {
                     "function": "generate",
                     "module": "scene_factory.blender.skills.architecture",
-                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                     "support_sha256": {
                       "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                       "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                     }
                   },
@@ -1769,10 +1769,10 @@
                   "validator": {
                     "function": "validate",
                     "module": "scene_factory.blender.skills.architecture",
-                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                     "support_sha256": {
                       "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                       "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                     }
                   },
@@ -1782,10 +1782,10 @@
               "implementation": {
                 "function": "generate",
                 "module": "scene_factory.blender.skills.architecture",
-                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                 "support_sha256": {
                   "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                   "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                 }
               },
@@ -1794,10 +1794,10 @@
               "validator": {
                 "function": "validate",
                 "module": "scene_factory.blender.skills.architecture",
-                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                 "support_sha256": {
                   "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                   "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                 }
               },
@@ -1807,10 +1807,10 @@
           "implementation": {
             "function": "generate",
             "module": "scene_factory.blender.skills.architecture",
-            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
             "support_sha256": {
               "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
               "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
             }
           },
@@ -1819,10 +1819,10 @@
           "validator": {
             "function": "validate",
             "module": "scene_factory.blender.skills.architecture",
-            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
             "support_sha256": {
               "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
               "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
             }
           },
@@ -1874,10 +1874,10 @@
                   "implementation": {
                     "function": "generate",
                     "module": "scene_factory.blender.skills.architecture",
-                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                     "support_sha256": {
                       "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                       "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                     }
                   },
@@ -1886,10 +1886,10 @@
                   "validator": {
                     "function": "validate",
                     "module": "scene_factory.blender.skills.architecture",
-                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                     "support_sha256": {
                       "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                       "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                     }
                   },
@@ -1899,10 +1899,10 @@
               "implementation": {
                 "function": "generate",
                 "module": "scene_factory.blender.skills.architecture",
-                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                 "support_sha256": {
                   "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                   "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                 }
               },
@@ -1911,10 +1911,10 @@
               "validator": {
                 "function": "validate",
                 "module": "scene_factory.blender.skills.architecture",
-                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                 "support_sha256": {
                   "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                   "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                 }
               },
@@ -1924,10 +1924,10 @@
           "implementation": {
             "function": "generate",
             "module": "scene_factory.blender.skills.architecture",
-            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
             "support_sha256": {
               "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
               "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
             }
           },
@@ -1936,10 +1936,10 @@
           "validator": {
             "function": "validate",
             "module": "scene_factory.blender.skills.architecture",
-            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
             "support_sha256": {
               "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
               "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
             }
           },
@@ -1975,10 +1975,10 @@
               "implementation": {
                 "function": "generate",
                 "module": "scene_factory.blender.skills.architecture",
-                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                 "support_sha256": {
                   "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                   "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                 }
               },
@@ -1987,10 +1987,10 @@
               "validator": {
                 "function": "validate",
                 "module": "scene_factory.blender.skills.architecture",
-                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                 "support_sha256": {
                   "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                   "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                 }
               },
@@ -2026,10 +2026,10 @@
                   "implementation": {
                     "function": "generate",
                     "module": "scene_factory.blender.skills.architecture",
-                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                     "support_sha256": {
                       "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                       "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                     }
                   },
@@ -2038,10 +2038,10 @@
                   "validator": {
                     "function": "validate",
                     "module": "scene_factory.blender.skills.architecture",
-                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                     "support_sha256": {
                       "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                       "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                     }
                   },
@@ -2051,10 +2051,10 @@
               "implementation": {
                 "function": "generate",
                 "module": "scene_factory.blender.skills.architecture",
-                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                 "support_sha256": {
                   "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                   "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                 }
               },
@@ -2063,10 +2063,10 @@
               "validator": {
                 "function": "validate",
                 "module": "scene_factory.blender.skills.architecture",
-                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                 "support_sha256": {
                   "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                   "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                 }
               },
@@ -2098,10 +2098,10 @@
                   "implementation": {
                     "function": "generate",
                     "module": "scene_factory.blender.skills.architecture",
-                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                     "support_sha256": {
                       "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                       "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                     }
                   },
@@ -2110,10 +2110,10 @@
                   "validator": {
                     "function": "validate",
                     "module": "scene_factory.blender.skills.architecture",
-                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                     "support_sha256": {
                       "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                       "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                     }
                   },
@@ -2149,10 +2149,10 @@
                       "implementation": {
                         "function": "generate",
                         "module": "scene_factory.blender.skills.architecture",
-                        "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                        "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                         "support_sha256": {
                           "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                          "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                          "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                           "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                         }
                       },
@@ -2161,10 +2161,10 @@
                       "validator": {
                         "function": "validate",
                         "module": "scene_factory.blender.skills.architecture",
-                        "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                        "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                         "support_sha256": {
                           "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                          "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                          "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                           "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                         }
                       },
@@ -2174,10 +2174,10 @@
                   "implementation": {
                     "function": "generate",
                     "module": "scene_factory.blender.skills.architecture",
-                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                     "support_sha256": {
                       "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                       "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                     }
                   },
@@ -2186,10 +2186,10 @@
                   "validator": {
                     "function": "validate",
                     "module": "scene_factory.blender.skills.architecture",
-                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                     "support_sha256": {
                       "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                       "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                     }
                   },
@@ -2207,10 +2207,10 @@
               "validator": {
                 "function": "validate",
                 "module": "scene_factory.blender.skills.architecture",
-                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                 "support_sha256": {
                   "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                   "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                 }
               },
@@ -2228,10 +2228,10 @@
           "validator": {
             "function": "validate",
             "module": "scene_factory.blender.skills.architecture",
-            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
             "support_sha256": {
               "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
               "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
             }
           },
@@ -2263,10 +2263,10 @@
               "implementation": {
                 "function": "generate",
                 "module": "scene_factory.blender.skills.architecture",
-                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                 "support_sha256": {
                   "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                   "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                 }
               },
@@ -2275,10 +2275,10 @@
               "validator": {
                 "function": "validate",
                 "module": "scene_factory.blender.skills.architecture",
-                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                 "support_sha256": {
                   "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                   "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                 }
               },
@@ -2314,10 +2314,10 @@
                   "implementation": {
                     "function": "generate",
                     "module": "scene_factory.blender.skills.architecture",
-                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                     "support_sha256": {
                       "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                       "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                     }
                   },
@@ -2326,10 +2326,10 @@
                   "validator": {
                     "function": "validate",
                     "module": "scene_factory.blender.skills.architecture",
-                    "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                    "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                     "support_sha256": {
                       "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                      "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                      "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                       "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                     }
                   },
@@ -2339,10 +2339,10 @@
               "implementation": {
                 "function": "generate",
                 "module": "scene_factory.blender.skills.architecture",
-                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                 "support_sha256": {
                   "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                   "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                 }
               },
@@ -2351,10 +2351,10 @@
               "validator": {
                 "function": "validate",
                 "module": "scene_factory.blender.skills.architecture",
-                "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+                "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
                 "support_sha256": {
                   "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-                  "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+                  "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
                   "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
                 }
               },
@@ -2372,10 +2372,10 @@
           "validator": {
             "function": "validate",
             "module": "scene_factory.blender.skills.architecture",
-            "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+            "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
             "support_sha256": {
               "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-              "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+              "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
               "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
             }
           },
@@ -2393,10 +2393,10 @@
       "validator": {
         "function": "validate",
         "module": "scene_factory.blender.skills.architecture",
-        "sha256": "212f49be83d3580f056b5686ac3dbc2918ec4681686064fc01f6811400e80c7b",
+        "sha256": "ef1dca6eecd74b137586ce8d44527ada48508c62b2b95e3225508f936b1c1e5e",
         "support_sha256": {
           "architecture_contracts.py": "f5c87164bc60e6bc2c39848e5b2cd8a97b8859d659b1e4c24748eff1270b5870",
-          "blender/skills/common.py": "3be495e1f0ab94915f8cb4f0a734c61e810aa9946139791580bb04c15700a87f",
+          "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
           "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
         }
       },
@@ -2407,7 +2407,7 @@
       "architecture": "arm64",
       "blender": "4.5.15 LTS",
       "blender_python": "3.11.15 (main, Apr 25 2025, 12:39:20) [Clang 15.0.0 (clang-1500.0.40.1)]",
-      "implementation_sha256": "5c596a1f9c0a092eb04d8dd366bec558567e61fada61a7c87cf45c380e3ebda3",
+      "implementation_sha256": "8134d3b7f29481e988ef6fc906355924d532fa06d923b372a71eb8b30c53c8c8",
       "os": "Darwin"
     },
     "status": "passed",
@@ -2422,12 +2422,12 @@
         ],
         "example": 0,
         "metrics": {
-          "build_reopen_seconds": 2.547,
+          "build_reopen_seconds": 1.245,
           "face_count": 206,
           "mesh_count": 13,
           "vertex_count": 224
         },
-        "plan_digest": "3b293791d581fbb032e39e511fb5bc08c95e265403ed46fec91ce896f4eb17ec",
+        "plan_digest": "fb6422729b71fce84318ec579e8e7f14e5c10edfbe71e3134e28772b1ff5f55e",
         "structure_sha256": "e86e84dfe228cf02bd5440a091cf2704ce1e5b06ad10aef175b88056898fb598"
       },
       {
@@ -2440,60 +2440,63 @@
         ],
         "example": 1,
         "metrics": {
-          "build_reopen_seconds": 5.956,
+          "build_reopen_seconds": 1.728,
           "face_count": 404,
           "mesh_count": 24,
           "vertex_count": 440
         },
-        "plan_digest": "ef4547c70e47a8d9bc276b91abc2c6bcc091d32c5dca18e5a7824e07e26bb445",
+        "plan_digest": "ee9a776eabd53b661c66da03ce13a9c2f74e35e2abf56dfcfcf8f8181e3df011",
         "structure_sha256": "c3ed6ffa52a245d8a551c794ba8d54843d562db75f4a07fc022133d0cf26f385"
       }
     ],
     "unit_tests": {
-      "case_count": 40,
+      "case_count": 43,
       "cases": [
-        "tests.test_architecture.test_layout_recipe_dimensions_references_and_determinism[1]",
-        "tests.test_architecture.test_layout_recipe_dimensions_references_and_determinism[2]",
-        "tests.test_architecture.test_layout_recipe_dimensions_references_and_determinism[3]",
-        "tests.test_architecture.test_window_edit_only_three_nodes_preserves_all_seeds_and_artifact_ids",
-        "tests.test_architecture.test_invalid_scene_d[big_window]",
-        "tests.test_architecture.test_invalid_scene_d[outside_door]",
-        "tests.test_architecture.test_invalid_scene_d[overlap]",
-        "tests.test_architecture.test_invalid_scene_d[negative_wall]",
-        "tests.test_architecture.test_invalid_scene_d[negative_floor]",
-        "tests.test_architecture.test_invalid_scene_d[bad_parent]",
-        "tests.test_architecture.test_invalid_scene_d[missing_wallref]",
-        "tests.test_architecture.test_invalid_scene_d[fitting_mismatch]",
-        "tests.test_architecture.test_invalid_scene_d[unconnected_room]",
-        "tests.test_architecture.test_invalid_scene_d[duplicate_id]",
-        "tests.test_architecture.test_invalid_scene_d[duplicate_slot]",
-        "tests.test_architecture.test_invalid_scene_d[thickness]",
-        "tests.test_architecture.test_invalid_scene_d[perimeter]",
-        "tests.test_architecture.test_invalid_scene_d[wall_intersection]",
-        "tests.test_architecture.test_invalid_scene_d[hidden_space]",
-        "tests.test_architecture.test_invalid_scene_d[floating_slab]",
-        "tests.test_architecture.test_invalid_scene_d[wrong_type]",
-        "tests.test_architecture.test_invalid_scene_d[roof_missing]",
-        "tests.test_architecture.test_invalid_scene_d[inward_space]",
-        "tests.test_architecture.test_wall_contract_invalid[no_end_pier]",
-        "tests.test_architecture.test_wall_contract_invalid[no_header]",
-        "tests.test_architecture.test_wall_contract_invalid[door_sill]",
-        "tests.test_architecture.test_wall_contract_invalid[touching_openings]",
-        "tests.test_architecture.test_wall_contract_invalid[fractional_count]",
-        "tests.test_architecture.test_wall_contract_invalid[negative_thickness]",
-        "tests.test_architecture.test_architectural_profile_preserves_legacy_profiles",
-        "tests.test_architecture.test_manifest_pins_include_pure_contract_and_support",
-        "tests.test_architecture.test_layout_rejects_unsupported_room_counts[0]",
-        "tests.test_architecture.test_layout_rejects_unsupported_room_counts[4]",
-        "tests.test_architecture.test_layout_rejects_unsupported_room_counts[1.5]",
-        "tests.test_architecture.test_wall_material_slots_are_explicit[0]",
-        "tests.test_architecture.test_wall_material_slots_are_explicit[1]",
-        "tests.test_architecture.test_wall_material_slots_are_explicit[2]",
-        "tests.test_architecture.test_wall_material_slots_are_explicit[3]",
-        "tests.test_architecture.test_architectural_domain_evidence_is_required_and_not_visual_evidence",
-        "tests.test_architecture.test_binding_syntax_cache_uses_exact_source_bytes"
+        "tests.test_library.test_mp1_provider_registration_and_capabilities",
+        "tests.test_library.test_mp2_mp3_provider_neutral_catalog_and_namespace",
+        "tests.test_library.test_mp4_non_cc0_and_unknown_licenses_are_not_rewritten",
+        "tests.test_library.test_mp5_hierarchy_metadata_retained",
+        "tests.test_library.test_mp6_usd_metadata_is_representable_but_has_no_import_adapter",
+        "tests.test_library.test_cache_hit_offline_freeze_and_corruption",
+        "tests.test_library.test_acquisition_failures_are_not_published[size]",
+        "tests.test_library.test_acquisition_failures_are_not_published[checksum]",
+        "tests.test_library.test_acquisition_failures_are_not_published[missing]",
+        "tests.test_library.test_acquisition_failures_are_not_published[transfer]",
+        "tests.test_library.test_acquisition_failures_are_not_published[license]",
+        "tests.test_library.test_acquisition_failures_are_not_published[axis]",
+        "tests.test_library.test_acquisition_failures_are_not_published[duplicate]",
+        "tests.test_library.test_acquisition_failures_are_not_published[format]",
+        "tests.test_library.test_scene_e_material_rejections[material_id]",
+        "tests.test_library.test_scene_e_material_rejections[roughness]",
+        "tests.test_library.test_scene_e_material_rejections[metallic]",
+        "tests.test_library.test_scene_e_material_rejections[transmission]",
+        "tests.test_library.test_scene_e_material_rejections[ior]",
+        "tests.test_library.test_scene_e_material_rejections[normal]",
+        "tests.test_library.test_scene_e_material_rejections[bump]",
+        "tests.test_library.test_scene_e_material_rejections[scale]",
+        "tests.test_library.test_scene_e_material_rejections[color]",
+        "tests.test_library.test_scene_e_material_rejections[state]",
+        "tests.test_library.test_scene_e_material_rejections[provider]",
+        "tests.test_library.test_scene_e_material_rejections[license]",
+        "tests.test_library.test_scene_e_material_rejections[channel]",
+        "tests.test_library.test_scene_e_material_rejections[space]",
+        "tests.test_library.test_eight_builtins_and_immutable_material_versions",
+        "tests.test_library.test_scene_e_reference_rejections[missing_asset]",
+        "tests.test_library.test_scene_e_reference_rejections[version]",
+        "tests.test_library.test_scene_e_reference_rejections[hash]",
+        "tests.test_library.test_scene_e_reference_rejections[uv]",
+        "tests.test_library.test_scene_e_reference_rejections[uv_rotation]",
+        "tests.test_library.test_scene_e_reference_rejections[missing_material]",
+        "tests.test_library.test_scene_e_reference_rejections[missing_texture]",
+        "tests.test_library.test_polyhaven_response_normalization_user_agent_and_dependencies",
+        "tests.test_library.test_polyhaven_failure_is_not_success[exception0]",
+        "tests.test_library.test_polyhaven_failure_is_not_success[exception1]",
+        "tests.test_library.test_polyhaven_failure_is_not_success[exception2]",
+        "tests.test_library.test_gltf_does_not_resolve_unlisted_remote_or_escaped_dependencies[../escape.bin]",
+        "tests.test_library.test_gltf_does_not_resolve_unlisted_remote_or_escaped_dependencies[https://remote/model.bin]",
+        "tests.test_library.test_gltf_does_not_resolve_unlisted_remote_or_escaped_dependencies[/absolute.bin]"
       ],
-      "sha256": "f58915087ac48a1c8b768784cde8403ed8e1e0a4fdb93d3463676c55299b209a"
+      "sha256": "64d77feff6fa9e04602b26fe6dad3e46268affeba0cb67edc080ce1ad358da0a"
     }
   },
   "validation_status": "validated",

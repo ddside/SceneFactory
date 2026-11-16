@@ -33,7 +33,7 @@ def geometry_digest(mesh):
     return sha.hexdigest()
 
 
-def validate_scene(plan, registry, domain_validators=()):
+def validate_scene(plan, registry, domain_validators=(),resource_root=None):
     scene = bpy.context.scene
     for key, expected in (("scene_id", plan["scene_id"]), ("seed", plan["seed"]),
                           ("schema_version", 2), ("source_schema_version", plan["source_schema_version"]),
@@ -53,6 +53,10 @@ def validate_scene(plan, registry, domain_validators=()):
         raise ValueError("scene contains missing/unexpected artifacts")
     nodes = {n["node_id"]: n for n in plan["nodes"]}
     primary = {nid: actual[n["expected_artifacts"][0]["artifact_id"]] for nid, n in nodes.items()}
+    appearance_inventory={};appearance_result=None
+    if plan.get('appearance') or any(o.get('appearance_bound') for o in scene.objects):
+        from scene_factory.blender.appearance import validate
+        appearance_inventory,appearance_result=validate(plan,resource_root)
     inventory, legacy_objects = [], []
     for aid, declaration in sorted(expected.items()):
         obj = actual[aid]
@@ -65,13 +69,20 @@ def validate_scene(plan, registry, domain_validators=()):
                 raise ValueError(f"{aid}.{key}: metadata mismatch")
         if obj.get("typed_inputs") != json.dumps(node["resolved_inputs"], sort_keys=True):
             raise ValueError(f"{aid}: typed input binding mismatch")
-        if obj.parent != (primary[node["parent_id"]] if node["parent_id"] else None):
+        if 'component' in declaration:
+            parent_role=declaration['component']['parent_role']
+            parent_obj=actual[next(a['artifact_id'] for a in node['expected_artifacts'] if a['local_role']==parent_role)]
+        else:parent_obj=primary[node['parent_id']] if node['parent_id'] else None
+        if obj.parent != parent_obj:
             raise ValueError(f"{aid}: spatial parent mismatch")
         if obj.modifiers or obj.constraints or obj.animation_data:
             raise ValueError(f"{aid}: undeclared modifiers/constraints/animation unsupported in Phase 2A")
-        for row, exp in zip(obj.matrix_basis, node["local_matrix"]):
+        basis=declaration.get('component',{}).get('local_matrix',node['local_matrix'])
+        from mathutils import Matrix
+        expected_world=(parent_obj.matrix_world @ Matrix(basis)) if parent_obj else Matrix(basis)
+        for row, exp in zip(obj.matrix_basis, basis):
             close(row, exp, aid + ".local_matrix")
-        for row, exp in zip(obj.matrix_world, node["world_matrix"]):
+        for row, exp in zip(obj.matrix_world, expected_world):
             close(row, exp, aid + ".world_matrix")
         for i, row in enumerate(obj.matrix_parent_inverse):
             close(row, [float(i == j) for j in range(4)], aid + ".matrix_parent_inverse")
@@ -101,13 +112,16 @@ def validate_scene(plan, registry, domain_validators=()):
                           "geometry_digest": digest, "vertex_count": vertex_count, "face_count": face_count,
                           "bounds": [[round(v,6) for v in low], [round(v,6) for v in high]],
                           "local_matrix": rounded_matrix(obj.matrix_basis), "world_matrix": rounded_matrix(obj.matrix_world)})
-    context = {"plan": plan, "primary_objects": primary}
+    for a in inventory:
+        if a['artifact_id'] in appearance_inventory:a['appearance']=appearance_inventory[a['artifact_id']]
+    context = {"plan": plan, "primary_objects": primary,"resource_root":resource_root}
     skill_results = []
     for node in plan["nodes"]:
         manifest = registry.get(node["skill"]["skill_id"], node["skill"]["version"], plan["validation_candidates"])
         objects = {a["local_role"]: actual[a["artifact_id"]] for a in node["expected_artifacts"]}
         result = callback(registry, manifest["validator"])(node, objects, context)
         if result is not None: skill_results.append(result)
+    if appearance_result:skill_results.append(appearance_result)
     domain_results = skill_results + [validator(plan, context) for validator in domain_validators]
     mapping = {}
     for a in inventory:
