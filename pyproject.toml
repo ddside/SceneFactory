@@ -1,6 +1,6 @@
 [project]
 name = "scene-factory"
-version = "0.6.0"
+version = "0.7.0"
 description = "Procedural 3D environments with Python and Blender CLI"
 requires-python = ">=3.12,<3.13"
 dependencies = []

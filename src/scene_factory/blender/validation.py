@@ -33,7 +33,7 @@ def geometry_digest(mesh):
     return sha.hexdigest()
 
 
-def validate_scene(plan, registry, domain_validators=(),resource_root=None):
+def validate_scene(plan, registry, domain_validators=(),resource_root=None,artifact_state=None):
     scene = bpy.context.scene
     for key, expected in (("scene_id", plan["scene_id"]), ("seed", plan["seed"]),
                           ("schema_version", 2), ("source_schema_version", plan["source_schema_version"]),
@@ -56,7 +56,7 @@ def validate_scene(plan, registry, domain_validators=(),resource_root=None):
     appearance_inventory={};appearance_result=None
     if plan.get('appearance') or any(o.get('appearance_bound') for o in scene.objects):
         from scene_factory.blender.appearance import validate
-        appearance_inventory,appearance_result=validate(plan,resource_root)
+        appearance_inventory,appearance_result=validate(plan,resource_root,skip_spatial=artifact_state is not None)
     inventory, legacy_objects = [], []
     for aid, declaration in sorted(expected.items()):
         obj = actual[aid]
@@ -73,11 +73,14 @@ def validate_scene(plan, registry, domain_validators=(),resource_root=None):
             parent_role=declaration['component']['parent_role']
             parent_obj=actual[next(a['artifact_id'] for a in node['expected_artifacts'] if a['local_role']==parent_role)]
         else:parent_obj=primary[node['parent_id']] if node['parent_id'] else None
+        pose = artifact_state['records'][aid] if artifact_state else None
+        if pose:
+            parent_obj=actual[pose['parent']] if pose['parent'] else None
         if obj.parent != parent_obj:
             raise ValueError(f"{aid}: spatial parent mismatch")
         if obj.modifiers or obj.constraints or obj.animation_data:
             raise ValueError(f"{aid}: undeclared modifiers/constraints/animation unsupported in Phase 2A")
-        basis=declaration.get('component',{}).get('local_matrix',node['local_matrix'])
+        basis=pose['basis'] if pose else declaration.get('component',{}).get('local_matrix',node['local_matrix'])
         from mathutils import Matrix
         expected_world=(parent_obj.matrix_world @ Matrix(basis)) if parent_obj else Matrix(basis)
         for row, exp in zip(obj.matrix_basis, basis):
@@ -118,6 +121,7 @@ def validate_scene(plan, registry, domain_validators=(),resource_root=None):
     skill_results = []
     for node in plan["nodes"]:
         manifest = registry.get(node["skill"]["skill_id"], node["skill"]["version"], plan["validation_candidates"])
+        if artifact_state and node['node_id'] in artifact_state['skip']:continue
         objects = {a["local_role"]: actual[a["artifact_id"]] for a in node["expected_artifacts"]}
         result = callback(registry, manifest["validator"])(node, objects, context)
         if result is not None: skill_results.append(result)

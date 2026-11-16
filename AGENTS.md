@@ -224,3 +224,24 @@ example input fixtures belong in Git.
 - Run existing regressions and new furniture/interior tests with both Blender
   variables. Live Provider tests need no rerun if no Provider code changed.
   Record metrics, simplifications, actual image review and unverified platforms.
+
+## Phase 3D damage (overrides normal-only scope when explicitly requested)
+- Read docs/phase3d.md. Preserve normal nodes/materials and add versioned damage
+  intent in a new Revision. Keep the normal interior profile unchanged; use
+  damaged_interior and the registered damage_processor for explicit damage.
+- Resolve real component node IDs and optional Mesh roles. Reject conflicts,
+  unsupported targets/regions/supports and unvalidated/stale processor evidence.
+- Copy Mesh data only for geometry changes. Rigid poses/detach preserve sharing.
+  Keep source IDs/lineage, stable fragment IDs, MaterialRefs and unaffected digests.
+- Validate the normal baseline first, then damaged solids/support/contact policy.
+  Reopen validation replays in an isolated Scene and independently checks geometry.
+  Do not apply normal upright/connected/passable requirements to intended damage.
+- AABB only selects candidates. Use real solid intersections or certified
+  enclosure/core intervals; never call an AABB overlap a proven major penetration.
+  Record measurement uncertainty. PASS/WARNING do not trigger automatic repair.
+  FAIL uses existing bounded Repair and must not be accepted while another FAIL remains.
+- Record room/corridor passable/partially_blocked/blocked evidence. Intended
+  closure is valid; explicit passage expectations must still be satisfied.
+- Inspect actual attempt images before image-bound review. Preserve old accepted
+  and prove edit/rollback. Do not claim physics, structural stability, complete
+  arbitrary-mesh fracture, or USD/Isaac Sim compatibility from geometry validation.

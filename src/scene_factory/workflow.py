@@ -154,7 +154,7 @@ def execute(project,executable,options):
             opts=dict(options)
             opts['resolution']=min(opts['resolution'],budget['max_resolution'])
             opts['samples']=min(opts['samples'],budget['max_samples'])
-            if workflow['profile']['profile_id'] in ('appearance','interior'):opts['denoise']=True
+            if workflow['profile']['profile_id'] in ('appearance','interior','damaged_interior'):opts['denoise']=True
             opts['_deadline_epoch']=deadline
             aid=uid('attempt')
             attempt={'schema_version':1,'attempt_id':aid,'workflow_id':wid,'revision_id':rid,'intent_id':intent['intent_id'],
@@ -169,7 +169,7 @@ def execute(project,executable,options):
                 attempt['build_id']=built['build_id']; _save_attempt(project,attempt)
                 operate(project,'validate',executable,opts,build_id=built['build_id'],check_working_spec=False,_locked=True)
                 views=[(name,direction,[]) for name,direction in VIEWS.items()]
-                if workflow['profile']['profile_id'] in ('architectural','appearance','interior'):
+                if workflow['profile']['profile_id'] in ('architectural','appearance','interior','damaged_interior'):
                     views=[('overview',VIEWS['overview'],[]),('top',VIEWS['top'],['cover']),
                            ('interior',[1,-1.4,1.6],['cover','south_wall'])]
                 for name,direction,hidden in views:

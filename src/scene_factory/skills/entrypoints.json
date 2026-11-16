@@ -181,5 +181,56 @@
       "contract_utils.py",
       "spec.py"
     ]
+  },
+  "damage.generate": {
+    "module": "scene_factory.blender.skills.damage",
+    "function": "generate",
+    "support_files": [
+      "artifacts.py",
+      "blender/appearance.py",
+      "blender/damage_geometry.py",
+      "blender/damage_runtime.py",
+      "blender/damage_validation.py",
+      "blender/engine.py",
+      "blender/generators.py",
+      "blender/interior.py",
+      "blender/validation.py",
+      "damage_contracts.py",
+      "interior_contracts.py"
+    ]
+  },
+  "damage.validate": {
+    "module": "scene_factory.blender.skills.damage",
+    "function": "validate",
+    "support_files": [
+      "artifacts.py",
+      "blender/appearance.py",
+      "blender/damage_geometry.py",
+      "blender/damage_runtime.py",
+      "blender/damage_validation.py",
+      "blender/engine.py",
+      "blender/generators.py",
+      "blender/interior.py",
+      "blender/validation.py",
+      "damage_contracts.py",
+      "interior_contracts.py"
+    ]
+  },
+  "damage.apply": {
+    "module": "scene_factory.blender.skills.damage",
+    "function": "apply",
+    "support_files": [
+      "artifacts.py",
+      "blender/appearance.py",
+      "blender/damage_geometry.py",
+      "blender/damage_runtime.py",
+      "blender/damage_validation.py",
+      "blender/engine.py",
+      "blender/generators.py",
+      "blender/interior.py",
+      "blender/validation.py",
+      "damage_contracts.py",
+      "interior_contracts.py"
+    ]
   }
 }

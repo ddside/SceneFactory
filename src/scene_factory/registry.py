@@ -87,7 +87,7 @@ class Registry:
         required = ("schema_version", "skill_id", "version", "name", "description", "category", "tags",
                     "kind", "parameter_schema", "inputs", "outputs", "artifacts", "implementation",
                     "validator", "dependencies", "blender_compatibility", "examples", "validation_status")
-        fields(value, "SkillManifest", required, ("recipe", "validation_evidence", "contract", "test_scenes", "asset_consumer", "test_catalog"))
+        fields(value, "SkillManifest", required, ("recipe", "validation_evidence", "contract", "test_scenes", "asset_consumer", "test_catalog", "postprocess"))
         if type(value["schema_version"]) is not int or value["schema_version"] != 1:
             raise SpecError("SkillManifest.schema_version: only 1 supported")
         identifier(value["skill_id"], "skill_id")
@@ -138,6 +138,8 @@ class Registry:
             catalog=(PACKAGE/value['test_catalog']).resolve()
             if not catalog.is_relative_to(PACKAGE.resolve()) or not catalog.is_dir():
                 raise SpecError('test_catalog must be a reviewed packaged fixture directory')
+        if "postprocess" in value:
+            self.binding(value["postprocess"])
         self.binding(value["implementation"])
         self.binding(value["validator"])
         if value["kind"] == "recipe":
@@ -225,6 +227,7 @@ class Registry:
                 "implementation": self.binding(manifest["implementation"]),
                 "validator": self.binding(manifest["validator"]),
                 **({"contract": self.binding(manifest["contract"])} if "contract" in manifest else {}),
+                **({"postprocess":self.binding(manifest["postprocess"])} if "postprocess" in manifest else {}),
                 "dependencies": manifest["dependencies"],
                 "dependency_pins": [self.pin(self.manifests[(d["skill_id"],d["version"])]) for d in manifest["dependencies"]]}
 

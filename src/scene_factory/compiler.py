@@ -204,6 +204,21 @@ def compile_scene(source, registry=None, source_sha256=None, runtime_profile=Non
         plan["interior"] = copy.deepcopy(authored["interior"])
         plan["interior_metadata"] = interior_report
     plan["plan_digest"] = canonical_digest(plan)
+    if 'damage' in authored:
+        from .damage_contracts import resolve
+        effect=resolve(authored['damage'],plan)
+        controller=resolved[effect['controller_node_id']]
+        manifest=registry.get(controller['skill']['skill_id'],controller['skill']['version'],allow_candidates)
+        if 'postprocess' not in manifest:raise SpecError('damage controller has no registered postprocessor')
+        plan['baseline_plan']=copy.deepcopy(plan)
+        plan['damage']=effect
+        plan['damage_postprocess']=manifest['postprocess']
+        for op in effect['operations']:
+            for a in plan['expected_artifacts']:
+                if a['artifact_id'] in op['artifact_ids']:
+                    a['damage']={'operation_id':op['operation_id'],'original_artifact_id':a['artifact_id'],'state':op['state'],'fixed':'fragment_artifact_id' in op or op['support']['kind']=='retained'}
+        plan['expected_artifacts']=sorted(plan['expected_artifacts']+effect['fragments'],key=lambda a:a['artifact_id'])
+        plan['plan_digest']=canonical_digest({k:v for k,v in plan.items() if k!='plan_digest'})
     return {"resolved_scene": resolved_scene, "build_plan": plan, "skills_lock": lock}
 
 

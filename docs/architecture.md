@@ -1,6 +1,17 @@
 # Scene Factory — アーキテクチャと実環境
 
-## 現行のPhase 3C
+## 現行のPhase 3D
+
+[Phase 3D実装記録](phase3d.md)を損傷生成の現行仕様とする。
+正常SceneSpecを保持したdamage v1と登録済みProcessorを新Revisionに追加する。
+純粋compileで対象と破片IDを解決し、正常baselineの実検証後にcopy-on-write、
+実Geometryの切断/欠損、転倒/脱落/崩落を適用する。再読込では別Sceneへ再実行し、
+全Artifactの形状・姿勢・共有・lineageを照合し、独立した閉形状・接地・接触検査も行う。
+damaged_interior profileは正常interiorの意味を変えず、意図した閉塞と軽微な交差を許容する。
+重大判定は実Geometryまたは保証された交差下限から行い、AABBだけでは断定しない。
+USD/Isaac Sim、構造解析、剛体、火災/浸水は別段階。
+
+## Phase 3Cの正常屋内基盤（維持）
 
 [Phase 3C実装記録](phase3c.md)を屋内生成の現行仕様とする。
 共通家具部材Leafと複合Recipe、用途別配置パターンを既存Registryの上に追加した。

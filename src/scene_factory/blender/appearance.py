@@ -134,11 +134,11 @@ def apply(plan,root):
     bpy.context.scene['material_build_seconds']=time.monotonic()-started
 
 
-def validate(plan,root):
+def validate(plan,root,skip_spatial=False):
     bundle=plan.get('resources');groups=grouped(plan);inventory={};texture_hashes=set()
     for obj in bpy.context.scene.objects:
         if obj.get('appearance_bound') and (obj.get('producer_node_id'),obj.get('local_role')) not in groups:raise ValueError('unbound/forged appearance marker')
-    no_coplanar_overlap([o for o in bpy.context.scene.objects if o.get('appearance_bound')])
+    if not skip_spatial:no_coplanar_overlap([o for o in bpy.context.scene.objects if o.get('appearance_bound')])
     for (nid,role),bindings in groups.items():
         node=next(n for n in plan['nodes'] if n['node_id']==nid);aid=next(a['artifact_id'] for a in node['expected_artifacts'] if a['local_role']==role);obj=bpy.data.objects[aid]
         if not obj.get('appearance_bound') or obj.get('appearance_bindings')!=canonical_digest(bindings) or len(obj.data.materials)!=1:raise ValueError('appearance binding/material missing')
@@ -178,7 +178,7 @@ def validate(plan,root):
         inventory[aid]={'bindings':bindings,'material_refs':{b['material']:plan['appearance']['materials'][b['material']] for b in bindings},
                         'uv_digest':uv_digest(obj),'shader_digest':actual,'texture_hashes':sorted(local_hashes)}
     return inventory,{'kind':'appearance','state':'passed','material_count':len(groups),'texture_count':len(texture_hashes),'asset_count':sum('asset_key' in n for n in plan['nodes']),
-                      'material_build_seconds':bpy.context.scene.get('material_build_seconds',0),'checks':['PBR','texture_hashes','color_spaces','metric_UV','bindings','offline_resources','no_coplanar_surface_overlap']}
+                      'material_build_seconds':bpy.context.scene.get('material_build_seconds',0),'checks':['PBR','texture_hashes','color_spaces','metric_UV','bindings','offline_resources',*(['no_coplanar_surface_overlap'] if not skip_spatial else [])]}
 
 
 def no_coplanar_overlap(objects):

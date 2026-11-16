@@ -83,6 +83,9 @@ def check(value,nodes,measured=None):
                 # Frozen asset metadata is required for pure asset bounds.
                 bounds=part.get('interior_asset_bounds');require(bounds is not None,'asset bounds missing')
                 boxes[part['node_id']+':asset']=transformed_box(multiply(inv,part['world_matrix']),*bounds)
+            elif part.get('typed_outputs',{}).get('dimensions',{}).get('type')=='Dimensions':
+                dims=part['typed_outputs']['dimensions']['value']
+                boxes[part['node_id']+':geometry']=transformed_box(multiply(inv,part['world_matrix']),[-dims[0]/2,-dims[1]/2,0],[dims[0]/2,dims[1]/2,dims[2]])
             else:raise SpecError('interior: unsupported mesh skill')
         require(bool(boxes),'item has no mesh components');bounds=bounds_union(list(boxes.values()));p=room['parameters'];clearance=item['placement']['minimum_clearance']
         require(all(bounds[0][i]>=-p[k]/2+clearance-EPS and bounds[1][i]<=p[k]/2-clearance+EPS for i,k in enumerate(['width','depth'])),'item outside room / wall clearance: '+nid)

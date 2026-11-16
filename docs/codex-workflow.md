@@ -134,3 +134,18 @@ interior profileでgenerate/editし、機械検査後のoverview/top/interiorを
 新Revisionで共通ノードのID/seed/geometry digestと旧acceptedの保護を比較する。
 Rollbackは従来どおり再生成せずbundleを切り替える。共有Meshの将来の損傷編集は
 copy-on-writeを必要とする。正常状態と破壊・物理の受入を混同しない。
+
+## Phase 3D: 正常状態から損傷Revisionへ
+
+[損傷契約と検証](phase3d.md)に従い、正常Specのnodes/appearanceを維持してdamage操作を追加する。
+登録済みdamage_processorと実在するRecipe部材node/roleを使う。部材IDを推測で作らず、
+compile済みPlanやRegistryのlocal_keyから解決する。新しいLLM/MCP/UIは不要。
+
+damaged_interiorで生成・編集し、実Geometry、支持、接触のPASS/WARNING/FAIL、
+通路分類と明示した閉塞意図を読む。PASS/WARNINGをゼロ交差へ修復しない。
+FAILだけを既存Repairの予算内で修正し、別のFAILも再評価する。閾値を緩めて受理しない。
+全画像を実閲覧してreviewを提出する。失敗Attemptや未閲覧を受理しない。
+
+damage_layout.clear_damageで選択操作を解除できる。全解除時はcontrollerも除去し、
+正常interior profileへ戻す。小さな領域変更でも同じoperation IDを保って破片IDを維持する。
+新Revisionの共通Artifactのdigest/MaterialRefと旧acceptedを比較し、Rollbackは再生成せず行う。

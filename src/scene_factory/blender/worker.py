@@ -80,11 +80,15 @@ def execute(request, out):
         raise ValueError("SceneSpec v2 requires a compiled BuildPlan")
     if action == "build":
         if plan is not None:
-            generate_plan(plan, registry,resource_root)
-            if plan.get('appearance'):
+            if 'damage' in plan:
+                from scene_factory.blender.damage_runtime import build
+                validation=build(plan,registry,resource_root)
+            else:
+                generate_plan(plan, registry,resource_root)
+            if 'damage' not in plan and plan.get('appearance'):
                 from scene_factory.blender.appearance import apply
                 apply(plan,resource_root)
-            validation = validate_scene(plan, registry,domain_validators=(validate_interior,) if "interior" in plan else (),resource_root=resource_root)
+            if 'damage' not in plan:validation = validate_scene(plan, registry,domain_validators=(validate_interior,) if "interior" in plan else (),resource_root=resource_root)
         else:
             generate(spec)
             validation = validate_legacy_scene(spec)
@@ -95,7 +99,10 @@ def execute(request, out):
         return {**metadata, **validation, "scene_file": str(path)}
     if action in ("validate", "preview"):
         bpy.ops.wm.open_mainfile(filepath=request["blend_path"], load_ui=False, use_scripts=False)
-        validation = validate_scene(plan, registry,domain_validators=(validate_interior,) if "interior" in plan else (),resource_root=resource_root) if plan is not None else validate_legacy_scene(spec)
+        if plan is not None and 'damage' in plan:
+            from scene_factory.blender.damage_runtime import validate_saved
+            validation=validate_saved(plan,registry,resource_root)
+        else:validation = validate_scene(plan, registry,domain_validators=(validate_interior,) if "interior" in plan else (),resource_root=resource_root) if plan is not None else validate_legacy_scene(spec)
         if action == "validate":
             return {**metadata, **validation, "reopened": True}
         selected = render(out / "preview.png", request["device"], request["resolution"], request["samples"],
