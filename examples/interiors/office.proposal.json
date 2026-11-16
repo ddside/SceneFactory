@@ -1,0 +1,4872 @@
+{
+  "raw_request": "3部屋あるオフィス。執務室に机と椅子を6セット、会議室にテーブルと椅子、倉庫に棚と箱。",
+  "scene_spec": {
+    "schema_version": 2,
+    "scene_id": "interior-office",
+    "seed": 42,
+    "units": "m",
+    "nodes": [
+      {
+        "node_id": "building.main",
+        "skill": {
+          "skill_id": "arch_building",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "width": 18,
+          "depth": 14,
+          "height": 3,
+          "wall_thickness": 0.2,
+          "room_count": 3,
+          "corridor_width": 1.6
+        },
+        "parent_id": null,
+        "transform": {
+          "location": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.wall.south",
+        "skill": {
+          "skill_id": "arch_wall",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "length": 18,
+          "height": 3,
+          "thickness": 0.2,
+          "wall_kind": 1,
+          "side": 1,
+          "opening_count": 1,
+          "o1_width": 1,
+          "o1_height": 2.2,
+          "o1_sill": 0,
+          "o1_offset": 0,
+          "o1_kind": 1
+        },
+        "parent_id": "building.main",
+        "transform": {
+          "location": [
+            0,
+            -6.9,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.opening.entrance",
+        "skill": {
+          "skill_id": "arch_opening",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "slot": 1,
+          "width": 1,
+          "height": 2.2,
+          "sill": 0,
+          "offset": 0,
+          "kind": 1,
+          "depth": 0.2
+        },
+        "parent_id": "building.main.wall.south",
+        "transform": {
+          "location": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {
+          "wall": {
+            "node_id": "building.main.wall.south",
+            "output": "wall"
+          }
+        },
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.door.entrance",
+        "skill": {
+          "skill_id": "arch_door",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "width": 1,
+          "height": 2.2,
+          "depth": 0.2
+        },
+        "parent_id": "building.main.opening.entrance",
+        "transform": {
+          "location": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {
+          "opening": {
+            "node_id": "building.main.opening.entrance",
+            "output": "opening"
+          }
+        },
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.wall.north",
+        "skill": {
+          "skill_id": "arch_wall",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "length": 18,
+          "height": 3,
+          "thickness": 0.2,
+          "wall_kind": 1,
+          "side": 2,
+          "opening_count": 3,
+          "o1_width": 1.2,
+          "o1_height": 1.2,
+          "o1_sill": 1,
+          "o1_offset": -5.933333333333334,
+          "o1_kind": 2,
+          "o2_width": 1.2,
+          "o2_height": 1.2,
+          "o2_sill": 1,
+          "o2_offset": 8.881784197001252e-16,
+          "o2_kind": 2,
+          "o3_width": 1.2,
+          "o3_height": 1.2,
+          "o3_sill": 1,
+          "o3_offset": 5.933333333333335,
+          "o3_kind": 2
+        },
+        "parent_id": "building.main",
+        "transform": {
+          "location": [
+            0,
+            6.9,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.opening.window.room01",
+        "skill": {
+          "skill_id": "arch_opening",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "slot": 1,
+          "width": 1.2,
+          "height": 1.2,
+          "sill": 1,
+          "offset": -5.933333333333334,
+          "kind": 2,
+          "depth": 0.2
+        },
+        "parent_id": "building.main.wall.north",
+        "transform": {
+          "location": [
+            -5.933333333333334,
+            0,
+            1
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {
+          "wall": {
+            "node_id": "building.main.wall.north",
+            "output": "wall"
+          }
+        },
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.window.room01",
+        "skill": {
+          "skill_id": "arch_window",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "width": 1.2,
+          "height": 1.2,
+          "depth": 0.2
+        },
+        "parent_id": "building.main.opening.window.room01",
+        "transform": {
+          "location": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {
+          "opening": {
+            "node_id": "building.main.opening.window.room01",
+            "output": "opening"
+          }
+        },
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.opening.window.room02",
+        "skill": {
+          "skill_id": "arch_opening",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "slot": 2,
+          "width": 1.2,
+          "height": 1.2,
+          "sill": 1,
+          "offset": 8.881784197001252e-16,
+          "kind": 2,
+          "depth": 0.2
+        },
+        "parent_id": "building.main.wall.north",
+        "transform": {
+          "location": [
+            8.881784197001252e-16,
+            0,
+            1
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {
+          "wall": {
+            "node_id": "building.main.wall.north",
+            "output": "wall"
+          }
+        },
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.window.room02",
+        "skill": {
+          "skill_id": "arch_window",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "width": 1.2,
+          "height": 1.2,
+          "depth": 0.2
+        },
+        "parent_id": "building.main.opening.window.room02",
+        "transform": {
+          "location": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {
+          "opening": {
+            "node_id": "building.main.opening.window.room02",
+            "output": "opening"
+          }
+        },
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.opening.window.room03",
+        "skill": {
+          "skill_id": "arch_opening",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "slot": 3,
+          "width": 1.2,
+          "height": 1.2,
+          "sill": 1,
+          "offset": 5.933333333333335,
+          "kind": 2,
+          "depth": 0.2
+        },
+        "parent_id": "building.main.wall.north",
+        "transform": {
+          "location": [
+            5.933333333333335,
+            0,
+            1
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {
+          "wall": {
+            "node_id": "building.main.wall.north",
+            "output": "wall"
+          }
+        },
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.window.room03",
+        "skill": {
+          "skill_id": "arch_window",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "width": 1.2,
+          "height": 1.2,
+          "depth": 0.2
+        },
+        "parent_id": "building.main.opening.window.room03",
+        "transform": {
+          "location": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {
+          "opening": {
+            "node_id": "building.main.opening.window.room03",
+            "output": "opening"
+          }
+        },
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.wall.west",
+        "skill": {
+          "skill_id": "arch_wall",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "length": 13.6,
+          "height": 3,
+          "thickness": 0.2,
+          "wall_kind": 1,
+          "side": 3,
+          "opening_count": 0
+        },
+        "parent_id": "building.main",
+        "transform": {
+          "location": [
+            -8.9,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            90
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.wall.east",
+        "skill": {
+          "skill_id": "arch_wall",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "length": 13.6,
+          "height": 3,
+          "thickness": 0.2,
+          "wall_kind": 1,
+          "side": 4,
+          "opening_count": 0
+        },
+        "parent_id": "building.main",
+        "transform": {
+          "location": [
+            8.9,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            90
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.wall.corridor",
+        "skill": {
+          "skill_id": "arch_wall",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "length": 17.6,
+          "height": 3,
+          "thickness": 0.2,
+          "wall_kind": 3,
+          "side": 0,
+          "opening_count": 3,
+          "o1_width": 0.95,
+          "o1_height": 2.2,
+          "o1_sill": 0,
+          "o1_offset": -5.933333333333334,
+          "o1_kind": 1,
+          "o2_width": 0.95,
+          "o2_height": 2.2,
+          "o2_sill": 0,
+          "o2_offset": 8.881784197001252e-16,
+          "o2_kind": 1,
+          "o3_width": 0.95,
+          "o3_height": 2.2,
+          "o3_sill": 0,
+          "o3_offset": 5.933333333333335,
+          "o3_kind": 1
+        },
+        "parent_id": "building.main",
+        "transform": {
+          "location": [
+            0,
+            -5.1,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.opening.room01",
+        "skill": {
+          "skill_id": "arch_opening",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "slot": 1,
+          "width": 0.95,
+          "height": 2.2,
+          "sill": 0,
+          "offset": -5.933333333333334,
+          "kind": 1,
+          "depth": 0.2
+        },
+        "parent_id": "building.main.wall.corridor",
+        "transform": {
+          "location": [
+            -5.933333333333334,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {
+          "wall": {
+            "node_id": "building.main.wall.corridor",
+            "output": "wall"
+          }
+        },
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.door.room01",
+        "skill": {
+          "skill_id": "arch_door",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "width": 0.95,
+          "height": 2.2,
+          "depth": 0.2
+        },
+        "parent_id": "building.main.opening.room01",
+        "transform": {
+          "location": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {
+          "opening": {
+            "node_id": "building.main.opening.room01",
+            "output": "opening"
+          }
+        },
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.opening.room02",
+        "skill": {
+          "skill_id": "arch_opening",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "slot": 2,
+          "width": 0.95,
+          "height": 2.2,
+          "sill": 0,
+          "offset": 8.881784197001252e-16,
+          "kind": 1,
+          "depth": 0.2
+        },
+        "parent_id": "building.main.wall.corridor",
+        "transform": {
+          "location": [
+            8.881784197001252e-16,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {
+          "wall": {
+            "node_id": "building.main.wall.corridor",
+            "output": "wall"
+          }
+        },
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.door.room02",
+        "skill": {
+          "skill_id": "arch_door",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "width": 0.95,
+          "height": 2.2,
+          "depth": 0.2
+        },
+        "parent_id": "building.main.opening.room02",
+        "transform": {
+          "location": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {
+          "opening": {
+            "node_id": "building.main.opening.room02",
+            "output": "opening"
+          }
+        },
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.opening.room03",
+        "skill": {
+          "skill_id": "arch_opening",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "slot": 3,
+          "width": 0.95,
+          "height": 2.2,
+          "sill": 0,
+          "offset": 5.933333333333335,
+          "kind": 1,
+          "depth": 0.2
+        },
+        "parent_id": "building.main.wall.corridor",
+        "transform": {
+          "location": [
+            5.933333333333335,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {
+          "wall": {
+            "node_id": "building.main.wall.corridor",
+            "output": "wall"
+          }
+        },
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.door.room03",
+        "skill": {
+          "skill_id": "arch_door",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "width": 0.95,
+          "height": 2.2,
+          "depth": 0.2
+        },
+        "parent_id": "building.main.opening.room03",
+        "transform": {
+          "location": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {
+          "opening": {
+            "node_id": "building.main.opening.room03",
+            "output": "opening"
+          }
+        },
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.wall.partition01",
+        "skill": {
+          "skill_id": "arch_wall",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "length": 11.8,
+          "height": 3,
+          "thickness": 0.2,
+          "wall_kind": 2,
+          "side": 0,
+          "opening_count": 0
+        },
+        "parent_id": "building.main",
+        "transform": {
+          "location": [
+            -2.9666666666666663,
+            0.9000000000000004,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            90
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.wall.partition02",
+        "skill": {
+          "skill_id": "arch_wall",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "length": 11.8,
+          "height": 3,
+          "thickness": 0.2,
+          "wall_kind": 2,
+          "side": 0,
+          "opening_count": 0
+        },
+        "parent_id": "building.main",
+        "transform": {
+          "location": [
+            2.9666666666666677,
+            0.9000000000000004,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            90
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.corridor.main",
+        "skill": {
+          "skill_id": "arch_corridor",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "width": 17.6,
+          "depth": 1.6,
+          "height": 3
+        },
+        "parent_id": "building.main",
+        "transform": {
+          "location": [
+            0,
+            -6.0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {
+          "entrance": {
+            "node_id": "building.main.opening.entrance",
+            "output": "opening"
+          }
+        },
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.01",
+        "skill": {
+          "skill_id": "arch_room",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "width": 5.733333333333334,
+          "depth": 11.8,
+          "height": 3
+        },
+        "parent_id": "building.main",
+        "transform": {
+          "location": [
+            -5.933333333333334,
+            0.9000000000000004,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {
+          "access": {
+            "node_id": "building.main.opening.room01",
+            "output": "opening"
+          },
+          "corridor": {
+            "node_id": "building.main.corridor.main",
+            "output": "space"
+          }
+        },
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.02",
+        "skill": {
+          "skill_id": "arch_room",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "width": 5.733333333333334,
+          "depth": 11.8,
+          "height": 3
+        },
+        "parent_id": "building.main",
+        "transform": {
+          "location": [
+            8.881784197001252e-16,
+            0.9000000000000004,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {
+          "access": {
+            "node_id": "building.main.opening.room02",
+            "output": "opening"
+          },
+          "corridor": {
+            "node_id": "building.main.corridor.main",
+            "output": "space"
+          }
+        },
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.03",
+        "skill": {
+          "skill_id": "arch_room",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "width": 5.733333333333334,
+          "depth": 11.8,
+          "height": 3
+        },
+        "parent_id": "building.main",
+        "transform": {
+          "location": [
+            5.933333333333335,
+            0.9000000000000004,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {
+          "access": {
+            "node_id": "building.main.opening.room03",
+            "output": "opening"
+          },
+          "corridor": {
+            "node_id": "building.main.corridor.main",
+            "output": "space"
+          }
+        },
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.01.furniture.workstation.01",
+        "skill": {
+          "skill_id": "workstation",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.01",
+        "transform": {
+          "location": [
+            -1.65,
+            -3.2,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.01.furniture.workstation.02",
+        "skill": {
+          "skill_id": "workstation",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.01",
+        "transform": {
+          "location": [
+            1.65,
+            -3.2,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.01.furniture.workstation.03",
+        "skill": {
+          "skill_id": "workstation",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.01",
+        "transform": {
+          "location": [
+            -1.65,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.01.furniture.workstation.04",
+        "skill": {
+          "skill_id": "workstation",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.01",
+        "transform": {
+          "location": [
+            1.65,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.01.furniture.workstation.05",
+        "skill": {
+          "skill_id": "workstation",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.01",
+        "transform": {
+          "location": [
+            -1.65,
+            3.2,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.01.furniture.workstation.06",
+        "skill": {
+          "skill_id": "workstation",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.01",
+        "transform": {
+          "location": [
+            1.65,
+            3.2,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.01.furniture.partition",
+        "skill": {
+          "skill_id": "partition",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.01",
+        "transform": {
+          "location": [
+            0,
+            5.6450000000000005,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.01.furniture.light",
+        "skill": {
+          "skill_id": "light_fixture",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.01",
+        "transform": {
+          "location": [
+            0,
+            0,
+            2.92
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.02.furniture.table",
+        "skill": {
+          "skill_id": "desk",
+          "version": "1.0.0"
+        },
+        "parameters": {
+          "width": 2.1,
+          "depth": 1,
+          "height": 0.75
+        },
+        "parent_id": "building.main.room.02",
+        "transform": {
+          "location": [
+            0,
+            1.5,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.02.furniture.chair.south.0",
+        "skill": {
+          "skill_id": "chair",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.02",
+        "transform": {
+          "location": [
+            -0.7,
+            0.55,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            180
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.02.furniture.chair.north.0",
+        "skill": {
+          "skill_id": "chair",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.02",
+        "transform": {
+          "location": [
+            -0.7,
+            2.45,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.02.furniture.chair.south.1",
+        "skill": {
+          "skill_id": "chair",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.02",
+        "transform": {
+          "location": [
+            0,
+            0.55,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            180
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.02.furniture.chair.north.1",
+        "skill": {
+          "skill_id": "chair",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.02",
+        "transform": {
+          "location": [
+            0,
+            2.45,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.02.furniture.chair.south.2",
+        "skill": {
+          "skill_id": "chair",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.02",
+        "transform": {
+          "location": [
+            0.7,
+            0.55,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            180
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.02.furniture.chair.north.2",
+        "skill": {
+          "skill_id": "chair",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.02",
+        "transform": {
+          "location": [
+            0.7,
+            2.45,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.02.furniture.light",
+        "skill": {
+          "skill_id": "light_fixture",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.02",
+        "transform": {
+          "location": [
+            0,
+            0,
+            2.92
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.03.furniture.shelf.00",
+        "skill": {
+          "skill_id": "shelf",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.03",
+        "transform": {
+          "location": [
+            -1.45,
+            5.595000000000001,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.03.furniture.shelf.00.box.00",
+        "skill": {
+          "skill_id": "storage_box",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.03",
+        "transform": {
+          "location": [
+            -1.7,
+            5.595000000000001,
+            0.93
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.03.furniture.shelf.00.box.01",
+        "skill": {
+          "skill_id": "storage_box",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.03",
+        "transform": {
+          "location": [
+            -1.2,
+            5.595000000000001,
+            0.93
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.03.furniture.shelf.01",
+        "skill": {
+          "skill_id": "shelf",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.03",
+        "transform": {
+          "location": [
+            1.45,
+            5.595000000000001,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.03.furniture.shelf.01.box.00",
+        "skill": {
+          "skill_id": "storage_box",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.03",
+        "transform": {
+          "location": [
+            1.2,
+            5.595000000000001,
+            0.93
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.03.furniture.shelf.01.box.01",
+        "skill": {
+          "skill_id": "storage_box",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.03",
+        "transform": {
+          "location": [
+            1.7,
+            5.595000000000001,
+            0.93
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.03.furniture.filing",
+        "skill": {
+          "skill_id": "filing_cabinet",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.03",
+        "transform": {
+          "location": [
+            -2.481666666666667,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            270
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      },
+      {
+        "node_id": "building.main.room.03.furniture.light",
+        "skill": {
+          "skill_id": "light_fixture",
+          "version": "1.0.0"
+        },
+        "parameters": {},
+        "parent_id": "building.main.room.03",
+        "transform": {
+          "location": [
+            0,
+            0,
+            2.92
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        },
+        "inputs": {},
+        "depends_on": []
+      }
+    ],
+    "interior": {
+      "schema_version": 1,
+      "minimum_passage": 0.8,
+      "rooms": [
+        {
+          "room_id": "building.main.room.01",
+          "purpose": "work_area",
+          "requirements": {
+            "workstation": 6,
+            "desk": 6,
+            "chair": 6,
+            "monitor": 6,
+            "partition": 1,
+            "light_fixture": 1
+          }
+        },
+        {
+          "room_id": "building.main.room.02",
+          "purpose": "meeting",
+          "requirements": {
+            "desk": 1,
+            "chair": 6,
+            "light_fixture": 1
+          }
+        },
+        {
+          "room_id": "building.main.room.03",
+          "purpose": "storage",
+          "requirements": {
+            "shelf": 2,
+            "storage_box": 4,
+            "filing_cabinet": 1,
+            "light_fixture": 1
+          }
+        }
+      ],
+      "items": [
+        {
+          "node_id": "building.main.room.01.furniture.workstation.01",
+          "room_id": "building.main.room.01",
+          "semantic_type": "workstation",
+          "initial_state": "normal",
+          "support": {
+            "kind": "floor"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 0,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.01.furniture.workstation.02",
+          "room_id": "building.main.room.01",
+          "semantic_type": "workstation",
+          "initial_state": "normal",
+          "support": {
+            "kind": "floor"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 0,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.01.furniture.workstation.03",
+          "room_id": "building.main.room.01",
+          "semantic_type": "workstation",
+          "initial_state": "normal",
+          "support": {
+            "kind": "floor"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 0,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.01.furniture.workstation.04",
+          "room_id": "building.main.room.01",
+          "semantic_type": "workstation",
+          "initial_state": "normal",
+          "support": {
+            "kind": "floor"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 0,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.01.furniture.workstation.05",
+          "room_id": "building.main.room.01",
+          "semantic_type": "workstation",
+          "initial_state": "normal",
+          "support": {
+            "kind": "floor"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 0,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.01.furniture.workstation.06",
+          "room_id": "building.main.room.01",
+          "semantic_type": "workstation",
+          "initial_state": "normal",
+          "support": {
+            "kind": "floor"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 0,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.01.furniture.partition",
+          "room_id": "building.main.room.01",
+          "semantic_type": "partition",
+          "initial_state": "normal",
+          "support": {
+            "kind": "floor"
+          },
+          "placement": {
+            "mode": "wall_aligned",
+            "facing": 0,
+            "minimum_clearance": 0.08,
+            "wall": "north"
+          }
+        },
+        {
+          "node_id": "building.main.room.01.furniture.light",
+          "room_id": "building.main.room.01",
+          "semantic_type": "light_fixture",
+          "initial_state": "normal",
+          "support": {
+            "kind": "ceiling",
+            "node_id": "n.c9509bb4b63cb3e210ba831d7b6c94d06dd6052d"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 0,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.02.furniture.table",
+          "room_id": "building.main.room.02",
+          "semantic_type": "desk",
+          "initial_state": "normal",
+          "support": {
+            "kind": "floor"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 0,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.02.furniture.chair.south.0",
+          "room_id": "building.main.room.02",
+          "semantic_type": "chair",
+          "initial_state": "normal",
+          "support": {
+            "kind": "floor"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 180,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.02.furniture.chair.north.0",
+          "room_id": "building.main.room.02",
+          "semantic_type": "chair",
+          "initial_state": "normal",
+          "support": {
+            "kind": "floor"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 0,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.02.furniture.chair.south.1",
+          "room_id": "building.main.room.02",
+          "semantic_type": "chair",
+          "initial_state": "normal",
+          "support": {
+            "kind": "floor"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 180,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.02.furniture.chair.north.1",
+          "room_id": "building.main.room.02",
+          "semantic_type": "chair",
+          "initial_state": "normal",
+          "support": {
+            "kind": "floor"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 0,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.02.furniture.chair.south.2",
+          "room_id": "building.main.room.02",
+          "semantic_type": "chair",
+          "initial_state": "normal",
+          "support": {
+            "kind": "floor"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 180,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.02.furniture.chair.north.2",
+          "room_id": "building.main.room.02",
+          "semantic_type": "chair",
+          "initial_state": "normal",
+          "support": {
+            "kind": "floor"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 0,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.02.furniture.light",
+          "room_id": "building.main.room.02",
+          "semantic_type": "light_fixture",
+          "initial_state": "normal",
+          "support": {
+            "kind": "ceiling",
+            "node_id": "n.c9509bb4b63cb3e210ba831d7b6c94d06dd6052d"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 0,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.03.furniture.shelf.00",
+          "room_id": "building.main.room.03",
+          "semantic_type": "shelf",
+          "initial_state": "normal",
+          "support": {
+            "kind": "floor"
+          },
+          "placement": {
+            "mode": "wall_aligned",
+            "facing": 0,
+            "minimum_clearance": 0.08,
+            "wall": "north"
+          }
+        },
+        {
+          "node_id": "building.main.room.03.furniture.shelf.00.box.00",
+          "room_id": "building.main.room.03",
+          "semantic_type": "storage_box",
+          "initial_state": "normal",
+          "support": {
+            "kind": "on_top",
+            "node_id": "n.d87cbc3443a8ff780ac8f04af814d1cd61760962"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 0,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.03.furniture.shelf.00.box.01",
+          "room_id": "building.main.room.03",
+          "semantic_type": "storage_box",
+          "initial_state": "normal",
+          "support": {
+            "kind": "on_top",
+            "node_id": "n.d87cbc3443a8ff780ac8f04af814d1cd61760962"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 0,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.03.furniture.shelf.01",
+          "room_id": "building.main.room.03",
+          "semantic_type": "shelf",
+          "initial_state": "normal",
+          "support": {
+            "kind": "floor"
+          },
+          "placement": {
+            "mode": "wall_aligned",
+            "facing": 0,
+            "minimum_clearance": 0.08,
+            "wall": "north"
+          }
+        },
+        {
+          "node_id": "building.main.room.03.furniture.shelf.01.box.00",
+          "room_id": "building.main.room.03",
+          "semantic_type": "storage_box",
+          "initial_state": "normal",
+          "support": {
+            "kind": "on_top",
+            "node_id": "n.c289fca5abfc65c21f90b1771d5c794f3d68ac0e"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 0,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.03.furniture.shelf.01.box.01",
+          "room_id": "building.main.room.03",
+          "semantic_type": "storage_box",
+          "initial_state": "normal",
+          "support": {
+            "kind": "on_top",
+            "node_id": "n.c289fca5abfc65c21f90b1771d5c794f3d68ac0e"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 0,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.03.furniture.filing",
+          "room_id": "building.main.room.03",
+          "semantic_type": "filing_cabinet",
+          "initial_state": "normal",
+          "support": {
+            "kind": "floor"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 270,
+            "minimum_clearance": 0.08
+          }
+        },
+        {
+          "node_id": "building.main.room.03.furniture.light",
+          "room_id": "building.main.room.03",
+          "semantic_type": "light_fixture",
+          "initial_state": "normal",
+          "support": {
+            "kind": "ceiling",
+            "node_id": "n.c9509bb4b63cb3e210ba831d7b6c94d06dd6052d"
+          },
+          "placement": {
+            "mode": "explicit",
+            "facing": 0,
+            "minimum_clearance": 0.08
+          }
+        }
+      ]
+    },
+    "appearance": {
+      "schema_version": 1,
+      "materials": {
+        "concrete": {
+          "material_id": "concrete",
+          "version": "1.0.0",
+          "content_hash": "96f60aec7b4938327ffa033263eb0f8247660445c5531d1dd5514c749a2e1187"
+        },
+        "wood": {
+          "material_id": "wood",
+          "version": "1.0.0",
+          "content_hash": "cfdef354a0301f9d00780e0993082368c27d0bb6efaf7f7be7d3b78a44e3ed5e"
+        },
+        "paint": {
+          "material_id": "painted_wall",
+          "version": "1.0.0",
+          "content_hash": "ec6cbf173e9ebe777fcc5c238cfcd5d581ec866be27aba9387a3b1f97b20552b"
+        },
+        "glass": {
+          "material_id": "glass",
+          "version": "1.0.0",
+          "content_hash": "2b621978ff47584f5db22974873baba58ea77e8fe0027aadf00abaf153b68dbf"
+        },
+        "metal": {
+          "material_id": "metal",
+          "version": "1.0.0",
+          "content_hash": "50b61bdeaad00fe47694dd24a9bb6dda0e3b4f3881a0260da5d515d8e4555be9"
+        },
+        "painted_wall": {
+          "material_id": "painted_wall",
+          "version": "1.0.0",
+          "content_hash": "ec6cbf173e9ebe777fcc5c238cfcd5d581ec866be27aba9387a3b1f97b20552b"
+        },
+        "asphalt": {
+          "material_id": "asphalt",
+          "version": "1.0.0",
+          "content_hash": "168aa7ce7088570cfb426f9074dea22ce503b8cfb06b776b5a04f5b10e6f1990"
+        },
+        "plaster": {
+          "material_id": "plaster",
+          "version": "1.0.0",
+          "content_hash": "68225272e37321ef8312e44d5622e54aab2ea1f3bdec300e961eddbf83255d3f"
+        }
+      },
+      "bindings": [
+        {
+          "node_id": "n.2139d34acac8fb85e45f055db29701afe13ac07d",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.c9509bb4b63cb3e210ba831d7b6c94d06dd6052d",
+          "role": "geometry",
+          "material": "paint",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.04003fbd8bf3e4151a0d51042ac5c71d2d88c4c0",
+          "role": "geometry",
+          "material": "concrete",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.wall.south",
+          "role": "geometry",
+          "material": "concrete",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.door.entrance",
+          "role": "frame",
+          "material": "paint",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.door.entrance",
+          "role": "leaf",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.wall.north",
+          "role": "geometry",
+          "material": "concrete",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.window.room01",
+          "role": "frame",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.window.room01",
+          "role": "glass",
+          "material": "glass",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.window.room02",
+          "role": "frame",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.window.room02",
+          "role": "glass",
+          "material": "glass",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.window.room03",
+          "role": "frame",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.window.room03",
+          "role": "glass",
+          "material": "glass",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.wall.west",
+          "role": "geometry",
+          "material": "concrete",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.wall.east",
+          "role": "geometry",
+          "material": "concrete",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.wall.corridor",
+          "role": "geometry",
+          "material": "paint",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.door.room01",
+          "role": "frame",
+          "material": "paint",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.door.room01",
+          "role": "leaf",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.door.room02",
+          "role": "frame",
+          "material": "paint",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.door.room02",
+          "role": "leaf",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.door.room03",
+          "role": "frame",
+          "material": "paint",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.door.room03",
+          "role": "leaf",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.wall.partition01",
+          "role": "geometry",
+          "material": "paint",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "building.main.wall.partition02",
+          "role": "geometry",
+          "material": "paint",
+          "uv": {
+            "meters_per_repeat": [
+              2,
+              2
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.0079d9bf2f628bcb339edf63c14c710962ee6a27",
+          "role": "geometry",
+          "material": "asphalt",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.00effec0fdc0d3cc6a40d584e34d910a27f043e9",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.01929de5350ef9e02b8bdc3c5868725b7fa34682",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.0250e1e26afdb5ed9d60947b86c429ed602fc094",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.060e0f3fab8146b2bb0bc876d1bc4e4390495a6b",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.067bfb03ec839147196d4e1d7ab73ed765e4ad6a",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.067f9719150239bceaa0160546eef3d1e886d948",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.069de40a4aaedad914d1bbeda7e16ccb88a14ebb",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.0773f87424f308afc0d48efef180bb1662c62424",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.0780bf2c5bba98d4e970c0be73cc9447b2c8cb07",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.07ff436135054942203e6490957e7c6b1fbf2f1b",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.080957d2b6e54320e16368a34a598d62529253a4",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.08586232ad02686e8c7edb8b61c115422cf2bb1b",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.091f23aa376acd0c3851157b093eb3c87908b399",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.09edba4a2958b4bdd44b09d6c9fc8db8b5de91ea",
+          "role": "geometry",
+          "material": "asphalt",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.0b5414080049c61fb10d27d3eb80614997615c20",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.0ca6c89528d22db7cd0a65e40e4fbf41f153712a",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.0d33edead82dd8aec05a744b95bc70989bcaefa0",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.0e09b6b51346fe034b830fedb67d37b0c76fa2df",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.0ea5baf907406534733e3a9969486c3033d03329",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.0f8f06824c19b64b44f73311fa657fa89dc32b38",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.101edbc570ca4d8ab29e9c09a50d09877c921ed6",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.1029a49a725c0028da27add233d6fb4f913c98fd",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.103a1ced2ca21bd24eae3ec404e53016ce696c7e",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.11379266bad41622f6e810689499aea647600f59",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.115c1f79d9ddc03f2c4004081c540cab40ae7764",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.131bf5a77df364934373a6b783f4567bc1c519ce",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.1332649ca9755b55f344504227c5a27fa54a78b5",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.13720f1319fa2eaa05f0e47a208731553fc66f2f",
+          "role": "geometry",
+          "material": "asphalt",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.16485e546f5bda209e8542717807d8f42fd447ea",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.188d70abca3ebf3fb92d0ee840d22f111d2909c7",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.18df447674f9f27492f1aea4a331f620d46f1334",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.19fbc355fa41a11287e767a9297be1b0a0afecc4",
+          "role": "geometry",
+          "material": "plaster",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.1a5abff6353e330ec61dee415a5cfbf3d09972f6",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.1b23dbbe043b49143d4794aade5f03387f08b70c",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.1bd0a4755c9dda23a3b15992c94b32ab677d3a8f",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.1c07fadf489bf8025f5241500f6c0215acd0be3c",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.1c1719a29ef3adf73cf88b2f776e020aa68a7a4e",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.1c6ad9487fa670cff22dd8271b236463edd96d70",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.1fa2dde9bb932762c6054b4b1310a99dd01bbf2a",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.1fa68d4e7809a7877cff11c1d85a5192c6c72fdb",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.24bce346e51ff9238295901296c8fb8e8416bd0e",
+          "role": "geometry",
+          "material": "asphalt",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.260a58cc9dee1a057eccf25465db4f83a6e30145",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.27b8f7e5b4d79e49561c43ac98dafb2e272fe8cd",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.280b631794f358100f352e8c998930145453ac62",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.29cbb847e471e25255bd6ac7942b043bfff43aa7",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.2ae9b48e94bc6037a5bd41d6f155f49c2c6720c0",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.2bca796f0f2cb491185bccf80e94aa587bee1f40",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.2d9ee943dae3e6b98064dbed02bc364e5d9ab8a0",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.2e7ee8c06d4f27b861a19b439478810321d9e5ea",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.2eb94dab36cd6b970be3f4a59e42db75fbdc1742",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.3113570f71ee08bc55eb34d667288a8312a66ef6",
+          "role": "geometry",
+          "material": "asphalt",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.31b29c4e353775fb816dbd60fb4cec43eb4daed6",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.3479936163bb8fa8f869df589bea7a649a1068dc",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.359e867f24a23c5816a6643a27df0e47042e9e37",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.36992114f0e74c4f024caf235fb510117f0bec2d",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.390e49d5eafb8249dfe3c61af9823ae0a02d9d6a",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.3954dc201c34a6009a1c3c4e956abbf8ef622d96",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.3affe8cb0d99c788728eb36c7fbc29a39d0a94e2",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.3bd435208ca580b486fed0ebd12511b068d86d4a",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.3d11402ad60cf5e73e08556a8b3facac5609a3f0",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.3d3c1a0f7546915128a84d1920f71853a224afe0",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.3d7a3a57df0c32ee80bcbbf48490431fc6ec6c95",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.3e040e3e136387c510227e8a768dc2f10288b4fb",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.3f08a7b247ccaf1f5653ba7a6f5f380397000e9c",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.402aaaa856166986f6e486895284ccd7a9190390",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.406b63cbd3abbf8effb3c742174cacb9d7d213c7",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.41515e10271b2190ae69c598e0f0d2bdfb62cc2c",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.42b05a5298b1d77c6a3ec19494c1bda7e5b43a34",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.4454d0f2a30f076752a3866bda4404804e56b0b0",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.4b7b90722cc9b6634f56b08136b3334f60b8f9df",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.4c8033f81e50baab939cbb7285881c3d6549c7b8",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.4cf226a0265f95b5e8e1ae454d1a224a81610001",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.4d54e740f214d0261a084bb41e36ba43df555a29",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.4f41ed9884b3a2483d6339d8b11c359456fe02b7",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.4f8cd9e4796837a3e7b9e308e63d5f8f65461d19",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.51e56c878edf0de7e3408a92b242386ec3f7a806",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.52b5ca8c8e0fd80fc0c93ce2cb286de376de8297",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.531a1ed3c35b9458975dc49d687a1a6b1e18ee89",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.5677a26fbd3c01b25239e40dc9f4b146fdf50a0e",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.57ad80dfd09a741e9b4be22b661f350c4967f3e4",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.583ddcd5da3f37d11e30716621abac92086659ca",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.585c6214b1d086f6a3d447cfa8822eb0e7e67247",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.58e2d90af31beb106d246eac0ba5555966a2ef2a",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.5a7583a309417f1562035d90055b7aa50bdb8dd9",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.5ae84098b3da45d20328c06780a74cc868d259af",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.5b86a7269cc0c553f021a2da3625c141cb0868d2",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.5d8c323e8ba39ca810fa5636b0309c47b0454c12",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.5efa1fae8ae925c29aad72ee22b503470957fbca",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.5f6b043b37285a6f50738057bdb1bf48b3271791",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.607b55caeb6049e452b8e990dda14d8a11edf344",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.62625f8d973079dc6b47635d150fd3338afccca5",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.62cb01b306d9c3febd8e1ab371e45c0783bc467d",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.6456f0b1d77d2366502b640a27be46c0c23a664e",
+          "role": "geometry",
+          "material": "asphalt",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.6514bad155ab127db29ff0bf0703e0a87fdd9f42",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.65b5dac2c6d02c1ce950f2042ce0b84fadee7d0a",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.664fd1e62712b132541b384d2b1cdaae0c0b67ce",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.66bbf08c3727d516a37ba8b8984663556ab48df1",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.673473c6e4cf87eb5191234030cfd7d400bcb788",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.674ba57442cfd370ef9dbb7c780cda690e1718fc",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.67f5320df0808c22de441d9853b6c63e1574ae00",
+          "role": "geometry",
+          "material": "asphalt",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.685f1fb9fb111d45f4dab8052575805429770929",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.69e85a2e37d3c7efa477d4b66f90f7b7654fa804",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.69ec776006e7ba26652a6cb51dcb47d693d810b7",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.6b76eb1dc35a0eab765428283a128be5a35ffe0f",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.6d7e9bfb0f6d2a3bec2265f8982e8bcf6b3f5827",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.6d828593ca3a4b013fca69251546419bde01f1a1",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.6e06a63ae23d3b3a048d1f3128aafaa7465b07da",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.6e16e554feedd7350856a75fcb327260a4432c2b",
+          "role": "geometry",
+          "material": "asphalt",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.6f2fbf4da343a2f256e0db893f5cd3ca902018b8",
+          "role": "geometry",
+          "material": "plaster",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.703287019055b2bf837147c7c4d6e03548f1da30",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.71dae82f56c700bdfda807eb39a7558855e5e97d",
+          "role": "geometry",
+          "material": "plaster",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.72295b63d8412d0711b948ce9d6c9259ce6d8485",
+          "role": "geometry",
+          "material": "asphalt",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.72815c074ab005ee91940cc5606dfa4114d55144",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.76a435cb4f07c19570bf0514a97972cba67ed9e8",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.76c91026035f104f0f5fdb4debc2afaa1a9e5f47",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.770b1ec9ecb5847f53850e27760cee5ee3412f1f",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.7791080c4cebab64b21e2c13a872670f49b3f274",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.789fa3da58ca927ae8b47cab80c666c44afbe153",
+          "role": "geometry",
+          "material": "asphalt",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.79c019349d5a859a57f0be0b3ba9c813cad9d6ce",
+          "role": "geometry",
+          "material": "asphalt",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.79cd57f6794d8b896029f4803b6e27cf20644e1f",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.79d749c9d6fb00efd6f97ddc5573493a155af4de",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.7a4122ddab5e45d12f71119cad62b101f5a45353",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.7ade012870c01894b65f401a59a004bc578453fc",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.7e7f5bfe0760507fa5c593afb386407e0f3dde89",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.837e1429655efe5cfe465a3363c6ba3fc5cb5015",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.8513ceb6554a4349cf3fdb929d1931614384228c",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.85306926c55d7240a985605595538bf90e40f3f0",
+          "role": "geometry",
+          "material": "asphalt",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.8618cd6bbe955b32a185e3a6d4ef70e68ff45524",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.870d9211f03543bb658f3e5e01043ca4d7b9bc5d",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.88fa5d56b017bc48ed12b86015dd89c02db0507e",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.8900d03867c814cd3c0eb5fd33a1951f8d718fb2",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.8c819aa2151f779695250d105351f3ee14075cde",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.8deab1cbe1f406d30babbe25c0e0a0644102d2a8",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.8e2b5ea4d0bf74f4f153f7f03e3b4f92e03e925a",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.9117209edffc891533fc60b2677f118385b70101",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.920972ed90d05011d5d2df877c2588cb52f8d7f9",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.963845c3effb07f4fdf881ea7cd60e779925f26c",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.9676f5f3a0aefaef6ed38c1ddc938808bf978413",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.96b42c3402a37d024849f5523070a2f1021d5f89",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.96efdd597f048d8e732656539a38ec22f6d63f2d",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.971bca7586ef5f84ec39c59aba61f29724a4efe0",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.979d71979ab8b6c96d60f45b92e9351ce11ec666",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.9a4e54ba83bba453a7d37a24013737d013b462a1",
+          "role": "geometry",
+          "material": "asphalt",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.9c347ade18e317858b072d768b369f392510bd32",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.9d50237ebfe7442f3075ff02f6358dafcadf52d5",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.a0aa58f43d93d386fd10f9be126d085ff27fd67b",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.a20e50809b2c8a6d79be415d87fe98426613ecd6",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.a377e2db59593d2053a14e2770d39baf1de16978",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.a444f7e30e9df70f5d4396e325f7ec2677853887",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.a7ef1c4a7ac68bce622d9e6aef09ec61868604c8",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.aa81d790821ec9ea897dc6eb39f7730e9d6c7332",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.aba6df589621a8567666f89ac60d7c7af96d0f4a",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.ad3848fa61e44fe0bed3da47fba1ed610df91234",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.add212965f91e41f47a365f4640f774508664ea7",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.b448c335aace0953d1f5d773c88df62a266c4d4e",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.b491be9c6d5e090ad205849c1022eeafc26c673a",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.b629e1d6b80981e8e64ead886570011e629a9408",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.b6425fe89888b7b3c76428ed74009cf5b36de450",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.b6919ce85cd461e59f2f5421140b5c7de77b99b9",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.b69bbee9f5bddaff711d72e92f600cfe8db08a66",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.ba043eba28ef0f5bc5c880325d39c9ceb08d0c65",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.ba959ba9d7a6d321f2fd845c96a37caea92e80fc",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.bbba2d3df6a955f24c177aac1bd5316f8df2e7d6",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.be8a80313f0ae45025fc7dbc0fac65fa79566cac",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.c282a4a496048c94fa2ee8ed7b11cd8928c09c9b",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.c289fca5abfc65c21f90b1771d5c794f3d68ac0e",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.c6b8fdd39f5efc8f1d5281897661d704f35b0ada",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.c8eaf2176dd4ced9cd0f27cafd1f2ff549edf0b5",
+          "role": "geometry",
+          "material": "asphalt",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.ca8a5c9d75272f6744766714cf426a439695dfea",
+          "role": "geometry",
+          "material": "asphalt",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.cc99adcbe6d6b86e2ec06ffb095c3ecd90525f54",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.ce522fd5a799fcf579150e1fc378995b792e097b",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.ceecc062d6815ac927b976599a876648a8da64e0",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.d195d8e295f0c07f718db9e138b8e139dc14838d",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.d222ad6210bd2ea342ba33db29065c0a287b70ca",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.d22fd0437d956f1f15925f7db7c8547322e150cb",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.d27e5e29e236a50fcde803a58064158040d28d47",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.d3e80447ffa08626b8780d013fd26b800698a209",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.d436090766e52fafbf501577d7f169ecfaa9cbdf",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.d599252357993052480f5f431cfd9fc0b03ce870",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.d5ea2188349acc1a0d59caf758778e180eae5c13",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.d77d88ef2e9f9b9f01b7c3df0b2f81d45a2314e3",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.d7ebfe3d05c9ed5c290268f4fdbda662549284a6",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.d86b16a79f1e585da65c2625170100d725da354f",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.d87cbc3443a8ff780ac8f04af814d1cd61760962",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.d934d99bcedb9d402c9433e945558344c29ebc69",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.d95034202ec349b620f5acf8adacbb7fd01bad95",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.daf9d8a58a7602a2f46b2787d49b19c0a6b93590",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.dc7ddbb8877f9c9d98e0537a50987429e6418a37",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.dca6182d3cecfba3dcac2125309ac46c8f2d5d50",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.dcafbb35811a17e9336c11449e3a1ae7549d98c3",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.dcc27ba7429afb69636d5b0ec8c2a218fd3408a4",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.defbef6482667b9df2fdf5c059424f8500f7a74b",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.dfb00416d7721721438baf95e83328c71235e783",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.e0911c7f9bd6bd1ae292b4fb2d94f9b17c4f4b3e",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.e3582f5856713eb21874f0d9325f531ab7f99489",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.e435a6b5cb1388fc33ebf699c2965dae424ad4e3",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.e5fbd36c3f279ae88077bba9af80a746522f3f21",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.e661737b4c72010d352b4d77229c88057dc7b24b",
+          "role": "geometry",
+          "material": "painted_wall",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.e674d4f87ba686271e276cec6ef8d2e8a47984c4",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.e68131f01f5ac1ce4e9d0fa3f07848abd618684b",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.e6860f838216ec864687727e5888c460bc725c50",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.e856b9187926a33f5c4da8f54e0c23f553738ad1",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.e8c67cd9a7b1b8124f199c74f88976fe8a41e047",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.ea7331bdd821c66484d5c4902175d301868a5ef1",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.eb16594d8f90e31fb8bab5ac53bdcafeb0a5445f",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.eceec311cc41fafdaa95ceb6c3d9224013623497",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.ee080c36012946f6ab6e614100f010bd7f1bd5a5",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.ef9ef54ca66f89c4eda68bc8741f2e973eaad7fd",
+          "role": "geometry",
+          "material": "asphalt",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.efbbaf51db67b9d858f04e78a263146e54df7584",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.f1adfb3db46d660065f807495b2a6e2d863db2ed",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.f27bab94f510a5f5b975de101a6de6460bbc4bbb",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.f48d36ae3f793781bfff3a7c78ca7ee580f9c181",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.f501aa3d6ab823ea7008ff599314e11cd98e39ae",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.f503503632ecb2e6a72089b12e8f3a5f416463d6",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.f62980c70e909c5e8c23f524e1a751fcfc11e3f7",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.f66e3511e0030ccf6a1d2258a76c430c1933de19",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.f82e9f4029037d646490d5e580e0ad42228ff2d7",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.fa4e8213fbeaa86aefcac0066e486b84360a8acc",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.fb5214de917ef92c82aaff822a06f825883e1c22",
+          "role": "geometry",
+          "material": "wood",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.fbd2e3a4acfdd9f9ab25282c8c261cb0c1911345",
+          "role": "geometry",
+          "material": "asphalt",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.fc36b280e3f6a47a3e10fd5d3dbf87cead171dd9",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.fc3ffcf8df48914f17d422fd06e41e1c834c66a1",
+          "role": "geometry",
+          "material": "metal",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        },
+        {
+          "node_id": "n.fdaa2a6f3b2901d9b22f7d035c01c689157df0d6",
+          "role": "geometry",
+          "material": "asphalt",
+          "uv": {
+            "meters_per_repeat": [
+              1,
+              1
+            ],
+            "rotation_degrees": 0
+          }
+        }
+      ]
+    }
+  },
+  "change_summary": "Deterministic office interior pattern",
+  "requested_quality_profile": "interior",
+  "generation_budget": {
+    "max_nodes": 700,
+    "max_seconds": 1800
+  }
+}

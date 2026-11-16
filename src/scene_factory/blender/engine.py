@@ -26,10 +26,11 @@ def generate_plan(plan, registry,resource_root=None):
     nodes = {n["node_id"]: n for n in plan["nodes"]}
     primary_objects = {}
     asset_prototypes = {}
+    mesh_cache = {}
     for nid in plan["execution_order"]:
         node = nodes[nid]
         manifest = registry.get(node["skill"]["skill_id"], node["skill"]["version"], plan["validation_candidates"])
-        context = {"scene_seed": plan["seed"], "plan": plan, "primary_objects": primary_objects,"resource_root":resource_root,"asset_prototypes":asset_prototypes}
+        context = {"scene_seed": plan["seed"], "plan": plan, "primary_objects": primary_objects,"resource_root":resource_root,"asset_prototypes":asset_prototypes,"mesh_cache":mesh_cache}
         objects = callback(registry, manifest["implementation"])(node, context)
         declarations = {a["local_role"]: a for a in node["expected_artifacts"]}
         if not isinstance(objects, dict) or set(objects) != set(declarations):
@@ -62,4 +63,13 @@ def generate_plan(plan, registry,resource_root=None):
             obj.rotation_euler = [radians(x) for x in t["rotation_degrees"]]
             obj.scale = t["scale"]
         primary_objects[nid] = objects[node["expected_artifacts"][0]["local_role"]]
+    # Ceiling-supported geometry follows the cover only in cutaway previews.
+    # Authoritative geometry and saved visibility remain intact.
+    for item in plan.get('interior',{}).get('items',[]):
+        if item['support']['kind']=='ceiling':
+            owner=item['node_id']
+            for obj in scene.objects:
+                node=nodes[obj['producer_node_id']]
+                if node['node_id']==owner or owner in node['lineage']:
+                    obj['preview_group']='cover'
     bpy.context.view_layer.update()

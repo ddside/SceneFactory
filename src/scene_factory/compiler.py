@@ -167,6 +167,13 @@ def compile_scene(source, registry=None, source_sha256=None, runtime_profile=Non
             for i,a in enumerate(regions):
                 for b in regions[:i]:
                     if min(a['xmax'],b['xmax'])>max(a['xmin'],b['xmin']) and min(a['ymax'],b['ymax'])>max(a['ymin'],b['ymin']):raise SpecError('overlapping material regions')
+    interior_report = None
+    if "interior" in authored:
+        from .interior_contracts import check
+        for node in resolved.values():
+            if "asset_ref" in node:
+                node["interior_asset_bounds"] = resources["assets"][node["asset_key"]]["bounding_box"]
+        interior_report = check(authored["interior"], resolved)
     runtime = {"blender_series": "4.5", "worker_python_series": "3.11", **(runtime_profile or {})}
     if (set(runtime) - {"blender_series","worker_python_series","implementation_sha256","application_python","os","architecture"}
         or any(not isinstance(v,str) or not v for v in runtime.values())):
@@ -193,6 +200,9 @@ def compile_scene(source, registry=None, source_sha256=None, runtime_profile=Non
     if resources is not None:
         plan['resources']=copy.deepcopy(resources)
         plan['appearance']=copy.deepcopy(authored.get('appearance'))
+    if interior_report is not None:
+        plan["interior"] = copy.deepcopy(authored["interior"])
+        plan["interior_metadata"] = interior_report
     plan["plan_digest"] = canonical_digest(plan)
     return {"resolved_scene": resolved_scene, "build_plan": plan, "skills_lock": lock}
 

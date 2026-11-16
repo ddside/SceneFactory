@@ -1,0 +1,772 @@
+{
+  "artifacts": [
+    {
+      "role": "frame",
+      "type": "Object"
+    }
+  ],
+  "blender_compatibility": {
+    "python_series": "3.11",
+    "series": "4.5"
+  },
+  "category": "interior",
+  "contract": "furniture.check_assembly",
+  "dependencies": [
+    {
+      "skill_id": "furniture_part",
+      "version": "1.0.0"
+    }
+  ],
+  "description": "Normal-state modular desk with stable independently addressable components.",
+  "examples": [
+    {},
+    {
+      "depth": 0.7150000000000001,
+      "height": 0.8250000000000001,
+      "width": 1.44
+    }
+  ],
+  "implementation": "recipe.generate",
+  "inputs": {
+    "elevation": {
+      "required": false,
+      "target": "elevation",
+      "type": "Length"
+    }
+  },
+  "kind": "recipe",
+  "name": "desk",
+  "outputs": {
+    "height": {
+      "type": "Length",
+      "value": {
+        "parameter": "height"
+      }
+    }
+  },
+  "parameter_schema": {
+    "depth": {
+      "default": 0.65,
+      "maximum": 20,
+      "minimum": 0.02,
+      "type": "number"
+    },
+    "height": {
+      "default": 0.75,
+      "maximum": 20,
+      "minimum": 0.02,
+      "type": "number"
+    },
+    "thickness": {
+      "default": 0.04,
+      "maximum": 20,
+      "minimum": 0.003,
+      "type": "number"
+    },
+    "width": {
+      "default": 1.2,
+      "maximum": 20,
+      "minimum": 0.02,
+      "type": "number"
+    }
+  },
+  "recipe": {
+    "nodes": [
+      {
+        "depends_on": [],
+        "inputs": {},
+        "local_key": "leg.0",
+        "parameters": {
+          "bevel": 0.001,
+          "depth": {
+            "parameter": "thickness"
+          },
+          "height": {
+            "args": [
+              {
+                "parameter": "height"
+              },
+              {
+                "args": [
+                  -1,
+                  {
+                    "parameter": "thickness"
+                  }
+                ],
+                "op": "multiply"
+              }
+            ],
+            "op": "add"
+          },
+          "surface": 1,
+          "width": {
+            "parameter": "thickness"
+          }
+        },
+        "skill": {
+          "skill_id": "furniture_part",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            {
+              "args": [
+                -1,
+                0.5,
+                {
+                  "args": [
+                    {
+                      "parameter": "width"
+                    },
+                    {
+                      "args": [
+                        -1,
+                        {
+                          "parameter": "thickness"
+                        }
+                      ],
+                      "op": "multiply"
+                    }
+                  ],
+                  "op": "add"
+                }
+              ],
+              "op": "multiply"
+            },
+            {
+              "args": [
+                -1,
+                0.5,
+                {
+                  "args": [
+                    {
+                      "parameter": "depth"
+                    },
+                    {
+                      "args": [
+                        -1,
+                        {
+                          "parameter": "thickness"
+                        }
+                      ],
+                      "op": "multiply"
+                    }
+                  ],
+                  "op": "add"
+                }
+              ],
+              "op": "multiply"
+            },
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "depends_on": [],
+        "inputs": {},
+        "local_key": "leg.1",
+        "parameters": {
+          "bevel": 0.001,
+          "depth": {
+            "parameter": "thickness"
+          },
+          "height": {
+            "args": [
+              {
+                "parameter": "height"
+              },
+              {
+                "args": [
+                  -1,
+                  {
+                    "parameter": "thickness"
+                  }
+                ],
+                "op": "multiply"
+              }
+            ],
+            "op": "add"
+          },
+          "surface": 1,
+          "width": {
+            "parameter": "thickness"
+          }
+        },
+        "skill": {
+          "skill_id": "furniture_part",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            {
+              "args": [
+                -1,
+                0.5,
+                {
+                  "args": [
+                    {
+                      "parameter": "width"
+                    },
+                    {
+                      "args": [
+                        -1,
+                        {
+                          "parameter": "thickness"
+                        }
+                      ],
+                      "op": "multiply"
+                    }
+                  ],
+                  "op": "add"
+                }
+              ],
+              "op": "multiply"
+            },
+            {
+              "args": [
+                1,
+                0.5,
+                {
+                  "args": [
+                    {
+                      "parameter": "depth"
+                    },
+                    {
+                      "args": [
+                        -1,
+                        {
+                          "parameter": "thickness"
+                        }
+                      ],
+                      "op": "multiply"
+                    }
+                  ],
+                  "op": "add"
+                }
+              ],
+              "op": "multiply"
+            },
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "depends_on": [],
+        "inputs": {},
+        "local_key": "leg.2",
+        "parameters": {
+          "bevel": 0.001,
+          "depth": {
+            "parameter": "thickness"
+          },
+          "height": {
+            "args": [
+              {
+                "parameter": "height"
+              },
+              {
+                "args": [
+                  -1,
+                  {
+                    "parameter": "thickness"
+                  }
+                ],
+                "op": "multiply"
+              }
+            ],
+            "op": "add"
+          },
+          "surface": 1,
+          "width": {
+            "parameter": "thickness"
+          }
+        },
+        "skill": {
+          "skill_id": "furniture_part",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            {
+              "args": [
+                1,
+                0.5,
+                {
+                  "args": [
+                    {
+                      "parameter": "width"
+                    },
+                    {
+                      "args": [
+                        -1,
+                        {
+                          "parameter": "thickness"
+                        }
+                      ],
+                      "op": "multiply"
+                    }
+                  ],
+                  "op": "add"
+                }
+              ],
+              "op": "multiply"
+            },
+            {
+              "args": [
+                -1,
+                0.5,
+                {
+                  "args": [
+                    {
+                      "parameter": "depth"
+                    },
+                    {
+                      "args": [
+                        -1,
+                        {
+                          "parameter": "thickness"
+                        }
+                      ],
+                      "op": "multiply"
+                    }
+                  ],
+                  "op": "add"
+                }
+              ],
+              "op": "multiply"
+            },
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "depends_on": [],
+        "inputs": {},
+        "local_key": "leg.3",
+        "parameters": {
+          "bevel": 0.001,
+          "depth": {
+            "parameter": "thickness"
+          },
+          "height": {
+            "args": [
+              {
+                "parameter": "height"
+              },
+              {
+                "args": [
+                  -1,
+                  {
+                    "parameter": "thickness"
+                  }
+                ],
+                "op": "multiply"
+              }
+            ],
+            "op": "add"
+          },
+          "surface": 1,
+          "width": {
+            "parameter": "thickness"
+          }
+        },
+        "skill": {
+          "skill_id": "furniture_part",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            {
+              "args": [
+                1,
+                0.5,
+                {
+                  "args": [
+                    {
+                      "parameter": "width"
+                    },
+                    {
+                      "args": [
+                        -1,
+                        {
+                          "parameter": "thickness"
+                        }
+                      ],
+                      "op": "multiply"
+                    }
+                  ],
+                  "op": "add"
+                }
+              ],
+              "op": "multiply"
+            },
+            {
+              "args": [
+                1,
+                0.5,
+                {
+                  "args": [
+                    {
+                      "parameter": "depth"
+                    },
+                    {
+                      "args": [
+                        -1,
+                        {
+                          "parameter": "thickness"
+                        }
+                      ],
+                      "op": "multiply"
+                    }
+                  ],
+                  "op": "add"
+                }
+              ],
+              "op": "multiply"
+            },
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "depends_on": [],
+        "inputs": {},
+        "local_key": "top",
+        "parameters": {
+          "bevel": 0.001,
+          "depth": {
+            "parameter": "depth"
+          },
+          "height": {
+            "parameter": "thickness"
+          },
+          "surface": 0,
+          "width": {
+            "parameter": "width"
+          }
+        },
+        "skill": {
+          "skill_id": "furniture_part",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            0,
+            0,
+            {
+              "args": [
+                {
+                  "parameter": "height"
+                },
+                {
+                  "args": [
+                    -1,
+                    {
+                      "parameter": "thickness"
+                    }
+                  ],
+                  "op": "multiply"
+                }
+              ],
+              "op": "add"
+            }
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "depends_on": [],
+        "inputs": {},
+        "local_key": "modesty",
+        "parameters": {
+          "bevel": 0.001,
+          "depth": {
+            "parameter": "thickness"
+          },
+          "height": {
+            "args": [
+              0.35,
+              {
+                "parameter": "height"
+              }
+            ],
+            "op": "multiply"
+          },
+          "surface": 0,
+          "width": {
+            "args": [
+              {
+                "parameter": "width"
+              },
+              {
+                "args": [
+                  -1,
+                  {
+                    "args": [
+                      2,
+                      {
+                        "parameter": "thickness"
+                      }
+                    ],
+                    "op": "multiply"
+                  }
+                ],
+                "op": "multiply"
+              }
+            ],
+            "op": "add"
+          }
+        },
+        "skill": {
+          "skill_id": "furniture_part",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            0,
+            {
+              "args": [
+                0.5,
+                {
+                  "args": [
+                    {
+                      "parameter": "depth"
+                    },
+                    {
+                      "args": [
+                        -1,
+                        {
+                          "parameter": "thickness"
+                        }
+                      ],
+                      "op": "multiply"
+                    }
+                  ],
+                  "op": "add"
+                }
+              ],
+              "op": "multiply"
+            },
+            {
+              "args": [
+                0.4,
+                {
+                  "parameter": "height"
+                }
+              ],
+              "op": "multiply"
+            }
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    ]
+  },
+  "schema_version": 1,
+  "skill_id": "desk",
+  "tags": [
+    "interior",
+    "furniture",
+    "desk"
+  ],
+  "validation_evidence": {
+    "pin": {
+      "contract": {
+        "function": "check_assembly",
+        "module": "scene_factory.furniture_contracts",
+        "sha256": "7c69c88073c410521f74b03f3f81c9e29767256d43c0685eee5ff7ab2b10dab0",
+        "support_sha256": {
+          "contract_utils.py": "e5c678647d947205acced8cea2a4952b4c8fed2536625acdeff34dd4f46416d9",
+          "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+        }
+      },
+      "dependencies": [
+        {
+          "skill_id": "furniture_part",
+          "version": "1.0.0"
+        }
+      ],
+      "dependency_pins": [
+        {
+          "contract": {
+            "function": "check_part",
+            "module": "scene_factory.furniture_contracts",
+            "sha256": "7c69c88073c410521f74b03f3f81c9e29767256d43c0685eee5ff7ab2b10dab0",
+            "support_sha256": {
+              "contract_utils.py": "e5c678647d947205acced8cea2a4952b4c8fed2536625acdeff34dd4f46416d9",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "dependencies": [],
+          "dependency_pins": [],
+          "implementation": {
+            "function": "generate",
+            "module": "scene_factory.blender.skills.furniture",
+            "sha256": "a6c6d5befd34d17b337122c1f458d3d5088c6368da7b6d14774e15b5df8c1660",
+            "support_sha256": {
+              "blender/generators.py": "06db28e679a89cab1ff9f906d79dd4142261706505e8bbb4145d8ca3d21ca187",
+              "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
+              "contract_utils.py": "e5c678647d947205acced8cea2a4952b4c8fed2536625acdeff34dd4f46416d9",
+              "furniture_contracts.py": "7c69c88073c410521f74b03f3f81c9e29767256d43c0685eee5ff7ab2b10dab0",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "manifest_sha256": "86d2c7cf678f7d229e8e4d7b4eb06ab0272c56529f8fcd0b8cfc69a7dce17301",
+          "skill_id": "furniture_part",
+          "validator": {
+            "function": "validate",
+            "module": "scene_factory.blender.skills.furniture",
+            "sha256": "a6c6d5befd34d17b337122c1f458d3d5088c6368da7b6d14774e15b5df8c1660",
+            "support_sha256": {
+              "blender/generators.py": "06db28e679a89cab1ff9f906d79dd4142261706505e8bbb4145d8ca3d21ca187",
+              "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
+              "contract_utils.py": "e5c678647d947205acced8cea2a4952b4c8fed2536625acdeff34dd4f46416d9",
+              "furniture_contracts.py": "7c69c88073c410521f74b03f3f81c9e29767256d43c0685eee5ff7ab2b10dab0",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "version": "1.0.0"
+        }
+      ],
+      "implementation": {
+        "function": "generate",
+        "module": "scene_factory.blender.skills.recipe",
+        "sha256": "b76410f398addda3b082ff01a37909cdfd9b5bcf1102082424f8d54829ecaf87",
+        "support_sha256": {}
+      },
+      "manifest_sha256": "d14cd45e3b5b1ed1f7bec636387746eb2d84b1b1a0307b7aafa9173daf16be25",
+      "skill_id": "desk",
+      "validator": {
+        "function": "validate_assembly",
+        "module": "scene_factory.blender.skills.furniture",
+        "sha256": "a6c6d5befd34d17b337122c1f458d3d5088c6368da7b6d14774e15b5df8c1660",
+        "support_sha256": {
+          "blender/generators.py": "06db28e679a89cab1ff9f906d79dd4142261706505e8bbb4145d8ca3d21ca187",
+          "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
+          "contract_utils.py": "e5c678647d947205acced8cea2a4952b4c8fed2536625acdeff34dd4f46416d9",
+          "furniture_contracts.py": "7c69c88073c410521f74b03f3f81c9e29767256d43c0685eee5ff7ab2b10dab0",
+          "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+        }
+      },
+      "version": "1.0.0"
+    },
+    "runtime": {
+      "application_python": "3.12.13",
+      "architecture": "arm64",
+      "blender": "4.5.15 LTS",
+      "blender_python": "3.11.15 (main, Apr 25 2025, 12:39:20) [Clang 15.0.0 (clang-1500.0.40.1)]",
+      "implementation_sha256": "e511ec95b7459458752de05aa787e1de4f0365ecdf396faeb35518e89fe6135c",
+      "os": "Darwin"
+    },
+    "status": "passed",
+    "tests": [
+      {
+        "checks": [
+          "compile",
+          "generate",
+          "skill-validator",
+          "reopen",
+          "artifact-contract"
+        ],
+        "example": 0,
+        "metrics": {
+          "build_reopen_seconds": 0.811,
+          "face_count": 180,
+          "mesh_count": 6,
+          "vertex_count": 192
+        },
+        "plan_digest": "7365393b274c4ed9adf85831a09495b7709c2445635f653cd7be6baf92083730",
+        "structure_sha256": "985870088aebe73f6e5831e59304408110222121fdefa6063500e664dfa097dc"
+      },
+      {
+        "checks": [
+          "compile",
+          "generate",
+          "skill-validator",
+          "reopen",
+          "artifact-contract"
+        ],
+        "example": 1,
+        "metrics": {
+          "build_reopen_seconds": 0.958,
+          "face_count": 180,
+          "mesh_count": 6,
+          "vertex_count": 192
+        },
+        "plan_digest": "e92f0a6ba021bd2c81c9d8fbc6fcd64ed40927c2f59aeaa16118b116f299ab38",
+        "structure_sha256": "d65d7468de1e6705c81d029dcf4ff14ec2c8d545e44cd1bd2ad542e7544650b7"
+      }
+    ],
+    "unit_tests": {
+      "case_count": 34,
+      "cases": [
+        "tests.test_furniture.test_furniture_recipe_examples[furniture_part]",
+        "tests.test_furniture.test_furniture_recipe_examples[desk]",
+        "tests.test_furniture.test_furniture_recipe_examples[chair]",
+        "tests.test_furniture.test_furniture_recipe_examples[shelf]",
+        "tests.test_furniture.test_furniture_recipe_examples[cabinet]",
+        "tests.test_furniture.test_furniture_recipe_examples[storage_box]",
+        "tests.test_furniture.test_furniture_recipe_examples[monitor]",
+        "tests.test_furniture.test_furniture_recipe_examples[partition]",
+        "tests.test_furniture.test_furniture_recipe_examples[counter]",
+        "tests.test_furniture.test_furniture_recipe_examples[product_package]",
+        "tests.test_furniture.test_furniture_recipe_examples[bed]",
+        "tests.test_furniture.test_furniture_recipe_examples[light_fixture]",
+        "tests.test_furniture.test_furniture_recipe_examples[workstation]",
+        "tests.test_furniture.test_furniture_recipe_examples[filing_cabinet]",
+        "tests.test_furniture.test_negative_furniture_dimension[furniture_part]",
+        "tests.test_furniture.test_negative_furniture_dimension[desk]",
+        "tests.test_furniture.test_negative_furniture_dimension[chair]",
+        "tests.test_furniture.test_negative_furniture_dimension[shelf]",
+        "tests.test_furniture.test_negative_furniture_dimension[cabinet]",
+        "tests.test_furniture.test_negative_furniture_dimension[storage_box]",
+        "tests.test_furniture.test_negative_furniture_dimension[monitor]",
+        "tests.test_furniture.test_negative_furniture_dimension[partition]",
+        "tests.test_furniture.test_negative_furniture_dimension[counter]",
+        "tests.test_furniture.test_negative_furniture_dimension[product_package]",
+        "tests.test_furniture.test_negative_furniture_dimension[bed]",
+        "tests.test_furniture.test_negative_furniture_dimension[light_fixture]",
+        "tests.test_furniture.test_negative_furniture_dimension[workstation]",
+        "tests.test_furniture.test_negative_furniture_dimension[filing_cabinet]",
+        "tests.test_furniture.test_invalid_component[parameters0]",
+        "tests.test_furniture.test_invalid_component[parameters1]",
+        "tests.test_furniture.test_invalid_component[parameters2]",
+        "tests.test_furniture.test_invalid_component[parameters3]",
+        "tests.test_furniture.test_detached_and_intersecting_components",
+        "tests.test_furniture.test_dimension_edit_preserves_ids_seeds"
+      ],
+      "sha256": "7edb9ef73102e5ea5fdb307d1606026ee43ee5bad0a576e4da27a9edcd4f803e"
+    }
+  },
+  "validation_status": "validated",
+  "validator": "furniture.validate_assembly",
+  "version": "1.0.0"
+}

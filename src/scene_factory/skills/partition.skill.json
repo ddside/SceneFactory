@@ -1,0 +1,380 @@
+{
+  "artifacts": [
+    {
+      "role": "frame",
+      "type": "Object"
+    }
+  ],
+  "blender_compatibility": {
+    "python_series": "3.11",
+    "series": "4.5"
+  },
+  "category": "interior",
+  "contract": "furniture.check_assembly",
+  "dependencies": [
+    {
+      "skill_id": "furniture_part",
+      "version": "1.0.0"
+    }
+  ],
+  "description": "Normal-state modular partition with stable independently addressable components.",
+  "examples": [
+    {},
+    {
+      "depth": 0.385,
+      "height": 1.54,
+      "width": 1.68
+    }
+  ],
+  "implementation": "recipe.generate",
+  "inputs": {
+    "elevation": {
+      "required": false,
+      "target": "elevation",
+      "type": "Length"
+    }
+  },
+  "kind": "recipe",
+  "name": "partition",
+  "outputs": {
+    "height": {
+      "type": "Length",
+      "value": {
+        "parameter": "height"
+      }
+    }
+  },
+  "parameter_schema": {
+    "depth": {
+      "default": 0.35,
+      "maximum": 20,
+      "minimum": 0.02,
+      "type": "number"
+    },
+    "height": {
+      "default": 1.4,
+      "maximum": 20,
+      "minimum": 0.02,
+      "type": "number"
+    },
+    "thickness": {
+      "default": 0.05,
+      "maximum": 20,
+      "minimum": 0.003,
+      "type": "number"
+    },
+    "width": {
+      "default": 1.4,
+      "maximum": 20,
+      "minimum": 0.02,
+      "type": "number"
+    }
+  },
+  "recipe": {
+    "nodes": [
+      {
+        "depends_on": [],
+        "inputs": {},
+        "local_key": "foot.-1",
+        "parameters": {
+          "bevel": 0.001,
+          "depth": {
+            "parameter": "depth"
+          },
+          "height": 0.05,
+          "surface": 1,
+          "width": 0.08
+        },
+        "skill": {
+          "skill_id": "furniture_part",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            {
+              "args": [
+                -1,
+                0.4,
+                {
+                  "parameter": "width"
+                }
+              ],
+              "op": "multiply"
+            },
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "depends_on": [],
+        "inputs": {},
+        "local_key": "foot.1",
+        "parameters": {
+          "bevel": 0.001,
+          "depth": {
+            "parameter": "depth"
+          },
+          "height": 0.05,
+          "surface": 1,
+          "width": 0.08
+        },
+        "skill": {
+          "skill_id": "furniture_part",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            {
+              "args": [
+                1,
+                0.4,
+                {
+                  "parameter": "width"
+                }
+              ],
+              "op": "multiply"
+            },
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "depends_on": [],
+        "inputs": {},
+        "local_key": "panel",
+        "parameters": {
+          "bevel": 0.001,
+          "depth": {
+            "parameter": "thickness"
+          },
+          "height": {
+            "args": [
+              {
+                "parameter": "height"
+              },
+              {
+                "args": [
+                  -1,
+                  0.05
+                ],
+                "op": "multiply"
+              }
+            ],
+            "op": "add"
+          },
+          "surface": 2,
+          "width": {
+            "parameter": "width"
+          }
+        },
+        "skill": {
+          "skill_id": "furniture_part",
+          "version": "1.0.0"
+        },
+        "transform": {
+          "location": [
+            0,
+            0,
+            0.05
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    ]
+  },
+  "schema_version": 1,
+  "skill_id": "partition",
+  "tags": [
+    "interior",
+    "furniture",
+    "partition"
+  ],
+  "validation_evidence": {
+    "pin": {
+      "contract": {
+        "function": "check_assembly",
+        "module": "scene_factory.furniture_contracts",
+        "sha256": "7c69c88073c410521f74b03f3f81c9e29767256d43c0685eee5ff7ab2b10dab0",
+        "support_sha256": {
+          "contract_utils.py": "e5c678647d947205acced8cea2a4952b4c8fed2536625acdeff34dd4f46416d9",
+          "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+        }
+      },
+      "dependencies": [
+        {
+          "skill_id": "furniture_part",
+          "version": "1.0.0"
+        }
+      ],
+      "dependency_pins": [
+        {
+          "contract": {
+            "function": "check_part",
+            "module": "scene_factory.furniture_contracts",
+            "sha256": "7c69c88073c410521f74b03f3f81c9e29767256d43c0685eee5ff7ab2b10dab0",
+            "support_sha256": {
+              "contract_utils.py": "e5c678647d947205acced8cea2a4952b4c8fed2536625acdeff34dd4f46416d9",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "dependencies": [],
+          "dependency_pins": [],
+          "implementation": {
+            "function": "generate",
+            "module": "scene_factory.blender.skills.furniture",
+            "sha256": "a6c6d5befd34d17b337122c1f458d3d5088c6368da7b6d14774e15b5df8c1660",
+            "support_sha256": {
+              "blender/generators.py": "06db28e679a89cab1ff9f906d79dd4142261706505e8bbb4145d8ca3d21ca187",
+              "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
+              "contract_utils.py": "e5c678647d947205acced8cea2a4952b4c8fed2536625acdeff34dd4f46416d9",
+              "furniture_contracts.py": "7c69c88073c410521f74b03f3f81c9e29767256d43c0685eee5ff7ab2b10dab0",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "manifest_sha256": "86d2c7cf678f7d229e8e4d7b4eb06ab0272c56529f8fcd0b8cfc69a7dce17301",
+          "skill_id": "furniture_part",
+          "validator": {
+            "function": "validate",
+            "module": "scene_factory.blender.skills.furniture",
+            "sha256": "a6c6d5befd34d17b337122c1f458d3d5088c6368da7b6d14774e15b5df8c1660",
+            "support_sha256": {
+              "blender/generators.py": "06db28e679a89cab1ff9f906d79dd4142261706505e8bbb4145d8ca3d21ca187",
+              "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
+              "contract_utils.py": "e5c678647d947205acced8cea2a4952b4c8fed2536625acdeff34dd4f46416d9",
+              "furniture_contracts.py": "7c69c88073c410521f74b03f3f81c9e29767256d43c0685eee5ff7ab2b10dab0",
+              "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+            }
+          },
+          "version": "1.0.0"
+        }
+      ],
+      "implementation": {
+        "function": "generate",
+        "module": "scene_factory.blender.skills.recipe",
+        "sha256": "b76410f398addda3b082ff01a37909cdfd9b5bcf1102082424f8d54829ecaf87",
+        "support_sha256": {}
+      },
+      "manifest_sha256": "c28b96816eeb7c229e657d32031e925cd1f162b60755c0329705e099f40b69c1",
+      "skill_id": "partition",
+      "validator": {
+        "function": "validate_assembly",
+        "module": "scene_factory.blender.skills.furniture",
+        "sha256": "a6c6d5befd34d17b337122c1f458d3d5088c6368da7b6d14774e15b5df8c1660",
+        "support_sha256": {
+          "blender/generators.py": "06db28e679a89cab1ff9f906d79dd4142261706505e8bbb4145d8ca3d21ca187",
+          "blender/skills/common.py": "40180bfdb6b88e2f47d623c3f5eb67a0a389b61a3e40fe88bf8aa12ceab87c43",
+          "contract_utils.py": "e5c678647d947205acced8cea2a4952b4c8fed2536625acdeff34dd4f46416d9",
+          "furniture_contracts.py": "7c69c88073c410521f74b03f3f81c9e29767256d43c0685eee5ff7ab2b10dab0",
+          "spec.py": "42be79eede2e799e025ab7a416e676fd45414078498eba8f3bcf854a72a29376"
+        }
+      },
+      "version": "1.0.0"
+    },
+    "runtime": {
+      "application_python": "3.12.13",
+      "architecture": "arm64",
+      "blender": "4.5.15 LTS",
+      "blender_python": "3.11.15 (main, Apr 25 2025, 12:39:20) [Clang 15.0.0 (clang-1500.0.40.1)]",
+      "implementation_sha256": "e511ec95b7459458752de05aa787e1de4f0365ecdf396faeb35518e89fe6135c",
+      "os": "Darwin"
+    },
+    "status": "passed",
+    "tests": [
+      {
+        "checks": [
+          "compile",
+          "generate",
+          "skill-validator",
+          "reopen",
+          "artifact-contract"
+        ],
+        "example": 0,
+        "metrics": {
+          "build_reopen_seconds": 0.801,
+          "face_count": 90,
+          "mesh_count": 3,
+          "vertex_count": 96
+        },
+        "plan_digest": "3262bc6f528c60342efa6ce6555f0d3bedda3b4e8447e4b3244ee52212adcf8f",
+        "structure_sha256": "24d885d63995d1125a4861c7b7bbc840e5a4d3e296c0a5edd738dab8c0e2c052"
+      },
+      {
+        "checks": [
+          "compile",
+          "generate",
+          "skill-validator",
+          "reopen",
+          "artifact-contract"
+        ],
+        "example": 1,
+        "metrics": {
+          "build_reopen_seconds": 0.8,
+          "face_count": 90,
+          "mesh_count": 3,
+          "vertex_count": 96
+        },
+        "plan_digest": "85dc13360be21f38e7d1af2ee3e46cbabeeb35f5ae80916133f287fe8a7cf3cd",
+        "structure_sha256": "eb8b5b465902de63e36d9045de5b75e275f4b6652e1f33c6ab608feaf7c15268"
+      }
+    ],
+    "unit_tests": {
+      "case_count": 34,
+      "cases": [
+        "tests.test_furniture.test_furniture_recipe_examples[furniture_part]",
+        "tests.test_furniture.test_furniture_recipe_examples[desk]",
+        "tests.test_furniture.test_furniture_recipe_examples[chair]",
+        "tests.test_furniture.test_furniture_recipe_examples[shelf]",
+        "tests.test_furniture.test_furniture_recipe_examples[cabinet]",
+        "tests.test_furniture.test_furniture_recipe_examples[storage_box]",
+        "tests.test_furniture.test_furniture_recipe_examples[monitor]",
+        "tests.test_furniture.test_furniture_recipe_examples[partition]",
+        "tests.test_furniture.test_furniture_recipe_examples[counter]",
+        "tests.test_furniture.test_furniture_recipe_examples[product_package]",
+        "tests.test_furniture.test_furniture_recipe_examples[bed]",
+        "tests.test_furniture.test_furniture_recipe_examples[light_fixture]",
+        "tests.test_furniture.test_furniture_recipe_examples[workstation]",
+        "tests.test_furniture.test_furniture_recipe_examples[filing_cabinet]",
+        "tests.test_furniture.test_negative_furniture_dimension[furniture_part]",
+        "tests.test_furniture.test_negative_furniture_dimension[desk]",
+        "tests.test_furniture.test_negative_furniture_dimension[chair]",
+        "tests.test_furniture.test_negative_furniture_dimension[shelf]",
+        "tests.test_furniture.test_negative_furniture_dimension[cabinet]",
+        "tests.test_furniture.test_negative_furniture_dimension[storage_box]",
+        "tests.test_furniture.test_negative_furniture_dimension[monitor]",
+        "tests.test_furniture.test_negative_furniture_dimension[partition]",
+        "tests.test_furniture.test_negative_furniture_dimension[counter]",
+        "tests.test_furniture.test_negative_furniture_dimension[product_package]",
+        "tests.test_furniture.test_negative_furniture_dimension[bed]",
+        "tests.test_furniture.test_negative_furniture_dimension[light_fixture]",
+        "tests.test_furniture.test_negative_furniture_dimension[workstation]",
+        "tests.test_furniture.test_negative_furniture_dimension[filing_cabinet]",
+        "tests.test_furniture.test_invalid_component[parameters0]",
+        "tests.test_furniture.test_invalid_component[parameters1]",
+        "tests.test_furniture.test_invalid_component[parameters2]",
+        "tests.test_furniture.test_invalid_component[parameters3]",
+        "tests.test_furniture.test_detached_and_intersecting_components",
+        "tests.test_furniture.test_dimension_edit_preserves_ids_seeds"
+      ],
+      "sha256": "7edb9ef73102e5ea5fdb307d1606026ee43ee5bad0a576e4da27a9edcd4f803e"
+    }
+  },
+  "validation_status": "validated",
+  "validator": "furniture.validate_assembly",
+  "version": "1.0.0"
+}

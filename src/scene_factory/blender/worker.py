@@ -18,6 +18,7 @@ from scene_factory.compiler import compile_scene, verify_plan
 from scene_factory.blender.generators import generate
 from scene_factory.blender.legacy_validation import validate_scene as validate_legacy_scene
 from scene_factory.blender.validation import validate_scene
+from scene_factory.blender.interior import validate as validate_interior
 from scene_factory.blender.engine import generate_plan
 from scene_factory.blender.rendering import inventory, render
 
@@ -83,7 +84,7 @@ def execute(request, out):
             if plan.get('appearance'):
                 from scene_factory.blender.appearance import apply
                 apply(plan,resource_root)
-            validation = validate_scene(plan, registry,resource_root=resource_root)
+            validation = validate_scene(plan, registry,domain_validators=(validate_interior,) if "interior" in plan else (),resource_root=resource_root)
         else:
             generate(spec)
             validation = validate_legacy_scene(spec)
@@ -94,7 +95,7 @@ def execute(request, out):
         return {**metadata, **validation, "scene_file": str(path)}
     if action in ("validate", "preview"):
         bpy.ops.wm.open_mainfile(filepath=request["blend_path"], load_ui=False, use_scripts=False)
-        validation = validate_scene(plan, registry,resource_root=resource_root) if plan is not None else validate_legacy_scene(spec)
+        validation = validate_scene(plan, registry,domain_validators=(validate_interior,) if "interior" in plan else (),resource_root=resource_root) if plan is not None else validate_legacy_scene(spec)
         if action == "validate":
             return {**metadata, **validation, "reopened": True}
         selected = render(out / "preview.png", request["device"], request["resolution"], request["samples"],
@@ -128,6 +129,10 @@ if __name__ == "__main__":
                 result['performance'].update(material_build_seconds=bpy.context.scene.get('material_build_seconds',0),
                     asset_import_seconds=sum(float(o.get('asset_import_seconds',0)) for o in bpy.context.scene.objects),
                     mesh_count=sum(o.type=='MESH' for o in bpy.context.scene.objects),
+                    unique_mesh_count=len({o.data.name for o in bpy.context.scene.objects if o.type=='MESH'}),
+                    vertex_count=sum(len(o.data.vertices) for o in bpy.context.scene.objects if o.type=='MESH'),
+                    face_count=sum(len(o.data.polygons) for o in bpy.context.scene.objects if o.type=='MESH'),
+                    furniture_count=len(metrics.get('interior',{}).get('items',[])),
                     material_count=len({m.name for o in bpy.context.scene.objects if o.type=='MESH' for m in o.data.materials if m}),
                     texture_count=len({n.image.name for o in bpy.context.scene.objects if o.type=='MESH' for m in o.data.materials if m and m.use_nodes for n in m.node_tree.nodes if n.type=='TEX_IMAGE' and n.image}))
         result.update(protocol_version=request.get("protocol_version", 1), attempt_id=request.get("attempt_id"))

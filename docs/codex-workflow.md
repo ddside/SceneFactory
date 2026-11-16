@@ -117,3 +117,20 @@ imagesには全preview（現在は2枚）を列挙する。上記は形式のみ
 
 Live APIテストは通常回帰から分離し、失敗/未実施をFakeProviderで置き換えて成功扱いに
 しない。Omniverse/Nucleus/Sketchfab/認証/USD import/exportはまだ対応していない。
+
+## Phase 3C: 家具付き屋内と不足スキル
+
+Registry検索→Catalog検索→寸法・品質・ライセンス・再利用性を比較し、生成/既存Asset/
+複合Recipeを選ぶ。重要な不足だけcandidateを開発し、単体JUnitと実Blender保存・再読込の
+登録証拠が揃ってからvalidatedとして使う。新しい外部LLMや実行エージェントは不要。
+
+interior_layoutの用途パターンから通常のSpecを作るか、既存working Revisionへ部材を
+明示追加する。SceneSpec.interiorに用途別必要数、正常状態、支持、向き、clearanceを
+記録する。詳細と実行可能なproposal例は[Phase 3C](phase3c.md)に記載する。
+
+interior profileでgenerate/editし、機械検査後のoverview/top/interiorを実閲覧する。
+家具の識別、用途、通路、貫通、PBRを確認してimage-bound reviewを提出する。
+「6セットを4セットへ、棚を1追加」は対象ノードだけを編集し、材質bindingも対応させる。
+新Revisionで共通ノードのID/seed/geometry digestと旧acceptedの保護を比較する。
+Rollbackは従来どおり再生成せずbundleを切り替える。共有Meshの将来の損傷編集は
+copy-on-writeを必要とする。正常状態と破壊・物理の受入を混同しない。

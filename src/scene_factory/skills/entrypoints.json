@@ -113,5 +113,73 @@
       "gltf_contract.py",
       "resources.py"
     ]
+  },
+  "furniture.generate": {
+    "module": "scene_factory.blender.skills.furniture",
+    "function": "generate",
+    "support_files": [
+      "blender/generators.py",
+      "blender/skills/common.py",
+      "contract_utils.py",
+      "furniture_contracts.py",
+      "spec.py"
+    ]
+  },
+  "furniture.validate": {
+    "module": "scene_factory.blender.skills.furniture",
+    "function": "validate",
+    "support_files": [
+      "blender/generators.py",
+      "blender/skills/common.py",
+      "contract_utils.py",
+      "furniture_contracts.py",
+      "spec.py"
+    ]
+  },
+  "furniture.validate_assembly": {
+    "module": "scene_factory.blender.skills.furniture",
+    "function": "validate_assembly",
+    "support_files": [
+      "blender/generators.py",
+      "blender/skills/common.py",
+      "contract_utils.py",
+      "furniture_contracts.py",
+      "spec.py"
+    ]
+  },
+  "furniture.validate_group": {
+    "module": "scene_factory.blender.skills.furniture",
+    "function": "validate_group",
+    "support_files": [
+      "blender/generators.py",
+      "blender/skills/common.py",
+      "contract_utils.py",
+      "furniture_contracts.py",
+      "spec.py"
+    ]
+  },
+  "furniture.check_part": {
+    "module": "scene_factory.furniture_contracts",
+    "function": "check_part",
+    "support_files": [
+      "contract_utils.py",
+      "spec.py"
+    ]
+  },
+  "furniture.check_assembly": {
+    "module": "scene_factory.furniture_contracts",
+    "function": "check_assembly",
+    "support_files": [
+      "contract_utils.py",
+      "spec.py"
+    ]
+  },
+  "furniture.check_group": {
+    "module": "scene_factory.furniture_contracts",
+    "function": "check_group",
+    "support_files": [
+      "contract_utils.py",
+      "spec.py"
+    ]
   }
 }

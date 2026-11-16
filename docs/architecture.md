@@ -1,6 +1,16 @@
 # Scene Factory — アーキテクチャと実環境
 
-## 現行のPhase 3B
+## 現行のPhase 3C
+
+[Phase 3C実装記録](phase3c.md)を屋内生成の現行仕様とする。
+共通家具部材Leafと複合Recipe、用途別配置パターンを既存Registryの上に追加した。
+任意のSceneSpec.interior v1が部屋用途・必要数・正常状態・支持・配置制約を表す。
+純粋compileと実Blender再読込検証の両方で、接地・室内範囲・部材交差・支持・
+ドア前・保守的な2D通路接続を確認する。interior profileは実PBRと実画像reviewも要求する。
+自然言語解釈と不足スキル開発はCodexが担当し、アプリは既存登録証拠を強制する。
+正常状態だけを扱い、損傷・物理・USD/Isaac Simは別段階。旧profileの意味は変えない。
+
+## Phase 3Bの材質・Asset基盤（維持）
 
 [Phase 3B実装記録](phase3b.md)を現行の材質・Asset仕様とする。
 GeometryとAppearance/Texture/Asset/Provider/Previewを分離し、不変Catalogのrefを

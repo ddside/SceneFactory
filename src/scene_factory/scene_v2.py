@@ -44,7 +44,7 @@ def validate_v2(data, registry=None, allow_candidates=()):
     if registry is None:
         from .registry import Registry
         registry = Registry()
-    fields(data, "$", ("schema_version", "scene_id", "seed", "units", "nodes"), ("migration", "appearance"))
+    fields(data, "$", ("schema_version", "scene_id", "seed", "units", "nodes"), ("migration", "appearance", "interior"))
     if type(data["schema_version"]) is not int or data["schema_version"] != 2:
         raise SpecError("$.schema_version: only integer version 2 supported")
     identifier(data["scene_id"], "$.scene_id")
@@ -64,6 +64,9 @@ def validate_v2(data, registry=None, allow_candidates=()):
     if 'appearance' in result:
         from .library_contracts import appearance
         appearance(result['appearance'])
+    if "interior" in result:
+        from .interior_contracts import validate
+        validate(result["interior"])
     seen, skills = {}, {}
     for index, node in enumerate(result["nodes"]):
         path = f"$.nodes[{index}]"

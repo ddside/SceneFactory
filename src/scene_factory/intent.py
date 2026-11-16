@@ -78,7 +78,7 @@ def validate_intent(value):
     try:
         if datetime.fromisoformat(value['created_at']).tzinfo is None: raise ValueError()
     except (ValueError,TypeError): raise SpecError("created_at: timezone-aware ISO timestamp required")
-    if value['requested_quality_profile'] not in ('structural','preview_reviewed','basic_scene','architectural','appearance'):
+    if value['requested_quality_profile'] not in ('structural','preview_reviewed','basic_scene','architectural','appearance','interior'):
         raise SpecError("requested_quality_profile: unsupported profile")
     budget=value['generation_budget']; fields(budget,'generation_budget',tuple(BUDGET))
     for key,lo,hi in (('max_attempts',1,10),('max_nodes',1,1000),('max_resolution',32,1024),('max_samples',1,64),('no_improvement_limit',1,10)):

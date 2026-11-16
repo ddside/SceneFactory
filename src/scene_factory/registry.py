@@ -63,10 +63,10 @@ class Registry:
         fields(entry, "entry point", ("module", "function"), ("support_files",))
         module, function = entry["module"], entry["function"]
         prefix = "scene_factory.blender.skills."
-        if (not isinstance(module, str) or not (module.startswith(prefix) or module == "scene_factory.architecture_contracts")
+        if (not isinstance(module, str) or not (module.startswith(prefix) or module in ("scene_factory.architecture_contracts","scene_factory.furniture_contracts"))
             or not all(x.isidentifier() for x in module.split("."))
             or not isinstance(function, str) or not function.isidentifier()):
-            raise SpecError("entry point: only reviewed Blender skills and pure architectural contract bindings are allowed")
+            raise SpecError("entry point: only reviewed Blender skills and pure domain contract bindings are allowed")
         path = PACKAGE.parent.joinpath(*module.split(".")).with_suffix(".py")
         if not path.is_file():
             raise SpecError(f"entry point: implementation file missing {module}")
@@ -128,7 +128,7 @@ class Registry:
             roles.add(artifact["role"])
         if "contract" in value:
             binding = self.binding(value["contract"])
-            if binding["module"] != "scene_factory.architecture_contracts":
+            if binding["module"] not in ("scene_factory.architecture_contracts","scene_factory.furniture_contracts"):
                 raise SpecError("contract: only reviewed pure contract bindings allowed")
         if "test_scenes" in value and (not isinstance(value["test_scenes"], list) or not value["test_scenes"]):
             raise SpecError("test_scenes: nonempty full SceneSpec fixtures required")

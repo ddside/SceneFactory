@@ -203,3 +203,24 @@ example input fixtures belong in Git.
   them separately with SCENE_FACTORY_TEST_POLYHAVEN=1. A network skip is unverified.
 - Track code/docs/own fixtures and example refs in Git; downloaded third-party
   bytes and generated artifacts remain under ignored artifacts/. Commit changes.
+
+## Phase 3C interiors and skill growth
+- Read docs/phase3c.md. Reuse furniture_part and modular furniture Recipes; keep
+  independent component IDs, normal state, exact skill versions and support refs.
+- Compare validated skills and licensed Catalog assets before developing a gap.
+  Codex authors/tests a candidate using the existing registration flow; do not
+  add an LLM service or automatically trust unvalidated code. Filing cabinet is
+  the documented gap-development and cross-scene reuse example.
+- Author SceneSpec.interior v1 for supported upright orthogonal rectangular rooms.
+  Use interior_layout patterns or explicit nodes, exact requirements counts and
+  declared floor/on_top/ceiling supports. Reject invalid layouts, never silently
+  move objects or relax clearance to pass. Preserve unrelated IDs/seeds on edit.
+- Choose interior profile for furnished architectural/PBR acceptance. Require
+  actual reopened furniture/layout evidence and inspect all attempt images.
+  Keep architectural/appearance semantics unchanged. Shape-only ceiling fixtures
+  follow covers in temporary cutaways, without changing saved scene visibility.
+- Mesh sharing keys include geometry and effective appearance. Future per-part
+  damage needs copy-on-write. Do not simulate damage or claim physics validity.
+- Run existing regressions and new furniture/interior tests with both Blender
+  variables. Live Provider tests need no rerun if no Provider code changed.
+  Record metrics, simplifications, actual image review and unverified platforms.
