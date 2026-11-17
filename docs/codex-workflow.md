@@ -149,3 +149,17 @@ FAILだけを既存Repairの予算内で修正し、別のFAILも再評価する
 damage_layout.clear_damageで選択操作を解除できる。全解除時はcontrollerも除去し、
 正常interior profileへ戻す。小さな領域変更でも同じoperation IDを保って破片IDを維持する。
 新Revisionの共通Artifactのdigest/MaterialRefと旧acceptedを比較し、Rollbackは再生成せず行う。
+
+## Phase 3E: 災害固有の痕跡と瓦礫
+
+[Effect契約](phase3e.md)に従い、working Specの正常nodesとdamageを保持してeffects v1を
+追加する。災害種別、対象node、room座標領域、seed、MaterialRef aliasと個数/寸法/分布を
+記録する。debris_fragmentと既存箱・商品Recipeを選び、損傷由来の場合は実在する
+source_operation_idも結び付ける。焼損/水位痕は対象とlayer順を明示する。
+
+disaster_interiorでgenerate/edit → 実検証 → overview/top/interior実閲覧 → reviewを行う。
+軽微/中程度の接触を修復しない。重大FAILのみ既存Repair対象であり、無断で反復しない。
+編集ではEffect IDを保つ。削除時は対象itemだけを除き、全解除時はeffectsとそのcontrollerを
+除く。既存damageの解除は別操作。旧acceptedを検査し、Rollbackはbundle参照だけを切り替える。
+入力例は`uv run --locked python examples/effects/create_proposals.py artifacts/effect-proposals`。
+Fは意図的なFAILを含む検証fixtureであり、acceptedにしない。

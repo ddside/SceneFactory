@@ -23,7 +23,7 @@ def intersection_measure(a,b,core_a=None,core_b=None):
             ha,hb=hull_object(a),hull_object(b);temporary=[ha,hb]
             try:
                 upper=convex_intersection(ha,hb)
-                if upper is None:raise ValueError('damage: unable to bound contact geometry')
+                if upper is None:raise ValueError('damage: unable to bound contact geometry: '+a.name+' / '+b.name)
                 inner=[]
                 for source,core in [(a,core_a),(b,core_b)]:
                     if convex_intersection(source,source) is not None:inner.append(source)
@@ -93,7 +93,7 @@ def passage_report(plan,objects):
     return reports
 
 
-def domain(plan,state,objects):
+def domain(plan,state,objects,extra_floor_levels=None):
     boxes={aid:bounds(o) for aid,o in objects.items() if o.type=='MESH'};volumes={};findings=[];checked=set();candidates=0
     nodes={n['node_id']:n for n in plan['nodes']}
     def core(aid):
@@ -122,7 +122,7 @@ def domain(plan,state,objects):
             candidates+=1;measure=intersection_measure(objects[aid],objects[bid],core(aid),core(bid));v=measure['upper'];depth=measure['depth']
             if v<=1e-12:continue
             dimension=min(a[1][i]-a[0][i] for i in range(3));semantic='floor' if objects[bid].get('preview_group')=='floor' else 'furniture'
-            classification=classify(measure,volume(aid),volume(bid),dimension,semantic,objects[aid].get('damage_lineage') is not None)
+            classification=classify(measure,volume(aid),volume(bid),dimension,semantic,bool(objects[aid].get('damage_lineage') or objects[aid].get('effect_origin')))
             # A thin wall may cut completely through a large object while its
             # fraction of the object's volume remains small. Confirm solid
             # overlap first, then estimate how much of the crossing section is
@@ -140,6 +140,7 @@ def domain(plan,state,objects):
     # Ground reference is Z=0 for this phase's building_scene convention. Test
     # submerged solid volume rather than only the finite floor slab thickness.
     floors={aid:op['floor_elevation'] for op in state['supports'] for aid in [*op['artifact_ids'],*([op['fragment_artifact_id']] if op['fragment_artifact_id'] else [])]}
+    floors.update(extra_floor_levels or {})
     for aid in sorted(state['affected']):
         box=boxes[aid];level=floors[aid]
         # A retained floor slab is intentionally below its walking surface.
@@ -151,9 +152,9 @@ def domain(plan,state,objects):
         floor=cutter(low,high)
         try:measure=intersection_measure(objects[aid],floor,core(aid));v=measure['upper']
         finally:remove_object(floor)
-        classification=classify_intersection(v,volume(aid),volume(aid),min(box[1][i]-box[0][i] for i in range(3)),'floor',penetration_depth=depth)
+        classification=classify_intersection(v,volume(aid),volume(aid),min(box[1][i]-box[0][i] for i in range(3)),'floor',penetration_depth=measure['depth'])
         findings.append(dict(state=classification,artifact_ids=[aid],intersection_volume=v,relative_volume=v/volume(aid),semantic='floor_burial',method=measure['method'],volume_lower=measure['lower'],volume_upper=measure['upper']))
-    for op in plan['damage']['operations']:
+    for op in plan.get('damage',{}).get('operations',[]):
         if op['support']['ground']:
             ids=[op['fragment_artifact_id']] if 'fragment_artifact_id' in op else op['artifact_ids']
             lowest=min(boxes[aid][0][2] for aid in ids)
@@ -175,9 +176,9 @@ def domain(plan,state,objects):
         if not hit or abs((support.matrix_world@point).z-bottom)>.02:
             findings.append(dict(state='FAIL',artifact_ids=[o['artifact_id'] for o in contents],semantic='unsupported_contents',method='retained support ray'))
     passages=passage_report(plan,objects)
-    for rid,expected in plan['damage'].get('passage_expectations',{}).items():
+    for rid,expected in plan.get('damage',{}).get('passage_expectations',{}).items():
         actual=next((p['state'] for p in passages if p['room_id']==rid),None)
         if actual!=expected:findings.append(dict(state='FAIL',artifact_ids=[],semantic='passage_expectation',room_id=rid,expected=expected,actual=actual,method='clearance flood fill'))
-    return dict(kind='damage',baseline_validated=True,operations=state['supports'],fragment_count=len(plan['damage']['fragments']),state='failed' if any(f['state']=='FAIL' for f in findings) else 'passed',findings=findings,
+    return dict(kind='damage',baseline_validated=True,operations=state['supports'],fragment_count=len(plan.get('damage',{}).get('fragments',[])),state='failed' if any(f['state']=='FAIL' for f in findings) else 'passed',findings=findings,
                 warnings=sum(f['state']=='WARNING' for f in findings),candidate_pairs=candidates,passages=passages,
                 checks=['normal baseline validation','deterministic replay','copy-on-write','closed positive solids','source lineage','supports','exact-volume collision policy'])

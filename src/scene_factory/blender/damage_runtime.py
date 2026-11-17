@@ -86,7 +86,7 @@ def apply_operations(plan,context):
     return dict(plan=expected,records=records,sharing=sharing,modified=modified,affected=affected,skip=skip,baseline=baseline,supports=support_records)
 
 
-def build(plan,registry,resource_root):
+def build(plan,registry,resource_root,return_state=False):
     from .validation import validate_scene
     from .interior import validate as interior_validate
     normal=plan['baseline_plan'];generate_plan(normal,registry,resource_root)
@@ -95,15 +95,12 @@ def build(plan,registry,resource_root):
         apply(normal,resource_root)
     validate_scene(normal,registry,domain_validators=(interior_validate,) if 'interior' in normal else (),resource_root=resource_root)
     state=callback(registry,plan['damage_postprocess'])(plan,dict(resource_root=resource_root))
-    return validate_saved(plan,registry,resource_root,state)
+    validation=validate_saved(plan,registry,resource_root,state)
+    return (validation,state) if return_state else validation
 
 
 def replay(plan,registry,resource_root):
-    original=bpy.context.window.scene;old=list(original.objects);names={o:o.name for o in old}
-    for obj in old:obj.name='damage.saved.'+obj.name
-    existing={k:set(getattr(bpy.data,k)) for k in ['objects','meshes','materials']}
-    temp=bpy.data.scenes.new('Damage verification');bpy.context.window.scene=temp
-    try:
+    def builder():
         from .validation import validate_scene
         from .interior import validate as interior_validate
         normal=plan['baseline_plan'];generate_plan(normal,registry,resource_root)
@@ -112,6 +109,16 @@ def replay(plan,registry,resource_root):
             apply(normal,resource_root)
         validate_scene(normal,registry,domain_validators=(interior_validate,) if 'interior' in normal else (),resource_root=resource_root)
         return callback(registry,plan['damage_postprocess'])(plan,dict(resource_root=resource_root))
+    return isolated_replay(builder)
+
+
+def isolated_replay(builder):
+    original=bpy.context.window.scene;old=list(original.objects);names={o:o.name for o in old}
+    for obj in old:obj.name='damage.saved.'+obj.name
+    existing={k:set(getattr(bpy.data,k)) for k in ['objects','meshes','materials']}
+    temp=bpy.data.scenes.new('Damage verification');bpy.context.window.scene=temp
+    try:
+        return builder()
     finally:
         bpy.context.window.scene=original
         for obj in set(bpy.data.objects)-existing['objects']:bpy.data.objects.remove(obj,do_unlink=True)

@@ -232,5 +232,101 @@
       "damage_contracts.py",
       "interior_contracts.py"
     ]
+  },
+  "debris.generate": {
+    "module": "scene_factory.blender.skills.debris",
+    "function": "generate",
+    "support_files": [
+      "blender/skills/common.py",
+      "blender/damage_geometry.py",
+      "contract_utils.py"
+    ]
+  },
+  "debris.validate": {
+    "module": "scene_factory.blender.skills.debris",
+    "function": "validate",
+    "support_files": [
+      "blender/skills/common.py",
+      "blender/damage_geometry.py",
+      "contract_utils.py"
+    ]
+  },
+  "disaster.generate": {
+    "module": "scene_factory.blender.skills.disaster",
+    "function": "generate",
+    "support_files": [
+      "artifacts.py",
+      "blender/appearance.py",
+      "blender/damage_geometry.py",
+      "blender/damage_runtime.py",
+      "blender/damage_validation.py",
+      "blender/effect_runtime.py",
+      "blender/effect_surfaces.py",
+      "blender/effect_validation.py",
+      "blender/engine.py",
+      "blender/generators.py",
+      "blender/interior.py",
+      "blender/validation.py",
+      "compiler.py",
+      "contract_utils.py",
+      "damage_contracts.py",
+      "effect_compile.py",
+      "effect_contracts.py",
+      "interior_contracts.py",
+      "scene_v2.py",
+      "spec.py"
+    ]
+  },
+  "disaster.validate": {
+    "module": "scene_factory.blender.skills.disaster",
+    "function": "validate",
+    "support_files": [
+      "artifacts.py",
+      "blender/appearance.py",
+      "blender/damage_geometry.py",
+      "blender/damage_runtime.py",
+      "blender/damage_validation.py",
+      "blender/effect_runtime.py",
+      "blender/effect_surfaces.py",
+      "blender/effect_validation.py",
+      "blender/engine.py",
+      "blender/generators.py",
+      "blender/interior.py",
+      "blender/validation.py",
+      "compiler.py",
+      "contract_utils.py",
+      "damage_contracts.py",
+      "effect_compile.py",
+      "effect_contracts.py",
+      "interior_contracts.py",
+      "scene_v2.py",
+      "spec.py"
+    ]
+  },
+  "disaster.apply": {
+    "module": "scene_factory.blender.skills.disaster",
+    "function": "apply",
+    "support_files": [
+      "artifacts.py",
+      "blender/appearance.py",
+      "blender/damage_geometry.py",
+      "blender/damage_runtime.py",
+      "blender/damage_validation.py",
+      "blender/effect_runtime.py",
+      "blender/effect_surfaces.py",
+      "blender/effect_validation.py",
+      "blender/engine.py",
+      "blender/generators.py",
+      "blender/interior.py",
+      "blender/validation.py",
+      "compiler.py",
+      "contract_utils.py",
+      "damage_contracts.py",
+      "effect_compile.py",
+      "effect_contracts.py",
+      "interior_contracts.py",
+      "scene_v2.py",
+      "spec.py"
+    ]
   }
 }

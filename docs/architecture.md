@@ -1,6 +1,16 @@
 # Scene Factory — アーキテクチャと実環境
 
-## 現行のPhase 3D
+## 現行のPhase 3E
+
+[Phase 3E](phase3e.md)で独立したeffects v1を追加する。純粋compileが正常/損傷baselineと
+決定的な追加Planを分離し、Blenderが基準検証→Geometry/散乱→領域付きMaterial layerを
+適用する。debris_fragmentとdisaster_processorは既存Registryへ実検証付きで登録する。
+表面layerはObjectのMaterial slotを分離し、既存MeshとCatalog参照を保持する。
+新しいdisaster_interiorは旧profileを変更せず、保存後のEffect/接触検証と実画像reviewを要求する。
+Effectだけの編集は完全baseline digestとhashが一致する前効果.blend/stateを再利用できる。
+再読込検証は独立Sceneで再生成して照合する。任意部分の増分ビルド、物理、USD/Isaac Simは未実装。
+
+## Phase 3Dの構造損傷基盤（維持）
 
 [Phase 3D実装記録](phase3d.md)を損傷生成の現行仕様とする。
 正常SceneSpecを保持したdamage v1と登録済みProcessorを新Revisionに追加する。
@@ -9,7 +19,7 @@
 全Artifactの形状・姿勢・共有・lineageを照合し、独立した閉形状・接地・接触検査も行う。
 damaged_interior profileは正常interiorの意味を変えず、意図した閉塞と軽微な交差を許容する。
 重大判定は実Geometryまたは保証された交差下限から行い、AABBだけでは断定しない。
-USD/Isaac Sim、構造解析、剛体、火災/浸水は別段階。
+USD/Isaac Sim、構造解析、剛体は別段階。静的な火災/浸水痕はPhase 3Eで追加。
 
 ## Phase 3Cの正常屋内基盤（維持）
 

@@ -1,0 +1,38 @@
+{
+  "assets": {},
+  "materials": {
+    "142f56d219bab997cd3773ead6fbe13b02b028067323c4f9da30c569b95abace": {
+      "path": "records/materials/142f56d219bab997cd3773ead6fbe13b02b028067323c4f9da30c569b95abace.json",
+      "sha256": "77edbee753a423893b0ccb99014ad2a4d83d1c289bf6a972fb7b4f5aab9151e8"
+    },
+    "2b61f2cffc9c3be5638f4d9b44367414d670623250bdfc5c3d9fd7e2fce31d83": {
+      "path": "records/materials/2b61f2cffc9c3be5638f4d9b44367414d670623250bdfc5c3d9fd7e2fce31d83.json",
+      "sha256": "d5d472479b980149bfd1fd484b3c84bbb9d54d44accfa96688d785604c9f34dd"
+    },
+    "64ba4681f99e49435d39efd42b89c8b3309837448e06086a38bd2cf6381fc939": {
+      "path": "records/materials/64ba4681f99e49435d39efd42b89c8b3309837448e06086a38bd2cf6381fc939.json",
+      "sha256": "0a914ad031992fc2cefb2f9e5f8812e6f00ba43cb2ee3c3e89288a85668991ef"
+    },
+    "ac67f651ceeaf302ad84598b96e15cecd3082e25b3164eac3b8b9ba1b4747999": {
+      "path": "records/materials/ac67f651ceeaf302ad84598b96e15cecd3082e25b3164eac3b8b9ba1b4747999.json",
+      "sha256": "12bd613fe197d21659bc96dc443c65abbf15c90094dfeab6dc992beb4e988c90"
+    },
+    "beacb8e4f6e9e7b2dcc1e0f9ce209f5f805270753de152bca9dd01aebb5cd94c": {
+      "path": "records/materials/beacb8e4f6e9e7b2dcc1e0f9ce209f5f805270753de152bca9dd01aebb5cd94c.json",
+      "sha256": "cac86f74db3be04b4d3c187dacf2b6adfb69d56ad799de49d17a522f841e00c7"
+    },
+    "cfe7dbf1f2b24c0c74957f27b2b3fc7faf4c734358365ef72e90fda53b8e1b56": {
+      "path": "records/materials/cfe7dbf1f2b24c0c74957f27b2b3fc7faf4c734358365ef72e90fda53b8e1b56.json",
+      "sha256": "d57424ca92ff69c99b12426efa1c00ae76f5d42e637fcaedfb2561edeaab82e5"
+    },
+    "d3e6e1b1bdf69779c927bb49ce65c868ba284510e684f7c86329d08ffac5ca3c": {
+      "path": "records/materials/d3e6e1b1bdf69779c927bb49ce65c868ba284510e684f7c86329d08ffac5ca3c.json",
+      "sha256": "f02b86878f66c23815b042a8dcb08ea9cf0de04ad5c382ef0208038253ded4d4"
+    },
+    "f7df0d296b7b89ec551daca63231405fb8ffa78658cc44fdcc92e915b59ed900": {
+      "path": "records/materials/f7df0d296b7b89ec551daca63231405fb8ffa78658cc44fdcc92e915b59ed900.json",
+      "sha256": "587e3f8fe867e67a2da868b4e266bf50eab10bf766097b50e6299914457bf043"
+    }
+  },
+  "schema_version": 1
+}

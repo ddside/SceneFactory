@@ -80,15 +80,18 @@ def execute(request, out):
         raise ValueError("SceneSpec v2 requires a compiled BuildPlan")
     if action == "build":
         if plan is not None:
-            if 'damage' in plan:
+            if 'effects' in plan:
+                from scene_factory.blender.effect_runtime import build
+                validation=build(plan,registry,resource_root,out,request.get('reuse_effect_base'))
+            elif 'damage' in plan:
                 from scene_factory.blender.damage_runtime import build
                 validation=build(plan,registry,resource_root)
             else:
                 generate_plan(plan, registry,resource_root)
-            if 'damage' not in plan and plan.get('appearance'):
+            if 'damage' not in plan and 'effects' not in plan and plan.get('appearance'):
                 from scene_factory.blender.appearance import apply
                 apply(plan,resource_root)
-            if 'damage' not in plan:validation = validate_scene(plan, registry,domain_validators=(validate_interior,) if "interior" in plan else (),resource_root=resource_root)
+            if 'damage' not in plan and 'effects' not in plan:validation = validate_scene(plan, registry,domain_validators=(validate_interior,) if "interior" in plan else (),resource_root=resource_root)
         else:
             generate(spec)
             validation = validate_legacy_scene(spec)
@@ -99,7 +102,10 @@ def execute(request, out):
         return {**metadata, **validation, "scene_file": str(path)}
     if action in ("validate", "preview"):
         bpy.ops.wm.open_mainfile(filepath=request["blend_path"], load_ui=False, use_scripts=False)
-        if plan is not None and 'damage' in plan:
+        if plan is not None and 'effects' in plan:
+            from scene_factory.blender.effect_runtime import validate_saved
+            validation=validate_saved(plan,registry,resource_root,cache=request.get('effect_base_cache'))
+        elif plan is not None and 'damage' in plan:
             from scene_factory.blender.damage_runtime import validate_saved
             validation=validate_saved(plan,registry,resource_root)
         else:validation = validate_scene(plan, registry,domain_validators=(validate_interior,) if "interior" in plan else (),resource_root=resource_root) if plan is not None else validate_legacy_scene(spec)

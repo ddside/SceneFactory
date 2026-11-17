@@ -142,7 +142,7 @@ def validate(plan,root,skip_spatial=False):
     for (nid,role),bindings in groups.items():
         node=next(n for n in plan['nodes'] if n['node_id']==nid);aid=next(a['artifact_id'] for a in node['expected_artifacts'] if a['local_role']==role);obj=bpy.data.objects[aid]
         if not obj.get('appearance_bound') or obj.get('appearance_bindings')!=canonical_digest(bindings) or len(obj.data.materials)!=1:raise ValueError('appearance binding/material missing')
-        mat=obj.data.materials[0];actual=signature(mat)
+        mat=obj.material_slots[0].material;actual=signature(mat)
         if obj.get('appearance_graph_hash')!=actual:raise ValueError('PBR shader graph/value/texture changed')
         local_hashes=set()
         ordered=[b for b in bindings if 'region' not in b]+[b for b in bindings if 'region' in b]

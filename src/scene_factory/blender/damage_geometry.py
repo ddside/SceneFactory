@@ -101,7 +101,7 @@ def convex_intersection(a,b):
     """
     import math
     all_points=[[o.matrix_world@v.co for v in o.data.vertices] for o in [a,b]]
-    scale=max(max(p[i] for p in points)-min(p[i] for p in points) for points in all_points for i in range(3));eps=max(1e-7,scale*2e-6)
+    scale=max(max(p[i] for p in points)-min(p[i] for p in points) for points in all_points for i in range(3));eps=max(1e-7,scale*2e-6,max(abs(v) for points in all_points for p in points for v in p)*5e-7)
     planes=[]
     for obj,points in zip([a,b],all_points):
         normals=obj.matrix_world.to_3x3().inverted().transposed();object_planes=[]

@@ -1,0 +1,45 @@
+{
+  "category": "effect",
+  "display_name": "effect.wet",
+  "license": {
+    "access_restrictions": [],
+    "attribution_required": false,
+    "authentication_requirements": "none",
+    "commercial_use": "allowed",
+    "license_id": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "provider_terms": "",
+    "redistribution": "allowed",
+    "verification_status": "verified"
+  },
+  "material_id": "effect.wet",
+  "parameters": {
+    "base_color": [
+      0.24,
+      0.2,
+      0.13,
+      1
+    ],
+    "bump_distance": 0.02,
+    "ior": 1.5,
+    "metallic": 0.0,
+    "normal_strength": 1.0,
+    "roughness": 0.12,
+    "transmission": 0.0
+  },
+  "provenance": {
+    "author": "Scene Factory procedural material",
+    "source_asset": null
+  },
+  "provider_id": "local",
+  "schema_version": 1,
+  "source_asset_id": null,
+  "surface_state": {},
+  "texture_references": {},
+  "texture_scale": [
+    2,
+    2
+  ],
+  "validation_status": "validated",
+  "version": "1.0.0"
+}

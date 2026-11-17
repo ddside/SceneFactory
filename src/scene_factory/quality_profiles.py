@@ -8,7 +8,8 @@ from .quality import STAGES, STATES
 from .spec import SpecError, fields
 from .storage import digest
 
-REQUIRED={'damaged_interior':['specification','execution','structure','visual','domain'],
+REQUIRED={'disaster_interior':['specification','execution','structure','visual','domain'],
+          'damaged_interior':['specification','execution','structure','visual','domain'],
           'structural':['specification','execution','structure'],
           'preview_reviewed':['specification','execution','structure','visual'],
           'basic_scene':['specification','execution','structure','visual','domain'],
@@ -23,7 +24,8 @@ def profile(name):
     if name not in REQUIRED: raise ValueError('Unknown quality profile')
     return {'schema_version':1,'profile_id':name,'version':'1.0.0','required_stages':copy.deepcopy(REQUIRED[name]),
             'request_conformance_required':True,
-            'scope':{'damaged_interior':'Validated normal baseline plus deterministic damaged solids, support and tolerant collision checks; no physical stability guarantee',
+            'scope':{'disaster_interior':'Source-related disaster effects, valid solids/PBR, tolerant contacts and actual visual review; no physics guarantee',
+                     'damaged_interior':'Validated normal baseline plus deterministic damaged solids, support and tolerant collision checks; no physical stability guarantee',
                      'structural':'Structure and declared hard constraints only; images unreviewed',
                      'preview_reviewed':'Structure, declared hard constraints and recorded visual review',
                      'basic_scene':'Preview-reviewed scene and basic declared spatial constraints; no physics/photorealism guarantee',
@@ -153,6 +155,12 @@ def evaluate(intent,spec,plan,artifacts,base_report,revision_id,attempt_id,quali
         passed=bool(damage and damage.get('state')=='passed' and damage.get('baseline_validated') and appearance and plan.get('damage') and plan.get('interior'))
         stages['domain']={'state':'passed' if passed and not hard and not blockers else 'failed','reason':'Reopened damage/solid/contact evidence with normal baseline' if passed else 'Damage FAIL or required damage evidence missing','evidence':['validation.json:damage']}
         if not passed:findings.append({'kind':'blocker','node_id':None,'reason':'Damage validation failed; only FAIL requires repair'})
+    if profile_snapshot['profile_id']=='disaster_interior':
+        evidence=next((r for r in domain_results if r.get('kind')=='effects'),None)
+        appearance=any(r.get('kind')=='appearance' and r.get('state')=='passed' for r in domain_results)
+        passed=bool(evidence and evidence.get('state')=='passed' and evidence.get('baseline_validated') and appearance and plan.get('effects') and plan.get('interior'))
+        stages['domain']={'state':'passed' if passed and not hard and not blockers else 'failed','reason':'Disaster count/region/source/material/replay/contact evidence' if passed else 'Disaster validation FAIL or evidence missing','evidence':['validation.json:effects']}
+        if not passed:findings.append({'kind':'blocker','node_id':None,'reason':'Disaster effects validation failed; only FAIL requires repair'})
     if visual is not None:
         passed=all(c['state'] in ('passed','not_applicable') for c in visual['checks'].values())
         stages['visual']={'state':'passed' if passed else 'failed','reason':visual['notes'],'evidence':[visual_id]}

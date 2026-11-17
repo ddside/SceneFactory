@@ -88,6 +88,7 @@ def build_at(project,build_id):
     if metadata.get("manifest_version") == 2:
         required.update(("scene-v2.json", "plan.json", "resolved-scene.json", "skills.lock.json", "artifact-manifest.json", "quality.json"))
     required.update(metadata.get("resource_files",[]))
+    if metadata.get("effects_cache"):required.update(("base-scene.blend","base-state.json"))
     if set(metadata.get("sha256", {})) != required:
         raise ValueError("Build manifest has missing or unexpected artifact entries")
     check_artifacts(directory, metadata["sha256"])
@@ -126,12 +127,20 @@ def run_build(project, executable, options, source_path=None, _locked=False):
             stage = "execution"
             request = {"action":"build", "spec_path":str(directory / "scene.json"),
                        "plan_path":str(directory / "plan.json"),"plan_digest":plan["plan_digest"]}
+            if 'effects' in plan:
+                previous=state(project).get('last_successful_build')
+                if previous:
+                    old,oldmeta=build_at(project,previous)
+                    oldplan=read_json(old/'plan.json')
+                    if oldmeta.get('effects_cache') and oldplan['effects_baseline_plan']['plan_digest']==plan['effects_baseline_plan']['plan_digest']:
+                        request['reuse_effect_base']=effect_cache_request(old,oldmeta)
             built = run_blender(executable, request,
                                 directory, remaining_timeout(options))
             if not (directory / "scene.blend").is_file() or (directory / "scene.blend").stat().st_size == 0:
                 raise ValueError("Missing/empty artifact: scene.blend")
             completed.append("execution")
             stage = "structure"
+            if "effects_cache" in built:request["effect_base_cache"]=built["effects_cache"]
             checked = run_blender(executable, {**request,
                 "action": "validate",
                 "blend_path": str(directory / "scene.blend")}, directory / "reopen", remaining_timeout(options))
@@ -154,6 +163,9 @@ def run_build(project, executable, options, source_path=None, _locked=False):
                 from .resources import resource_files
                 metadata['resource_files']=resource_files(plan['resources'])
                 metadata['sha256'].update({name:digest(directory/name) for name in metadata['resource_files']})
+            if 'effects' in plan:
+                metadata['effects_cache']=True
+                metadata['sha256'].update({name:digest(directory/name) for name in ['base-scene.blend','base-state.json']})
             write_json(directory / "build.json", metadata)
             # Only this atomic state update publishes the validated build.
             record_operation(project, "build", directory, "validated", promote=build_id)
@@ -228,6 +240,7 @@ def operate(project, action, executable, options, build_id=None, check_working_s
                        "blend_path": str(build_dir / "scene.blend"), **{k:v for k,v in options.items() if not k.startswith('_')}}
             if metadata.get("manifest_version") == 2:
                 request.update(plan_path=str(build_dir / "plan.json"), plan_digest=metadata["plan_digest"])
+            if metadata.get("effects_cache"):request["effect_base_cache"]=effect_cache_request(build_dir,metadata)
             result = run_blender(executable, request, directory, remaining_timeout(options))
             if result.get("structure_sha256") != metadata["structure_sha256"]:
                 raise ValueError("Structure fingerprint differs from validated build")
@@ -272,3 +285,10 @@ def status(project):
         from .workflow import resume_context
         data['workflow']=resume_context(project)
     return data
+
+
+def effect_cache_request(directory,metadata):
+    plan=read_json(directory/'plan.json')
+    return dict(blend_path=str(directory/'base-scene.blend'),state_path=str(directory/'base-state.json'),
+                blend_sha256=metadata['sha256']['base-scene.blend'],state_sha256=metadata['sha256']['base-state.json'],
+                plan_digest=plan['effects_baseline_plan']['plan_digest'])

@@ -245,3 +245,24 @@ example input fixtures belong in Git.
 - Inspect actual attempt images before image-bound review. Preserve old accepted
   and prove edit/rollback. Do not claim physics, structural stability, complete
   arbitrary-mesh fracture, or USD/Isaac Sim compatibility from geometry validation.
+
+## Phase 3E disaster effects
+- Read docs/phase3e.md. Keep normal nodes, damage intent, resources and accepted
+  bundles immutable. Add independent effects v1 and the registered
+  disaster_processor; use disaster_interior without weakening older profiles.
+- Reuse debris_fragment prototypes and existing furniture Recipes. Distinguish
+  synthetic rubble from actual cut fragments; cap combined source volume.
+  Keep effect/source/component IDs, seed, MaterialRef, semantic, support and
+  fixed/detail/obstacle metadata. Placement is static and bounded, not physics.
+- Use Geometry for significant cracks, rubble and thick sediment, procedural
+  appearance for fine cracks, soot, waterline and wetness. Preserve base PBR and
+  isolate surface material slots per Object without breaking Mesh sharing.
+- Count/distribution edits reuse a verified pre-effects snapshot when its full
+  baseline Plan digest matches. Reopen independently replays generation for
+  validation; this is not a general incremental build or a simulation cache.
+- Reject duplicate application, conflicting layers and resource budget excess.
+  Require strict solids, measured region/source/support checks, deterministic
+  saved state and inherited tolerant contacts. Never repair PASS/WARNING.
+- Run related tests first, then one final regression with actual Blender. Open
+  all required previews before review. Commit/push this phase only after its
+  mandatory acceptance evidence is complete. Ubuntu/Isaac Sim remain separate.

@@ -24,7 +24,7 @@ def check_manifest(manifest, expected=None):
     for artifact in manifest["artifacts"]:
         fields(artifact, "artifact", ("artifact_id", "source_node_id", "producer_node_id", "role", "local_role", "type",
             "lineage", "dependencies", "reference", "geometry_digest", "vertex_count", "face_count", "bounds",
-            "local_matrix", "world_matrix"), ("component", "asset", "appearance", "damage"))
+            "local_matrix", "world_matrix"), ("component", "asset", "appearance", "damage", "effect"))
         for key in ("artifact_id", "source_node_id", "producer_node_id", "local_role"):
             identifier(artifact[key], f"artifact.{key}")
         if not isinstance(artifact["role"], str) or not artifact["role"]:

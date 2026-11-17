@@ -29,6 +29,9 @@ def artifact_id(node_id, role):
 
 def compile_scene(source, registry=None, source_sha256=None, runtime_profile=None, allow_candidates=(), resources=None):
     registry = registry or Registry()
+    if isinstance(source,dict) and "effects" in source:
+        from .effect_compile import compile_effects
+        return compile_effects(source,registry,source_sha256,runtime_profile,allow_candidates,resources)
     version = source.get("schema_version") if isinstance(source, dict) else None
     if version == 1:
         authored = migrate_v1(source, source_sha256)

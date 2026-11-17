@@ -18870,11 +18870,11 @@
         "module": "scene_factory.blender.skills.damage",
         "sha256": "176e120c3b2d8ddfab7d03d26410a59ace9147d4b7d776739cdab6d72fa99786",
         "support_sha256": {
-          "artifacts.py": "27ae77a8a2c7304d4699d352ae0d558bd534243a2bfb89ef32855d23c005ccbf",
-          "blender/appearance.py": "2b6e827b44c210ddcf7f88f46362a39da0ac6144cbb1a919483c813ffd5a26e3",
-          "blender/damage_geometry.py": "e85fccab20f04932209c895d409694754e98ab081dfe15310c43be91b880de1c",
-          "blender/damage_runtime.py": "cd7c7cc2ffa1e9ad767b5fb125326944e19d8733a8535e890d2d1a6432d58ec4",
-          "blender/damage_validation.py": "a657d78393aebdf2aac8ddf2163766c609162b6b3bd6458ed595f792b6a959ef",
+          "artifacts.py": "7d662a9bdc21ecdd38589aec366e238a76bf93df136dbe37d5b707a2f489666f",
+          "blender/appearance.py": "fab193070cd8f249931238c11544155a27cfc14d7dadae5fc2fc8133c3a74b2a",
+          "blender/damage_geometry.py": "769695697781e6cb468bea8703b5f6fadf12dfba860508338316dbb2f41fa1bf",
+          "blender/damage_runtime.py": "a6891693aab4eb0e37ab121bf08bcd041010fc1413d062ceabb110eeab8ac1ed",
+          "blender/damage_validation.py": "d51f91bd543ce2b63d406eade2b74ae03fc2b175467ac3fc9527b7b504a0af89",
           "blender/engine.py": "28b3610bc1cdd56db6762b9dbb5c2047043143db494284fa9068447a8240aff7",
           "blender/generators.py": "06db28e679a89cab1ff9f906d79dd4142261706505e8bbb4145d8ca3d21ca187",
           "blender/interior.py": "0a7880981929c86050b1d787c0f48246ca4d1fe6a8f55c62fa897d2e9123b7c8",
@@ -18889,11 +18889,11 @@
         "module": "scene_factory.blender.skills.damage",
         "sha256": "176e120c3b2d8ddfab7d03d26410a59ace9147d4b7d776739cdab6d72fa99786",
         "support_sha256": {
-          "artifacts.py": "27ae77a8a2c7304d4699d352ae0d558bd534243a2bfb89ef32855d23c005ccbf",
-          "blender/appearance.py": "2b6e827b44c210ddcf7f88f46362a39da0ac6144cbb1a919483c813ffd5a26e3",
-          "blender/damage_geometry.py": "e85fccab20f04932209c895d409694754e98ab081dfe15310c43be91b880de1c",
-          "blender/damage_runtime.py": "cd7c7cc2ffa1e9ad767b5fb125326944e19d8733a8535e890d2d1a6432d58ec4",
-          "blender/damage_validation.py": "a657d78393aebdf2aac8ddf2163766c609162b6b3bd6458ed595f792b6a959ef",
+          "artifacts.py": "7d662a9bdc21ecdd38589aec366e238a76bf93df136dbe37d5b707a2f489666f",
+          "blender/appearance.py": "fab193070cd8f249931238c11544155a27cfc14d7dadae5fc2fc8133c3a74b2a",
+          "blender/damage_geometry.py": "769695697781e6cb468bea8703b5f6fadf12dfba860508338316dbb2f41fa1bf",
+          "blender/damage_runtime.py": "a6891693aab4eb0e37ab121bf08bcd041010fc1413d062ceabb110eeab8ac1ed",
+          "blender/damage_validation.py": "d51f91bd543ce2b63d406eade2b74ae03fc2b175467ac3fc9527b7b504a0af89",
           "blender/engine.py": "28b3610bc1cdd56db6762b9dbb5c2047043143db494284fa9068447a8240aff7",
           "blender/generators.py": "06db28e679a89cab1ff9f906d79dd4142261706505e8bbb4145d8ca3d21ca187",
           "blender/interior.py": "0a7880981929c86050b1d787c0f48246ca4d1fe6a8f55c62fa897d2e9123b7c8",
@@ -18908,11 +18908,11 @@
         "module": "scene_factory.blender.skills.damage",
         "sha256": "176e120c3b2d8ddfab7d03d26410a59ace9147d4b7d776739cdab6d72fa99786",
         "support_sha256": {
-          "artifacts.py": "27ae77a8a2c7304d4699d352ae0d558bd534243a2bfb89ef32855d23c005ccbf",
-          "blender/appearance.py": "2b6e827b44c210ddcf7f88f46362a39da0ac6144cbb1a919483c813ffd5a26e3",
-          "blender/damage_geometry.py": "e85fccab20f04932209c895d409694754e98ab081dfe15310c43be91b880de1c",
-          "blender/damage_runtime.py": "cd7c7cc2ffa1e9ad767b5fb125326944e19d8733a8535e890d2d1a6432d58ec4",
-          "blender/damage_validation.py": "a657d78393aebdf2aac8ddf2163766c609162b6b3bd6458ed595f792b6a959ef",
+          "artifacts.py": "7d662a9bdc21ecdd38589aec366e238a76bf93df136dbe37d5b707a2f489666f",
+          "blender/appearance.py": "fab193070cd8f249931238c11544155a27cfc14d7dadae5fc2fc8133c3a74b2a",
+          "blender/damage_geometry.py": "769695697781e6cb468bea8703b5f6fadf12dfba860508338316dbb2f41fa1bf",
+          "blender/damage_runtime.py": "a6891693aab4eb0e37ab121bf08bcd041010fc1413d062ceabb110eeab8ac1ed",
+          "blender/damage_validation.py": "d51f91bd543ce2b63d406eade2b74ae03fc2b175467ac3fc9527b7b504a0af89",
           "blender/engine.py": "28b3610bc1cdd56db6762b9dbb5c2047043143db494284fa9068447a8240aff7",
           "blender/generators.py": "06db28e679a89cab1ff9f906d79dd4142261706505e8bbb4145d8ca3d21ca187",
           "blender/interior.py": "0a7880981929c86050b1d787c0f48246ca4d1fe6a8f55c62fa897d2e9123b7c8",
@@ -18928,7 +18928,7 @@
       "architecture": "arm64",
       "blender": "4.5.15 LTS",
       "blender_python": "3.11.15 (main, Apr 25 2025, 12:39:20) [Clang 15.0.0 (clang-1500.0.40.1)]",
-      "implementation_sha256": "1e6b45c9d8e4206225f58151c0528055b6654faa453215294d58b4af17a2e5d2",
+      "implementation_sha256": "542024fe374329d8b27b9b7c338dda6c77b6caad87d8f724f40b8803856bbc93",
       "os": "Darwin"
     },
     "status": "passed",
@@ -18943,12 +18943,12 @@
         ],
         "example": 0,
         "metrics": {
-          "build_reopen_seconds": 1.28,
+          "build_reopen_seconds": 0.903,
           "face_count": 30,
           "mesh_count": 1,
           "vertex_count": 32
         },
-        "plan_digest": "ec4958c78b895c138a7b7761bab758739c9ecf8212793f9447a859eb78a7b9fe",
+        "plan_digest": "281e7037a71f82c9df7657a7801956c61b4c41dc17a09faf7e356aa6d09ca021",
         "structure_sha256": "330addbb1f4ba3cb9049e7faf2b27919aea1125eb9c7125dabe69f13d8c0e0b8"
       },
       {
@@ -18961,12 +18961,12 @@
         ],
         "example": 1,
         "metrics": {
-          "build_reopen_seconds": 0.893,
+          "build_reopen_seconds": 0.947,
           "face_count": 30,
           "mesh_count": 1,
           "vertex_count": 32
         },
-        "plan_digest": "210c853668fc67f37d0ac98227e9f697710f2065f6e95a34f30dab8e07c20d96",
+        "plan_digest": "34fc182826658cbf66aa5182db28af49b1b273c6935676c611683a2e69cf1508",
         "structure_sha256": "330addbb1f4ba3cb9049e7faf2b27919aea1125eb9c7125dabe69f13d8c0e0b8"
       },
       {
@@ -18979,12 +18979,12 @@
         ],
         "example": 2,
         "metrics": {
-          "build_reopen_seconds": 0.895,
+          "build_reopen_seconds": 1.013,
           "face_count": 30,
           "mesh_count": 1,
           "vertex_count": 32
         },
-        "plan_digest": "0a2a9dccc640a0b7c877d08848ffb7989df6fa69aa44ea837bc14fd25422a4b9",
+        "plan_digest": "2309c1e564576eebda5441bf0f65c0d773d6e441b8db974b1fa42a3e4ab84af1",
         "structure_sha256": "330addbb1f4ba3cb9049e7faf2b27919aea1125eb9c7125dabe69f13d8c0e0b8"
       },
       {
@@ -18997,12 +18997,12 @@
         ],
         "example": 3,
         "metrics": {
-          "build_reopen_seconds": 0.896,
+          "build_reopen_seconds": 1.016,
           "face_count": 44,
           "mesh_count": 2,
           "vertex_count": 56
         },
-        "plan_digest": "1b31e64e7e09b8a3ccd7cd8555cbc7727abea6a2f0a20978428566f531210675",
+        "plan_digest": "bbef013c286f71530e667e491f43a460218da3eacb3d919b8383e9c038e21573",
         "structure_sha256": "8c26fbc58b6e957c6f31182ca3b69168e479ccf4361a566ac75ea7df441cc4f6"
       },
       {
@@ -19015,12 +19015,12 @@
         ],
         "example": 4,
         "metrics": {
-          "build_reopen_seconds": 0.9,
+          "build_reopen_seconds": 1.13,
           "face_count": 44,
           "mesh_count": 2,
           "vertex_count": 56
         },
-        "plan_digest": "2bf3014ff7e1f68bc64735c0e3a78bc8371df8f39dc21e5e0a2a2ec801531a34",
+        "plan_digest": "ac38c9bf0480a03a56660d188116b0e39bde5b3cf48e6196b0fcd14656f9b48f",
         "structure_sha256": "5c8936abd10a05cdc3ce85206b1e34670c9f1ad9ef56fe50e462d539bb107ca7"
       },
       {
@@ -19033,12 +19033,12 @@
         ],
         "example": 5,
         "metrics": {
-          "build_reopen_seconds": 0.939,
+          "build_reopen_seconds": 1.007,
           "face_count": 44,
           "mesh_count": 2,
           "vertex_count": 56
         },
-        "plan_digest": "c6e78eb2b72eae27d98476b57aa89e7c819ca9265d8ae16f090e1d94d329b26f",
+        "plan_digest": "cc294e27a4f477b02555b41c40968398edf745f50d1a4480a5a73c711b8a3223",
         "structure_sha256": "5c8936abd10a05cdc3ce85206b1e34670c9f1ad9ef56fe50e462d539bb107ca7"
       },
       {
@@ -19051,12 +19051,12 @@
         ],
         "example": 6,
         "metrics": {
-          "build_reopen_seconds": 10.768,
+          "build_reopen_seconds": 12.292,
           "face_count": 7718,
           "mesh_count": 270,
           "vertex_count": 8276
         },
-        "plan_digest": "bbde6588165e340981e60f6e35da080925c6c857a631a8c868a5c77cdb21a132",
+        "plan_digest": "6179cd21f7500e769e3cdece98becc5e74b245bcb25675b6de59b91f85fc381e",
         "structure_sha256": "220f20343552c14de5fd199e52273b7c85cd2401162f9cab731c28af36786ffa"
       },
       {
@@ -19069,12 +19069,12 @@
         ],
         "example": 7,
         "metrics": {
-          "build_reopen_seconds": 11.156,
+          "build_reopen_seconds": 12.046,
           "face_count": 7718,
           "mesh_count": 270,
           "vertex_count": 8276
         },
-        "plan_digest": "184be2ce975306a8b036965fd4ddf127e46bdb2ad7335400bd9ce03c3cee7f1c",
+        "plan_digest": "bb50d276096d6e3e4594262688b3d03b18b9d51fa0cd536c4229e8808beab4a7",
         "structure_sha256": "4bdd863047808fa17ea48703a6eda91f314e5537eb81a50c309edb3491a2a0fd"
       },
       {
@@ -19087,12 +19087,12 @@
         ],
         "example": 8,
         "metrics": {
-          "build_reopen_seconds": 10.816,
+          "build_reopen_seconds": 12.551,
           "face_count": 7694,
           "mesh_count": 270,
           "vertex_count": 8224
         },
-        "plan_digest": "c4d484b18b4d00be5b58db8d95ef0edd3ce0e1bbd25550b5ce334e8f8cebd517",
+        "plan_digest": "5436c9df427d8c046c41ca12ad017bf230f8f2f50886df238746434017e019a7",
         "structure_sha256": "36be731ecc0476a609d1045c225a4754ffc717b64a344197aafee0ba64af44e1"
       },
       {
@@ -19105,12 +19105,12 @@
         ],
         "example": 9,
         "metrics": {
-          "build_reopen_seconds": 1.982,
+          "build_reopen_seconds": 2.219,
           "face_count": 386,
           "mesh_count": 19,
           "vertex_count": 416
         },
-        "plan_digest": "0fd50bc1cfb2cecb17f2dcc12308879b03420c42ddd0ed8c239b2f8be7427aee",
+        "plan_digest": "9aebed67c84f777c3acf637ae4dda76f165ac8a768c63a67384dab93a625b3c4",
         "structure_sha256": "b07bacbf6aaaa13fee87413ac9c12d437a6e9157eb287086687a816bc9384a39"
       },
       {
@@ -19123,18 +19123,53 @@
         ],
         "example": 10,
         "metrics": {
-          "build_reopen_seconds": 2.087,
+          "build_reopen_seconds": 2.213,
           "face_count": 386,
           "mesh_count": 19,
           "vertex_count": 416
         },
-        "plan_digest": "d9555ce20cd596596b0e74e189295b2785704225fad93b6fd64b4e4e72374253",
+        "plan_digest": "80fc54b0c40b25118ab7c24ed319e8dba9bdc0712ebb3efe9c6a48bd95bbc9e2",
         "structure_sha256": "03da54117197f9ae66382b9f7271ca0538c2078d366b53bcae703f39b3f58c56"
       }
     ],
     "unit_tests": {
-      "case_count": 26,
+      "case_count": 116,
       "cases": [
+        "tests.test_effects.test_scenarios_compile[A]",
+        "tests.test_effects.test_scenarios_compile[B]",
+        "tests.test_effects.test_scenarios_compile[C]",
+        "tests.test_effects.test_scenarios_compile[D]",
+        "tests.test_effects.test_scenarios_compile[E]",
+        "tests.test_effects.test_scenarios_compile[F]",
+        "tests.test_effects.test_effect_rejections[source]",
+        "tests.test_effects.test_effect_rejections[room]",
+        "tests.test_effects.test_effect_rejections[count]",
+        "tests.test_effects.test_effect_rejections[density]",
+        "tests.test_effects.test_effect_rejections[extent]",
+        "tests.test_effects.test_effect_rejections[severity]",
+        "tests.test_effects.test_effect_rejections[size]",
+        "tests.test_effects.test_effect_rejections[seed]",
+        "tests.test_effects.test_effect_rejections[material]",
+        "tests.test_effects.test_effect_rejections[duplicate]",
+        "tests.test_effects.test_effect_rejections[distribution]",
+        "tests.test_effects.test_effect_rejections[direction]",
+        "tests.test_effects.test_effect_rejections[budget]",
+        "tests.test_effects.test_effect_rejections[outside]",
+        "tests.test_effects.test_effect_rejections[kind]",
+        "tests.test_effects.test_edit_reuses_baseline_identity_and_preserves_fragment_ids_geometry",
+        "tests.test_effects.test_distribution_reproducibility_and_bounds[uniform]",
+        "tests.test_effects.test_distribution_reproducibility_and_bounds[clustered]",
+        "tests.test_effects.test_distribution_reproducibility_and_bounds[source_based]",
+        "tests.test_effects.test_distribution_reproducibility_and_bounds[directional]",
+        "tests.test_effects.test_surface_conflict_and_waterline_range",
+        "tests.test_effects.test_extended_effect_contract_rejections[operation]",
+        "tests.test_effects.test_extended_effect_contract_rejections[settle]",
+        "tests.test_effects.test_extended_effect_contract_rejections[total]",
+        "tests.test_effects.test_extended_effect_contract_rejections[existing]",
+        "tests.test_effects.test_extended_effect_contract_rejections[repeat_existing]",
+        "tests.test_effects.test_extended_effect_contract_rejections[surface_direction]",
+        "tests.test_effects.test_extended_effect_contract_rejections[crack_region]",
+        "tests.test_effects.test_unvalidated_processor_cannot_execute_and_removal_restores_source",
         "tests.test_damage.test_damage_schema_preserves_input",
         "tests.test_damage.test_damage_rejections[severity]",
         "tests.test_damage.test_damage_rejections[seed]",
@@ -19160,9 +19195,64 @@
         "tests.test_damage.test_damage_clear_restores_the_normal_spec_without_geometry_edits",
         "tests.test_damage.test_floor_beam_door_targets_and_competing_ancestor_operations",
         "tests.test_damage.test_absolute_contact_budget_bounds_large_objects",
-        "tests.test_damage.test_passage_intent_must_reference_a_real_space"
+        "tests.test_damage.test_passage_intent_must_reference_a_real_space",
+        "tests.test_library.test_mp1_provider_registration_and_capabilities",
+        "tests.test_library.test_mp2_mp3_provider_neutral_catalog_and_namespace",
+        "tests.test_library.test_mp4_non_cc0_and_unknown_licenses_are_not_rewritten",
+        "tests.test_library.test_mp5_hierarchy_metadata_retained",
+        "tests.test_library.test_mp6_usd_metadata_is_representable_but_has_no_import_adapter",
+        "tests.test_library.test_cache_hit_offline_freeze_and_corruption",
+        "tests.test_library.test_acquisition_failures_are_not_published[size]",
+        "tests.test_library.test_acquisition_failures_are_not_published[checksum]",
+        "tests.test_library.test_acquisition_failures_are_not_published[missing]",
+        "tests.test_library.test_acquisition_failures_are_not_published[transfer]",
+        "tests.test_library.test_acquisition_failures_are_not_published[license]",
+        "tests.test_library.test_acquisition_failures_are_not_published[axis]",
+        "tests.test_library.test_acquisition_failures_are_not_published[duplicate]",
+        "tests.test_library.test_acquisition_failures_are_not_published[format]",
+        "tests.test_library.test_scene_e_material_rejections[material_id]",
+        "tests.test_library.test_scene_e_material_rejections[roughness]",
+        "tests.test_library.test_scene_e_material_rejections[metallic]",
+        "tests.test_library.test_scene_e_material_rejections[transmission]",
+        "tests.test_library.test_scene_e_material_rejections[ior]",
+        "tests.test_library.test_scene_e_material_rejections[normal]",
+        "tests.test_library.test_scene_e_material_rejections[bump]",
+        "tests.test_library.test_scene_e_material_rejections[scale]",
+        "tests.test_library.test_scene_e_material_rejections[color]",
+        "tests.test_library.test_scene_e_material_rejections[state]",
+        "tests.test_library.test_scene_e_material_rejections[provider]",
+        "tests.test_library.test_scene_e_material_rejections[license]",
+        "tests.test_library.test_scene_e_material_rejections[channel]",
+        "tests.test_library.test_scene_e_material_rejections[space]",
+        "tests.test_library.test_eight_builtins_and_immutable_material_versions",
+        "tests.test_library.test_scene_e_reference_rejections[missing_asset]",
+        "tests.test_library.test_scene_e_reference_rejections[version]",
+        "tests.test_library.test_scene_e_reference_rejections[hash]",
+        "tests.test_library.test_scene_e_reference_rejections[uv]",
+        "tests.test_library.test_scene_e_reference_rejections[uv_rotation]",
+        "tests.test_library.test_scene_e_reference_rejections[missing_material]",
+        "tests.test_library.test_scene_e_reference_rejections[missing_texture]",
+        "tests.test_library.test_polyhaven_response_normalization_user_agent_and_dependencies",
+        "tests.test_library.test_polyhaven_failure_is_not_success[exception0]",
+        "tests.test_library.test_polyhaven_failure_is_not_success[exception1]",
+        "tests.test_library.test_polyhaven_failure_is_not_success[exception2]",
+        "tests.test_library.test_gltf_does_not_resolve_unlisted_remote_or_escaped_dependencies[../escape.bin]",
+        "tests.test_library.test_gltf_does_not_resolve_unlisted_remote_or_escaped_dependencies[https://remote/model.bin]",
+        "tests.test_library.test_gltf_does_not_resolve_unlisted_remote_or_escaped_dependencies[/absolute.bin]",
+        "tests.test_library.test_gltf_does_not_resolve_unlisted_remote_or_escaped_dependencies[..%2fescape.bin]",
+        "tests.test_library.test_material_only_revision_changes_no_geometry_ids_or_seeds",
+        "tests.test_library.test_binding_errors_fail_pure_compile[node]",
+        "tests.test_library.test_binding_errors_fail_pure_compile[role]",
+        "tests.test_library.test_binding_errors_fail_pure_compile[duplicate]",
+        "tests.test_library.test_binding_errors_fail_pure_compile[no_base]",
+        "tests.test_library.test_binding_errors_fail_pure_compile[overlap]",
+        "tests.test_library.test_credentials_are_not_persisted[metadata]",
+        "tests.test_library.test_credentials_are_not_persisted[uri]",
+        "tests.test_library.test_polyhaven_keyword_search_also_matches_declared_categories",
+        "tests.test_library.test_asset_placement_respects_explicit_ground_elevation",
+        "tests.test_library.test_cli_accepts_registered_fake_provider_without_catalog_changes"
       ],
-      "sha256": "2e766e4b7d815916511a662cfade69b550ca1339d122e589d21da61254e3a129"
+      "sha256": "d91f420793e57fa45c769f64773de81c17de2f0679cd7747086e02ef7518ec65"
     }
   },
   "validation_status": "validated",
